@@ -2,7 +2,7 @@ import tasks from '../reducer';
 import {addTask, removeTask, updateTask} from '../actions';
 
 describe('task reducer', function() {
-  const expectedInitialState = {getByIds: {}};
+  const expectedInitialState = {currentTask: null, getByIds: {}};
 
   it('should return initial state', () => {
     expect(tasks(undefined, {})).toEqual(expectedInitialState);
