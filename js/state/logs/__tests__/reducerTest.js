@@ -6,6 +6,4 @@ describe('logs reducer', function() {
   it('should return initial state', () => {
     expect(logs(undefined, {})).toEqual(expectedInitialState);
   });
-
-  it('should create a new log when task is started')
 });

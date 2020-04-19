@@ -5,7 +5,7 @@ import TaskList from '../views/components/tasks/TaskList';
 const mapStateToProps = state => {
   return {
     currentTask: state.currentTask,
-    tasks: state.tasks,
+    data: Object.values(state.tasks.getById),
     total: Object.values(state.tasks).length,
   };
 };
