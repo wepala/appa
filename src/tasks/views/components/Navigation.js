@@ -7,9 +7,9 @@ import {
   Divider,
   TopNavigationAction,
 } from '@ui-kitten/components';
-import TaskList from './TaskList';
+import TaskList from '../../controllers/TaskList';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import {MenuIcon} from '../../views/components/Icons';
+import {MenuIcon} from '../../../views/components/Icons';
 
 const {Navigator, Screen} = createMaterialTopTabNavigator();
 

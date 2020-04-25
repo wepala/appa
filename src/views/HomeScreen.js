@@ -9,14 +9,19 @@ import {
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import OnboardNavigation from '../onboarding/controllers/Main';
-import MainMenu from './components/MainMenu';
-import TasksNavigator from '../tasks/controllers/TasksNavigator';
-import {MenuIcon} from './components/Icons';
 import {connect} from 'react-redux';
 import {SafeAreaLayout} from './components/SafeAreaLayout';
+import {MenuIcon} from './components/Icons';
 
-const RootStack = createStackNavigator();
+//import the different modules
+import MainMenu from './components/MainMenu';
+import Tasks from '../tasks/controllers/Main';
+import Onboarding from '../onboarding/controllers/Main';
+import Logs from '../logs/controllers/Main';
+import Projects from '../projects/controllers/Main';
+import Reports from '../reports/controllers/Main';
+
+const OnboardStack = createStackNavigator();
 const {Navigator, Screen} = createDrawerNavigator();
 
 const mapStateToProps = state => {
@@ -32,17 +37,13 @@ const mapDispatchToProps = dispatch => {
 };
 
 const HomeScreen = ({navigation, onBoarded}) => {
-  const onItemPress = index => {
-    // navigation.navigate(data[index].route);
-  };
-
-  const renderDrawerAction = () => <TopNavigationAction icon={MenuIcon} />;
-
   const MainStackScreen = () => {
     return (
       <Navigator drawerContent={props => <MainMenu {...props} />}>
-        <Screen name="Tasks" component={TasksNavigator} />
-        <Screen name="Projects" component={TasksNavigator} />
+        <Screen name="Tasks" component={Tasks} />
+        <Screen name="Projects" component={Projects} />
+        <Screen name="Logs" component={Logs} />
+        <Screen name="Reports" component={Reports} />
       </Navigator>
     );
   };
@@ -50,13 +51,13 @@ const HomeScreen = ({navigation, onBoarded}) => {
   const RootStackScreen = () => {
     if (!onBoarded) {
       return (
-        <RootStack.Navigator mode="modal">
-          <RootStack.Screen
+        <OnboardStack.Navigator mode="modal">
+          <OnboardStack.Screen
             name="Onboarding"
-            component={OnboardNavigation}
+            component={Onboarding}
             options={{headerShown: false}}
           />
-        </RootStack.Navigator>
+        </OnboardStack.Navigator>
       );
     } else {
       return <MainStackScreen />;

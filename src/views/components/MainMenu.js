@@ -10,8 +10,7 @@ import {
   MenuItemType,
   Text,
 } from '@ui-kitten/components';
-
-const DATA: MenuItemType[] = [{title: 'Libraries'}, {title: 'Documentation'}];
+import {AssetCalendarIcon} from './Icons';
 
 export default ({navigation}): DrawerElement => {
   const onItemSelect = (index: number): void => {};
@@ -42,11 +41,11 @@ export default ({navigation}): DrawerElement => {
       <Drawer
         header={renderHeader}
         footer={renderFooter}
-        onSelect={onItemSelect}
-      >
-        <DrawerItem title={'Tasks'} />
-        <DrawerItem title={"Logs"} />
-        <DrawerItem title={"Projects"} />
+        onSelect={onItemSelect}>
+        <DrawerItem title={'Agenda'} accessoryLeft={AssetCalendarIcon} />
+        <DrawerItem title={'Time Log'} />
+        <DrawerItem title={'Projects'} />
+        <DrawerItem title={'Reports'} />
       </Drawer>
     </SafeAreaView>
   );

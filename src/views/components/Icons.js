@@ -49,249 +49,249 @@ export const StarOutlineIcon = style => <Icon {...style} name="star-outline" />;
 export const TrashIcon = style => <Icon {...style} name="trash" />;
 
 export const AssetAuthIcon = style => (
-  <Icon {...style} pack="app" name="auth" />
+  <Icon {...style} name="auth" />
 );
 
 export const AssetAuthDarkIcon = style => (
-  <Icon {...style} pack="app" name="auth-dark" />
+  <Icon {...style} name="auth-dark" />
 );
 
 export const AssetSocialIcon = style => (
-  <Icon {...style} pack="app" name="social" />
+  <Icon {...style} name="social" />
 );
 
 export const AssetSocialDarkIcon = style => (
-  <Icon {...style} pack="app" name="social-dark" />
+  <Icon {...style} name="social-dark" />
 );
 
 export const AssetArticlesIcon = style => (
-  <Icon {...style} pack="app" name="articles" />
+  <Icon {...style} name="articles" />
 );
 
 export const AssetArticlesDarkIcon = style => (
-  <Icon {...style} pack="app" name="articles-dark" />
+  <Icon {...style} name="articles-dark" />
 );
 
 export const AssetMessagingIcon = style => (
-  <Icon {...style} pack="app" name="messaging" />
+  <Icon {...style} name="messaging" />
 );
 
 export const AssetMessagingDarkIcon = style => (
-  <Icon {...style} pack="app" name="messaging-dark" />
+  <Icon {...style} name="messaging-dark" />
 );
 
 export const AssetDashboardsIcon = style => (
-  <Icon {...style} pack="app" name="dashboards" />
+  <Icon {...style} name="dashboards" />
 );
 
 export const AssetDashboardsDarkIcon = style => (
-  <Icon {...style} pack="app" name="dashboards-dark" />
+  <Icon {...style} name="dashboards-dark" />
 );
 
 export const AssetEcommerceIcon = style => (
-  <Icon {...style} pack="app" name="ecommerce" />
+  <Icon {...style} name="ecommerce" />
 );
 
 export const AssetEcommerceDarkIcon = style => (
-  <Icon {...style} pack="app" name="ecommerce-dark" />
+  <Icon {...style} name="ecommerce-dark" />
 );
 
 export const AssetAutocompleteIcon = style => (
-  <Icon {...style} pack="app" name="autocomplete" />
+  <Icon {...style} name="autocomplete" />
 );
 
 export const AssetAutocompleteDarkIcon = style => (
-  <Icon {...style} pack="app" name="autocomplete-dark" />
+  <Icon {...style} name="autocomplete-dark" />
 );
 
 export const AssetAvatarIcon = style => (
-  <Icon {...style} pack="app" name="avatar" />
+  <Icon {...style} name="avatar" />
 );
 
 export const AssetAvatarDarkIcon = style => (
-  <Icon {...style} pack="app" name="avatar-dark" />
+  <Icon {...style} name="avatar-dark" />
 );
 
 export const AssetBottomNavigationIcon = style => (
-  <Icon {...style} pack="app" name="bottom-navigation" />
+  <Icon {...style} name="bottom-navigation" />
 );
 
 export const AssetBottomNavigationDarkIcon = style => (
-  <Icon {...style} pack="app" name="bottom-navigation-dark" />
+  <Icon {...style} name="bottom-navigation-dark" />
 );
 
 export const AssetButtonIcon = style => (
-  <Icon {...style} pack="app" name="button" />
+  <Icon {...style} name="button" />
 );
 
 export const AssetButtonDarkIcon = style => (
-  <Icon {...style} pack="app" name="button-dark" />
+  <Icon {...style} name="button-dark" />
 );
 
 export const AssetButtonGroupIcon = style => (
-  <Icon {...style} pack="app" name="button-group" />
+  <Icon {...style} name="button-group" />
 );
 
 export const AssetButtonGroupDarkIcon = style => (
-  <Icon {...style} pack="app" name="button-group-dark" />
+  <Icon {...style} name="button-group-dark" />
 );
 
 export const AssetCalendarIcon = style => (
-  <Icon {...style} pack="app" name="calendar" />
+  <Icon {...style} name="calendar" />
 );
 
 export const AssetCalendarDarkIcon = style => (
-  <Icon {...style} pack="app" name="calendar-dark" />
+  <Icon {...style} name="calendar-dark" />
 );
 
 export const AssetCardIcon = style => (
-  <Icon {...style} pack="app" name="card" />
+  <Icon {...style} name="card" />
 );
 
 export const AssetCardDarkIcon = style => (
-  <Icon {...style} pack="app" name="card-dark" />
+  <Icon {...style} name="card-dark" />
 );
 
 export const AssetCheckBoxIcon = style => (
-  <Icon {...style} pack="app" name="check-box" />
+  <Icon {...style} name="check-box" />
 );
 
 export const AssetCheckBoxDarkIcon = style => (
-  <Icon {...style} pack="app" name="check-box-dark" />
+  <Icon {...style} name="check-box-dark" />
 );
 
 export const AssetDatepickerIcon = style => (
-  <Icon {...style} pack="app" name="datepicker" />
+  <Icon {...style} name="datepicker" />
 );
 
 export const AssetDatepickerDarkIcon = style => (
-  <Icon {...style} pack="app" name="datepicker-dark" />
+  <Icon {...style} name="datepicker-dark" />
 );
 
 export const AssetDrawerIcon = style => (
-  <Icon {...style} pack="app" name="drawer" />
+  <Icon {...style} name="drawer" />
 );
 
 export const AssetDrawerDarkIcon = style => (
-  <Icon {...style} pack="app" name="drawer-dark" />
+  <Icon {...style} name="drawer-dark" />
 );
 
 export const AssetIconIcon = style => (
-  <Icon {...style} pack="app" name="icon" />
+  <Icon {...style} name="icon" />
 );
 
 export const AssetIconDarkIcon = style => (
-  <Icon {...style} pack="app" name="icon-dark" />
+  <Icon {...style} name="icon-dark" />
 );
 
 export const AssetInputIcon = style => (
-  <Icon {...style} pack="app" name="input" />
+  <Icon {...style} name="input" />
 );
 
 export const AssetInputDarkIcon = style => (
-  <Icon {...style} pack="app" name="input-dark" />
+  <Icon {...style} name="input-dark" />
 );
 
 export const AssetListIcon = style => (
-  <Icon {...style} pack="app" name="list" />
+  <Icon {...style} name="list" />
 );
 
 export const AssetListDarkIcon = style => (
-  <Icon {...style} pack="app" name="list-dark" />
+  <Icon {...style} name="list-dark" />
 );
 
 export const AssetMenuIcon = style => (
-  <Icon {...style} pack="app" name="menu" />
+  <Icon {...style} name="menu" />
 );
 
 export const AssetMenuDarkIcon = style => (
-  <Icon {...style} pack="app" name="menu-dark" />
+  <Icon {...style} name="menu-dark" />
 );
 
 export const AssetModalIcon = style => (
-  <Icon {...style} pack="app" name="modal" />
+  <Icon {...style} name="modal" />
 );
 
 export const AssetModalDarkIcon = style => (
-  <Icon {...style} pack="app" name="modal-dark" />
+  <Icon {...style} name="modal-dark" />
 );
 
 export const AssetOverflowMenuIcon = style => (
-  <Icon {...style} pack="app" name="overflow-menu" />
+  <Icon {...style} name="overflow-menu" />
 );
 
 export const AssetOverflowMenuDarkIcon = style => (
-  <Icon {...style} pack="app" name="overflow-menu-dark" />
+  <Icon {...style} name="overflow-menu-dark" />
 );
 
 export const AssetPopoverIcon = style => (
-  <Icon {...style} pack="app" name="popover" />
+  <Icon {...style} name="popover" />
 );
 
 export const AssetPopoverDarkIcon = style => (
-  <Icon {...style} pack="app" name="popover-dark" />
+  <Icon {...style} name="popover-dark" />
 );
 
 export const AssetRadioIcon = style => (
-  <Icon {...style} pack="app" name="radio" />
+  <Icon {...style} name="radio" />
 );
 
 export const AssetRadioDarkIcon = style => (
-  <Icon {...style} pack="app" name="radio-dark" />
+  <Icon {...style} name="radio-dark" />
 );
 
 export const AssetSelectIcon = style => (
-  <Icon {...style} pack="app" name="select" />
+  <Icon {...style} name="select" />
 );
 
 export const AssetSelectDarkIcon = style => (
-  <Icon {...style} pack="app" name="select-dark" />
+  <Icon {...style} name="select-dark" />
 );
 
 export const AssetSpinnerIcon = style => (
-  <Icon {...style} pack="app" name="spinner" />
+  <Icon {...style} name="spinner" />
 );
 
 export const AssetSpinnerDarkIcon = style => (
-  <Icon {...style} pack="app" name="spinner-dark" />
+  <Icon {...style} name="spinner-dark" />
 );
 
 export const AssetTabViewIcon = style => (
-  <Icon {...style} pack="app" name="tab-view" />
+  <Icon {...style} name="tab-view" />
 );
 
 export const AssetTabViewDarkIcon = style => (
-  <Icon {...style} pack="app" name="tab-view-dark" />
+  <Icon {...style} name="tab-view-dark" />
 );
 
 export const AssetTextIcon = style => (
-  <Icon {...style} pack="app" name="text" />
+  <Icon {...style} name="text" />
 );
 
 export const AssetTextDarkIcon = style => (
-  <Icon {...style} pack="app" name="text-dark" />
+  <Icon {...style} name="text-dark" />
 );
 
 export const AssetToggleIcon = style => (
-  <Icon {...style} pack="app" name="toggle" />
+  <Icon {...style} name="toggle" />
 );
 
 export const AssetToggleDarkIcon = style => (
-  <Icon {...style} pack="app" name="toggle-dark" />
+  <Icon {...style} name="toggle-dark" />
 );
 
 export const AssetTooltipIcon = style => (
-  <Icon {...style} pack="app" name="tooltip" />
+  <Icon {...style} name="tooltip" />
 );
 
 export const AssetTooltipDarkIcon = style => (
-  <Icon {...style} pack="app" name="tooltip-dark" />
+  <Icon {...style} name="tooltip-dark" />
 );
 
 export const AssetTopNavigationIcon = style => (
-  <Icon {...style} pack="app" name="top-navigation" />
+  <Icon {...style} name="top-navigation" />
 );
 
 export const AssetTopNavigationDarkIcon = style => (
-  <Icon {...style} pack="app" name="top-navigation-dark" />
+  <Icon {...style} name="top-navigation-dark" />
 );
