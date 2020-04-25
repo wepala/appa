@@ -37,10 +37,10 @@ export default ({navigation}) => {
         accessoryLeft={MenuAction}
       />
       <Divider />
-      <Navigator tabBar={props => <TopTabBar {...props} />}>
-        <Screen name="Today" component={TaskList} />
-        <Screen name="Backlog" component={TaskList} />
-      </Navigator>
+      {/*<Navigator tabBar={props => <TopTabBar {...props} />}>*/}
+      {/*  <Screen name="Today" component={TaskList} />*/}
+      {/*  <Screen name="Backlog" component={TaskList} />*/}
+      {/*</Navigator>*/}
     </SafeAreaView>
   );
 };

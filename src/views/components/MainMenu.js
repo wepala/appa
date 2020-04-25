@@ -12,8 +12,31 @@ import {
 } from '@ui-kitten/components';
 import {AssetCalendarIcon} from './Icons';
 
-export default ({navigation}): DrawerElement => {
-  const onItemSelect = (index: number): void => {};
+export default ({navigation}) => {
+  const onItemSelect = index => {
+    switch (index.row) {
+      case 0: {
+        navigation.toggleDrawer();
+        navigation.navigate('Agenda');
+        return;
+      }
+      case 1: {
+        navigation.toggleDrawer();
+        navigation.navigate('Logs');
+        return;
+      }
+      case 2: {
+        navigation.toggleDrawer();
+        navigation.navigate('Projects');
+        return;
+      }
+      case 3: {
+        navigation.toggleDrawer();
+        navigation.navigate('Reports');
+        return;
+      }
+    }
+  };
 
   const renderHeader = () => (
     <Layout style={styles.header} level="2">

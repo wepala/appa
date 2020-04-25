@@ -40,7 +40,7 @@ const HomeScreen = ({navigation, onBoarded}) => {
   const MainStackScreen = () => {
     return (
       <Navigator drawerContent={props => <MainMenu {...props} />}>
-        <Screen name="Tasks" component={Tasks} />
+        <Screen name="Agenda" component={Tasks} />
         <Screen name="Projects" component={Projects} />
         <Screen name="Logs" component={Logs} />
         <Screen name="Reports" component={Reports} />

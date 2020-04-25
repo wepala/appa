@@ -8,7 +8,6 @@ import {
   Text,
   useStyleSheet,
 } from '@ui-kitten/components';
-import {EyeIcon, EyeOffIcon, PersonIcon} from '../components/Extras';
 import {KeyboardAvoidingView} from '../../../views/components/KeyboardAvoidingView';
 
 export default ({navigation}) => {
@@ -40,32 +39,6 @@ export default ({navigation}) => {
           Sign in to your account
         </Text>
       </View>
-      <Layout style={styles.formContainer} level="1">
-        <Input
-          placeholder="Email"
-          icon={PersonIcon}
-          value={email}
-          onChangeText={setEmail}
-        />
-        <Input
-          style={styles.passwordInput}
-          placeholder="Password"
-          icon={passwordVisible ? EyeIcon : EyeOffIcon}
-          value={password}
-          secureTextEntry={!passwordVisible}
-          onChangeText={setPassword}
-          onIconPress={onPasswordIconPress}
-        />
-        <View style={styles.forgotPasswordContainer}>
-          <Button
-            style={styles.forgotPasswordButton}
-            appearance="ghost"
-            status="basic"
-            onPress={onForgotPasswordButtonPress}>
-            Forgot your password?
-          </Button>
-        </View>
-      </Layout>
       <Button style={styles.signInButton} size="giant">
         SIGN IN
       </Button>
