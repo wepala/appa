@@ -39,7 +39,9 @@ const mapDispatchToProps = dispatch => {
 const HomeScreen = ({navigation, onBoarded}) => {
   const MainStackScreen = () => {
     return (
-      <Navigator drawerContent={props => <MainMenu {...props} />}>
+      <Navigator
+        screenOptions={{gestureEnabled: false}}
+        drawerContent={props => <MainMenu {...props} />}>
         <Screen name="Agenda" component={Tasks} />
         <Screen name="Projects" component={Projects} />
         <Screen name="Logs" component={Logs} />

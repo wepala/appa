@@ -9,13 +9,17 @@ import {
 } from '@ui-kitten/components';
 import TaskList from '../../controllers/TaskList';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import {MenuIcon} from '../../../views/components/Icons';
 
 const {Navigator, Screen} = createMaterialTopTabNavigator();
+// const { Navigator, Screen } = createStackNavigator();
 
 export default ({navigation}) => {
-  const TopTabBar = () => (
-    <TabBar selectedIndex={0} onSelect={index => navigation.navigate('Today')}>
+  const TopTabBar = ({navigation, state}) => (
+    <TabBar
+      selectedIndex={state.index}
+      onSelect={index => navigation.navigate(state.routeNames[index])}>
       <Tab title="Today" />
       <Tab title="Backlog" />
     </TabBar>
@@ -30,17 +34,18 @@ export default ({navigation}) => {
   );
 
   return (
-    <SafeAreaView>
+    <>
       <TopNavigation
         title="Tasks"
         alignment="center"
         accessoryLeft={MenuAction}
       />
       <Divider />
-      {/*<Navigator tabBar={props => <TopTabBar {...props} />}>*/}
-      {/*  <Screen name="Today" component={TaskList} />*/}
-      {/*  <Screen name="Backlog" component={TaskList} />*/}
-      {/*</Navigator>*/}
-    </SafeAreaView>
+      <Navigator screenOptions={{gestureEnabled: false}}>
+        <Screen name="Today" component={TaskList} />
+        <Screen name="Backlog" component={TaskList} />
+      </Navigator>
+      {/*<TaskList />*/}
+    </>
   );
 };

@@ -9,8 +9,8 @@ import React from 'react';
 import {Dimensions, ListRenderItemInfo, StyleSheet} from 'react-native';
 import type {Task} from '../../model/Task';
 
-export default (props) => {
-  const { contentContainerStyle, onItemPress, ...listProps } = props;
+export default props => {
+  const {contentContainerStyle, onItemPress, ...listProps} = props;
   const renderItem = (info: ListRenderItemInfo<Task>): ListItemElement => (
     <Card style={styles.item} onPress={() => props.onItemPress(info.index)}>
       <Text style={styles.itemTitle} category="s2">
