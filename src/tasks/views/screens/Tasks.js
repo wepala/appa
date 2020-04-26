@@ -24,8 +24,8 @@ const TopTabBar = ({navigation, state}) => (
 
 const TabNavigator = () => (
   <Navigator tabBar={props => <TopTabBar {...props} />}>
-    <Screen name="Today" component={TaskList} />
-    <Screen name="Backlog" component={TaskList} />
+    <Screen name="Today" component={TaskList} testID="TasksAgenda" />
+    <Screen name="Backlog" component={TaskList} testID="TasksBackLog" />
   </Navigator>
 );
 
@@ -35,7 +35,7 @@ export const Tasks = ({navigation, state}) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1}} testID="TasksNavigator">
       <TopNavigation title="Tasks" alignment="center" />
       <Divider />
       <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
