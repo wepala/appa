@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {SafeAreaView, View} from 'react-native-web';
 import {
   Button,
   Input,
@@ -8,7 +8,7 @@ import {
   Text,
   useStyleSheet,
 } from '@ui-kitten/components';
-import {KeyboardAvoidingView} from '../../../views/components/KeyboardAvoidingView';
+
 
 export default ({navigation}) => {
   const [email, setEmail] = React.useState();
@@ -30,7 +30,7 @@ export default ({navigation}) => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
         <Text category="h1" status="control">
           Hello
@@ -49,7 +49,7 @@ export default ({navigation}) => {
         onPress={onSignUpButtonPress}>
         Don't have an account? Create
       </Button>
-    </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 

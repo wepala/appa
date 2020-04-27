@@ -1,4 +1,4 @@
-import {ADD_TASK, REMOVE_TASK, UPDATE_TASK} from '../../actionTypes';
+import {ADD_TASK, REMOVE_TASK, UPDATE_TASK} from './commandTypes';
 import {v4 as uuidv4} from 'uuid';
 
 const tasks = (state = {currentTask: null, getByIds: {}}, action) => {

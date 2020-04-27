@@ -20,7 +20,7 @@
     "@ui-kitten/components": "^5.0.0-alpha.1",
     "@ui-kitten/eva-icons": "^5.0.0-alpha.1",
     "detox": "^16.2.1",
-    "react": "16.11.0",
+    "react": "^16.11.0",
     "react-dom": "^16.13.1",
     "react-native": "0.62.2",
     "react-native-gesture-handler": "^1.6.1",
@@ -51,7 +51,6 @@
   },
   "jest": {
     "preset": "react-native"
-
   },
   "detox": {
     "test-runner": "jest",

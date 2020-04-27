@@ -4,6 +4,9 @@ import rootReducer from './rootReducer';
 
 const initialState = {
   onboard: {onBoarded: true},
+  projects: {
+    getById: {},
+  },
   tasks: {
     getById: {
       '36212c03-040b-4139-867f-bd76485f4084': {

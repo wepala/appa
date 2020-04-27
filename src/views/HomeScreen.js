@@ -15,7 +15,7 @@ import {MenuIcon} from './components/Icons';
 
 //import the different modules
 import MainMenu from './components/MainMenu';
-import Tasks from '../tasks/controllers/Main';
+import Tasks from '../tasks/views/components/Navigation';
 import Onboarding from '../onboarding/controllers/Main';
 import Logs from '../logs/controllers/Main';
 import Projects from '../projects/controllers/Main';

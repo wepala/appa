@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
-import {addTask, removeTask} from '../model/actions';
-import TaskList from '../views/components/TaskList';
+import {addTask, removeTask} from '../model/commands';
+import ListScreen from '../views/screens/List';
 
 const mapStateToProps = state => {
   return {
@@ -19,4 +19,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(TaskList);
+)(ListScreen);

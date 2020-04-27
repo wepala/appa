@@ -1,5 +1,5 @@
 import tasks from '../reducer';
-import {addTask, removeTask, updateTask} from '../actions';
+import {addTask, removeTask, updateTask} from '../commands';
 
 describe('task reducer', function() {
   const expectedInitialState = {currentTask: null, getByIds: {}};
