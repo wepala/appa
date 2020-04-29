@@ -7,12 +7,8 @@ import {
   Layout,
   StyleService,
   useStyleSheet,
-  Autocomplete,
-  Select,
-  SelectItem,
 } from '@ui-kitten/components';
 import {KeyboardAvoidingView} from 'react-native';
-import {View} from 'react-native-web';
 import TopBar from '../components/TopBar';
 
 const themedStyles = StyleService.create({
@@ -94,7 +90,7 @@ export default ({navigation, onCreate}) => {
       <Button
         style={styles.addButton}
         size="giant"
-        onPress={onCreate(navigation)}>
+        onPress={() => onCreate(navigation, title, description, dueDate)}>
         Submit
       </Button>
     </KeyboardAvoidingView>
