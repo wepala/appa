@@ -28,7 +28,7 @@ export default ({navigation}) => {
         <Button style={styles.subscriptionButton} status="success" size="giant">
           Support Subscription
         </Button>
-        <Button style={styles.skipButton} status="basic">
+        <Button appearance="" style={styles.skipButton} status="basic">
           Skip
         </Button>
       </View>
@@ -44,7 +44,6 @@ const themedStyles = StyleService.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    minHeight: 216,
     backgroundColor: 'color-primary-default',
   },
   text: {
