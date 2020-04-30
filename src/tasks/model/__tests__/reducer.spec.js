@@ -1,14 +1,14 @@
 import tasks from '../reducer';
-import {addTask, removeTask, updateTask} from '../actions';
+import {addTask, removeTask, updateTask} from '../commands';
 
 describe('task reducer', function() {
-  const expectedInitialState = {currentTask: null, getByIds: {}};
+  const expectedInitialState = {currentTask: null, getById: {}};
 
   it('should return initial model', () => {
     expect(tasks(undefined, {})).toEqual(expectedInitialState);
   });
 
-  it('should add task to getByIds map with a uid as the key', () => {
+  it('should add task to getById map with a uid as the key', () => {
     let state = tasks(
       undefined,
       addTask({
@@ -20,13 +20,13 @@ describe('task reducer', function() {
     let uidRegex = /^([0-9a-fA-F]{8})-(([0-9a-fA-F]{4}-){3})([0-9a-fA-F]{12})$/i;
 
     expect(state).toBeDefined();
-    expect(Object.keys(state.getByIds).length).toEqual(1);
-    expect(uidRegex.test(Object.keys(state.getByIds)[0])).toBe(true);
+    expect(Object.keys(state.getById).length).toEqual(1);
+    expect(uidRegex.test(Object.keys(state.getById)[0])).toBe(true);
   });
 
   it('should delete task', () => {
     let mockInitialState = expectedInitialState;
-    mockInitialState.getByIds['36212c03-040b-4139-867f-bd76485f4084'] = {
+    mockInitialState.getById['36212c03-040b-4139-867f-bd76485f4084'] = {
       title: 'test task',
     };
     let state = tasks(
@@ -34,13 +34,13 @@ describe('task reducer', function() {
       removeTask('36212c03-040b-4139-867f-bd76485f4084'),
     );
     expect(
-      state.getByIds['36212c03-040b-4139-867f-bd76485f4084'],
+      state.getById['36212c03-040b-4139-867f-bd76485f4084'],
     ).not.toBeDefined();
   });
 
   it('should update the  task', () => {
     let mockInitialState = expectedInitialState;
-    mockInitialState.getByIds['36212c03-040b-4139-867f-bd76485f4084'] = {
+    mockInitialState.getById['36212c03-040b-4139-867f-bd76485f4084'] = {
       title: 'test task',
     };
     let state = tasks(
@@ -49,7 +49,7 @@ describe('task reducer', function() {
         title: 'new task title',
       }),
     );
-    expect(state.getByIds['36212c03-040b-4139-867f-bd76485f4084'].title).toBe(
+    expect(state.getById['36212c03-040b-4139-867f-bd76485f4084'].title).toBe(
       'new task title',
     );
   });

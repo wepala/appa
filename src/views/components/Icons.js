@@ -249,3 +249,7 @@ export const AssetTopNavigationIcon = style => (
 export const AssetTopNavigationDarkIcon = style => (
   <Icon {...style} name="top-navigation-dark" />
 );
+
+export const PlusIcon = (style) => (
+  <Icon {...style} name='plus'/>
+);
