@@ -1,4 +1,4 @@
-import {ADD_TASK, REMOVE_TASK, START_TASK, UPDATE_TASK} from '../../actionTypes';
+import {ADD_TASK, REMOVE_TASK, START_TASK, UPDATE_TASK} from './commandTypes';
 
 export const addTask = task => {
   return {
