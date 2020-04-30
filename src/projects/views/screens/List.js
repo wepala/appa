@@ -1,91 +1,37 @@
 import React from 'react';
-import {SafeAreaView, View} from 'react-native-web';
-import {
-  Button,
-  Input,
-  Layout,
-  StyleService,
-  Text,
-  useStyleSheet,
-} from '@ui-kitten/components';
+import {StyleService, List, Layout, useStyleSheet} from '@ui-kitten/components';
+import ProjectItem from '../components/ProjectItem';
 
+const data = new Array(8).fill({
+  title: 'Item',
+});
 
 export default ({navigation}) => {
-  const [email, setEmail] = React.useState();
-  const [password, setPassword] = React.useState();
-  const [passwordVisible, setPasswordVisible] = React.useState(false);
-
   const styles = useStyleSheet(themedStyles);
 
-  const onSignUpButtonPress = (): void => {
-    navigation && navigation.navigate('SignUp2');
-  };
-
-  const onForgotPasswordButtonPress = (): void => {
-    navigation && navigation.navigate('ForgotPassword');
-  };
-
-  const onPasswordIconPress = (): void => {
-    setPasswordVisible(!passwordVisible);
-  };
-
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text category="h1" status="control">
-          Hello
-        </Text>
-        <Text style={styles.signInLabel} category="s1" status="control">
-          Sign in to your account
-        </Text>
-      </View>
-      <Button style={styles.signInButton} size="giant">
-        SIGN IN
-      </Button>
-      <Button
-        style={styles.signUpButton}
-        appearance="ghost"
-        status="basic"
-        onPress={onSignUpButtonPress}>
-        Don't have an account? Create
-      </Button>
-    </SafeAreaView>
+    <Layout style={styles.container}>
+      <Layout style={styles.contentContainer}>
+        <List
+          data={data}
+          renderItem={({item, index}) => (
+            <ProjectItem item={item} index={index} />
+          )}
+        />
+      </Layout>
+    </Layout>
   );
 };
 
 const themedStyles = StyleService.create({
   container: {
-    backgroundColor: 'background-basic-color-1',
+    backgroundColor: 'background-basic-color-2',
+    height: '100%',
   },
-  headerContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: 216,
-    backgroundColor: 'color-primary-default',
-  },
-  formContainer: {
+  contentContainer: {
     flex: 1,
     paddingTop: 32,
     paddingHorizontal: 16,
-  },
-  signInLabel: {
-    marginTop: 16,
-  },
-  signInButton: {
-    marginHorizontal: 16,
-  },
-  signUpButton: {
-    marginVertical: 12,
-    marginHorizontal: 16,
-  },
-  forgotPasswordContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
-  passwordInput: {
-    marginTop: 16,
-  },
-  forgotPasswordButton: {
-    paddingHorizontal: 0,
+    backgroundColor: 'background-basic-color-2',
   },
 });
