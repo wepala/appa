@@ -9,7 +9,7 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components';
 import {KeyboardAvoidingView} from 'react-native';
-import TopBar from '../components/TopBar';
+import DetailTopBar from '../components/DetailTopBar';
 
 const themedStyles = StyleService.create({
   container: {
@@ -37,18 +37,36 @@ const themedStyles = StyleService.create({
   },
 });
 
-export default ({navigation, onCreate}) => {
+export default ({navigation, route, tasks, onCreate, onUpdate}) => {
+  const {itemId} = route.params;
+  const task =
+    tasks[itemId] !== undefined
+      ? tasks[itemId]
+      : {
+          title: '',
+          description: '',
+          dueDate: '',
+        };
+
   const styles = useStyleSheet(themedStyles);
-  const [title, setTitle] = useState();
+  const [title, setTitle] = useState(task.title);
   const [timeEstimate, setTimeEstimate] = useState();
   const [timeUnit, setTimeUnit] = useState();
   const [project, setProject] = useState();
-  const [description, setDescription] = useState();
-  const [dueDate, setDueDate] = useState();
+  const [description, setDescription] = useState(task.description);
+  const [dueDate, setDueDate] = useState(task.dueDate);
+
+  const onSubmit = () => {
+    if (task.id === undefined) {
+      onCreate(navigation, title, description, dueDate);
+    } else {
+      onUpdate(navigation, task.id, title, description, dueDate);
+    }
+  };
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <TopBar navigation={navigation} />
+      <DetailTopBar navigation={navigation} />
       <Layout style={styles.form}>
         <Input
           style={styles.input}
@@ -87,10 +105,7 @@ export default ({navigation, onCreate}) => {
         />
       </Layout>
       <Divider />
-      <Button
-        style={styles.addButton}
-        size="giant"
-        onPress={() => onCreate(navigation, title, description, dueDate)}>
+      <Button style={styles.addButton} size="giant" onPress={onSubmit}>
         Submit
       </Button>
     </KeyboardAvoidingView>

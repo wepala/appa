@@ -3,21 +3,21 @@ import {
   TopNavigation,
   TopNavigationAction,
 } from '@ui-kitten/components';
-import {MenuIcon, PlusIcon} from '../../../views/components/Icons';
+import {ArrowIosBackIcon, PlusIcon} from '../../../views/components/Icons';
 import React from 'react';
 
 export default ({navigation, title}) => {
   title = title === undefined ? 'WeAgenda' : title;
 
-  const showMenu = () => {
-    navigation.toggleDrawer();
+  const goBack = () => {
+    navigation.goBack();
   };
 
-  const MenuAction = () => (
-    <TopNavigationAction icon={MenuIcon} onPress={showMenu} />
+  const BackAction = () => (
+    <TopNavigationAction icon={ArrowIosBackIcon} onPress={goBack} />
   );
 
-  const CreateAction = () => {
+  const MenuAction = () => {
     const showCreate = () => {
       navigation.navigate('CreateTask');
     };
@@ -30,8 +30,8 @@ export default ({navigation, title}) => {
       <TopNavigation
         title={title}
         alignment="center"
-        accessoryLeft={MenuAction}
-        accessoryRight={CreateAction}
+        accessoryLeft={BackAction}
+        accessoryRight={MenuAction}
       />
       <Divider />
     </>
