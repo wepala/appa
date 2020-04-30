@@ -10,7 +10,13 @@ import {
   MenuItemType,
   Text,
 } from '@ui-kitten/components';
-import {AssetCalendarIcon} from './Icons';
+import {
+  AssetCalendarIcon,
+  ClockIcon,
+  ProjectIcon,
+  ReportIcon,
+  SettingsIcon,
+} from './Icons';
 
 export default ({navigation}) => {
   const onItemSelect = index => {
@@ -33,6 +39,11 @@ export default ({navigation}) => {
       case 3: {
         navigation.toggleDrawer();
         navigation.navigate('Reports');
+        return;
+      }
+      case 4: {
+        navigation.toggleDrawer();
+        navigation.navigate('Settings');
         return;
       }
     }
@@ -66,9 +77,11 @@ export default ({navigation}) => {
         footer={renderFooter}
         onSelect={onItemSelect}>
         <DrawerItem title={'Agenda'} accessoryLeft={AssetCalendarIcon} />
-        <DrawerItem title={'Time Log'} />
-        <DrawerItem title={'Projects'} />
-        <DrawerItem title={'Reports'} />
+        <DrawerItem title={'Time Log'} accessoryLeft={ClockIcon} />
+        <DrawerItem title={'Projects'} accessoryLeft={ProjectIcon} />
+        <DrawerItem title={'Reports'} accessoryLeft={ReportIcon} />
+        <Divider />
+        <DrawerItem title={'Settings'} accessoryLeft={SettingsIcon} />
       </Drawer>
     </SafeAreaView>
   );

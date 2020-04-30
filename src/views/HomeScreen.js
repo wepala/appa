@@ -40,7 +40,7 @@ const HomeScreen = ({navigation, onBoarded}) => {
   const MainStackScreen = () => {
     return (
       <Navigator
-        screenOptions={{gestureEnabled: false}}
+        screenOptions={{gestureEnabled: true}}
         drawerContent={props => <MainMenu {...props} />}>
         <Screen name="Agenda" component={Tasks} />
         <Screen name="Projects" component={Projects} />
