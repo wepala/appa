@@ -5,6 +5,7 @@ import {
   ListProps,
   Text,
 } from '@ui-kitten/components';
+import TaskItem from './TaskItem';
 import React from 'react';
 import {Dimensions, ListRenderItemInfo, StyleSheet} from 'react-native';
 import type {Task} from '../../model/Task';
@@ -12,18 +13,14 @@ import type {Task} from '../../model/Task';
 export default props => {
   const {contentContainerStyle, onItemPress, ...listProps} = props;
   const renderItem = (info: ListRenderItemInfo<Task>): ListItemElement => (
-    <Card style={styles.item} onPress={() => props.onItemPress(info.index)}>
-      <Text style={styles.itemTitle} category="s2">
-        {info.item.title}
-      </Text>
-    </Card>
+    <TaskItem />
   );
 
   return (
     <List
       {...listProps}
       contentContainerStyle={[styles.container, contentContainerStyle]}
-      numColumns={2}
+      numColumns={1}
       renderItem={renderItem}
     />
   );

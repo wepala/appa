@@ -10,20 +10,21 @@ import {
   ListItem,
   View,
   Layout,
+  Input,
   StyleService,
 } from '@ui-kitten/components';
 
-const ProjectItem = ({item, index}) => {
+const TaskItem = ({item, index}) => {
   return (
     <Card style={styles.item}>
       <Layout style={styles.row}>
         <Layout style={styles.column1}>
-          <FontAwesomeIcon icon={faGithub} size={50} />
+          <Text>Checkbox</Text>
         </Layout>
         <Layout style={styles.column2}>
-          <Text category="h4">Project Name</Text>
+          <Text category="s2">Project Name</Text>
           <Text>
-            <FontAwesomeIcon icon={faClock} /> 8h 10m
+            Time: <FontAwesomeIcon icon={faClock} /> 8h 10m
           </Text>
         </Layout>
       </Layout>
@@ -59,4 +60,4 @@ const styles = StyleService.create({
     justifyContent: 'space-between',
   },
 });
-export default ProjectItem;
+export default TaskItem;

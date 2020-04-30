@@ -28,7 +28,7 @@ export default ({navigation}) => {
         <Button style={styles.subscriptionButton} status="success" size="giant">
           Support Subscription
         </Button>
-        <Button appearance="" style={styles.skipButton} status="basic">
+        <Button appearance="ghost" style={styles.skipButton} status="basic">
           Skip
         </Button>
       </View>
