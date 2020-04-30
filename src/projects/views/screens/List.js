@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  Button,
-  Input,
-  StyleService,
-  Text,
-  List,
-  ListItem,
-  Layout,
-  useStyleSheet,
-} from '@ui-kitten/components';
+import {StyleService, List, Layout, useStyleSheet} from '@ui-kitten/components';
 import ProjectItem from '../components/ProjectItem';
 
 const data = new Array(8).fill({
@@ -20,7 +11,6 @@ export default ({navigation}) => {
 
   return (
     <Layout style={styles.container}>
-      <Layout style={styles.headerContainer} />
       <Layout style={styles.contentContainer}>
         <List
           data={data}
@@ -38,7 +28,6 @@ const themedStyles = StyleService.create({
     backgroundColor: 'background-basic-color-2',
     height: '100%',
   },
-
   contentContainer: {
     flex: 1,
     paddingTop: 32,
