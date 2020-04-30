@@ -16,6 +16,7 @@ import {
   ProjectIcon,
   ReportIcon,
   SettingsIcon,
+  SupportIcon,
 } from './Icons';
 
 export default ({navigation}) => {
@@ -41,9 +42,15 @@ export default ({navigation}) => {
         navigation.navigate('Reports');
         return;
       }
-      case 4: {
+
+      case 5: {
         navigation.toggleDrawer();
         navigation.navigate('Settings');
+        return;
+      }
+      case 6: {
+        navigation.toggleDrawer();
+        navigation.navigate('Support');
         return;
       }
     }
@@ -82,6 +89,7 @@ export default ({navigation}) => {
         <DrawerItem title={'Reports'} accessoryLeft={ReportIcon} />
         <Divider />
         <DrawerItem title={'Settings'} accessoryLeft={SettingsIcon} />
+        <DrawerItem title={'Support'} accessoryLeft={SupportIcon} />
       </Drawer>
     </SafeAreaView>
   );

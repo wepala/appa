@@ -8,7 +8,7 @@ import {
   Text,
   useStyleSheet,
 } from '@ui-kitten/components';
-import {EyeIcon, EyeOffIcon, PersonIcon} from '../components/Extras';
+import {EyeIcon, EyeOffIcon, PersonIcon} from '../../../views/components/Icons';
 import {KeyboardAvoidingView} from '../../../views/components/KeyboardAvoidingView';
 
 export default ({navigation}) => {

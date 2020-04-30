@@ -20,6 +20,7 @@ import Onboarding from '../onboarding/controllers/Main';
 import Logs from '../logs/controllers/Main';
 import Projects from '../projects/controllers/Main';
 import Reports from '../reports/controllers/Main';
+import Support from '../support/views/screens/Support';
 
 const OnboardStack = createStackNavigator();
 const {Navigator, Screen} = createDrawerNavigator();
@@ -46,6 +47,8 @@ const HomeScreen = ({navigation, onBoarded}) => {
         <Screen name="Projects" component={Projects} />
         <Screen name="Logs" component={Logs} />
         <Screen name="Reports" component={Reports} />
+        <Screen name="Settings" component={Tasks} />
+        <Screen name="Support" component={Support} />
       </Navigator>
     );
   };

@@ -26,6 +26,12 @@ export const ClockIcon = style => <Icon {...style} name="clock-outline" />;
 
 export const CloseIcon = style => <Icon {...style} name="close" />;
 
+export const EyeIcon = style => <Icon {...style} name="eye-outline" />;
+
+export const EyeOffIcon = style => <Icon {...style} name="eye-off-outline" />;
+
+export const PersonIcon = style => <Icon {...style} name="person-outline" />;
+
 export const GithubIcon = style => <Icon {...style} name="github" />;
 
 export const GridIcon = style => <Icon {...style} name="grid-outline" />;
@@ -48,6 +54,7 @@ export const SearchIcon = style => <Icon {...style} name="search" />;
 export const SettingsIcon = style => (
   <Icon {...style} name="settings-outline" />
 );
+export const SupportIcon = style => <Icon {...style} name="phone-outline" />;
 
 export const StarIcon = style => <Icon {...style} name="star" />;
 
