@@ -9,73 +9,29 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components';
 import {EyeIcon, EyeOffIcon, PersonIcon} from '../../../views/components/Icons';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faLifeRing} from '@fortawesome/free-solid-svg-icons';
 import {KeyboardAvoidingView} from '../../../views/components/KeyboardAvoidingView';
 
 export default ({navigation}) => {
-  const [email, setEmail] = React.useState();
-  const [password, setPassword] = React.useState();
-  const [passwordVisible, setPasswordVisible] = React.useState(false);
-
   const styles = useStyleSheet(themedStyles);
-
-  const onSignUpButtonPress = () => {
-    navigation && navigation.navigate('SignUp2');
-  };
-
-  const onForgotPasswordButtonPress = () => {
-    navigation && navigation.navigate('ForgotPassword');
-  };
-
-  const onPasswordIconPress = () => {
-    setPasswordVisible(!passwordVisible);
-  };
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text category="h1" status="control">
-          Hello
+      <Layout style={styles.headerContainer} level="1">
+        <FontAwesomeIcon icon={faLifeRing} size={216} color={'white'} />
+        <Text style={styles.text} category="h1">
+          Get Help
         </Text>
-        <Text style={styles.signInLabel} category="s1" status="control">
-          Sign in to your account
-        </Text>
-      </View>
-      <Layout style={styles.formContainer} level="1">
-        <Input
-          placeholder="Email"
-          icon={PersonIcon}
-          value={email}
-          onChangeText={setEmail}
-        />
-        <Input
-          style={styles.passwordInput}
-          placeholder="Password"
-          icon={passwordVisible ? EyeIcon : EyeOffIcon}
-          value={password}
-          secureTextEntry={!passwordVisible}
-          onChangeText={setPassword}
-          onIconPress={onPasswordIconPress}
-        />
-        <View style={styles.forgotPasswordContainer}>
-          <Button
-            style={styles.forgotPasswordButton}
-            appearance="ghost"
-            status="basic"
-            onPress={onForgotPasswordButtonPress}>
-            Forgot your password?
-          </Button>
-        </View>
       </Layout>
-      <Button style={styles.signInButton} size="giant">
-        SIGN IN
-      </Button>
-      <Button
-        style={styles.signUpButton}
-        appearance="ghost"
-        status="basic"
-        onPress={onSignUpButtonPress}>
-        Don't have an account? Create
-      </Button>
+      <View style={styles.buttonGroup}>
+        <Button style={styles.subscriptionButton} status="success" size="giant">
+          Support Subscription
+        </Button>
+        <Button style={styles.skipButton} status="basic">
+          Skip
+        </Button>
+      </View>
     </KeyboardAvoidingView>
   );
 };
@@ -85,34 +41,25 @@ const themedStyles = StyleService.create({
     backgroundColor: 'background-basic-color-1',
   },
   headerContainer: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: 216,
     backgroundColor: 'color-primary-default',
   },
-  formContainer: {
-    flex: 1,
-    paddingTop: 32,
-    paddingHorizontal: 16,
+  text: {
+    paddingTop: 16,
+    color: '#fff',
   },
-  signInLabel: {
-    marginTop: 16,
+
+  buttonGroup: {
+    paddingVertical: 16,
   },
-  signInButton: {
+  subscriptionButton: {
     marginHorizontal: 16,
   },
-  signUpButton: {
-    marginVertical: 12,
+  skipButton: {
+    marginVertical: 16,
     marginHorizontal: 16,
-  },
-  forgotPasswordContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
-  passwordInput: {
-    marginTop: 16,
-  },
-  forgotPasswordButton: {
-    paddingHorizontal: 0,
   },
 });
