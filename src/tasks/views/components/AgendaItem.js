@@ -11,24 +11,27 @@ import {
   View,
   Layout,
   Input,
+  CheckBox,
   StyleService,
 } from '@ui-kitten/components';
 
-const TaskItem = ({item, index}) => {
+const TaskItem = ({item, index, onPress}) => {
   return (
-    <Card style={styles.item}>
+    <Card style={styles.item} onPress={onPress}>
       <Layout style={styles.row}>
         <Layout style={styles.column1}>
-          <Text>Checkbox</Text>
+          <CheckBox />
         </Layout>
         <Layout style={styles.column2}>
-          <Text category="s2">Project Name</Text>
+          <Text category="s1">Project Name</Text>
           <Text>
-            Time: <FontAwesomeIcon icon={faClock} /> 8h 10m
+            <FontAwesomeIcon icon={faClock} /> Time: 8h 10m
           </Text>
         </Layout>
+        <Layout style={styles.column1}>
+          <Button status="success" />
+        </Layout>
       </Layout>
-      <Layout style={styles.breakRow} />
     </Card>
   );
 };
@@ -49,14 +52,13 @@ const styles = StyleService.create({
     backgroundColor: 'transparent',
     flexBasis: 'auto',
     flexShrink: 0,
-    paddingVertical: 2,
-    paddingHorizontal: 4,
+    justifyContent: 'center',
   },
   column2: {
     backgroundColor: 'transparent',
     flexGrow: 1,
     paddingVertical: 2,
-    paddingHorizontal: 4,
+    paddingHorizontal: 16,
     justifyContent: 'space-between',
   },
 });
