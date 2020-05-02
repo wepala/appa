@@ -1,16 +1,11 @@
 import React from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faClock} from '@fortawesome/free-solid-svg-icons';
-import {faGithub} from '@fortawesome/free-brands-svg-icons';
 
 import {
-  Button,
   Text,
   Card,
-  ListItem,
-  View,
   Layout,
-  Input,
   StyleService,
 } from '@ui-kitten/components';
 
