@@ -57,3 +57,7 @@ export const mockTasks = {
     },
   },
 };
+
+it('should have fixtures', () => {
+  expect(mockTasks).toBeObject();
+});
