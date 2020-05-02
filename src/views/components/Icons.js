@@ -39,6 +39,7 @@ export const GridIcon = style => <Icon {...style} name="grid-outline" />;
 export const LayoutIcon = style => <Icon {...style} name="layout-outline" />;
 
 export const ListIcon = style => <Icon {...style} name="list" />;
+export const LoginIcon = style => <Icon {...style} name="log-in-outline" />;
 
 export const MenuIcon = style => <Icon {...style} name="menu" />;
 
@@ -250,6 +251,4 @@ export const AssetTopNavigationDarkIcon = style => (
   <Icon {...style} name="top-navigation-dark" />
 );
 
-export const PlusIcon = (style) => (
-  <Icon {...style} name='plus'/>
-);
+export const PlusIcon = style => <Icon {...style} name="plus" />;

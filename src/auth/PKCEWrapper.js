@@ -7,6 +7,9 @@ import {
   useStyleSheet,
   StyleService,
 } from '@ui-kitten/components';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faUserAltSlash} from '@fortawesome/free-solid-svg-icons';
+import {LoginIcon} from '../views/components/Icons';
 import PKCE from './pkce';
 import {
   CLIENT_ID,
@@ -51,15 +54,15 @@ const PKCEWrapper = props => {
     <SafeAreaView>
       <Layout style={styles.container}>
         <Layout style={styles.headerContainer} level="1">
-          {/* <FontAwesomeIcon icon={faLifeRing} size={216} color={'white'} /> */}
+          <FontAwesomeIcon icon={faUserAltSlash} size={216} color={'white'} />
+
           <Text style={styles.text} category="h1">
             You are not logged in
           </Text>
-        </Layout>
-        <Layout style={styles.buttonGroup}>
           <Button
             style={styles.loginButton}
-            appearance="primary"
+            accessoryRight={LoginIcon}
+            status="basic"
             onPress={handleLogin}>
             Login
           </Button>
@@ -79,21 +82,16 @@ const themedStyles = StyleService.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'color-primary-default',
+    padding: 16,
   },
   text: {
     paddingTop: 16,
     color: '#fff',
   },
 
-  buttonGroup: {
-    paddingVertical: 16,
-  },
   loginButton: {
-    marginHorizontal: 16,
-  },
-  skipButton: {
+    width: '100%',
     marginVertical: 16,
-    marginHorizontal: 16,
   },
 });
 
