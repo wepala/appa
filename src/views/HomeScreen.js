@@ -1,28 +1,19 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
-import {
-  Divider,
-  Layout,
-  TopNavigation,
-  TopNavigationAction,
-} from '@ui-kitten/components';
+import {StyleSheet} from 'react-native';
+
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {connect} from 'react-redux';
-import {SafeAreaLayout} from './components/SafeAreaLayout';
-import {MenuIcon} from './components/Icons';
 
 //import the different modules
 import MainMenu from './components/MainMenu';
 import Tasks from '../tasks/views/screens/Main';
-import Onboarding from '../onboarding/controllers/Main';
+import Onboarding from '../onboarding/views/screens/Main';
 import Logs from '../logs/controllers/Main';
 import Projects from '../projects/controllers/Main';
 import Reports from '../reports/controllers/Main';
 import Support from '../support/views/screens/Support';
 
-const OnboardStack = createStackNavigator();
 const {Navigator, Screen} = createDrawerNavigator();
 
 const mapStateToProps = state => {
@@ -55,15 +46,7 @@ const HomeScreen = ({navigation, onBoarded}) => {
 
   const RootStackScreen = () => {
     if (!onBoarded) {
-      return (
-        <OnboardStack.Navigator mode="modal">
-          <OnboardStack.Screen
-            name="Onboarding"
-            component={Onboarding}
-            options={{headerShown: false}}
-          />
-        </OnboardStack.Navigator>
-      );
+      return <Onboarding />;
     } else {
       return <MainStackScreen />;
     }

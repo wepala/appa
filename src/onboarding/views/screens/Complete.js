@@ -7,16 +7,13 @@ export default ({navigation}) => {
     <SafeAreaView>
       <View>
         <Text category="h1" status="control">
-          Create Account
+          You're All Set
         </Text>
         <Text category="s1" status="control">
-          You can connect to WeOS our platform to make it easier to make it
-          easier to share information between devices. You can learn more about
-          WeOS here.
+          Don't hesitate to reach out with your feedback
         </Text>
-        <Button>WeOS Connect</Button>
       </View>
-      <Button onPress={() => navigation.navigate('Complete')}>Skip</Button>
+      <Button>Complete</Button>
     </SafeAreaView>
   );
 };

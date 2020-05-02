@@ -1,5 +1,5 @@
 import onboard from '../reducer';
-import {onBoardUser} from '../actions';
+import {onBoardUser} from '../commands';
 
 describe('onboarding reducer', function() {
   const expectedInitialState = {onBoarded: false};
