@@ -7,6 +7,7 @@ import {default as theme} from './theme.json';
 
 import HomeScreen from './src/views/HomeScreen';
 import {Provider} from 'react-redux';
+import PKCEWrapper from './src/auth/PKCEWrapper';
 
 //store
 import store from './src/store';
@@ -15,9 +16,11 @@ export default () => (
   <>
     <IconRegistry icons={EvaIconsPack} />
     <ApplicationProvider {...eva} theme={{...eva.light, ...theme}}>
-      <Provider store={store}>
-        <HomeScreen />
-      </Provider>
+      <PKCEWrapper>
+        <Provider store={store}>
+          <HomeScreen />
+        </Provider>
+      </PKCEWrapper>
     </ApplicationProvider>
   </>
 );
