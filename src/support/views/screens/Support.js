@@ -16,7 +16,7 @@ export default ({navigation}) => {
   const styles = useStyleSheet(themedStyles);
 
   return (
-    <KeyboardAvoidingView style={styles.container}>
+    <Layout style={styles.container}>
       <Layout style={styles.headerContainer} level="1">
         <FontAwesomeIcon icon={faLifeRing} size={216} color={'white'} />
         <Text style={styles.text} category="h1">
@@ -31,13 +31,14 @@ export default ({navigation}) => {
           Skip
         </Button>
       </View>
-    </KeyboardAvoidingView>
+    </Layout>
   );
 };
 
 const themedStyles = StyleService.create({
   container: {
     backgroundColor: 'background-basic-color-1',
+    height: '100%',
   },
   headerContainer: {
     flex: 1,
