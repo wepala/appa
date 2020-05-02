@@ -35,7 +35,6 @@
     "react-native-screens": "^2.5.0",
     "react-native-svg": "^12.1.0",
     "react-native-tab-view": "^2.14.0",
-    "react-native-testing-library": "^1.13.2",
     "react-native-web": "^0.12.2",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
@@ -54,7 +53,8 @@
     "eslint": "6.8.0",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "0.58.0",
-    "react-test-renderer": "16.11.0"
+    "react-native-testing-library": "^1.13.2",
+    "react-test-renderer": "^16.11.0"
   },
   "jest": {
     "preset": "react-native",

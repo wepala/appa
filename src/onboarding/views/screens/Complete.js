@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, View} from 'react-native';
 import {Button, Text} from '@ui-kitten/components';
 
-export default ({navigation}) => {
+export default ({navigation, onComplete}) => {
   return (
     <SafeAreaView>
       <View>
@@ -13,7 +13,9 @@ export default ({navigation}) => {
           Don't hesitate to reach out with your feedback
         </Text>
       </View>
-      <Button>Complete</Button>
+      <Button testID={'CompleteButton'} onPress={() => onComplete()}>
+        Complete
+      </Button>
     </SafeAreaView>
   );
 };

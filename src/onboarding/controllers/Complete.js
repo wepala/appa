@@ -1,16 +1,10 @@
-import {connect} from 'react-redux';
-import Complete from '../views/screens/Complete';
 import {onBoardUser} from '../model/commands';
+import {Controller} from '../../controller';
 
 /**
  * @class OnboardingCompleteController Final section of the onboarding process
  */
-export class OnboardingCompleteController {
-  constructor(state, dispatch) {
-    this.state = state;
-    this.dispatch = dispatch;
-  }
-
+export default class OnboardingCompleteController extends Controller {
   /**
    * Finish the onboarding process
    */
@@ -18,20 +12,3 @@ export class OnboardingCompleteController {
     this.dispatch(onBoardUser());
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    onBoarded: state.onboard.onBoarded,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onShowConnect: () => {},
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Complete);
