@@ -29,7 +29,7 @@ export class Controller {
         ) {
           if (this.hasMethod(proto, name)) {
             this.#result[name] = (...args) => {
-              this[name].apply(this, args);
+              return this[name].apply(this, args);
             };
           }
         }

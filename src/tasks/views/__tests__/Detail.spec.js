@@ -37,5 +37,6 @@ describe('Task Detail Screen', () => {
     expect(submitButton).toHaveLength(1);
     fireEvent.press(submitButton[0]);
     expect(onSave).toHaveBeenCalled();
+    // expect(navigation.goBack).toHaveBeenCalled();
   });
 });

@@ -15,7 +15,7 @@ describe('Task Create Controller', () => {
 
     const controller = new DetailController();
     const state = controller.configureDispatch(dispatch);
-    state.onSave(
+    const promise = state.onSave(
       expectedTask.title,
       expectedTask.description,
       expectedTask.dueDate,
@@ -30,6 +30,7 @@ describe('Task Create Controller', () => {
         expectedTask.agendas,
       ),
     );
+    expect(promise).toBeDefined();
   });
   it('should create a task on the current agenda when add to agenda is true', () => {
     const today = new Date();
