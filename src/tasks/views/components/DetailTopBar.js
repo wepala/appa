@@ -3,7 +3,7 @@ import {
   TopNavigation,
   TopNavigationAction,
 } from '@ui-kitten/components';
-import {ArrowIosBackIcon, PlusIcon} from '../../../views/components/Icons';
+import {ArrowIosBackIcon, TrashIcon} from '../../../views/components/Icons';
 import React from 'react';
 
 export default ({navigation, title}) => {
@@ -22,7 +22,7 @@ export default ({navigation, title}) => {
       navigation.navigate('CreateTask');
     };
 
-    return <TopNavigationAction icon={PlusIcon} onPress={showCreate} />;
+    return <TopNavigationAction icon={TrashIcon} onPress={showCreate} />;
   };
 
   return (

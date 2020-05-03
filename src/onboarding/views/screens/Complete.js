@@ -2,18 +2,20 @@ import React from 'react';
 import {SafeAreaView, View} from 'react-native';
 import {Button, Text} from '@ui-kitten/components';
 
-export default ({navigation}) => {
+export default ({navigation, onComplete}) => {
   return (
     <SafeAreaView>
       <View>
         <Text category="h1" status="control">
-          Welcome to WeAgenda
+          You're All Set
         </Text>
         <Text category="s1" status="control">
-          A fully customizable app built by Wepala and made better by you!
+          Don't hesitate to reach out with your feedback
         </Text>
       </View>
-      <Button onPress={() => navigation.navigate('Connect')}>Continue</Button>
+      <Button testID={'CompleteButton'} onPress={() => onComplete()}>
+        Complete
+      </Button>
     </SafeAreaView>
   );
 };

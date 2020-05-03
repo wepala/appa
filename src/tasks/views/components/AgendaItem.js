@@ -2,13 +2,11 @@ import React from 'react';
 import {ClockIcon, PlayIcon} from '../../../views/components/Icons';
 
 import {
-  Button,
   Text,
   Card,
-  ListItem,
-  View,
   Layout,
   Input,
+  Button,
   CheckBox,
   StyleService,
   useStyleSheet,
@@ -70,4 +68,5 @@ const themedStyles = StyleService.create({
     padding: 0,
   },
 });
+
 export default TaskItem;
