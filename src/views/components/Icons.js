@@ -18,6 +18,10 @@ export const BookmarkOutlineIcon = style => (
   <Icon {...style} name="bookmark-outline" />
 );
 
+export const CalendarIcon = style => (
+  <Icon {...style} name="calendar-outline" />
+);
+
 export const ColorPaletteIcon = style => (
   <Icon {...style} name="color-palette-outline" />
 );
@@ -250,6 +254,4 @@ export const AssetTopNavigationDarkIcon = style => (
   <Icon {...style} name="top-navigation-dark" />
 );
 
-export const PlusIcon = (style) => (
-  <Icon {...style} name='plus'/>
-);
+export const PlusIcon = style => <Icon {...style} name="plus" />;
