@@ -37,17 +37,7 @@ const themedStyles = StyleService.create({
   },
 });
 
-export default ({navigation, route, tasks, onCreate, onUpdate}) => {
-  const {itemId} = route.params;
-  const task =
-    tasks[itemId] !== undefined
-      ? tasks[itemId]
-      : {
-          title: '',
-          description: '',
-          dueDate: '',
-        };
-
+export default ({navigation, route, task, onSave}) => {
   const styles = useStyleSheet(themedStyles);
   const [title, setTitle] = useState(task.title);
   const [timeEstimate, setTimeEstimate] = useState();
@@ -57,11 +47,7 @@ export default ({navigation, route, tasks, onCreate, onUpdate}) => {
   const [dueDate, setDueDate] = useState(task.dueDate);
 
   const onSubmit = () => {
-    if (task.id === undefined) {
-      onCreate(navigation, title, description, dueDate);
-    } else {
-      onUpdate(navigation, task.id, title, description, dueDate);
-    }
+    onSave(title, description, dueDate).then(() => navigation.goBack());
   };
 
   return (
@@ -105,7 +91,7 @@ export default ({navigation, route, tasks, onCreate, onUpdate}) => {
         />
       </Layout>
       <Divider />
-      <Button style={styles.addButton} size="giant" onPress={onSubmit}>
+      <Button style={styles.addButton} size="giant" onPress={onSubmit} testID={"SubmitButton"}>
         Submit
       </Button>
     </KeyboardAvoidingView>

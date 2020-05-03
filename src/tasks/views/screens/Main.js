@@ -1,7 +1,9 @@
 import React from 'react';
 import List from './List';
-import TaskDetail from '../../controllers/Detail';
+import DetailController from '../../controllers/Detail';
+import Detail from './Detail';
 import {createStackNavigator} from '@react-navigation/stack';
+import {Component} from '../../../weosHelpers';
 
 const {Navigator, Screen} = createStackNavigator();
 
@@ -10,12 +12,12 @@ export default () => (
     <Screen name="TaskList" component={List} />
     <Screen
       name="CreateTask"
-      component={TaskDetail}
+      component={Component(new DetailController(null, true), Detail)}
       initialParams={{itemId: ''}}
     />
     <Screen
       name="UpdateTask"
-      component={TaskDetail}
+      component={Component(new DetailController(null), Detail)}
       initialParams={{itemId: ''}}
     />
   </Navigator>
