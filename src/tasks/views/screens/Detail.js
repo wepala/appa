@@ -37,8 +37,10 @@ const themedStyles = StyleService.create({
   },
 });
 
-export default ({navigation, route, task, onSave}) => {
+export default ({navigation, route, getTask, onSave, section}) => {
   const styles = useStyleSheet(themedStyles);
+  const id = route.params?.id;
+  const task = getTask(id);
   const [title, setTitle] = useState(task.title);
   const [timeEstimate, setTimeEstimate] = useState();
   const [timeUnit, setTimeUnit] = useState();
@@ -47,12 +49,15 @@ export default ({navigation, route, task, onSave}) => {
   const [dueDate, setDueDate] = useState(task.dueDate);
 
   const onSubmit = () => {
-    onSave(title, description, dueDate).then(() => navigation.goBack());
+    const section = route.params?.section;
+    onSave(title, description, dueDate, section === 'agenda').then(() =>
+      navigation.goBack(),
+    );
   };
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <DetailTopBar navigation={navigation} />
+      <DetailTopBar navigation={navigation} section={section} />
       <Layout style={styles.form}>
         <Input
           style={styles.input}
@@ -91,7 +96,11 @@ export default ({navigation, route, task, onSave}) => {
         />
       </Layout>
       <Divider />
-      <Button style={styles.addButton} size="giant" onPress={onSubmit} testID={"SubmitButton"}>
+      <Button
+        style={styles.addButton}
+        size="giant"
+        onPress={onSubmit}
+        testID={'SubmitButton'}>
         Submit
       </Button>
     </KeyboardAvoidingView>

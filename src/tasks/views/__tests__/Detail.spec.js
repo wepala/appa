@@ -15,15 +15,12 @@ describe('Task Detail Screen', () => {
     };
     const onSave = jest.fn(
       () =>
-        new Promise(function(resolve, reject) {
-          console.log("resolve", resolve);
+        new Promise(function(resolve) {
           resolve();
-          return;
         }),
     );
     const task = mockTasks.getById['7a5fe6af-27f5-486b-a32d-4d3d0437d0c3'];
     task.dueDate = moment(task.dueDate).toDate();
-    console.log(task);
 
     const {getAllByTestId} = render(
       <>

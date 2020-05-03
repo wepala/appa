@@ -3,22 +3,13 @@ import {Controller} from '../../controller';
 import moment from 'moment';
 
 export default class DetailController extends Controller {
-  #id;
-  #addToAgenda;
-
-  constructor(id = null, addToAgenda = false) {
+  constructor() {
     super();
-    this.#id = id;
-    this.#addToAgenda = addToAgenda;
   }
 
-  get projects() {
-    return Object.values(this.state.projects.getById);
-  }
-
-  get task() {
-    return this.#id != null
-      ? this.state.tasks.getById[this.#id]
+  getTask(id) {
+    return id !== undefined && id !== ''
+      ? this.state.tasks.getById[id]
       : {
           title: '',
           description: '',
@@ -28,20 +19,20 @@ export default class DetailController extends Controller {
         };
   }
 
-  onSave(title, description, dueDate, project) {
-    return new Promise((resolve, reject) => {
+  onSave(title, description, dueDate, addToAgenda = false, project = '') {
+    return new Promise(resolve => {
+      const task = {
+        title: title,
+        description: description,
+        dueDate: dueDate,
+        agendas: addToAgenda ? [moment().format('YYYY-MM-DD')] : [],
+        project: project,
+        created: moment(),
+      };
       //TODO execute command to create task
-      this.dispatch(
-        addTask(
-          title,
-          description,
-          dueDate,
-          project,
-          this.#addToAgenda ? [moment().format('YYYY-MM-DD')] : [],
-        ),
-      );
+      this.dispatch(addTask(task));
+      console.log('task created');
       resolve();
-      return;
     });
   }
 

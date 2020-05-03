@@ -1,22 +1,9 @@
 import {ADD_TASK, REMOVE_TASK, START_TASK, UPDATE_TASK} from './commandTypes';
 
-export const addTask = (
-  title,
-  description = '',
-  dueDate = '',
-  project = '',
-  agendas = [],
-) => {
+export const addTask = task => {
   return {
     type: ADD_TASK,
-    payload: {
-      title: title,
-      description: description,
-      dueDate: dueDate,
-      project: project,
-      completed: false,
-      agendas: agendas,
-    },
+    payload: task,
   };
 };
 
