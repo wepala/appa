@@ -3,10 +3,10 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import BacklogItem from './BacklogItem';
 
-export default ({navigation, data, contentContainerStyle}) => {
+export default ({navigation, items, contentContainerStyle}) => {
   const onItemPress = index => {
     navigation.navigate('UpdateTask', {
-      itemId: data[index].id,
+      itemId: items[index].id,
     });
   };
 
@@ -19,7 +19,7 @@ export default ({navigation, data, contentContainerStyle}) => {
     <List
       contentContainerStyle={[styles.container, contentContainerStyle]}
       numColumns={3}
-      data={data}
+      data={items}
       renderItem={renderItem}
     />
   );
