@@ -1,7 +1,5 @@
 import React from 'react';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faClock} from '@fortawesome/free-solid-svg-icons';
-import {faGithub} from '@fortawesome/free-brands-svg-icons';
+import {ClockIcon, PlayIcon} from '../../../views/components/Icons';
 
 import {
   Button,
@@ -13,9 +11,11 @@ import {
   Input,
   CheckBox,
   StyleService,
+  useStyleSheet,
 } from '@ui-kitten/components';
 
 const TaskItem = ({item, index, onPress}) => {
+  const styles = useStyleSheet(themedStyles);
   return (
     <Card style={styles.item} onPress={onPress}>
       <Layout style={styles.row}>
@@ -24,19 +24,17 @@ const TaskItem = ({item, index, onPress}) => {
         </Layout>
         <Layout style={styles.column2}>
           <Text category="s1">Project Name</Text>
-          <Text>
-            <FontAwesomeIcon icon={faClock} /> Time: 8h 10m
-          </Text>
+          <Text style={styles.time}>Time: 8h 10m</Text>
         </Layout>
         <Layout style={styles.column1}>
-          <Button status="success" />
+          <Button size="small" status="success" accessoryLeft={PlayIcon} />
         </Layout>
       </Layout>
     </Card>
   );
 };
 
-const styles = StyleService.create({
+const themedStyles = StyleService.create({
   item: {
     marginVertical: 8,
     padding: 0,
@@ -60,6 +58,16 @@ const styles = StyleService.create({
     paddingVertical: 2,
     paddingHorizontal: 16,
     justifyContent: 'space-between',
+  },
+  time: {
+    color: '$color-basic-700',
+    justifyContent: 'center',
+  },
+  icon: {
+    width: 20,
+    height: 20,
+    margin: 0,
+    padding: 0,
   },
 });
 export default TaskItem;
