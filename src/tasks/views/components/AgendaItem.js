@@ -6,6 +6,7 @@ import {
   Card,
   Layout,
   Input,
+  Button,
   CheckBox,
   StyleService,
   useStyleSheet,
@@ -67,3 +68,5 @@ const themedStyles = StyleService.create({
     padding: 0,
   },
 });
+
+export default TaskItem;
