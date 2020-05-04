@@ -3,6 +3,7 @@ import List from './List';
 import TaskDetail from '../../controllers/Detail';
 import {SafeAreaView} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const {Navigator, Screen} = createStackNavigator();
 

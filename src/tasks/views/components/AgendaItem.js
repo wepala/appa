@@ -22,7 +22,7 @@ const TaskItem = ({item, index, onPress}) => {
           <CheckBox checked={checked} onChange={toggleCheck} />
         </Layout>
         <Layout style={styles.column2}>
-          <Text category="s1">Project Name</Text>
+          <Text category="s1">{item.title}</Text>
           <Text style={styles.time}>Time: 8h 10m</Text>
         </Layout>
         <Layout style={styles.column1}>
