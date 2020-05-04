@@ -10,7 +10,7 @@ import {StyleSheet, SafeAreaView} from 'react-native';
 import AgendaItem from '../components/AgendaItem';
 import CurrentTask from '../components/CurrentTask';
 
-export default ({navigation, data, contentContainerStyle}) => {
+export default ({navigation, items, contentContainerStyle}) => {
   const styles = useStyleSheet(themedStyles);
   const onItemPress = index => {
     navigation.navigate('UpdateTask', {
@@ -29,7 +29,7 @@ export default ({navigation, data, contentContainerStyle}) => {
       <List
         style={[styles.list, contentContainerStyle]}
         numColumns={1}
-        data={data}
+        data={items}
         renderItem={renderItem}
       />
     </Layout>
