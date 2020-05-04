@@ -70,7 +70,9 @@ const themedStyles = StyleService.create({
     padding: 0,
   },
   checked: {
+    fontStyle: 'italic',
     textDecorationLine: 'line-through',
+    color: '$color-basic-600',
   },
 });
 
