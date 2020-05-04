@@ -11,12 +11,13 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onCreate: (navigation, title, description, dueDate, currentAgenda) => {
+    onCreate: (navigation, title, description, dueDate) => {
+      const today = new Date();
       const task = {
         title: title,
         description: description,
         dueDate: dueDate,
-        currentAgenda: currentAgenda,
+        agendas: [today.toISOString()],
       };
       //TODO execute command to create task
       dispatch(addTask(task));

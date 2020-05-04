@@ -13,9 +13,8 @@ import CurrentTask from '../components/CurrentTask';
 export default ({navigation, data, contentContainerStyle}) => {
   const styles = useStyleSheet(themedStyles);
   const onItemPress = index => {
-    console.log(data, index);
     navigation.navigate('UpdateTask', {
-      itemId: data[index].id,
+      itemId: items[index].id,
     });
   };
 
