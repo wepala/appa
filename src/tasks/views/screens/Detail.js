@@ -11,7 +11,7 @@ import {
   SelectItem,
   useStyleSheet,
 } from '@ui-kitten/components';
-import {CalendarIcon} from '../../../views/components/Icons';
+import {CalendarIcon, ClockIcon} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
 import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
 
@@ -70,6 +70,7 @@ export default ({navigation, route, tasks, onCreate, onUpdate}) => {
               </Layout>
               <Layout style={styles.column2}>
                 <Select
+                  accessoryRight={ClockIcon}
                   label="  "
                   style={styles.input}
                   selectedIndex={timeUnit}
@@ -126,7 +127,7 @@ export default ({navigation, route, tasks, onCreate, onUpdate}) => {
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
-    backgroundColor: 'background-basic-color-1',
+    backgroundColor: '$background-basic-color-1',
   },
   form: {
     flex: 1,
