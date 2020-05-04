@@ -16,17 +16,19 @@ const TaskItem = ({item, index, onPress}) => {
   const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
   return (
-    <Card style={styles.item} onPress={onPress}>
+    <Card style={styles.item} onPress={onPress} status={checked && 'success'}>
       <Layout style={styles.row}>
         <Layout style={styles.column1}>
-          <CheckBox checked={checked} onChange={toggleCheck} />
+          <CheckBox status="success" checked={checked} onChange={toggleCheck} />
         </Layout>
         <Layout style={styles.column2}>
-          <Text category="s1">{item.title}</Text>
+          <Text category="s1" style={checked && styles.checked}>
+            {item.title}
+          </Text>
           <Text style={styles.time}>Time: 8h 10m</Text>
         </Layout>
         <Layout style={styles.column1}>
-          <Button size="small" status="success" accessoryLeft={PlayIcon} />
+          <Button size="small" status="basic" accessoryLeft={PlayIcon} />
         </Layout>
       </Layout>
     </Card>
@@ -66,6 +68,9 @@ const themedStyles = StyleService.create({
     height: 20,
     margin: 0,
     padding: 0,
+  },
+  checked: {
+    textDecorationLine: 'line-through',
   },
 });
 
