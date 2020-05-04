@@ -1,11 +1,14 @@
-name: Build Android and iOS
-on:
-  push:
-    branches:
-      - master
+name: Test changes
+on: [push, pull_request]
+
 jobs:
   install-and-test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-18.04, macos-10.15]
+        node: [12]
+
     steps:
       - uses: actions/checkout@v2
       - name: Install npm dependencies
