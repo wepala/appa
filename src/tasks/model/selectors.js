@@ -16,3 +16,8 @@ export const getTasksByDate = createSelector(
         ).length > 0,
     ),
 );
+
+export const getIncompleteTasks = createSelector(
+  [tasksSelector],
+  tasks => tasks.filter(task => !task.complete),
+);
