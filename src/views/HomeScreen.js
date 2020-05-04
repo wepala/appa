@@ -9,7 +9,7 @@ import {connect} from 'react-redux';
 import MainMenu from './components/MainMenu';
 import Tasks from '../tasks/views/screens/Main';
 import Onboarding from '../onboarding/views/screens/Main';
-import Logs from '../logs/controllers/Main';
+import Logs from '../logs/controllers/Logs';
 import Projects from '../projects/controllers/Main';
 import Reports from '../reports/controllers/Main';
 import Support from '../support/views/screens/Support';

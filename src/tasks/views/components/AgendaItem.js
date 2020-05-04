@@ -3,12 +3,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faClock} from '@fortawesome/free-solid-svg-icons';
 import {faGithub} from '@fortawesome/free-brands-svg-icons';
 
-import {
-  Text,
-  Card,
-  Layout,
-  StyleService,
-} from '@ui-kitten/components';
+import {Text, Card, Layout, StyleService} from '@ui-kitten/components';
 
 export default ({item, index, onPress}) => {
   return (
