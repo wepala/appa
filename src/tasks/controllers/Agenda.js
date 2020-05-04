@@ -1,21 +1,8 @@
-import {connect} from 'react-redux';
-import AgendaList from '../views/components/Agenda';
+import {Controller} from '../../controller';
+import {getTasksByDate} from '../model/selectors';
 
-const mapStateToProps = state => {
-  return {
-    currentTask: state.currentTask,
-    data: Object.values(state.tasks.getById),
-    total: Object.values(state.tasks).length,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onStartTask: () => {},
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AgendaList);
+export default class AgendaController extends Controller {
+  get items() {
+    return getTasksByDate(this.state.tasks, new Date());
+  }
+}

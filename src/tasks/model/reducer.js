@@ -6,7 +6,6 @@ const tasks = (state = {currentTask: null, getById: {}}, action) => {
   switch (action.type) {
     case ADD_TASK:
       let newState = {...state};
-      console.log(state, newState, action.payload);
       newState.getById[uuidv4()] = action.payload;
       return newState;
     case REMOVE_TASK:
