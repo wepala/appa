@@ -2,13 +2,14 @@ import React from 'react';
 import List from './List';
 import DetailController from '../../controllers/Detail';
 import Detail from './Detail';
+import {SafeAreaView} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Component} from '../../../weosHelpers';
 
 const {Navigator, Screen} = createStackNavigator();
 
-export default () => {
-  return (
+export default () => (
+  <SafeAreaView style={{flex: 1}}>
     <Navigator screenOptions={{gestureEnabled: false, headerShown: false}}>
       <Screen name="TaskList" component={List} />
       <Screen
@@ -22,5 +23,5 @@ export default () => {
         initialParams={{id: ''}}
       />
     </Navigator>
-  );
-};
+  </SafeAreaView>
+);
