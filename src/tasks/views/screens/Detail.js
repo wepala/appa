@@ -105,13 +105,14 @@ export default ({navigation, route, tasks, onCreate, onUpdate}) => {
                 status="basic"
                 style={styles.buttonCancel}
                 size="giant"
-                onPress={onSubmit}>
+                Cancel
+                onPress={() => console.log('Cancelled')}>
                 Cancel
               </Button>
               <Button
                 style={styles.buttonSubmit}
                 size="giant"
-                onPress={() => console.log('Cancelled')}>
+                onPress={onSubmit}>
                 Submit
               </Button>
             </Layout>
