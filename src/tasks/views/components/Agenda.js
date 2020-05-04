@@ -3,11 +3,10 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import AgendaItem from '../components/AgendaItem';
 
-export default ({navigation, data, contentContainerStyle}) => {
+export default ({navigation, items, contentContainerStyle}) => {
   const onItemPress = index => {
-    console.log(data, index);
     navigation.navigate('UpdateTask', {
-      itemId: data[index].id,
+      itemId: items[index].id,
     });
   };
 
@@ -20,7 +19,7 @@ export default ({navigation, data, contentContainerStyle}) => {
     <List
       contentContainerStyle={[styles.container, contentContainerStyle]}
       numColumns={1}
-      data={data}
+      data={items}
       renderItem={renderItem}
     />
   );
