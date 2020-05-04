@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {ClockIcon, PlayIcon} from '../../../views/components/Icons';
 
 import {
@@ -13,12 +13,13 @@ import {
 } from '@ui-kitten/components';
 
 const TaskItem = ({item, index, onPress}) => {
+  const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
   return (
     <Card style={styles.item} onPress={onPress}>
       <Layout style={styles.row}>
         <Layout style={styles.column1}>
-          <CheckBox />
+          <CheckBox checked={checked} onChange={toggleCheck} />
         </Layout>
         <Layout style={styles.column2}>
           <Text category="s1">Project Name</Text>
