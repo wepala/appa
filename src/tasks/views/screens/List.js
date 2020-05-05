@@ -12,23 +12,23 @@ export default props => {
   //setup tabs for current task list and backlog
   const Tabs = createMaterialTopTabNavigator();
 
-  const TabNavigation = () => (
-    <Tabs.Navigator screenOptions={{gestureEnabled: false}}>
-      <Tabs.Screen
-        name="Backlog"
-        component={Component(new BacklogController(), Backlog)}
-      />
-      <Tabs.Screen
-        name="Today"
-        component={Component(new AgendaController(), Agenda)}
-      />
-    </Tabs.Navigator>
-  );
+  // const TabNavigation = () => (
+
+  // );
 
   return (
     <>
       <TopBar navigation={navigation} />
-      <TabNavigation />
+      <Tabs.Navigator screenOptions={{gestureEnabled: false}}>
+        <Tabs.Screen
+          name="Today"
+          component={Component(new AgendaController(), Agenda)}
+        />
+        <Tabs.Screen
+          name="Backlog"
+          component={Component(new BacklogController(), Backlog)}
+        />
+      </Tabs.Navigator>
     </>
   );
 };
