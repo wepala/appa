@@ -12,7 +12,7 @@ export const mockTasks = {
       description:
         "This is an example of a task that will be on the current day's agenda",
       complete: false,
-      dueDate: '2030-12-12',
+      dueDate: '2030-12-11',
       project: '32ebd0dd-8c83-4acf-a8d3-3f88c686c742',
       billable: false,
       agendas: [today.format('YYYY-MM-DD')],
