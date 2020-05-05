@@ -21,12 +21,12 @@ export default props => {
       <TopBar navigation={navigation} />
       <Tabs.Navigator screenOptions={{gestureEnabled: false}}>
         <Tabs.Screen
-          name="Backlog"
-          component={Component(new BacklogController(), Backlog)}
-        />
-        <Tabs.Screen
           name="Today"
           component={Component(new AgendaController(), Agenda)}
+        />
+        <Tabs.Screen
+          name="Backlog"
+          component={Component(new BacklogController(), Backlog)}
         />
       </Tabs.Navigator>
     </>
