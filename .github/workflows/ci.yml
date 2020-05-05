@@ -48,5 +48,5 @@ jobs:
       - name: Upload debug APK
         uses: actions/upload-artifact@v1
         with:
-          name: weagenda-$(echo ${GITHUB_REF#refs/heads/})-debug
+          name: weagenda-debug
           path: app/build/outputs/apk/debug/weagenda-$(echo ${GITHUB_REF#refs/heads/})-debug.apk
