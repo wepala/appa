@@ -1,9 +1,7 @@
-import * as api from '../api.js';
-import events from '../__mocks__/events';
+import * as api from '../eventApi';
+import events from '../../__mocks__/events';
 
 import axios from 'axios';
-
-jest.mock('axios');
 
 describe('API', () => {
   it('Should fetch events', async () => {
