@@ -75,13 +75,8 @@ jobs:
       - name: Build app
         run: |
           cd ios
-          xcodebuild clean build -workspace WeAgenda.xcworkspace -scheme WeAgenda CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS="" CODE_SIGNING_ALLOWED="NO"
+          xcodebuild clean build -workspace WeAgenda.xcworkspace -scheme WeAgenda -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS="" CODE_SIGNING_ALLOWED="NO"
           mv build/Release-iphoneos/WeAgenda.app build/Release-iphoneos/WeAgenda-debug.app
-        env:
-          CODE_SIGN_IDENTITY: ""
-          CODE_SIGNING_REQUIRED: NO
-          CODE_SIGN_ENTITLEMENTS: ""
-          CODE_SIGNING_ALLOWED: NO
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
