@@ -74,11 +74,12 @@ jobs:
           cd ios && pod install
       - name: Build app
         run: |
-          xcodebuild -workspace myapp.xcworkspace -scheme myapp archive -archivePath myapp.xcarchive -allowProvisioningUpdates
-          xcodebuild -exportArchive -archivePath ./myapp.xcarchive -exportPath . -exportOptionsPlist myapp/Info.plist
-          mv myapp.ipa ../myapp.ipa
+          cd ios
+          xcodebuild -workspace WeAgenda.xcworkspace -scheme WeAgenda archive -archivePath WeAgenda.xcarchive -allowProvisioningUpdates
+          xcodebuild -exportArchive -archivePath ./WeAgenda.xcarchive -exportPath . -exportOptionsPlist WeAgenda/Info.plist
+          mv WeAgenda.ipa ../WeAgenda-debug.ipa
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: myapp.ipa
+          name: WeAgenda-debug.ipa
           path: ios/build/
