@@ -81,6 +81,8 @@ jobs:
         env:
           CODE_SIGN_IDENTITY: ""
           CODE_SIGNING_REQUIRED: NO
+          CODE_SIGN_ENTITLEMENTS: ""
+          CODE_SIGNING_ALLOWED: NO
           IPHONEOS_DEPLOYMENT_TARGET: 8.0
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
