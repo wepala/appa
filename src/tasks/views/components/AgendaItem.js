@@ -49,7 +49,6 @@ const themedStyles = StyleService.create({
   },
 
   row: {
-    backgroundColor: 'transparent',
     display: 'flex',
     flexDirection: 'row',
   },
