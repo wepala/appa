@@ -6,7 +6,7 @@ import AgendaItem from '../components/AgendaItem';
 export default ({navigation, items, contentContainerStyle}) => {
   const onItemPress = index => {
     navigation.navigate('UpdateTask', {
-      itemId: items[index].id,
+      id: items[index].id,
     });
   };
 
