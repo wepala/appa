@@ -1,21 +1,16 @@
-import {connect} from 'react-redux';
-import AgendaList from '../views/components/Agenda';
+import {Controller} from '../../controller';
+import {getTasksByDate} from '../model/selectors';
+import moment from 'moment';
 
-const mapStateToProps = state => {
-  return {
-    currentTask: state.currentTask,
-    data: Object.values(state.tasks.getById),
-    total: Object.values(state.tasks).length,
-  };
-};
+export default class AgendaController extends Controller {
+  // get items() {
+  //   return getTasksByDate(state.tasks, new Date());
+  // }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onStartTask: () => {},
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AgendaList);
+  //in order to use reselector I had to override the configureState function of the controller
+  configureState(state) {
+    return {
+      items: getTasksByDate(state.tasks, moment().format('YYYY-MM-DD')),
+    };
+  }
+}

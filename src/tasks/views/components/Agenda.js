@@ -1,13 +1,20 @@
-import {List} from '@ui-kitten/components';
+import {
+  List,
+  Layout,
+  StyleService,
+  useStyleSheet,
+  Divider,
+} from '@ui-kitten/components';
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, SafeAreaView} from 'react-native';
 import AgendaItem from '../components/AgendaItem';
+import CurrentTask from '../components/CurrentTask';
 
-export default ({navigation, data, contentContainerStyle}) => {
+export default ({navigation, items, contentContainerStyle}) => {
+  const styles = useStyleSheet(themedStyles);
   const onItemPress = index => {
-    console.log(data, index);
     navigation.navigate('UpdateTask', {
-      itemId: data[index].id,
+      id: items[index].id,
     });
   };
 
@@ -17,17 +24,25 @@ export default ({navigation, data, contentContainerStyle}) => {
   );
 
   return (
-    <List
-      contentContainerStyle={[styles.container, contentContainerStyle]}
-      numColumns={1}
-      data={data}
-      renderItem={renderItem}
-    />
+    <Layout style={styles.container}>
+      <CurrentTask item={{title: 'Lorem Ipsum'}} />
+      <List
+        style={[styles.list, contentContainerStyle]}
+        numColumns={1}
+        data={items}
+        renderItem={renderItem}
+      />
+    </Layout>
   );
 };
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   container: {
-    padding: 8,
+    padding: 16,
+    flex: 1,
+  },
+  list: {
+    padding: 0,
+    backgroundColor: '$background-basic-color-1',
   },
 });
