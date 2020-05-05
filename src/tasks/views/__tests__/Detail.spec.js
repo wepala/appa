@@ -10,6 +10,9 @@ import moment from 'moment';
 
 describe('Task Detail Screen', () => {
   it('should have a submit button that calls onSave then navigates back', () => {
+    const getTask = jest.fn(
+      () => mockTasks.getById['7a5fe6af-27f5-486b-a32d-4d3d0437d0c3'],
+    );
     const navigation = {
       goBack: jest.fn(),
     };
@@ -19,6 +22,9 @@ describe('Task Detail Screen', () => {
           resolve();
         }),
     );
+    const route = {
+      param: {},
+    };
     const task = mockTasks.getById['7a5fe6af-27f5-486b-a32d-4d3d0437d0c3'];
     task.dueDate = moment(task.dueDate).toDate();
 
@@ -26,7 +32,13 @@ describe('Task Detail Screen', () => {
       <>
         <IconRegistry icons={EvaIconsPack} />
         <ApplicationProvider {...eva} theme={{...eva.light, ...theme}}>
-          <Detail onSave={onSave} task={task} navigation={navigation} />
+          <Detail
+            onSave={onSave}
+            task={task}
+            navigation={navigation}
+            route={route}
+            getTask={getTask}
+          />
         </ApplicationProvider>
       </>,
     );
