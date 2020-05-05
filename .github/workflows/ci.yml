@@ -78,6 +78,9 @@ jobs:
           xcodebuild -workspace WeAgenda.xcworkspace -scheme WeAgenda archive -archivePath WeAgenda.xcarchive -allowProvisioningUpdates
           xcodebuild -exportArchive -archivePath ./WeAgenda.xcarchive -exportPath . -exportOptionsPlist WeAgenda/Info.plist
           mv WeAgenda.ipa ../WeAgenda-debug.ipa
+        env:
+          CODE_SIGN_IDENTITY: ""
+          CODE_SIGNING_REQUIRED: NO
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
