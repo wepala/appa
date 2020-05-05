@@ -8,6 +8,7 @@ import {
   Button,
   useStyleSheet,
 } from '@ui-kitten/components';
+import {StopOutlineIcon} from '../../../views/components/Icons';
 
 export default ({item, index, onPress}) => {
   const styles = useStyleSheet(themedStyles);
@@ -20,7 +21,11 @@ export default ({item, index, onPress}) => {
         </Layout>
         <Layout style={styles.column2}>
           <Text category="h5">{item.totalTime}</Text>
-          <Button testID="TaskButton" style={styles.button} status="danger">
+          <Button
+            testID="TaskButton"
+            style={styles.button}
+            status="danger"
+            accessoryRight={StopOutlineIcon}>
             Stop
           </Button>
         </Layout>
