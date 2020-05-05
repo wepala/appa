@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useForm} from '../../model/hooks';
 import {
   Button,
   Datepicker,
@@ -10,6 +11,7 @@ import {
   Select,
   SelectItem,
   useStyleSheet,
+  IndexPath,
 } from '@ui-kitten/components';
 import {CalendarIcon, ClockIcon} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
@@ -27,13 +29,24 @@ export default ({navigation, route, tasks, onCreate, onUpdate}) => {
         };
 
   const styles = useStyleSheet(themedStyles);
+
   const [title, setTitle] = useState(task.title);
   const [timeEstimate, setTimeEstimate] = useState('10');
   const [timeUnit, setTimeUnit] = useState(0);
   const [project, setProject] = useState('Test Project');
   const [description, setDescription] = useState(task.description);
-
   const [dueDate, setDueDate] = useState(task.dueDate);
+
+  const timeUnits = ['Minutes', 'Hours'];
+  const [form, setForm] = useForm({
+    title: '',
+    timeEstimate: '15',
+    timeUnit: new IndexPath(0),
+    project: 'Project X',
+    description: 'A great task!',
+    dueDate: '',
+  });
+
   const [show, toggleShow] = useState(false);
 
   const onSubmit = () => {
@@ -54,8 +67,8 @@ export default ({navigation, route, tasks, onCreate, onUpdate}) => {
               style={styles.input}
               label="Task Title"
               placeholder="Enter title here"
-              value={title}
-              onChangeText={setTitle}
+              value={form.title}
+              onChangeText={val => setForm(val, 'title')}
             />
             <Layout style={styles.row}>
               <Layout style={styles.column1}>
@@ -63,20 +76,25 @@ export default ({navigation, route, tasks, onCreate, onUpdate}) => {
                   style={styles.input}
                   label="Estimated Time"
                   placeholder="30"
-                  onChangeText={setTimeEstimate}
                   keyboardType="numeric"
-                  value={timeEstimate}
+                  value={form.timeEstimate}
+                  onChangeText={val => setForm(val, 'timeEstimate')}
                 />
               </Layout>
               <Layout style={styles.column2}>
                 <Select
                   accessoryRight={ClockIcon}
                   label="  "
+                  value={timeUnits[form.timeUnit.row]}
                   style={styles.input}
-                  selectedIndex={timeUnit}
-                  onSelect={setTimeUnit}>
-                  <SelectItem title="Minutes" />
-                  <SelectItem title="Hours" />
+                  selectedIndex={form.timeUnit}
+                  onSelect={index => {
+                    console.log(form.timeUnit.row);
+                    setForm(index, 'timeUnit');
+                  }}>
+                  {timeUnits.map(unit => (
+                    <SelectItem title={unit} />
+                  ))}
                 </Select>
               </Layout>
             </Layout>
@@ -85,17 +103,16 @@ export default ({navigation, route, tasks, onCreate, onUpdate}) => {
               multiline={true}
               placeholder=""
               label="Description"
-              onChangeText={setDescription}
-              value={description}
+              value={form.description}
+              onChangeText={val => setForm(val, 'description')}
             />
             <Datepicker
               style={styles.input}
               accessoryRight={CalendarIcon}
               label="Due Date"
-              date={dueDate}
-              onSelect={date => {
-                setDueDate(date);
-                toggleShow(false);
+              date={form.dueDate}
+              onSelect={val => {
+                setForm(val, 'dueDate');
               }}
             />
             <Divider />
