@@ -22,7 +22,7 @@ jobs:
       - name: Run tests
         run: |
           npm run lint && npm test
-      - name: Slack Notification
+      - name: Send failure notification
         uses: rtCamp/action-slack-notify@v2.0.0
         if: failure()
         env:
@@ -65,6 +65,17 @@ jobs:
         with:
           name: app-debug.apk
           path: android/app/build/outputs/apk/debug/
+      - name: Send failure notification
+        uses: rtCamp/action-slack-notify@v2.0.0
+        if: failure()
+        env:
+          SLACK_CHANNEL: weagenda
+          SLACK_COLOR: "#FF0000"
+          SLACK_ICON: https://github.com/wepala.png?size=48
+          SLACK_MESSAGE: Tests passed for your code changes but we aren't able to generate and Android app
+          SLACK_TITLE: Could not build Android APK
+          SLACK_USERNAME: WeAgenda
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
   build-ios:
     runs-on: macos-10.15
@@ -94,3 +105,29 @@ jobs:
         with:
           name: WeAgenda-debug-app.zip
           path: ios/
+      - name: Send failure notification
+        uses: rtCamp/action-slack-notify@v2.0.0
+        if: failure()
+        env:
+          SLACK_CHANNEL: weagenda
+          SLACK_COLOR: "#FF0000"
+          SLACK_ICON: https://github.com/wepala.png?size=48
+          SLACK_MESSAGE: Tests passed for your code changes but we aren't able to generate and iOS app
+          SLACK_TITLE: Could not build iOS app
+          SLACK_USERNAME: WeAgenda
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+  success-notification:
+    runs-on: ubuntu-18.04
+    needs: [build-android, build-ios]
+    steps:
+      - name: Send success notification
+        uses: rtCamp/action-slack-notify@v2.0.0
+        env:
+          SLACK_CHANNEL: weagenda
+          SLACK_COLOR: "#3278BD"
+          SLACK_ICON: https://github.com/wepala.png?size=48
+          SLACK_MESSAGE: We were able to test and build your code without problems. Pat yourself on the back
+          SLACK_TITLE: Action Successfully Completed
+          SLACK_USERNAME: WeAgenda
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
