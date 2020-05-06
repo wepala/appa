@@ -22,4 +22,11 @@ describe('Agenda Controller', () => {
       updateTask('36212c03-040b-4139-867f-bd76485f4084', {complete: true}),
     );
   });
+
+  it('should provide a method for starting a task', () => {
+    const dispatch = jest.fn();
+    const controller = new AgendaController();
+    const state = controller.configureDispatch(dispatch);
+    state.startTask('36212c03-040b-4139-867f-bd76485f4084');
+  });
 });
