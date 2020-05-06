@@ -1,4 +1,5 @@
 import axios from 'axios';
+import store from '../store';
 
 export const eventsApi = axios.create({
   baseURL: 'https://api.wepala.weos-dev.com',
@@ -6,9 +7,9 @@ export const eventsApi = axios.create({
 
 eventsApi.interceptors.request.use(
   function(config) {
-    // let authToken = localStorage.getItem('token');
-    // config.headers.Authorization = `Bearer ${authToken}`;
-    // config.headers.ETag = `${applicationId}.${lastCount}`;
+    const {token, applicationId, eventLastCount} = store.getState();
+    config.headers.Authorization = `Bearer ${token}`;
+    config.headers.ETag = `${applicationId}.${eventLastCount}`;
     return config;
   },
   function(error) {
