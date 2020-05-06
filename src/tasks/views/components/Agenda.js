@@ -3,14 +3,12 @@ import {
   Layout,
   StyleService,
   useStyleSheet,
-  Divider,
 } from '@ui-kitten/components';
 import React from 'react';
-import {StyleSheet, SafeAreaView} from 'react-native';
 import AgendaItem from '../components/AgendaItem';
 import CurrentTask from '../components/CurrentTask';
 
-export default ({navigation, items, contentContainerStyle}) => {
+export default ({navigation, items, onTaskComplete, contentContainerStyle}) => {
   const styles = useStyleSheet(themedStyles);
   const onItemPress = index => {
     navigation.navigate('UpdateTask', {
@@ -20,7 +18,12 @@ export default ({navigation, items, contentContainerStyle}) => {
 
   //method to render each item in the list
   const renderItem = ({index, item}) => (
-    <AgendaItem item={item} index={index} onPress={() => onItemPress(index)} />
+    <AgendaItem
+      item={item}
+      index={index}
+      onPress={() => onItemPress(index)}
+      onComplete={() => onTaskComplete(item.id)}
+    />
   );
 
   return (

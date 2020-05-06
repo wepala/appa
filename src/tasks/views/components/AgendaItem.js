@@ -11,9 +11,10 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components';
 
-const TaskItem = ({item, index, onPress}) => {
+const TaskItem = ({item, index, onPress, onComplete}) => {
   const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
+
   return (
     <Card testID={'TaskItem'} style={styles.item} onPress={onPress}>
       <Layout style={styles.row}>
@@ -21,13 +22,13 @@ const TaskItem = ({item, index, onPress}) => {
           <CheckBox
             testID={'TaskCheckBox'}
             checked={checked}
-            onChange={toggleCheck}
+            onChange={() => onComplete().then(toggleCheck(!checked))}
           />
         </Layout>
         <Layout style={styles.column2}>
           <Text category="s1">{item.title}</Text>
           <Text style={styles.time}>Time: {item.time}</Text>
-          {item.project && <Text style={styles.project}>{item.project}</Text>}
+          <Text style={styles.project}>{item.project}</Text>
         </Layout>
         <Layout style={styles.column1}>
           <Button
