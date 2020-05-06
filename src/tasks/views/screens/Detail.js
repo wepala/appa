@@ -1,19 +1,23 @@
-import React, {useState} from 'react';
-import {useForm} from '../../model/hooks';
+import React from 'react';
+import {useForm, useValidated} from '../../model/hooks';
 import {
+  Text,
   Button,
   Datepicker,
   Divider,
   Input,
   Layout,
   StyleService,
-  View,
   Select,
   SelectItem,
   useStyleSheet,
   IndexPath,
 } from '@ui-kitten/components';
-import {CalendarIcon, ClockIcon} from '../../../views/components/Icons';
+import {
+  AlertIcon,
+  CalendarIcon,
+  ClockIcon,
+} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
 import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
 
@@ -21,30 +25,35 @@ export default ({navigation, route, getTask, onSave, section}) => {
   const styles = useStyleSheet(themedStyles);
   const id = route.params?.id;
   const task = getTask(id);
-  const [title, setTitle] = useState(task.title);
-  const [timeEstimate, setTimeEstimate] = useState('10');
-  const [timeUnit, setTimeUnit] = useState(0);
-  const [project, setProject] = useState('Test Project');
-  const [description, setDescription] = useState(task.description);
-  const [dueDate, setDueDate] = useState(task.dueDate);
 
   const timeUnits = ['Minutes', 'Hours'];
   const [form, setForm] = useForm({
-    title: '',
-    timeEstimate: '15',
+    title: task.title,
+    timeEstimate: task.timeEstimate,
     timeUnit: new IndexPath(0),
-    project: 'Project X',
-    description: 'A great task!',
-    dueDate: '',
+    project: task.project,
+    description: task.description,
+    dueDate: task.dueDate,
   });
-
-  const [show, toggleShow] = useState(false);
+  const [valid, setValid] = useValidated(form, {
+    title: true,
+    timeEstimate: true,
+    project: true,
+    description: true,
+    dueDate: true,
+  });
 
   const onSubmit = () => {
     const section = route.params?.section;
-    onSave(title, description, dueDate, section === 'agenda').then(() =>
-      navigation.goBack(),
-    );
+    setValid(form, valid);
+    console.log('Validated Values', valid);
+    if (valid.title)
+      onSave(
+        form.title,
+        form.description,
+        form.dueDate,
+        section === 'agenda',
+      ).then(() => navigation.goBack());
   };
 
   return (
@@ -58,7 +67,13 @@ export default ({navigation, route, getTask, onSave, section}) => {
               label="Task Title"
               placeholder="Enter title here"
               value={form.title}
-              onChangeText={val => setForm(val, 'title')}
+              onChangeText={val => {
+                setValid(form, valid);
+                setForm(val.trim(), 'title');
+              }}
+              status={!valid.title && 'danger'}
+              captionIcon={!valid.title && AlertIcon}
+              caption={!valid.title && 'Title cannot be blank'}
             />
             <Layout style={styles.row}>
               <Layout style={styles.column1}>
@@ -117,12 +132,14 @@ export default ({navigation, route, getTask, onSave, section}) => {
                 Cancel
               </Button>
               <Button
+                testID="SubmitButton"
                 style={styles.buttonSubmit}
                 size="giant"
                 onPress={onSubmit}>
                 Submit
               </Button>
             </Layout>
+            <Text>{JSON.stringify(valid)}</Text>
           </Layout>
 
           <Layout />

@@ -2,6 +2,9 @@ import React from 'react';
 
 import {Icon, IconElement} from '@ui-kitten/components';
 
+export const AlertIcon = style => (
+  <Icon {...style} name="alert-triangle-outline" />
+);
 export const ArrowIosBackIcon = style => (
   <Icon {...style} name="arrow-ios-back" />
 );
