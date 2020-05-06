@@ -10,15 +10,15 @@ export default class AgendaController extends Controller {
   // get items() {
   //   return getTasksByDate(state.tasks, new Date());
   // }
-
   /**
    * Task complete handler
    * @param id
+   * @param state boolean
    * @returns {Promise<R>}
    */
-  completeTask(id) {
+  setTaskCompletion(id, state = true) {
     return new Promise(resolve => {
-      this.dispatch(updateTask(id, {complete: true}));
+      this.dispatch(updateTask(id, {complete: state}));
       resolve();
     });
   }

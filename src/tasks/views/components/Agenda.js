@@ -8,7 +8,12 @@ import React from 'react';
 import AgendaItem from '../components/AgendaItem';
 import CurrentTask from '../components/CurrentTask';
 
-export default ({navigation, items, completeTask, contentContainerStyle}) => {
+export default ({
+  navigation,
+  items,
+  setTaskCompletion,
+  contentContainerStyle,
+}) => {
   const styles = useStyleSheet(themedStyles);
   const onItemPress = index => {
     navigation.navigate('UpdateTask', {
@@ -22,7 +27,7 @@ export default ({navigation, items, completeTask, contentContainerStyle}) => {
       item={item}
       index={index}
       onPress={() => onItemPress(index)}
-      onComplete={() => completeTask(item.id)}
+      onComplete={setTaskCompletion}
     />
   );
 
