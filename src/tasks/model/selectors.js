@@ -16,3 +16,19 @@ export const getTasksByDate = createSelector(
         ).length > 0,
     ),
 );
+
+export const getIncompleteTasks = createSelector(
+  [tasksSelector],
+  tasks =>
+    tasks
+      .filter(task => !task.complete)
+      .sort((a, b) => {
+        if (a.dueDate < b.dueDate) {
+          return 1;
+        }
+        if (a.dueDate > b.dueDate) {
+          return -1;
+        }
+        return 0;
+      }),
+);

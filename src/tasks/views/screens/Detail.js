@@ -15,18 +15,10 @@ import {CalendarIcon, ClockIcon} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
 import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
 
-export default ({navigation, route, tasks, onCreate, onUpdate}) => {
-  const {itemId} = route.params;
-  const task =
-    tasks[itemId] !== undefined
-      ? tasks[itemId]
-      : {
-          title: '',
-          description: '',
-          dueDate: '',
-        };
-
+export default ({navigation, route, getTask, onSave, section}) => {
   const styles = useStyleSheet(themedStyles);
+  const id = route.params?.id;
+  const task = getTask(id);
   const [title, setTitle] = useState(task.title);
   const [timeEstimate, setTimeEstimate] = useState('10');
   const [timeUnit, setTimeUnit] = useState(0);
@@ -37,11 +29,10 @@ export default ({navigation, route, tasks, onCreate, onUpdate}) => {
   const [show, toggleShow] = useState(false);
 
   const onSubmit = () => {
-    if (task.id === undefined) {
-      onCreate(navigation, title, description, dueDate);
-    } else {
-      onUpdate(navigation, task.id, title, description, dueDate);
-    }
+    const section = route.params?.section;
+    onSave(title, description, dueDate, section === 'agenda').then(() =>
+      navigation.goBack(),
+    );
   };
 
   return (

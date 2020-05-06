@@ -3,10 +3,11 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import BacklogItem from './BacklogItem';
 
-export default ({navigation, data, contentContainerStyle}) => {
+export default ({navigation, items, contentContainerStyle}) => {
+  console.log(items);
   const onItemPress = index => {
     navigation.navigate('UpdateTask', {
-      itemId: data[index].id,
+      itemId: items[index].id,
     });
   };
 
@@ -18,8 +19,8 @@ export default ({navigation, data, contentContainerStyle}) => {
   return (
     <List
       contentContainerStyle={[styles.container, contentContainerStyle]}
-      numColumns={3}
-      data={data}
+      numColumns={1}
+      data={items}
       renderItem={renderItem}
     />
   );
@@ -27,6 +28,7 @@ export default ({navigation, data, contentContainerStyle}) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 8,
+    flex: 1,
+    padding: 16,
   },
 });
