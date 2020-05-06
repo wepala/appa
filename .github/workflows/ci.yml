@@ -75,10 +75,11 @@ jobs:
       - name: Build app
         run: |
           cd ios
-          xcodebuild -workspace WeAgenda.xcworkspace -scheme WeAgenda archive -archivePath build/WeAgenda.xcarchive -allowProvisioningUpdates CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS="" CODE_SIGNING_ALLOWED="NO"
+          xcodebuild -workspace WeAgenda.xcworkspace -scheme WeAgenda clean archive -archivePath build/WeAgenda.xcarchive -allowProvisioningUpdates CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS="" CODE_SIGNING_ALLOWED="NO"
           cp -r build/WeAgenda.xcarchive/Products/Applications/WeAgenda.app WeAgenda-debug.app
+          zip -r WeAgenda-debug-app.zip WeAgenda-debug.app
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: WeAgenda-debug.app
+          name: WeAgenda-debug-app.zip
           path: ios/
