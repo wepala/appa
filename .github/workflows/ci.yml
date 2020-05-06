@@ -22,6 +22,17 @@ jobs:
       - name: Run tests
         run: |
           npm run lint && npm test
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2.0.0
+        if: failure()
+        env:
+          SLACK_CHANNEL: weagenda
+          SLACK_COLOR: "#FF0000"
+          SLACK_ICON: https://github.com/wepala.png?size=48
+          SLACK_MESSAGE: You entered code that was not linted or your tests failed
+          SLACK_TITLE: Lint/Test failed
+          SLACK_USERNAME: WeAgenda
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
   build-android:
     runs-on: ubuntu-18.04
