@@ -27,7 +27,9 @@ const TaskItem = ({item, index, onPress}) => {
         <Layout style={styles.column2}>
           <Text category="s1">{item.title}</Text>
           <Text style={styles.time}>Time: {item.time}</Text>
-          {item.project && <Text style={styles.project}>{item.project}</Text>}
+          {item.project !== '' && (
+            <Text style={styles.project}>{item.project}</Text>
+          )}
         </Layout>
         <Layout style={styles.column1}>
           <Button
