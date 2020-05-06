@@ -35,7 +35,7 @@ export default ({navigation, route, getTask, onSave, section}) => {
     description: task.description,
     dueDate: task.dueDate,
   });
-  const [valid, setValid] = useValidated(form, {
+  const [valid, setValid, clearValid] = useValidated(form, {
     title: true,
     timeEstimate: true,
     project: true,
@@ -47,13 +47,14 @@ export default ({navigation, route, getTask, onSave, section}) => {
     const section = route.params?.section;
     setValid(form, valid);
     console.log('Validated Values', valid);
-    if (valid.title)
+    if (valid.title) {
       onSave(
         form.title,
         form.description,
         form.dueDate,
         section === 'agenda',
       ).then(() => navigation.goBack());
+    }
   };
 
   return (
@@ -68,8 +69,8 @@ export default ({navigation, route, getTask, onSave, section}) => {
               placeholder="Enter title here"
               value={form.title}
               onChangeText={val => {
-                setValid(form, valid);
-                setForm(val.trim(), 'title');
+                setForm(val.trimLeft(), 'title');
+                clearValid();
               }}
               status={!valid.title && 'danger'}
               captionIcon={!valid.title && AlertIcon}
@@ -109,7 +110,7 @@ export default ({navigation, route, getTask, onSave, section}) => {
               placeholder=""
               label="Description"
               value={form.description}
-              onChangeText={val => setForm(val, 'description')}
+              onChangeText={val => setForm(val.trimLeft(), 'description')}
             />
             <Datepicker
               style={styles.input}
