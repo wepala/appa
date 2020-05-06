@@ -22,7 +22,9 @@ const TaskItem = ({item, index, onPress, onComplete, onStart}) => {
           <CheckBox
             testID={'TaskCheckBox'}
             checked={checked}
-            onChange={() => onComplete().then(toggleCheck(!checked))}
+            onChange={() =>
+              onComplete(item.id, !checked).then(toggleCheck(!checked))
+            }
           />
         </Layout>
         <Layout style={styles.column2}>

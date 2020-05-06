@@ -6,7 +6,7 @@ import CurrentTask from '../components/CurrentTask';
 export default ({
   navigation,
   items,
-  completeTask,
+  setTaskCompletion,
   startTask,
   contentContainerStyle,
   currentItem,
@@ -24,7 +24,7 @@ export default ({
       item={item}
       index={index}
       onPress={() => onItemPress(index)}
-      onComplete={() => completeTask(item.id)}
+      onComplete={setTaskCompletion}
       onStart={startTask}
     />
   );
