@@ -1,21 +1,11 @@
-import {connect} from 'react-redux';
-import BacklogList from '../views/components/Backlog';
+import {Controller} from '../../controller';
+import {getIncompleteTasks} from '../model/selectors';
 
-const mapStateToProps = state => {
-  return {
-    currentTask: state.currentTask,
-    data: Object.values(state.tasks.getById),
-    total: Object.values(state.tasks).length,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onStartTask: () => {},
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(BacklogList);
+export default class BacklogController extends Controller {
+  //in order to use reselector I had to override the configureState function of the controller
+  configureState(state) {
+    return {
+      items: getIncompleteTasks(state.tasks),
+    };
+  }
+}

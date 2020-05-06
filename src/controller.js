@@ -1,12 +1,10 @@
 export class Controller {
   state;
   dispatch;
+  #result = {};
 
   configureDispatch(dispatch) {
     this.dispatch = dispatch;
-    let result = {
-      dispatch: dispatch,
-    };
     let proto = Object.getPrototypeOf(this);
     while (proto) {
       Object.getOwnPropertyNames(proto).forEach(name => {
@@ -30,20 +28,19 @@ export class Controller {
           name !== 'toLocaleString'
         ) {
           if (this.hasMethod(proto, name)) {
-            result[name] = (...args) => {
-              this[name].apply(result, args);
+            this.#result[name] = (...args) => {
+              return this[name].apply(this, args);
             };
           }
         }
       });
       proto = Object.getPrototypeOf(proto);
     }
-    return {...result};
+    return {...this.#result};
   }
 
   configureState(state) {
     this.state = state;
-    const result = {};
     let proto = Object.getPrototypeOf(this);
     while (proto) {
       Object.getOwnPropertyNames(proto).forEach(name => {
@@ -67,13 +64,13 @@ export class Controller {
           name !== 'toLocaleString'
         ) {
           if (this.hasGetter(proto, name)) {
-            result[name] = this[name];
+            this.#result[name] = this[name];
           }
         }
       });
       proto = Object.getPrototypeOf(proto);
     }
-    return {...result};
+    return {...this.#result};
   }
 
   hasMethod(obj, name) {

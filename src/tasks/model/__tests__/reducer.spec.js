@@ -9,8 +9,9 @@ describe('task reducer', function() {
   });
 
   it('should add task to getById map with a uid as the key', () => {
+    const mockInitialState = {currentTask: {}, getById: {}};
     let state = tasks(
-      undefined,
+      mockInitialState,
       addTask({
         title: 'sample task',
         description: 'this is a basic task',
@@ -22,6 +23,11 @@ describe('task reducer', function() {
     expect(state).toBeDefined();
     expect(Object.keys(state.getById).length).toEqual(1);
     expect(uidRegex.test(Object.keys(state.getById)[0])).toBe(true);
+    expect(uidRegex.test(state.getById[Object.keys(state.getById)[0]].id)).toBe(
+      true,
+    );
+
+    expect(state === mockInitialState).toBe(false);
   });
 
   it('should delete task', () => {
@@ -36,6 +42,7 @@ describe('task reducer', function() {
     expect(
       state.getById['36212c03-040b-4139-867f-bd76485f4084'],
     ).not.toBeDefined();
+    expect(state === mockInitialState).toBe(false);
   });
 
   it('should update the  task', () => {
@@ -52,5 +59,6 @@ describe('task reducer', function() {
     expect(state.getById['36212c03-040b-4139-867f-bd76485f4084'].title).toBe(
       'new task title',
     );
+    expect(state === mockInitialState).toBe(false);
   });
 });
