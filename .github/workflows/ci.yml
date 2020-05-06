@@ -1,4 +1,4 @@
-name: Test changes
+name: Test and Build Android & iOS
 on: [push, pull_request]
 
 jobs:
@@ -22,3 +22,31 @@ jobs:
       - name: Run tests
         run: |
           npm test
+
+  build-android:
+    runs-on: ubuntu-18.04
+    needs: install-and-test
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: Install npm dependencies
+        run: |
+          npm install
+      - name: Install JDK for SDK to work
+        uses: actions/setup-java@v1
+        with:
+          java-version: 12 # The JDK version to make available on the path.
+          java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
+          architecture: x64 # (x64 or x86) - defaults to x64
+      - name: Install NDK # Temp fix for ongoing gradle issue
+        run: |
+          echo "y" | sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;20.0.5594570" --sdk_root=${ANDROID_SDK_ROOT}
+      - name: Build debug APK
+        run: |
+          cd android && ./gradlew assembleDebug --stacktrace
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-debug.apk
+          path: android/app/build/outputs/apk/debug/
