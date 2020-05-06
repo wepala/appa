@@ -14,7 +14,7 @@ export default ({navigation, items, contentContainerStyle}) => {
   const styles = useStyleSheet(themedStyles);
   const onItemPress = index => {
     navigation.navigate('UpdateTask', {
-      itemId: items[index].id,
+      id: items[index].id,
     });
   };
 

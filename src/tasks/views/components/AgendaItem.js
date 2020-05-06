@@ -5,7 +5,6 @@ import {
   Text,
   Card,
   Layout,
-  Input,
   Button,
   CheckBox,
   StyleService,
@@ -16,17 +15,27 @@ const TaskItem = ({item, index, onPress}) => {
   const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
   return (
-    <Card style={styles.item} onPress={onPress}>
+    <Card testID={'TaskItem'} style={styles.item} onPress={onPress}>
       <Layout style={styles.row}>
         <Layout style={styles.column1}>
-          <CheckBox checked={checked} onChange={toggleCheck} />
+          <CheckBox
+            testID={'TaskCheckBox'}
+            checked={checked}
+            onChange={toggleCheck}
+          />
         </Layout>
         <Layout style={styles.column2}>
           <Text category="s1">{item.title}</Text>
-          <Text style={styles.time}>Time: 8h 10m</Text>
+          <Text style={styles.time}>Time: {item.time}</Text>
+          {item.project && <Text style={styles.project}>{item.project}</Text>}
         </Layout>
         <Layout style={styles.column1}>
-          <Button size="small" status="success" accessoryLeft={PlayIcon} />
+          <Button
+            testID={'TaskButton'}
+            size="small"
+            status="success"
+            accessoryLeft={PlayIcon}
+          />
         </Layout>
       </Layout>
     </Card>
@@ -60,6 +69,9 @@ const themedStyles = StyleService.create({
   time: {
     color: '$color-basic-700',
     justifyContent: 'center',
+  },
+  project: {
+    color: '$color-basic-600',
   },
   icon: {
     width: 20,
