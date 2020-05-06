@@ -21,7 +21,7 @@ jobs:
           npm install
       - name: Run tests
         run: |
-          npm test
+          npm run lint && npm test
 
   build-android:
     runs-on: ubuntu-18.04
