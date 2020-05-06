@@ -34,6 +34,7 @@ export default class AgendaController extends Controller {
   configureState(state) {
     return {
       items: getTasksByDate(state.tasks, moment().format('YYYY-MM-DD')),
+      currentItem: state.tasks.currentTask,
     };
   }
 }

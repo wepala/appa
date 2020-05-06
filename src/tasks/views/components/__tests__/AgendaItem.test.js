@@ -91,4 +91,51 @@ describe('onboarding complete screen', () => {
     });
     expect(onComplete).toHaveBeenCalled();
   });
+
+  it('Should call onStart when the play button is pressed', async () => {
+    const itemData = {
+      title,
+      time,
+      project,
+    };
+    const onPressItem = jest.fn();
+    const onComplete = jest.fn(
+      () =>
+        new Promise(function(resolve) {
+          resolve();
+        }),
+    );
+    const onStart = jest.fn(
+      () =>
+        new Promise(function(resolve) {
+          resolve();
+        }),
+    );
+    const {getAllByTestId} = render(
+      <>
+        <IconRegistry icons={EvaIconsPack} />
+        <ApplicationProvider
+          {...eva}
+          theme={{
+            ...eva.light,
+            ...theme,
+          }}>
+          <AgendaItem
+            item={itemData}
+            onPress={onPressItem}
+            onComplete={onComplete}
+            onStart={onStart}
+          />
+        </ApplicationProvider>
+      </>,
+    );
+
+    // Task Item
+    const item = getAllByTestId('TaskButton');
+    expect(item).toHaveLength(1);
+    act(() => {
+      fireEvent.press(item[0]);
+    });
+    expect(onStart).toHaveBeenCalled();
+  });
 });

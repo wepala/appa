@@ -1,14 +1,16 @@
-import {
-  List,
-  Layout,
-  StyleService,
-  useStyleSheet,
-} from '@ui-kitten/components';
+import {List, Layout, StyleService, useStyleSheet} from '@ui-kitten/components';
 import React from 'react';
 import AgendaItem from '../components/AgendaItem';
 import CurrentTask from '../components/CurrentTask';
 
-export default ({navigation, items, completeTask, contentContainerStyle}) => {
+export default ({
+  navigation,
+  items,
+  completeTask,
+  startTask,
+  contentContainerStyle,
+  currentItem,
+}) => {
   const styles = useStyleSheet(themedStyles);
   const onItemPress = index => {
     navigation.navigate('UpdateTask', {
@@ -23,12 +25,13 @@ export default ({navigation, items, completeTask, contentContainerStyle}) => {
       index={index}
       onPress={() => onItemPress(index)}
       onComplete={() => completeTask(item.id)}
+      onStart={startTask}
     />
   );
 
   return (
-    <Layout style={styles.container}>
-      <CurrentTask item={{title: 'Lorem Ipsum'}} />
+    <Layout style={styles.container} testID={'AgendaLayout'}>
+      <CurrentTask item={currentItem} testID={'CurrentTask'} />
       <List
         style={[styles.list, contentContainerStyle]}
         numColumns={1}
