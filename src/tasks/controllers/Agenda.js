@@ -16,7 +16,7 @@ export default class AgendaController extends Controller {
    * @param id
    * @returns {Promise<R>}
    */
-  onTaskComplete(id) {
+  completeTask(id) {
     return new Promise(resolve => {
       this.dispatch(updateTask(id, {complete: true}));
       resolve();
