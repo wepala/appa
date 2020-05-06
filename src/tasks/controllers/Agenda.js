@@ -2,6 +2,7 @@ import {Controller} from '../../controller';
 import {getTasksByDate} from '../model/selectors';
 import moment from 'moment';
 import {startTask, updateTask} from '../model/commands';
+import {addTimeLog} from '../../logs/model/commands';
 
 /**
  * Agenda List Controller. Provides handlers and data for the agenda list
@@ -23,9 +24,16 @@ export default class AgendaController extends Controller {
     });
   }
 
+  /**
+   * Start task
+   *
+   * @param id
+   * @returns {Promise<R>}
+   */
   startTask(id) {
     return new Promise(resolve => {
       this.dispatch(startTask(id));
+      this.dispatch(addTimeLog(id, moment()));
       resolve();
     });
   }
