@@ -17,7 +17,7 @@ describe('Agenda Controller', () => {
     const dispatch = jest.fn();
     const controller = new AgendaController();
     const state = controller.configureDispatch(dispatch);
-    state.onTaskComplete('36212c03-040b-4139-867f-bd76485f4084');
+    state.completeTask('36212c03-040b-4139-867f-bd76485f4084');
     expect(dispatch).toBeCalledWith(
       updateTask('36212c03-040b-4139-867f-bd76485f4084', {complete: true}),
     );
