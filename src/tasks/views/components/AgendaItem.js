@@ -38,7 +38,7 @@ const TaskItem = ({item, index, onPress, onComplete, onStart}) => {
             size="small"
             status="success"
             accessoryLeft={PlayIcon}
-            onPress={() => onStart()}
+            onPress={() => onStart(item.id)}
           />
         </Layout>
       </Layout>
