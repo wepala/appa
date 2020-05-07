@@ -1,5 +1,6 @@
 import React from 'react';
 import {fireEvent, render} from 'react-native-testing-library';
+import {renderHook, act} from '@testing-library/react-hooks';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
@@ -7,9 +8,10 @@ import {default as theme} from '../../../../../theme.json';
 import Detail from '../Detail';
 import {mockTasks} from '../../../__tests__/fixtures';
 import moment from 'moment';
+import {useForm, useValidated} from '../../../../weosHelpers';
 
 describe('Task Detail Screen', () => {
-  it('should have a submit button that calls onSave then navigates back', () => {
+  it('should have a submit button that calls onSubmit then navigates back', () => {
     const getTask = jest.fn(
       () => mockTasks.getById['7a5fe6af-27f5-486b-a32d-4d3d0437d0c3'],
     );
@@ -31,7 +33,12 @@ describe('Task Detail Screen', () => {
     const {getAllByTestId} = render(
       <>
         <IconRegistry icons={EvaIconsPack} />
-        <ApplicationProvider {...eva} theme={{...eva.light, ...theme}}>
+        <ApplicationProvider
+          {...eva}
+          theme={{
+            ...eva.light,
+            ...theme,
+          }}>
           <Detail
             onSave={onSave}
             task={task}
@@ -42,10 +49,44 @@ describe('Task Detail Screen', () => {
         </ApplicationProvider>
       </>,
     );
+
+    // Task title
+    const taskTitle = getAllByTestId('TaskTitle');
+    expect(taskTitle).toHaveLength(1);
+
+    // Task description
+    const taskDesc = getAllByTestId('TaskDescription');
+    expect(taskDesc).toHaveLength(1);
+
+    // Task estimated time
+    const taskTime = getAllByTestId('TaskEstTime');
+    expect(taskTime).toHaveLength(1);
+
+    // Task due date
+    const dudeDate = getAllByTestId('TaskDueDate');
+    expect(dudeDate).toHaveLength(1);
+    // Task submit button
     const submitButton = getAllByTestId('SubmitButton');
     expect(submitButton).toHaveLength(1);
+
+    // Submitting empty required fields
     fireEvent.press(submitButton[0]);
-    expect(onSave).toHaveBeenCalled();
-    // expect(navigation.goBack).toHaveBeenCalled();
+    expect(onSave).not.toBeCalled();
+
+    // Submitting title but blank estimated time
+    fireEvent.changeText(taskTitle[0], 'New Title');
+    fireEvent.press(submitButton[0]);
+    expect(onSave).not.toBeCalled();
+
+    // Submitting estimated time but blank title
+    fireEvent.changeText(taskTitle[0], 'New Title');
+    fireEvent.press(submitButton[0]);
+    expect(onSave).not.toBeCalled();
+
+    // Submitting all required fields
+    fireEvent.changeText(taskTitle[0], 'New Title');
+    fireEvent.changeText(taskTime[0], '20');
+    fireEvent.press(submitButton[0]);
+    expect(onSave).toBeCalled();
   });
 });
