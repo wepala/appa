@@ -24,10 +24,9 @@ export const updateTask = (taskId, task) => {
   };
 };
 
-export const startTask = (taskId, startTime) => {
+export const startTask = taskId => {
   return {
     type: START_TASK,
-    payload: startTime,
     meta: {
       id: taskId,
     },
