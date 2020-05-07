@@ -1,4 +1,4 @@
-import {ADD_TASK, REMOVE_TASK, UPDATE_TASK} from './commandTypes';
+import {ADD_TASK, REMOVE_TASK, UPDATE_TASK, SYNC_TASK} from './commandTypes';
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
 
@@ -15,6 +15,10 @@ const tasks = (state = {currentTask: null, getById: {}}, action) => {
     case UPDATE_TASK:
       state.getById[action.meta.id] = action.payload;
       return state;
+    case SYNC_TASK:
+      let newSyncState = {...state};
+      newSyncState.getById[action.payload.id] = action.payload;
+      return newSyncState;
     default:
       return state;
   }
