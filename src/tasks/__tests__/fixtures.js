@@ -1,8 +1,6 @@
 import moment from 'moment';
 const today = moment();
-const futureDate = moment()
-  .add(2, 'days')
-  .toDate();
+const futureDate = moment().add(2, 'days');
 
 export const mockTasks = {
   currentTask: {},
@@ -19,7 +17,7 @@ export const mockTasks = {
       agendas: [today.format('YYYY-MM-DD')],
     },
     '22dc4620-66c8-4c02-ac48-3c030d48bfee': {
-      id: '36212c03-040b-4139-867f-bd76485f4084',
+      id: '22dc4620-66c8-4c02-ac48-3c030d48bfee',
       title: 'Completed Today Task',
       description: 'This is an example of a completed task',
       complete: true,
@@ -29,7 +27,7 @@ export const mockTasks = {
       agendas: [today.format('YYYY-MM-DD')],
     },
     'caac3188-4666-4b1f-9ad8-20c65a2871d2': {
-      id: '36212c03-040b-4139-867f-bd76485f4084',
+      id: 'caac3188-4666-4b1f-9ad8-20c65a2871d2',
       title: 'No Project Today Task',
       description:
         'This is an example of a task that is not associated to a project',
@@ -39,7 +37,7 @@ export const mockTasks = {
       agendas: [today.format('YYYY-MM-DD')],
     },
     'de2c2c26-cadb-4f06-a819-b1ffcfba35b0': {
-      id: '36212c03-040b-4139-867f-bd76485f4084',
+      id: 'de2c2c26-cadb-4f06-a819-b1ffcfba35b0',
       title: 'Overdue Task',
       description: 'This is an example of a task that is overdue',
       complete: false,
@@ -48,13 +46,13 @@ export const mockTasks = {
       agendas: [today.format('YYYY-MM-DD')],
     },
     '7a5fe6af-27f5-486b-a32d-4d3d0437d0c3': {
-      id: '36212c03-040b-4139-867f-bd76485f4084',
+      id: '7a5fe6af-27f5-486b-a32d-4d3d0437d0c3',
       title: 'Backlog Task',
       description: 'This is an example of a task that is in the backlog',
       complete: false,
       dueDate: '2020-02-02',
       billable: false,
-      agendas: [futureDate.toISOString()],
+      agendas: [futureDate.format('YYYY-MM-DD')],
     },
   },
 };
