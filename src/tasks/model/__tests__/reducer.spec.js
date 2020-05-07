@@ -1,5 +1,5 @@
 import tasks from '../reducer';
-import {addTask, removeTask, updateTask} from '../commands';
+import {addTask, removeTask, updateTask, syncTask} from '../commands';
 
 describe('task reducer', function() {
   const expectedInitialState = {currentTask: null, getById: {}};
@@ -47,6 +47,20 @@ describe('task reducer', function() {
       mockInitialState,
       updateTask('36212c03-040b-4139-867f-bd76485f4084', {
         title: 'new task title',
+      }),
+    );
+    expect(state.getById['36212c03-040b-4139-867f-bd76485f4084'].title).toBe(
+      'new task title',
+    );
+  });
+
+  it('should add tasks when syncing', () => {
+    let mockInitialState = expectedInitialState;
+    let state = tasks(
+      mockInitialState,
+      syncTask({
+        title: 'new task title',
+        id: '36212c03-040b-4139-867f-bd76485f4084',
       }),
     );
     expect(state.getById['36212c03-040b-4139-867f-bd76485f4084'].title).toBe(
