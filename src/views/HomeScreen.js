@@ -20,8 +20,6 @@ const {Navigator, Screen} = createDrawerNavigator();
 const mapStateToProps = state => {
   return {
     onBoarded: state.onboard.onBoarded,
-    token: state.token,
-    eventCount: state.eventCount,
   };
 };
 
@@ -31,7 +29,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const HomeScreen = ({navigation, onBoarded, token, eventCount}) => {
+const HomeScreen = ({navigation, onBoarded}) => {
   const MainStackScreen = () => {
     return (
       <Navigator
