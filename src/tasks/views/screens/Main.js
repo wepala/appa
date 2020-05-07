@@ -7,6 +7,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {Component} from '../../../weosHelpers';
 
 const {Navigator, Screen} = createStackNavigator();
+export const ListContext = React.createContext("agenda");
 
 export default () => (
   <SafeAreaView style={{flex: 1}}>
