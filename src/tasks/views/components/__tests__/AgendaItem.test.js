@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from 'react-native-testing-library';
+import {render, fireEvent, act} from 'react-native-testing-library';
 import {ApplicationProvider, IconRegistry, Button} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
@@ -51,5 +51,44 @@ describe('onboarding complete screen', () => {
     // Task Button
     const button = getAllByTestId('TaskButton');
     expect(button).toHaveLength(1);
+  });
+  it('Should call onComplete when the checkbox is pressed', async () => {
+    const itemData = {
+      title,
+      time,
+      project,
+    };
+    const onPressItem = jest.fn();
+    const onComplete = jest.fn(
+      () =>
+        new Promise(function(resolve) {
+          resolve();
+        }),
+    );
+    const {getAllByTestId} = render(
+      <>
+        <IconRegistry icons={EvaIconsPack} />
+        <ApplicationProvider
+          {...eva}
+          theme={{
+            ...eva.light,
+            ...theme,
+          }}>
+          <AgendaItem
+            item={itemData}
+            onPress={onPressItem}
+            onComplete={onComplete}
+          />
+        </ApplicationProvider>
+      </>,
+    );
+
+    // Task Item
+    const item = getAllByTestId('TaskCheckBox');
+    expect(item).toHaveLength(1);
+    act(() => {
+      fireEvent.press(item[0]);
+    });
+    expect(onComplete).toHaveBeenCalled();
   });
 });
