@@ -115,6 +115,7 @@ export default ({navigation, route, getTask, onSave, section}) => {
               </Layout>
             </Layout>
             <Input
+              testID="TaskDescription"
               style={styles.input}
               multiline={true}
               placeholder=""
@@ -123,7 +124,7 @@ export default ({navigation, route, getTask, onSave, section}) => {
               onChangeText={val => setForm(val.trimLeft(), 'description')}
             />
             <Datepicker
-              testID="TaskEstTime"
+              testID="TaskDueDate"
               style={styles.input}
               accessoryRight={CalendarIcon}
               label="Due Date"

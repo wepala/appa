@@ -19,6 +19,7 @@ export const useForm = initValues => {
     (val, key) => {
       console.log('Value changing,', val, key);
       setvalues({...values, [key]: val});
+      console.log(values);
     },
   ];
 };
