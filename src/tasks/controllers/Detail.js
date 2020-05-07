@@ -1,51 +1,51 @@
-import {connect} from 'react-redux';
 import {addTask, updateTask} from '../model/commands';
-import DetailScreen from '../views/screens/Detail';
+import {Controller} from '../../controller';
+import moment from 'moment';
 
-const mapStateToProps = state => {
-  return {
-    projects: Object.values(state.projects.getById),
-    tasks: state.tasks.getById,
-  };
-};
+export default class DetailController extends Controller {
+  constructor() {
+    super();
+  }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onCreate: (navigation, title, description, dueDate, currentAgenda) => {
+  getTask(id) {
+    return id !== undefined && id !== ''
+      ? this.state.tasks.getById[id]
+      : {
+          title: '',
+          description: '',
+          dueDate: moment().toDate(),
+          completed: true,
+          agendas: [],
+        };
+  }
+
+  onSave(title, description, dueDate, addToAgenda = false, project = '') {
+    return new Promise(resolve => {
       const task = {
         title: title,
         description: description,
         dueDate: dueDate,
-        currentAgenda: currentAgenda,
+        agendas: addToAgenda ? [moment().format('YYYY-MM-DD')] : [],
+        project: project,
+        created: moment(),
       };
       //TODO execute command to create task
-      dispatch(addTask(task));
-      navigation.goBack();
-      console.log('create task');
-    },
-    onUpdate: (
-      navigation,
-      task,
-      title,
-      description,
-      dueDate,
-      currentAgenda,
-    ) => {
-      const updatedTask = {
-        title: title,
-        description: description,
-        dueDate: dueDate,
-        currentAgenda: currentAgenda,
-      };
-      //TODO execute command to update task
-      dispatch(updateTask(task.id, updatedTask));
-      navigation.goBack();
-      console.log('update task');
-    },
-  };
-};
+      this.dispatch(addTask(task));
+      console.log('task created');
+      resolve();
+    });
+  }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(DetailScreen);
+  onUpdate(navigation, task, title, description, dueDate, currentAgenda) {
+    const updatedTask = {
+      title: title,
+      description: description,
+      dueDate: dueDate,
+      currentAgenda: currentAgenda,
+    };
+    //TODO execute command to update task
+    this.dispatch(updateTask(task.id, updatedTask));
+    navigation.goBack();
+    console.log('update task');
+  }
+}
