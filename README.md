@@ -1,5 +1,7 @@
 # WeAgenda
 
+![Test and Build Android & iOS](https://github.com/msanatan/weagenda/workflows/Test%20and%20Build%20Android%20&%20iOS/badge.svg)
+
 WeAgenda is a task management application
 
 ## Getting Started
