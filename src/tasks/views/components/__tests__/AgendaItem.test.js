@@ -1,6 +1,6 @@
 import React from 'react';
 import {render, fireEvent} from 'react-native-testing-library';
-import {ApplicationProvider, IconRegistry, Button} from '@ui-kitten/components';
+import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
 import {default as theme} from '../../../../../theme.json';
@@ -9,7 +9,7 @@ import AgendaItem from '../AgendaItem';
 describe('onboarding complete screen', () => {
   const title = 'My Task';
   const time = '9:07 AM';
-  const project = 'Projecct X';
+  const project = 'Project X';
 
   it('Should render a correctly given item prop', async () => {
     const itemData = {
@@ -45,9 +45,11 @@ describe('onboarding complete screen', () => {
     expect(taskTitle).toHaveLength(1);
     expect(taskTime).toHaveLength(1);
     expect(taskProject).toHaveLength(1);
+
     // Task CheckBox
     const checkBox = getAllByTestId('TaskCheckBox');
     expect(checkBox).toHaveLength(1);
+
     // Task Button
     const button = getAllByTestId('TaskButton');
     expect(button).toHaveLength(1);

@@ -101,6 +101,7 @@ export default ({navigation, route, getTask, onSave, section}) => {
                 Cancel
               </Button>
               <Button
+                testID="SubmitButton"
                 style={styles.buttonSubmit}
                 size="giant"
                 onPress={onSubmit}>
