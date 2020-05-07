@@ -4,7 +4,7 @@ import {
   SET_APPLICATION_ID,
 } from './actionTypes';
 
-export const setEventLastCount = lastCount => {
+export const setEventCount = lastCount => {
   return {
     type: SET_EVENT_LAST_COUNT,
     payload: lastCount,

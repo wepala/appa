@@ -2,7 +2,7 @@ import {combineReducers} from 'redux';
 import tasks from './tasks/model/reducer';
 import projects from './projects/model/reducer';
 import onboard from './onboarding/model/reducer';
-import {applicationId, token, eventLastCount} from './reducers';
+import {applicationId, token, eventCount} from './reducers';
 
 const rootReducer = combineReducers({
   tasks,
@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   projects,
   applicationId,
   token,
-  eventLastCount,
+  eventCount,
 });
 
 export default rootReducer;

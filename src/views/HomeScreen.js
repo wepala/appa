@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {StyleSheet} from 'react-native';
 
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
@@ -13,7 +13,7 @@ import Logs from '../logs/controllers/Main';
 import Projects from '../projects/controllers/Main';
 import Reports from '../reports/controllers/Main';
 import Support from '../support/views/screens/Support';
-import {fetchEvents} from '../apis/eventApi';
+import Sync from './Sync';
 
 const {Navigator, Screen} = createDrawerNavigator();
 
@@ -21,7 +21,7 @@ const mapStateToProps = state => {
   return {
     onBoarded: state.onboard.onBoarded,
     token: state.token,
-    eventLastCount: state.eventLastCount,
+    eventCount: state.eventCount,
   };
 };
 
@@ -31,22 +31,8 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const HomeScreen = ({navigation, onBoarded, token, eventLastCount}) => {
+const HomeScreen = ({navigation, onBoarded, token, eventCount}) => {
   const MainStackScreen = () => {
-    useEffect(() => {
-      if (token && eventLastCount === 0) {
-        fetchEvents()
-          .then(events => {
-            // TODO replay events and dispatch actions to update state
-            console.log(events);
-          })
-          .catch(error => {
-            // TODO notify user of error
-            console.log(error);
-          });
-      }
-    }, []);
-
     return (
       <Navigator
         screenOptions={{gestureEnabled: true}}
@@ -65,7 +51,11 @@ const HomeScreen = ({navigation, onBoarded, token, eventLastCount}) => {
     if (!onBoarded) {
       return <Onboarding />;
     } else {
-      return <MainStackScreen />;
+      return (
+        <Sync>
+          <MainStackScreen />
+        </Sync>
+      );
     }
   };
 

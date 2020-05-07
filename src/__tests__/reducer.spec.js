@@ -1,29 +1,29 @@
-import {eventLastCount, token, applicationId} from '../reducers';
-import {setEventLastCount, setToken} from '../actions';
+import {eventCount, token, applicationId} from '../reducers';
+import {setEventCount, setToken, setApplicationId} from '../actions';
 
-describe('EventLastCount reducer', function() {
+describe('EventCount reducer', function() {
   const expectedInitialState = 0;
 
   it('should return initial state', () => {
-    expect(eventLastCount(undefined, {})).toEqual(expectedInitialState);
+    expect(eventCount(undefined, {})).toEqual(expectedInitialState);
   });
 
-  it('should set update eventLastCount with new value', () => {
-    let state = eventLastCount(expectedInitialState, setEventLastCount(12));
+  it('should get updated count of events', () => {
+    let state = eventCount(expectedInitialState, setEventCount(12));
 
     expect(state).toBeDefined();
     expect(state).toEqual(12);
   });
 });
 
-describe('token reducer', function() {
+describe('Token reducer', function() {
   const expectedInitialState = null;
 
   it('should return initial state', () => {
     expect(token(undefined, {})).toEqual(expectedInitialState);
   });
 
-  it('should set update token with new value', () => {
+  it('should get updated token', () => {
     let state = token(expectedInitialState, setToken('token'));
 
     expect(state).not.toBeNull();
@@ -38,10 +38,10 @@ describe('ApplicationId reducer', function() {
     expect(applicationId(undefined, {})).toEqual(expectedInitialState);
   });
 
-  it('should set update applicationId with new value', () => {
-    let state = token(
+  it('should get updated applicationId', () => {
+    let state = applicationId(
       expectedInitialState,
-      setToken('36212c03-040b-4139-867f-bd76485f4084'),
+      setApplicationId('36212c03-040b-4139-867f-bd76485f4084'),
     );
 
     expect(state).not.toBeNull();

@@ -8,14 +8,9 @@ const initialState = {
     getById: {},
   },
   tasks: {
-    getById: {
-      '36212c03-040b-4139-867f-bd76485f4084': {
-        id: '36212c03-040b-4139-867f-bd76485f4084',
-        title: 'test task',
-      },
-    },
+    getById: {},
   },
-  eventLastCount: 0,
+  eventCount: 0,
   token: null,
   applicationId: '36212c03-040b-4139-867f-bd76485f4084', // TODO add acutal applicationId
 };
