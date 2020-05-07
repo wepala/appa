@@ -121,15 +121,17 @@ jobs:
 
   success-notification:
     runs-on: ubuntu-18.04
-    needs: [build-android, build-ios]
     steps:
+      - name: workflow conclusion
+        uses: technote-space/workflow-conclusion-action@v1
       - name: Send success notification
         uses: rtCamp/action-slack-notify@v2.0.0
+        if: env.WORKFLOW_CONCLUSION == 'success'
         env:
           SLACK_CHANNEL: weagenda
           SLACK_COLOR: "#3278BD"
           SLACK_ICON: https://github.com/wepala.png?size=48
-          SLACK_MESSAGE: We were able to test and build your code without problems. Pat yourself on the back
+          SLACK_MESSAGE: We were able to test and/or build your code without problems. Pat yourself on the back
           SLACK_TITLE: Action Successfully Completed
           SLACK_USERNAME: WeAgenda
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
