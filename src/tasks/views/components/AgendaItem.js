@@ -5,30 +5,50 @@ import {
   Text,
   Card,
   Layout,
-  Input,
   Button,
   CheckBox,
   StyleService,
   useStyleSheet,
 } from '@ui-kitten/components';
 
-const TaskItem = ({item, index, onPress}) => {
+const TaskItem = ({item, index, onPress, onComplete}) => {
   const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
+
   return (
-    <Card style={styles.item} onPress={onPress} status={checked && 'success'}>
+    <Card
+      testID={'TaskItem'}
+      style={styles.item}
+      onPress={onPress}
+      status={checked && 'success'}>
       <Layout style={styles.row}>
         <Layout style={styles.column1}>
-          <CheckBox status="success" checked={checked} onChange={toggleCheck} />
+          <CheckBox
+            testID={'TaskCheckBox'}
+            status="success"
+            checked={checked}
+            onChange={() =>
+              onComplete(item.id, !checked).then(toggleCheck(!checked))
+            }
+          />
         </Layout>
         <Layout style={styles.column2}>
           <Text category="s1" style={checked && styles.checked}>
             {item.title}
           </Text>
-          <Text style={styles.time}>Time: 8h 10m</Text>
+          <Text style={styles.time}>Time: {item.time}</Text>
+          {item.project !== '' && (
+            <Text style={styles.project}>{item.project}</Text>
+          )}
         </Layout>
+
         <Layout style={styles.column1}>
-          <Button size="small" status="basic" accessoryLeft={PlayIcon} />
+          <Button
+            testID={'TaskButton'}
+            size="small"
+            status="success"
+            accessoryLeft={PlayIcon}
+          />
         </Layout>
       </Layout>
     </Card>
@@ -62,6 +82,9 @@ const themedStyles = StyleService.create({
   time: {
     color: '$color-basic-700',
     justifyContent: 'center',
+  },
+  project: {
+    color: '$color-basic-600',
   },
   icon: {
     width: 20,
