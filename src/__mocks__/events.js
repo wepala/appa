@@ -6,8 +6,8 @@ const events = [
       title: 'Complete Redux tutoral',
       description: 'Finish effects, state, reducers',
       project: 'wepala',
-      created: new Date().toISOString(),
-      dueDate: '2020-05-10',
+      created: '2020-04-26',
+      dueDate: '2020-04-26',
     },
     meta: {
       id: '56268018-3057-4a75-80f2-281df7221c9a',
@@ -22,8 +22,8 @@ const events = [
       title: 'Complete React tutoral',
       description: 'Finish effects, state, reducers',
       project: 'wepala',
-      created: new Date().toISOString(),
-      dueDate: '2020-05-10',
+      created: '2020-04-26',
+      dueDate: '2020-05-26',
     },
     meta: {
       id: '56268018-3057-4a75-80f2-281df7221c9i',
@@ -38,8 +38,8 @@ const events = [
       title: 'Complete php tutoral',
       description: 'Finish effects, state, reducers',
       project: 'wepala',
-      created: new Date().toISOString(),
-      dueDate: '2020-05-10',
+      created: '2020-04-26',
+      dueDate: '2020-04-26',
     },
     meta: {
       id: '56268018-3057-4a75-80f2-281df7221c9f',
