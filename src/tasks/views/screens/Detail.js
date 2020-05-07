@@ -1,5 +1,5 @@
 import React from 'react';
-import {useForm, useValidated} from '../../model/hooks';
+import {useForm, useValidated} from '../../../weosHelpers';
 import {
   Text,
   Button,
@@ -64,6 +64,7 @@ export default ({navigation, route, getTask, onSave, section}) => {
         <ScrollView>
           <Layout style={styles.form}>
             <Input
+              testID="TaskTitle"
               style={styles.input}
               label="Task Title"
               placeholder="Enter title here"
@@ -79,6 +80,7 @@ export default ({navigation, route, getTask, onSave, section}) => {
             <Layout style={styles.row}>
               <Layout style={styles.column1}>
                 <Input
+                  testID="TaskEstTime"
                   style={styles.input}
                   label="Estimated Time"
                   placeholder="30"
@@ -106,8 +108,8 @@ export default ({navigation, route, getTask, onSave, section}) => {
                     console.log(form.timeUnit.row);
                     setForm(index, 'timeUnit');
                   }}>
-                  {timeUnits.map(unit => (
-                    <SelectItem title={unit} />
+                  {timeUnits.map((unit, index) => (
+                    <SelectItem key={index + ''} title={unit} />
                   ))}
                 </Select>
               </Layout>
@@ -121,6 +123,7 @@ export default ({navigation, route, getTask, onSave, section}) => {
               onChangeText={val => setForm(val.trimLeft(), 'description')}
             />
             <Datepicker
+              testID="TaskEstTime"
               style={styles.input}
               accessoryRight={CalendarIcon}
               label="Due Date"
@@ -148,7 +151,6 @@ export default ({navigation, route, getTask, onSave, section}) => {
                 Submit
               </Button>
             </Layout>
-            <Text>{JSON.stringify(valid)}</Text>
           </Layout>
 
           <Layout />
