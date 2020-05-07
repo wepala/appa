@@ -47,7 +47,7 @@ export default ({navigation, route, getTask, onSave, section}) => {
     const section = route.params?.section;
     setValid(form, valid);
     console.log('Validated Values', valid);
-    if (valid.title) {
+    if (valid.title && valid.timeEstimate) {
       onSave(
         form.title,
         form.description,
@@ -84,7 +84,15 @@ export default ({navigation, route, getTask, onSave, section}) => {
                   placeholder="30"
                   keyboardType="numeric"
                   value={form.timeEstimate}
-                  onChangeText={val => setForm(val, 'timeEstimate')}
+                  onChangeText={val => {
+                    setForm(val.trimLeft(), 'timeEstimate');
+                    clearValid();
+                  }}
+                  status={!valid.timeEstimate && 'danger'}
+                  captionIcon={!valid.timeEstimate && AlertIcon}
+                  caption={
+                    !valid.timeEstimate && 'Estimated time cannot be empty'
+                  }
                 />
               </Layout>
               <Layout style={styles.column2}>

@@ -18,16 +18,25 @@ export const useValidated = (form, validated) => {
   return [
     valid,
     (data, currentValid) => {
-      console.log('Submitted', form.title);
-      if (form.title === '' || form.title === null) {
+      console.log('Submitted', form.title, form.timeEstimate);
+      if (form.title === '') {
         currentValid.title = false;
       } else {
         currentValid.title = true;
       }
+      if (
+        form.timeEstimate === '' ||
+        form.timeEstimate === '0' ||
+        form.timeEstimate === undefined
+      ) {
+        currentValid.timeEstimate = false;
+      } else {
+        currentValid.timeEstimate = true;
+      }
       setValid({...valid, ...currentValid});
     },
     () => {
-      setValid({...valid, title: true});
+      setValid({...valid, title: true, timeEstimate: true});
     },
   ];
 };
