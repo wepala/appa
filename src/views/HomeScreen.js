@@ -21,7 +21,7 @@ const mapStateToProps = state => {
   return {
     onBoarded: state.onboard.onBoarded,
     token: state.token,
-    eventLastCount: state.eventLastCount,
+    eventCount: state.eventCount,
   };
 };
 
@@ -31,10 +31,10 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const HomeScreen = ({navigation, onBoarded, token, eventLastCount}) => {
+const HomeScreen = ({navigation, onBoarded, token, eventCount}) => {
   const MainStackScreen = () => {
     useEffect(() => {
-      if (token && eventLastCount === 0) {
+      if (token && eventCount === 0) {
         fetchEvents()
           .then(events => {
             // TODO replay events and dispatch actions to update state

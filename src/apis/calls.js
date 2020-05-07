@@ -7,9 +7,9 @@ export const eventsApi = axios.create({
 
 eventsApi.interceptors.request.use(
   function(config) {
-    const {token, applicationId, eventLastCount} = store.getState();
+    const {token, applicationId, eventCount} = store.getState();
     config.headers.Authorization = `Bearer ${token}`;
-    config.headers.ETag = `${applicationId}.${eventLastCount}`;
+    config.headers.ETag = `${applicationId}.${eventCount}`;
     return config;
   },
   function(error) {
