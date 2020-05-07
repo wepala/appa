@@ -21,7 +21,6 @@ const Sync = ({token, eventCount, children}) => {
       fetchEvents()
         .then(events => {
           // TODO replay events and dispatch actions to update state
-          console.log(events);
           setSyncComplete(true);
         })
         .catch(error => {
@@ -32,8 +31,6 @@ const Sync = ({token, eventCount, children}) => {
       setSyncComplete(true);
     }
   }, []);
-
-  // console.log(children)
 
   return isSyncComplete ? children : <></>; // TODO add loading component
 };
