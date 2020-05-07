@@ -1,4 +1,4 @@
-import {ADD_TASK, REMOVE_TASK, START_TASK, UPDATE_TASK} from './commandTypes';
+import {ADD_TASK, REMOVE_TASK, START_TASK, UPDATE_TASK, SYNC_TASK} from './commandTypes';
 
 export const addTask = task => {
   return {
@@ -31,5 +31,13 @@ export const startTask = (taskId, startTime) => {
     meta: {
       id: taskId,
     },
+  };
+};
+
+
+export const syncTask = task => {
+  return {
+    type: SYNC_TASK,
+    payload: task,
   };
 };
