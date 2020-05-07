@@ -11,30 +11,44 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components';
 
-const TaskItem = ({item, index, onPress}) => {
+const TaskItem = ({item, index, onPress, onComplete, onStart}) => {
   const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
+
   return (
-    <Card testID={'TaskItem'} style={styles.item} onPress={onPress}>
+    <Card
+      testID={'TaskItem'}
+      style={styles.item}
+      onPress={onPress}
+      status={checked && 'success'}>
       <Layout style={styles.row}>
         <Layout style={styles.column1}>
           <CheckBox
             testID={'TaskCheckBox'}
+            status="success"
             checked={checked}
-            onChange={toggleCheck}
+            onChange={() =>
+              onComplete(item.id, !checked).then(toggleCheck(!checked))
+            }
           />
         </Layout>
         <Layout style={styles.column2}>
-          <Text category="s1">{item.title}</Text>
+          <Text category="s1" style={checked && styles.checked}>
+            {item.title}
+          </Text>
           <Text style={styles.time}>Time: {item.time}</Text>
-          {item.project && <Text style={styles.project}>{item.project}</Text>}
+          {item.project !== '' && (
+            <Text style={styles.project}>{item.project}</Text>
+          )}
         </Layout>
+
         <Layout style={styles.column1}>
           <Button
             testID={'TaskButton'}
             size="small"
             status="success"
             accessoryLeft={PlayIcon}
+            onPress={() => onStart(item.id)}
           />
         </Layout>
       </Layout>
@@ -78,6 +92,11 @@ const themedStyles = StyleService.create({
     height: 20,
     margin: 0,
     padding: 0,
+  },
+  checked: {
+    fontStyle: 'italic',
+    textDecorationLine: 'line-through',
+    color: '$color-basic-600',
   },
 });
 
