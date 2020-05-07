@@ -126,7 +126,6 @@ jobs:
     steps:
       - name: Send success notification
         uses: rtCamp/action-slack-notify@v2.0.0
-        if: env.WORKFLOW_CONCLUSION == 'success'
         env:
           SLACK_CHANNEL: weagenda
           SLACK_COLOR: "#32BD65"
@@ -143,7 +142,6 @@ jobs:
     steps:
       - name: Send success notification
         uses: rtCamp/action-slack-notify@v2.0.0
-        if: env.WORKFLOW_CONCLUSION == 'success'
         env:
           SLACK_CHANNEL: weagenda
           SLACK_COLOR: "#32BD65"
