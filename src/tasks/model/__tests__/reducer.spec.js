@@ -1,5 +1,6 @@
 import tasks from '../reducer';
-import {addTask, removeTask, updateTask} from '../commands';
+import {addTask, removeTask, startTask, updateTask} from '../commands';
+import {mockTasks} from '../../__tests__/fixtures';
 
 describe('task reducer', function() {
   const expectedInitialState = {currentTask: null, getById: {}};
@@ -60,5 +61,19 @@ describe('task reducer', function() {
       'new task title',
     );
     expect(state === mockInitialState).toBe(false);
+  });
+
+  it('should assign the specified task to currentTask when the startTask action is called', () => {
+    let initialState = mockTasks;
+
+    let state = tasks(
+      initialState,
+      startTask('36212c03-040b-4139-867f-bd76485f4084'),
+    );
+
+    expect(state.currentTask).toBe(
+      mockTasks.getById['36212c03-040b-4139-867f-bd76485f4084'],
+    );
+    expect(state === initialState).toBe(false);
   });
 });

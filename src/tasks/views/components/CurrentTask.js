@@ -3,6 +3,7 @@ import React from 'react';
 import {Text, Card, Layout, StyleService, Button} from '@ui-kitten/components';
 
 export default ({item, index, onPress}) => {
+  item = item === undefined ? {title: 'Lorem Ipsum', project: ''} : item;
   return (
     <Card style={styles.item} onPress={onPress}>
       <Layout style={styles.row}>

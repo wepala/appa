@@ -11,7 +11,7 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components';
 
-const TaskItem = ({item, index, onPress, onComplete}) => {
+const TaskItem = ({item, index, onPress, onComplete, onStart}) => {
   const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
 
@@ -48,6 +48,7 @@ const TaskItem = ({item, index, onPress, onComplete}) => {
             size="small"
             status="success"
             accessoryLeft={PlayIcon}
+            onPress={() => onStart(item.id)}
           />
         </Layout>
       </Layout>

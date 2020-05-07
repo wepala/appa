@@ -1,17 +1,28 @@
-import {ADD_LOG, REMOVE_LOG, UPDATE_LOG} from '../../actionTypes';
 import {v4 as uuidv4} from 'uuid';
+import {ADD_LOG} from './commandTypes';
 
-const logs = (state = {currentLog: {}, getByIds: {}}, action) => {
+const logs = (state = {getByTaskId: {}}, action) => {
+  let getByTaskId = {};
   switch (action.type) {
     case ADD_LOG:
-      state.getByIds[uuidv4()] = action.payload;
-      return state;
-    case REMOVE_LOG:
-      delete state.getByIds[action.payload];
-      return state;
-    case UPDATE_LOG:
-      state.getByIds[action.id] = action.payload;
-      return state;
+      //deep copy the getByTaskId
+      Object.keys(state.getByTaskId).map(id => {
+        getByTaskId = Object.assign({}, getByTaskId, {
+          [id]: state.getByTaskId[id],
+        });
+      });
+      //add the new time log
+      const generatedId = uuidv4();
+      getByTaskId = Object.assign({}, getByTaskId, {
+        [action.payload.taskId]: Object.assign({}, action.payload, {
+          id: generatedId,
+          meta: {
+            id: generatedId,
+          },
+        }),
+      });
+      //return the updated state
+      return Object.assign({}, state, {getByTaskId: getByTaskId});
     default:
       return state;
   }
