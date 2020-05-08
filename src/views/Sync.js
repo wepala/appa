@@ -9,7 +9,7 @@ import {setEventCount} from '../actions';
 
 const mapStateToProps = state => {
   return {
-    token: state.token || 89,
+    token: state.token,
     eventCount: state.eventCount,
   };
 };
