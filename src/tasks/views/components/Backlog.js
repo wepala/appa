@@ -5,7 +5,7 @@ import BacklogItem from './BacklogItem';
 import {TasksContext} from '../../model/context';
 import {useFocusEffect} from '@react-navigation/native';
 
-export default ({navigation, items, contentContainerStyle}) => {
+export default ({navigation, items, contentContainerStyle, addToAgenda}) => {
   //get the setCurrentSection function from the Tasks context
   const {setCurrentSection} = useContext(TasksContext);
   React.useEffect(() => {
@@ -25,7 +25,7 @@ export default ({navigation, items, contentContainerStyle}) => {
 
   //method to render each item in the list
   const renderItem = ({index, item}) => (
-    <BacklogItem item={item} index={index} onPress={onItemPress} />
+    <BacklogItem item={item} index={index} onPress={onItemPress} onAddToAgenda={addToAgenda} />
   );
 
   return (
