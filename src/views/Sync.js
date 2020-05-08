@@ -5,15 +5,23 @@ import {fetchEvents} from '../apis/eventApi';
 import * as taskActionCreators from '../tasks/model/commands';
 import {REMOVE_TASK, UPDATE_TASK, ADD_TASK} from '../tasks/model/commandTypes';
 import {SyncSpinner} from '../views/components/Spinners';
+import {setEventCount} from '../actions';
+
 const mapStateToProps = state => {
   return {
-    token: state.token,
+    token: state.token || 89,
     eventCount: state.eventCount,
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(taskActionCreators, dispatch);
+  return bindActionCreators(
+    {
+      ...taskActionCreators,
+      updateEventCount: setEventCount,
+    },
+    dispatch,
+  );
 };
 
 const Sync = ({
@@ -23,6 +31,7 @@ const Sync = ({
   syncTask,
   removeTask,
   updateTask,
+  updateEventCount,
 }) => {
   const [isSyncComplete, setSyncComplete] = useState(false);
 
@@ -44,6 +53,8 @@ const Sync = ({
                 break;
             }
           }
+
+          updateEventCount(data.currentCount);
           setSyncComplete(true);
         })
         .catch(error => {
