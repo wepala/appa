@@ -61,6 +61,9 @@ jobs:
       - name: Build debug APK
         run: |
           cd android && ./gradlew assembleRelease
+        env:
+          UPLOAD_STORE_PASSWORD: ${{ secrets.UPLOAD_STORE_PASSWORD }}
+          UPLOAD_KEY_PASSWORD: ${{ secrets.UPLOAD_KEY_PASSWORD }}
       - name: Upload debug APK
         uses: actions/upload-artifact@v2
         with:
