@@ -28,7 +28,11 @@ export default ({item, index, onPress}) => {
           <Text>8:07 AM | 1 hour</Text>
         </Layout>
         <Layout style={styles.column1}>
-          <Button status="basic" accessoryLeft={MoreVerticalIcon} />
+          <Button
+            appearance="ghost"
+            status="basic"
+            accessoryLeft={MoreVerticalIcon}
+          />
         </Layout>
       </Layout>
     </Card>

@@ -47,6 +47,7 @@ export const MoreVerticalIcon = style => (
 );
 
 export const ProjectIcon = style => <Icon {...style} name="folder-outline" />;
+export const PlayIcon = style => <Icon {...style} name="play-circle" />;
 export const ReportIcon = style => <Icon {...style} name="bar-chart-outline" />;
 
 export const SearchIcon = style => <Icon {...style} name="search" />;

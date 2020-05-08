@@ -14,11 +14,6 @@ export default props => {
   const styles = useStyleSheet(themedStyles);
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text category="h1" status="control">
-          Logs
-        </Text>
-      </View>
       <Logs {...props} />
     </SafeAreaView>
   );
