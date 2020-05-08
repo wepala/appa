@@ -55,10 +55,9 @@ const tasks = (state = {currentTask: null, getById: {}}, action) => {
         currentTask: state.getById[action.meta.id],
       });
     case SYNC_TASK:
-      getById = Object.assign({}, getById, {
-        [action.payload.id]: action.payload,
-      });
-      return Object.assign({}, state, {getById: getById});
+      let newState = Object.assign({}, state);
+      newState.getById[action.payload.id] = action.payload;
+      return newState;
     default:
       return state;
   }
