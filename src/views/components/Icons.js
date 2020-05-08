@@ -29,6 +29,7 @@ export const CloseIcon = style => <Icon {...style} name="close" />;
 export const EyeIcon = style => <Icon {...style} name="eye-outline" />;
 
 export const EyeOffIcon = style => <Icon {...style} name="eye-off-outline" />;
+export const FilterIcon = style => <Icon {...style} name="funnel-outline" />;
 
 export const PersonIcon = style => <Icon {...style} name="person-outline" />;
 
