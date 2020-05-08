@@ -5,8 +5,8 @@ import {eventsApi} from '../calls';
 describe('API', () => {
   it('Should fetch events', async () => {
     eventsApi.get = jest.fn().mockResolvedValue({data: events});
-    let fetchEvents = await api.fetchEvents();
-    expect(fetchEvents).toEqual(events);
+    let fetchedEvents = await api.fetchEvents();
+    expect(fetchedEvents).toEqual(events);
   });
 
   it('Should throw errors on request failure', async () => {
