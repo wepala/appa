@@ -5,6 +5,9 @@ import {Icon, IconElement} from '@ui-kitten/components';
 export const AlertIcon = style => (
   <Icon {...style} name="alert-triangle-outline" />
 );
+export const ArrowDownIcon = style => (
+  <Icon {...style} name="arrow-ios-downward-outline" />
+);
 export const ArrowIosBackIcon = style => (
   <Icon {...style} name="arrow-ios-back" />
 );
