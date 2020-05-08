@@ -11,6 +11,9 @@ describe('Agenda List View', () => {
   it('should display the task being worked on at the top', () => {
     const currentItem =
       mockTasks.getById['36212c03-040b-4139-867f-bd76485f4084'];
+    const navigation = {
+      addListener: jest.fn(),
+    };
 
     const {getAllByTestId} = render(
       <>
@@ -21,7 +24,7 @@ describe('Agenda List View', () => {
             ...eva.light,
             ...theme,
           }}>
-          <Agenda currentItem={currentItem} />
+          <Agenda currentItem={currentItem} navigation={navigation} />
         </ApplicationProvider>
       </>,
     );
