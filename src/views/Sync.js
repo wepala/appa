@@ -39,7 +39,6 @@ const Sync = ({
     if (token && eventCount === 0) {
       fetchEvents()
         .then(data => {
-          console.log(data);
           for (let event of data.events) {
             switch (event.type) {
               case ADD_TASK:
