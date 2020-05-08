@@ -33,6 +33,7 @@ const BacklogItem = ({item, index, onPress, onAddToAgenda}) => {
             appearance="ghost"
             status="basic"
             accessoryLeft={AssetCalendarIcon}
+            testID={'AddAgendaButton'}
             onPress={() => onAddToAgenda(item, moment().format('YYYY-MM-DD'))}
           />
         </Layout>
