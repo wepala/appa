@@ -85,15 +85,27 @@ describe('task reducer', function() {
 
   it('should add tasks when syncing', () => {
     let mockInitialState = expectedInitialState;
-    let state = tasks(
+    tasks(
       mockInitialState,
       syncTask({
         title: 'new task title',
         id: '36212c03-040b-4139-867f-bd76485f4084',
       }),
     );
-    expect(state.getById['36212c03-040b-4139-867f-bd76485f4084'].title).toBe(
-      'new task title',
+    tasks(
+      mockInitialState,
+      syncTask({
+        title: 'second task title',
+        id: '36212c03-040b-4139-867f-bd76485f4088',
+      }),
     );
+
+    expect(Object.keys(mockInitialState).length).toEqual(2);
+    expect(
+      mockInitialState.getById['36212c03-040b-4139-867f-bd76485f4084'].title,
+    ).toBe('new task title');
+    expect(
+      mockInitialState.getById['36212c03-040b-4139-867f-bd76485f4088'].title
+    ).toBe('second task title');
   });
 });
