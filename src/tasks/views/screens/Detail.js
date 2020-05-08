@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   Button,
   Datepicker,
@@ -10,6 +10,7 @@ import {
 } from '@ui-kitten/components';
 import {KeyboardAvoidingView} from 'react-native';
 import DetailTopBar from '../components/DetailTopBar';
+import {TasksContext} from '../../model/context';
 
 const themedStyles = StyleService.create({
   container: {
@@ -37,7 +38,7 @@ const themedStyles = StyleService.create({
   },
 });
 
-export default ({navigation, route, getTask, onSave, section}) => {
+export default ({navigation, route, getTask, onSave}) => {
   const styles = useStyleSheet(themedStyles);
   const id = route.params?.id;
   const task = getTask(id);
@@ -48,8 +49,9 @@ export default ({navigation, route, getTask, onSave, section}) => {
   const [description, setDescription] = useState(task.description);
   const [dueDate, setDueDate] = useState(task.dueDate);
 
+  const {section} = useContext(TasksContext);
+
   const onSubmit = () => {
-    const section = route.params?.section;
     onSave(title, description, dueDate, section === 'agenda').then(() =>
       navigation.goBack(),
     );

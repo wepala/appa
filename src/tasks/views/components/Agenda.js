@@ -1,7 +1,9 @@
 import {List, Layout, StyleService, useStyleSheet} from '@ui-kitten/components';
-import React from 'react';
+import React, {useContext} from 'react';
 import AgendaItem from '../components/AgendaItem';
 import CurrentTask from '../components/CurrentTask';
+import {useFocusEffect} from '@react-navigation/native';
+import {TasksContext} from '../../model/context';
 
 export default ({
   navigation,
@@ -11,6 +13,16 @@ export default ({
   contentContainerStyle,
   currentItem,
 }) => {
+  //get the setCurrentSection function from the Tasks context
+  const {setCurrentSection} = useContext(TasksContext);
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setCurrentSection('agenda');
+    });
+
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, [navigation, setCurrentSection]);
   const styles = useStyleSheet(themedStyles);
   const onItemPress = index => {
     navigation.navigate('UpdateTask', {

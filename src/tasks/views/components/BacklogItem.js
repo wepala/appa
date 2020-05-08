@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {AssetCalendarIcon} from '../../../views/components/Icons';
-
+import moment from 'moment';
 import {
   Text,
   Card,
@@ -11,7 +11,7 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components';
 
-const BacklogItem = ({item, index, onPress}) => {
+const BacklogItem = ({item, index, onPress, onAddToAgenda}) => {
   const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
   return (
@@ -33,6 +33,8 @@ const BacklogItem = ({item, index, onPress}) => {
             appearance="ghost"
             status="basic"
             accessoryLeft={AssetCalendarIcon}
+            testID={'AddAgendaButton'}
+            onPress={() => onAddToAgenda(item, moment().format('YYYY-MM-DD'))}
           />
         </Layout>
       </Layout>
