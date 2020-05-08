@@ -33,8 +33,7 @@ const tasks = (state = {currentTask: null, getById: {}}, action) => {
           [id]: state.getById[id],
         });
       });
-      //add the new task
-      getById = Object.assign({}, getById, {[uuidv4()]: action.payload});
+
       delete getById[action.payload];
       return Object.assign({}, state, {getById: getById});
     case UPDATE_TASK:
