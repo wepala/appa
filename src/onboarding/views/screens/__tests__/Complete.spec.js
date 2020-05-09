@@ -6,6 +6,9 @@ import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
 import {default as theme} from '../../../../../theme.json';
 
+jest.mock('@fortawesome/react-native-fontawesome', () => ({
+  FontAwesomeIcon: '',
+}));
 describe('onboarding complete screen', () => {
   it('should have button that completes the process', async () => {
     const onComplete = jest.fn();
