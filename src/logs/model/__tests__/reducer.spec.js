@@ -3,7 +3,11 @@ import moment from 'moment';
 import {addTimeLog} from '../commands';
 
 describe('logs reducer', function() {
-  const expectedInitialState = {getByTaskId: [], getById: {}, getByTime: []};
+  const expectedInitialState = {
+    getByTaskId: new Map(),
+    getById: new Map(),
+    getByTime: new Map(),
+  };
 
   it('should return initial model', () => {
     expect(logs(undefined, {})).toEqual(expectedInitialState);
@@ -15,14 +19,15 @@ describe('logs reducer', function() {
     let uidRegex = /^([0-9a-fA-F]{8})-(([0-9a-fA-F]{4}-){3})([0-9a-fA-F]{12})$/i;
 
     const state = logs(expectedInitialState, addTimeLog(taskId, startTime));
-    expect(Object.keys(state.getById).length).toEqual(1);
-    expect(uidRegex.test(Object.keys(state.getById)[0])).toBe(true);
-    expect(uidRegex.test(state.getById[Object.keys(state.getById)[0]].id)).toBe(
+    expect(state.getById.size).toEqual(1);
+    const key = state.getById.keys().next().value;
+    expect(uidRegex.test(key)).toBe(true);
+    expect(uidRegex.test(state.getById.get(key).id)).toBe(
       true,
     );
 
-    expect(state.getByTaskId[taskId]).toBeArrayOfSize(1);
-    expect(state.getByTaskId[taskId][0]).toBe(Object.keys(state.getById)[0]);
+    expect(state.getByTaskId.size).toEqual(1);
+    expect(state.getByTaskId.get(taskId)[0]).toBe(key);
     expect(state === expectedInitialState).toBe(false);
   });
 });
