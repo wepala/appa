@@ -1,17 +1,23 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {useForm, useValidated} from '../../../weosHelpers';
 import {
+  Text,
   Button,
   Datepicker,
   Divider,
   Input,
   Layout,
   StyleService,
-  View,
   Select,
   SelectItem,
   useStyleSheet,
+  IndexPath,
 } from '@ui-kitten/components';
-import {CalendarIcon, ClockIcon} from '../../../views/components/Icons';
+import {
+  AlertIcon,
+  CalendarIcon,
+  ClockIcon,
+} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
 import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
 
@@ -19,20 +25,36 @@ export default ({navigation, route, getTask, onSave, section}) => {
   const styles = useStyleSheet(themedStyles);
   const id = route.params?.id;
   const task = getTask(id);
-  const [title, setTitle] = useState(task.title);
-  const [timeEstimate, setTimeEstimate] = useState('10');
-  const [timeUnit, setTimeUnit] = useState(0);
-  const [project, setProject] = useState('Test Project');
-  const [description, setDescription] = useState(task.description);
 
-  const [dueDate, setDueDate] = useState(task.dueDate);
-  const [show, toggleShow] = useState(false);
+  const timeUnits = ['Minutes', 'Hours'];
+  const [form, setForm] = useForm({
+    title: task.title,
+    timeEstimate: task.timeEstimate,
+    timeUnit: new IndexPath(0),
+    project: task.project,
+    description: task.description,
+    dueDate: task.dueDate,
+  });
+  const [valid, setValid, clearValid] = useValidated(form, {
+    title: true,
+    timeEstimate: true,
+    project: true,
+    description: true,
+    dueDate: true,
+  });
 
   const onSubmit = () => {
     const section = route.params?.section;
-    onSave(title, description, dueDate, section === 'agenda').then(() =>
-      navigation.goBack(),
-    );
+    setValid(form, valid);
+    console.log('Validated Values', valid);
+    if (valid.title && valid.timeEstimate) {
+      onSave(
+        form.title,
+        form.description,
+        form.dueDate,
+        section === 'agenda',
+      ).then(() => navigation.goBack());
+    }
   };
 
   return (
@@ -42,51 +64,73 @@ export default ({navigation, route, getTask, onSave, section}) => {
         <ScrollView>
           <Layout style={styles.form}>
             <Input
+              testID="TaskTitle"
               style={styles.input}
               label="Task Title"
               placeholder="Enter title here"
-              value={title}
-              onChangeText={setTitle}
+              value={form.title}
+              onChangeText={val => {
+                setForm(val.trimLeft(), 'title');
+                clearValid();
+              }}
+              status={!valid.title && 'danger'}
+              captionIcon={!valid.title && AlertIcon}
+              caption={!valid.title && 'Title cannot be blank'}
             />
             <Layout style={styles.row}>
               <Layout style={styles.column1}>
                 <Input
+                  testID="TaskEstTime"
                   style={styles.input}
                   label="Estimated Time"
                   placeholder="30"
-                  onChangeText={setTimeEstimate}
                   keyboardType="numeric"
-                  value={timeEstimate}
+                  value={form.timeEstimate}
+                  onChangeText={val => {
+                    setForm(val.trimLeft(), 'timeEstimate');
+                    clearValid();
+                  }}
+                  status={!valid.timeEstimate && 'danger'}
+                  captionIcon={!valid.timeEstimate && AlertIcon}
+                  caption={
+                    !valid.timeEstimate && 'Estimated time cannot be empty'
+                  }
                 />
               </Layout>
               <Layout style={styles.column2}>
                 <Select
                   accessoryRight={ClockIcon}
                   label="  "
+                  value={timeUnits[form.timeUnit.row]}
                   style={styles.input}
-                  selectedIndex={timeUnit}
-                  onSelect={setTimeUnit}>
-                  <SelectItem title="Minutes" />
-                  <SelectItem title="Hours" />
+                  selectedIndex={form.timeUnit}
+                  onSelect={index => {
+                    console.log(form.timeUnit.row);
+                    setForm(index, 'timeUnit');
+                  }}>
+                  {timeUnits.map((unit, index) => (
+                    <SelectItem key={index + ''} title={unit} />
+                  ))}
                 </Select>
               </Layout>
             </Layout>
             <Input
+              testID="TaskDescription"
               style={styles.input}
               multiline={true}
               placeholder=""
               label="Description"
-              onChangeText={setDescription}
-              value={description}
+              value={form.description}
+              onChangeText={val => setForm(val.trimLeft(), 'description')}
             />
             <Datepicker
+              testID="TaskDueDate"
               style={styles.input}
               accessoryRight={CalendarIcon}
               label="Due Date"
-              date={dueDate}
-              onSelect={date => {
-                setDueDate(date);
-                toggleShow(false);
+              date={form.dueDate}
+              onSelect={val => {
+                setForm(val, 'dueDate');
               }}
             />
             <Divider />
