@@ -1,4 +1,5 @@
 import moment from 'moment';
+import {mockTasks} from '../../tasks/__tests__/fixtures';
 export const mockLogs = {
   getById: new Map([
     [
@@ -105,3 +106,8 @@ export const mockLogs = {
     ['2020-05-09T10:07:44-04:00', '4c77b105-af6c-471c-bdaa-990cb0f76302'],
   ]),
 };
+
+it('should have fixtures', () => {
+  expect(mockLogs).toBeObject();
+});
+

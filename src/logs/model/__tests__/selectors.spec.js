@@ -3,6 +3,7 @@ import {
   getLogsByTaskId,
   getTimeSpentByTaskId,
   getTimeSpentByDay,
+  getTaskTimeSpentByDate,
 } from '../selectors';
 import {mockTasks} from '../../../tasks/__tests__/fixtures';
 import {addTimeLog} from '../commands';
@@ -10,13 +11,13 @@ import logs from '../reducer';
 import moment from 'moment';
 
 describe('Time Log Selectors', () => {
+  const mockState = {
+    tasks: mockTasks,
+    logs: mockLogs,
+  };
   it('should get task logs', () => {
-    const mockState = {
-      tasks: mockTasks,
-      logs: mockLogs,
-    };
     const logs = getLogsByTaskId(
-      mockLogs,
+      mockState,
       '36212c03-040b-4139-867f-bd76485f4084',
     );
     expect(logs).toBeArrayOfSize(2);
@@ -30,49 +31,36 @@ describe('Time Log Selectors', () => {
 
   it('should have a method for getting time spent on a task', () => {
     const timeSpent = getTimeSpentByTaskId(
-      mockLogs,
+      mockState,
       '36212c03-040b-4139-867f-bd76485f4084',
     );
     expect(timeSpent).toBe(7200);
   });
 
   it('should have a method for getting time spent on a task on a given day', () => {
-    const timeSpent = getTimeSpentByDay(
-      mockLogs,
-      '36212c03-040b-4139-867f-bd76485f4084',
-      '2020-05-08',
-    );
-    expect(timeSpent).toBe(3600);
+    const timeSpent = getTimeSpentByDay(mockState, '2020-05-08');
+    expect(timeSpent).toBe(9000);
   });
 
   it('should only recompute if state is updated or paramter changed', () => {
-    const timeSpent = getTimeSpentByDay(
-      mockLogs,
-      '36212c03-040b-4139-867f-bd76485f4084',
-      '2020-05-08',
-    );
-    expect(timeSpent).toBe(3600);
-    getTimeSpentByDay(
-      mockLogs,
-      '36212c03-040b-4139-867f-bd76485f4084',
-      '2020-05-08',
-    );
+    const timeSpent = getTimeSpentByDay(mockState, '2020-05-08');
+    expect(timeSpent).toBe(9000);
+    getTimeSpentByDay(mockState, '2020-05-08');
     expect(getTimeSpentByDay.recomputations()).toBe(1);
-    getTimeSpentByDay(
-      mockLogs,
-      '36212c03-040b-4139-867f-bd76485f4084',
-      '2020-05-08',
-    );
+    getTimeSpentByDay(mockState, '2020-05-08');
     expect(getTimeSpentByDay.recomputations()).toBe(1);
-    const updatedState = logs(
-      mockLogs,
-      addTimeLog('36212c03-040b-4139-867f-bd76485f4084', moment().format()),
-    );
-    getTimeSpentByDay(
-      updatedState,
-      '36212c03-040b-4139-867f-bd76485f4084',
-      '2020-05-08',
-    );
+    const updatedState = Object.assign({}, mockState, {
+      logs: logs(
+        mockState.logs,
+        addTimeLog('36212c03-040b-4139-867f-bd76485f4084', moment().format()),
+      ),
+    });
+    getTimeSpentByDay(updatedState, '2020-05-08');
     expect(getTimeSpentByDay.recomputations()).toBe(2);
+  });
+
+  it('should have select to get the totals by date for each task on the date', () => {
+    const timeTotals = getTaskTimeSpentByDate(mockState, '2020-05-08');
+    expect(timeTotals[0]).toBe(3600);
   });
 });

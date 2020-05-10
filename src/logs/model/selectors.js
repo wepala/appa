@@ -1,29 +1,38 @@
 import {createSelector} from 'reselect';
 import moment from 'moment';
+import {getTasksByDate} from '../../tasks/model/selectors';
 
-const getByTaskSelector = (state, taskId) => state.getByTaskId.get(taskId);
-const getByIdSelector = state => state.getById;
-const getByTimeSelector = state => [...state.getByTime.keys()];
+export const getByTaskSelector = (state, taskId) =>
+  state.logs.getByTaskId.get(taskId);
+export const getByIdSelector = state => state.logs.getById;
+export const getByTimeSelector = state => [...state.logs.getByTime.keys()];
 
-const getTimesByDate = (state, taskId, date) =>
-  taskId !== undefined && taskId !== null
-    ? [...state.getByTime.keys()]
-        .filter(time => time.startsWith(date))
-        .filter(
-          time =>
-            state.getById.get(state.getByTime.get(time))?.taskId === taskId,
-        )
-    : [...state.getByTime.keys()].filter(time => time.startsWith(date));
+export const getTimesByDate = (state, date) => {
+  const times = [...state.logs.getByTime.keys()].filter(time => {
+    return time.startsWith(date);
+  });
+
+  const result = new Map();
+  times.forEach(time => {
+    result.set(time, state.logs.getByTime.get(time));
+  });
+  return result;
+};
 /**
  * get the amount of time spent by day
  *
  * @type {OutputSelector<unknown, boolean|AnimatedNode<number>|number, (res1: unknown[], res2: unknown[]) => (boolean|AnimatedNode<number>|number)>}
  */
 export const getTimeSpentByDay = createSelector(
-  [getTimesByDate, getByTimeSelector],
-  (timesByDate, times) => {
-    return timesByDate
-      .map(time => moment(times[times.indexOf(time) + 1]).diff(time, 'seconds'))
+  [getTimesByDate],
+  timesByDate => {
+    const times = [...timesByDate.keys()];
+    return times
+      .map(time =>
+        times[times.indexOf(time) + 1] !== undefined
+          ? moment(times[times.indexOf(time) + 1]).diff(time, 'seconds')
+          : null,
+      )
       .reduce((totalTime, time) => totalTime + time);
   },
 );
@@ -53,5 +62,28 @@ export const getTimeSpentByTaskId = createSelector(
         ),
       )
       .reduce((totalTime, time) => totalTime + time);
+  },
+);
+
+export const getTaskTimeSpentByDate = createSelector(
+  [getTimesByDate, getTasksByDate, getByIdSelector],
+  (logsByTime, tasks, logs) => {
+    const values = [...logsByTime.values()];
+    const times = [...logsByTime.keys()];
+    return tasks.map(task => {
+      const filteredTimes = times.filter(
+        (time, index) => logs.get(values[index])?.taskId === task.id,
+      );
+      return filteredTimes.length > 0
+        ? filteredTimes
+            .map(time => {
+              const endTime = times[times.indexOf(time) + 1];
+              return endTime !== undefined
+                ? moment(endTime).diff(time, 'seconds')
+                : 0;
+            })
+            .reduce((totalTime, time) => totalTime + time)
+        : 0;
+    });
   },
 );
