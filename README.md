@@ -1,4 +1,4 @@
-# Project Title
+# WeAgenda
 
 WeAgenda is a task management application
 
@@ -27,7 +27,7 @@ Clone the repository
 Give the example
 ```
 
-Install the dependencies 
+Install the dependencies
 
 ```
 npm install
@@ -35,10 +35,10 @@ npm install
 
 ## Running the tests
 
-To run all the tests 
+To run all the tests
 
 ```
-npm test 
+npm test
 ```
 
 ### Break down into end to end tests
@@ -72,7 +72,7 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/wepala/weagenda/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/wepala/weagenda/tags).
 
 ## Authors
 

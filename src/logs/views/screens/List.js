@@ -9,7 +9,6 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components';
 
-
 export default ({navigation}) => {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();

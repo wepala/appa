@@ -6,8 +6,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-18.04, macos-10.15]
-        node: [12]
+        os: [ubuntu-18.04]
+        node: [13]
 
     steps:
       - name: checkout
@@ -21,15 +21,31 @@ jobs:
           npm install
       - name: Run tests
         run: |
-          npm test
+          npm run lint && npm test
+      - name: Send failure notification
+        uses: rtCamp/action-slack-notify@v2.0.0
+        if: failure()
+        env:
+          SLACK_CHANNEL: weagenda
+          SLACK_COLOR: "#FF0000"
+          SLACK_ICON: https://github.com/wepala.png?size=48
+          SLACK_MESSAGE: You entered code that was not linted or your tests failed
+          SLACK_TITLE: Lint/Test failed
+          SLACK_USERNAME: WeAgenda
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
   build-android:
     runs-on: ubuntu-18.04
     needs: install-and-test
+    if: contains(github.ref, 'release/')
 
     steps:
       - name: checkout
         uses: actions/checkout@v2
+      - name: setup node @ version
+        uses: actions/setup-node@v1
+        with:
+          node-version: 13
       - name: Install npm dependencies
         run: |
           npm install
@@ -50,3 +66,87 @@ jobs:
         with:
           name: app-debug.apk
           path: android/app/build/outputs/apk/debug/
+      - name: Send failure notification
+        uses: rtCamp/action-slack-notify@v2.0.0
+        if: failure()
+        env:
+          SLACK_CHANNEL: weagenda
+          SLACK_COLOR: "#FF0000"
+          SLACK_ICON: https://github.com/wepala.png?size=48
+          SLACK_MESSAGE: Tests passed for your code changes but we aren't able to generate and Android app
+          SLACK_TITLE: Could not build Android APK
+          SLACK_USERNAME: WeAgenda
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+  build-ios:
+    runs-on: macos-10.15
+    needs: install-and-test
+    if: contains(github.ref, 'release/')
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup node @ version
+        uses: actions/setup-node@v1
+        with:
+          node-version: 13
+      - name: Install npm dependencies
+        run: |
+          npm install
+      - name: Install pod dependencies
+        run: |
+          cd ios && pod install
+      - name: Build app
+        run: |
+          cd ios
+          xcodebuild -workspace WeAgenda.xcworkspace -scheme WeAgenda clean archive -archivePath build/WeAgenda.xcarchive -allowProvisioningUpdates CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS="" CODE_SIGNING_ALLOWED="NO"
+          cp -r build/WeAgenda.xcarchive/Products/Applications/WeAgenda.app WeAgenda-debug.app
+          zip -r WeAgenda-debug-app.zip WeAgenda-debug.app
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: WeAgenda-debug-app.zip
+          path: ios/
+      - name: Send failure notification
+        uses: rtCamp/action-slack-notify@v2.0.0
+        if: failure()
+        env:
+          SLACK_CHANNEL: weagenda
+          SLACK_COLOR: "#FF0000"
+          SLACK_ICON: https://github.com/wepala.png?size=48
+          SLACK_MESSAGE: Tests passed for your code changes but we aren't able to generate and iOS app
+          SLACK_TITLE: Could not build iOS app
+          SLACK_USERNAME: WeAgenda
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+  build-success-notification:
+    runs-on: ubuntu-18.04
+    if: contains(github.ref, 'release/')
+    needs: [build-android, build-ios]
+    steps:
+      - name: Send success notification
+        uses: rtCamp/action-slack-notify@v2.0.0
+        env:
+          SLACK_CHANNEL: weagenda
+          SLACK_COLOR: "#32BD65"
+          SLACK_ICON: https://github.com/wepala.png?size=48
+          SLACK_MESSAGE: We were able to test and build your code without problems. Pat yourself on the back
+          SLACK_TITLE: Apps built for release
+          SLACK_USERNAME: WeAgenda
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+  test-success-notification:
+    runs-on: ubuntu-18.04
+    if: "!contains(github.ref, 'release/')"
+    needs: [install-and-test]
+    steps:
+      - name: Send success notification
+        uses: rtCamp/action-slack-notify@v2.0.0
+        env:
+          SLACK_CHANNEL: weagenda
+          SLACK_COLOR: "#32BD65"
+          SLACK_ICON: https://github.com/wepala.png?size=48
+          SLACK_MESSAGE: We were able to test your code without problems. Not bad
+          SLACK_TITLE: Branch tests passed
+          SLACK_USERNAME: WeAgenda
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

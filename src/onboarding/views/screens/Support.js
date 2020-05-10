@@ -1,5 +1,5 @@
 import React from 'react';
-import {View,SafeAreaView} from 'react-native';
+import {View, SafeAreaView} from 'react-native';
 import {
   Button,
   Input,
@@ -9,7 +9,6 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components';
 import {EyeIcon, EyeOffIcon, PersonIcon} from '../components/Extras';
-
 
 export default ({navigation}) => {
   const [email, setEmail] = React.useState();
