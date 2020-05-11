@@ -1,6 +1,5 @@
-import {List, StyleService, useStyleSheet} from '@ui-kitten/components';
+import {List, Text, StyleService, useStyleSheet} from '@ui-kitten/components';
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import LogItem from '../components/LogItem';
 
 export default ({navigation, data, contentContainerStyle}) => {
@@ -18,12 +17,15 @@ export default ({navigation, data, contentContainerStyle}) => {
   );
 
   return (
-    <List
-      contentContainerStyle={[styles.container, contentContainerStyle]}
-      numColumns={1}
-      data={data}
-      renderItem={renderItem}
-    />
+    <>
+      <Text>Top bar placeholder for logs</Text>
+      <List
+        contentContainerStyle={[styles.container, contentContainerStyle]}
+        numColumns={1}
+        data={data}
+        renderItem={renderItem}
+      />
+    </>
   );
 };
 
