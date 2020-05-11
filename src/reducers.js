@@ -1,12 +1,8 @@
-import {
-  SET_EVENT_LAST_COUNT,
-  SET_TOKEN,
-  SET_APPLICATION_ID,
-} from './actionTypes';
+import {SET_EVENT_COUNT, SET_TOKEN, SET_APPLICATION_ID} from './actionTypes';
 
 export const eventCount = (state = 0, action) => {
   switch (action.type) {
-    case SET_EVENT_LAST_COUNT:
+    case SET_EVENT_COUNT:
       return action.payload;
     default:
       return state;
