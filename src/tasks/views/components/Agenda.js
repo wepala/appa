@@ -1,5 +1,5 @@
 import {List, Layout, StyleService, useStyleSheet} from '@ui-kitten/components';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import AgendaItem from '../components/AgendaItem';
 import CurrentTask from '../components/CurrentTask';
 
@@ -19,7 +19,6 @@ export default ({
       id: items[index].id,
     });
   };
-  console.log('Got a current iteM?', currentItem);
   //method to render each item in the list
   const renderItem = ({index, item}) => {
     // if there is a current item that is this item, set the totalTimes index to this item
@@ -39,6 +38,13 @@ export default ({
       />
     );
   };
+
+  useEffect(() => {
+    return () => {
+      console.log('Add a log when unmounting');
+      if (currentItem) startTask(currentItem.id);
+    };
+  }, [startTask]);
 
   return (
     <Layout style={styles.container} testID={'AgendaLayout'}>

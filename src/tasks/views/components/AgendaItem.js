@@ -30,7 +30,7 @@ const TaskItem = ({
   return (
     <Card
       testID={'TaskItem'}
-      style={styles.item}
+      style={active ? [styles.item, styles.active] : styles.item}
       onPress={onPress}
       status={checked ? 'success' : active ? 'basic' : null}>
       <Layout style={styles.row}>
@@ -116,6 +116,9 @@ const themedStyles = StyleService.create({
     fontStyle: 'italic',
     textDecorationLine: 'line-through',
     color: '$color-basic-600',
+  },
+  active: {
+    backgroundColor: '$background-basic-color-2',
   },
 });
 

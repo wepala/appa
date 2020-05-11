@@ -77,7 +77,7 @@ export default ({item, index, timeSpentToday, onPress}) => {
 
 const themedStyles = StyleService.create({
   item: {
-    backgroundColor: '$background-basic-color-2',
+    backgroundColor: '$background-basic-color-3',
     padding: 0,
     marginBottom: 16,
   },
