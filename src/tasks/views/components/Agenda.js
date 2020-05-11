@@ -19,10 +19,11 @@ export default ({
       id: items[index].id,
     });
   };
-  console.log(currentItem);
+  console.log('Got a current iteM?', currentItem);
   //method to render each item in the list
   const renderItem = ({index, item}) => {
-    if (item.id === currentItem.id) {
+    // if there is a current item that is this item, set the totalTimes index to this item
+    if (currentItem && item.id === currentItem.id) {
       setCurrentIndex(index);
     }
     return (
@@ -34,7 +35,7 @@ export default ({
         onStart={startTask}
         setCurrentIndex={setCurrentIndex}
         timeSpentToday={timeTotals[index]}
-        active={currentItem.id === item.id}
+        active={currentItem && currentItem.id === item.id}
       />
     );
   };

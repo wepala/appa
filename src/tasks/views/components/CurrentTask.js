@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 
 import {
   Text,
@@ -10,9 +10,41 @@ import {
 } from '@ui-kitten/components';
 import {StopOutlineIcon} from '../../../views/components/Icons';
 
+const useInterval = (callback, delay) => {
+  const savedCallback = useRef();
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+};
+
 export default ({item, index, timeSpentToday, onPress}) => {
   const styles = useStyleSheet(themedStyles);
   item = item === undefined ? {title: 'Lorem Ipsum', project: ''} : item;
+
+  const [timer, setTimer] = useState(timeSpentToday);
+  useEffect(() => {
+    setTimer(timeSpentToday);
+  }, [timeSpentToday]);
+
+  useInterval(() => {
+    setTimer(timer + 1);
+  }, 1000);
+  let hours = parseInt(timer / 3600, 10);
+  let minutes = parseInt(timer / 60, 10) % 60;
+  let seconds = timer % 60;
 
   return (
     <Card testID="CurrentTask" style={styles.item} onPress={onPress}>
@@ -22,15 +54,22 @@ export default ({item, index, timeSpentToday, onPress}) => {
           {item.project !== '' && <Text category="s2">{item.project}</Text>}
         </Layout>
         <Layout style={styles.column2}>
-          <Text category="h5">{timeSpentToday}</Text>
-          <Button
-            testID="TaskButton"
-            style={styles.button}
-            status="danger"
-            accessoryRight={StopOutlineIcon}>
-            Stop
-          </Button>
+          <Text testID="TotalTime" category="h5">
+            {hours > 0 ? `${hours} hrs ` : null}
+            {minutes > 0 ? `${minutes} mins ` : null}
+            {`${seconds} secs`}
+          </Text>
         </Layout>
+      </Layout>
+      <Layout style={styles.row}>
+        <Button
+          testID="TaskButton"
+          style={styles.button}
+          status="danger"
+          size="small"
+          accessoryRight={StopOutlineIcon}>
+          Stop
+        </Button>
       </Layout>
     </Card>
   );
@@ -47,6 +86,7 @@ const themedStyles = StyleService.create({
     backgroundColor: 'transparent',
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
 
   column1: {
@@ -57,7 +97,8 @@ const themedStyles = StyleService.create({
   },
   column2: {
     backgroundColor: 'transparent',
-    flexBasis: 'auto',
   },
-  button: {},
+  button: {
+    marginTop: 8,
+  },
 });

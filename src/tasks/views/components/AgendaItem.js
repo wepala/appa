@@ -23,9 +23,9 @@ const TaskItem = ({
 }) => {
   const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
-  const minutes = parseInt(timeSpentToday / 60, 10);
-  const hours = parseInt(minutes / 60, 10);
-  const seconds = parseInt(timeSpentToday % 60, 10);
+  let hours = parseInt(timeSpentToday / 3600, 10);
+  let minutes = parseInt(timeSpentToday / 60, 10) % 60;
+  let seconds = timeSpentToday % 60;
 
   return (
     <Card
@@ -48,7 +48,9 @@ const TaskItem = ({
             {item.title}
           </Text>
           <Text style={styles.time}>
-            Time: {hours} hrs {minutes} mins {seconds} secs
+            Time: {hours > 0 ? `${hours}hrs ` : null}
+            {minutes > 0 ? `${minutes}mins ` : null}
+            {`${seconds}secs`}
           </Text>
           {item.project !== '' && (
             <Text style={styles.project}>{item.project}</Text>
@@ -59,7 +61,7 @@ const TaskItem = ({
           <Button
             testID={'TaskButton'}
             size="small"
-            status={active ? 'disabled' : 'success'}
+            status="success"
             accessoryLeft={PlayIcon}
             onPress={() => {
               onStart(item.id);

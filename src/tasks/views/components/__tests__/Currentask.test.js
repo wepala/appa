@@ -40,7 +40,7 @@ describe('Current Task component', () => {
 
     // Task text
     const taskTitle = getAllByText(title);
-    const taskTotalTime = getAllByText(`${totalTime}`);
+    const taskTotalTime = getAllByTestId('TotalTime');
     const taskProject = getAllByText(project);
     expect(taskTitle).toHaveLength(1);
     expect(taskTotalTime).toHaveLength(1);
