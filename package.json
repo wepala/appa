@@ -8,7 +8,8 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "./node_modules/.bin/eslint .",
-    "lint-fix": "./node_modules/.bin/eslint --fix ."
+    "lint-fix": "./node_modules/.bin/eslint --fix .",
+    "build-android": "mkdir -p android/app/src/main/assets && rm -rf android/app/build && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && cd android && ./gradlew clean assembleDebug"
   },
   "dependencies": {
     "@eva-design/eva": "^2.0.0-alpha.1",
