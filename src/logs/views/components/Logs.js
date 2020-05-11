@@ -1,7 +1,11 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
-import {Layout, List, StyleService, useStyleSheet} from '@ui-kitten/components';
-import {StyleSheet} from 'react-native';
+import {
+  Layout,
+  Text,
+  List,
+  StyleService,
+  useStyleSheet,
+} from '@ui-kitten/components';
 import LogItem from '../components/LogItem';
 import LogFilter from '../components/LogsFilter';
 
@@ -21,6 +25,7 @@ export default ({navigation, data, contentContainerStyle}) => {
 
   return (
     <Layout style={styles.container}>
+      <Text>Top bar placeholder for logs</Text>
       <LogFilter />
       <List
         contentContainerStyle={[styles.list, contentContainerStyle]}
