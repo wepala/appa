@@ -11,9 +11,19 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components';
 
-const TaskItem = ({item, index, onPress, onComplete, onStart, timeSpentToday}) => {
+const TaskItem = ({
+  item,
+  index,
+  onPress,
+  onComplete,
+  onStart,
+  timeSpentToday,
+}) => {
   const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
+  const minutes = parseInt(timeSpentToday / 60);
+  const hours = parseInt(minutes / 60);
+  const seconds = parseInt(timeSpentToday % 60);
 
   return (
     <Card
@@ -36,7 +46,9 @@ const TaskItem = ({item, index, onPress, onComplete, onStart, timeSpentToday}) =
           <Text category="s1" style={checked && styles.checked}>
             {item.title}
           </Text>
-          <Text style={styles.time}>Time: {timeSpentToday} seconds</Text>
+          <Text style={styles.time}>
+            Time: {hours} hrs {minutes} mins {seconds} secs
+          </Text>
           {item.project !== '' && (
             <Text style={styles.project}>{item.project}</Text>
           )}
