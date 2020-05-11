@@ -10,6 +10,7 @@ export default ({
   startTask,
   contentContainerStyle,
   currentItem,
+  timeTotals,
 }) => {
   const styles = useStyleSheet(themedStyles);
   const onItemPress = index => {
@@ -26,6 +27,7 @@ export default ({
       onPress={() => onItemPress(index)}
       onComplete={setTaskCompletion}
       onStart={startTask}
+      timeSpentToday={timeTotals[index]}
     />
   );
 

@@ -91,6 +91,9 @@
         "type": "android.emulator",
         "name": "Pixel_C_API_26"
       }
-    }
+    },
+    "transformIgnorePatterns": [
+      "node_modules/?!(react-native|native-base)"
+    ]
   }
 }
