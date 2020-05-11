@@ -1,12 +1,8 @@
-import {
-  SET_EVENT_LAST_COUNT,
-  SET_TOKEN,
-  SET_APPLICATION_ID,
-} from './actionTypes';
+import {SET_EVENT_COUNT, SET_TOKEN, SET_APPLICATION_ID} from './actionTypes';
 
 export const setEventCount = eventCount => {
   return {
-    type: SET_EVENT_LAST_COUNT,
+    type: SET_EVENT_COUNT,
     payload: eventCount,
   };
 };
