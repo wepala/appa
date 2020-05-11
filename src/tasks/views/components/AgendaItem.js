@@ -50,7 +50,7 @@ const TaskItem = ({
           <Text style={styles.time}>
             Time: {hours > 0 ? `${hours}hrs ` : null}
             {minutes > 0 ? `${minutes}mins ` : null}
-            {`${seconds}secs`}
+            {`${seconds}secs`} | {item.estimatedTime}
           </Text>
           {item.project !== '' && (
             <Text style={styles.project}>{item.project}</Text>
