@@ -10,7 +10,7 @@ import {
 } from '@ui-kitten/components';
 import {StopOutlineIcon} from '../../../views/components/Icons';
 
-export default ({item, index, onPress}) => {
+export default ({item, index, timeSpentToday, onPress}) => {
   const styles = useStyleSheet(themedStyles);
   item = item === undefined ? {title: 'Lorem Ipsum', project: ''} : item;
 
@@ -22,7 +22,7 @@ export default ({item, index, onPress}) => {
           {item.project !== '' && <Text category="s2">{item.project}</Text>}
         </Layout>
         <Layout style={styles.column2}>
-          <Text category="h5">{item.totalTime}</Text>
+          <Text category="h5">{timeSpentToday}</Text>
           <Button
             testID="TaskButton"
             style={styles.button}
@@ -38,7 +38,7 @@ export default ({item, index, onPress}) => {
 
 const themedStyles = StyleService.create({
   item: {
-    backgroundColor: 'background-basic-color-2',
+    backgroundColor: '$background-basic-color-2',
     padding: 0,
     marginBottom: 16,
   },

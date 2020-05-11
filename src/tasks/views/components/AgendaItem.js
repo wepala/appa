@@ -17,25 +17,26 @@ const TaskItem = ({
   onPress,
   onComplete,
   onStart,
+  setCurrentIndex,
   timeSpentToday,
+  active,
 }) => {
   const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
-  const minutes = parseInt(timeSpentToday / 60);
-  const hours = parseInt(minutes / 60);
-  const seconds = parseInt(timeSpentToday % 60);
+  const minutes = parseInt(timeSpentToday / 60, 10);
+  const hours = parseInt(minutes / 60, 10);
+  const seconds = parseInt(timeSpentToday % 60, 10);
 
   return (
     <Card
       testID={'TaskItem'}
       style={styles.item}
       onPress={onPress}
-      status={checked && 'success'}>
+      status={checked ? 'success' : active ? 'basic' : null}>
       <Layout style={styles.row}>
         <Layout style={styles.column1}>
           <CheckBox
             testID={'TaskCheckBox'}
-            status="success"
             checked={checked}
             onChange={() =>
               onComplete(item.id, !checked).then(toggleCheck(!checked))
@@ -58,9 +59,12 @@ const TaskItem = ({
           <Button
             testID={'TaskButton'}
             size="small"
-            status="success"
+            status={active ? 'disabled' : 'success'}
             accessoryLeft={PlayIcon}
-            onPress={() => onStart(item.id)}
+            onPress={() => {
+              onStart(item.id);
+              setCurrentIndex(index);
+            }}
           />
         </Layout>
       </Layout>
@@ -77,6 +81,7 @@ const themedStyles = StyleService.create({
   row: {
     display: 'flex',
     flexDirection: 'row',
+    backgroundColor: 'transparent',
   },
 
   column1: {
