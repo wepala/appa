@@ -25,6 +25,7 @@ const Sync = ({eventCount, children}) => {
         .catch(error => {
           // TODO notify user of error
           console.log(error);
+          setSyncComplete(true);
         });
     } else {
       setSyncComplete(true);
