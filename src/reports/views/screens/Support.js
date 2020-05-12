@@ -10,7 +10,6 @@ import {
 } from '@ui-kitten/components';
 import {EyeIcon, EyeOffIcon, PersonIcon} from '../components/Extras';
 
-
 export default ({navigation}) => {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
