@@ -25,23 +25,25 @@ export default ({navigation, items, contentContainerStyle}) => {
   );
 
   return (
-    <Layout style={styles.container}>
+    <>
       <TopBar navigation={navigation} />
-      <LogFilter />
-      <List
-        contentContainerStyle={[styles.list, contentContainerStyle]}
-        numColumns={1}
-        data={items}
-        renderItem={renderItem}
-      />
-    </Layout>
+      <Layout style={styles.container}>
+        <LogFilter />
+        <List
+          contentContainerStyle={[styles.list, contentContainerStyle]}
+          numColumns={1}
+          data={items}
+          renderItem={renderItem}
+        />
+      </Layout>
+    </>
   );
 };
 
 const themedStyles = StyleService.create({
   container: {
-    backgroundColor: '$background-basic-color-1',
     padding: 16,
+    flex: 1,
   },
   list: {
     padding: 0,

@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import {PersonIcon, MoreVerticalIcon} from '../../../views/components/Icons';
 import {
   Text,
@@ -12,7 +13,10 @@ import {
 
 export default ({item, index, onPress}) => {
   const styles = useStyleSheet(themedStyles);
-
+  console.log('Log item', item);
+  let loggedDate = moment(item.startTime).format('Do MMM, YYYY');
+  let loggedTime = moment(item.startTime).format('h:mm:ss a');
+  console.log(loggedTime);
   return (
     <Card style={styles.item} onPress={onPress}>
       <Layout style={styles.row}>
@@ -25,7 +29,8 @@ export default ({item, index, onPress}) => {
         </Layout>
         <Layout style={styles.column2}>
           <Text category="s1">{item.title}</Text>
-          <Text>8:07 AM | 1 hour</Text>
+          <Text>{loggedDate}</Text>
+          <Text>{loggedTime}</Text>
         </Layout>
         <Layout style={styles.column1}>
           <Button
@@ -46,20 +51,22 @@ const themedStyles = StyleService.create({
   },
 
   row: {
-    backgroundColor: 'transparent',
     display: 'flex',
     flexDirection: 'row',
+    backgroundColor: 'transparent',
   },
 
   column1: {
-    // backgroundColor: 'transparent',
-    width: '20%',
+    backgroundColor: 'transparent',
+    flexShrink: 0,
+    justifyContent: 'center',
   },
   column2: {
     backgroundColor: 'transparent',
-    flex: 1,
+    paddingVertical: 2,
+    paddingHorizontal: 16,
     justifyContent: 'space-between',
-    marginHorizontal: 16,
+    width: '80%',
   },
 
   avatar: {
