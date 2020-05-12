@@ -3,10 +3,10 @@ import {
   TopNavigation,
   TopNavigationAction,
 } from '@ui-kitten/components';
-import {ArrowIosBackIcon, PlusIcon} from '../../../views/components/Icons';
+import {ArrowIosBackIcon, TrashIcon} from '../../../views/components/Icons';
 import React from 'react';
 
-export default ({navigation, title}) => {
+export default ({navigation, title, section}) => {
   title = title === undefined ? 'WeAgenda' : title;
 
   const goBack = () => {
@@ -19,10 +19,10 @@ export default ({navigation, title}) => {
 
   const MenuAction = () => {
     const showCreate = () => {
-      navigation.navigate('CreateTask');
+      navigation.navigate('CreateTask', {section: section});
     };
 
-    return <TopNavigationAction icon={PlusIcon} onPress={showCreate} />;
+    return <TopNavigationAction icon={TrashIcon} onPress={showCreate} />;
   };
 
   return (

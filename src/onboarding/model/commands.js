@@ -1,4 +1,4 @@
-import {ONBOARD} from './actionTypes';
+import {ONBOARD} from './commandTypes';
 
 export const onBoardUser = () => {
   return {

@@ -2,6 +2,9 @@ import React from 'react';
 
 import {Icon, IconElement} from '@ui-kitten/components';
 
+export const AlertIcon = style => (
+  <Icon {...style} name="alert-triangle-outline" />
+);
 export const ArrowIosBackIcon = style => (
   <Icon {...style} name="arrow-ios-back" />
 );
@@ -16,6 +19,10 @@ export const BookmarkIcon = style => <Icon {...style} name="bookmark" />;
 
 export const BookmarkOutlineIcon = style => (
   <Icon {...style} name="bookmark-outline" />
+);
+
+export const CalendarIcon = style => (
+  <Icon {...style} name="calendar-outline" />
 );
 
 export const ColorPaletteIcon = style => (
@@ -48,6 +55,7 @@ export const MoreVerticalIcon = style => (
 );
 
 export const ProjectIcon = style => <Icon {...style} name="folder-outline" />;
+export const PlayIcon = style => <Icon {...style} name="play-circle" />;
 export const ReportIcon = style => <Icon {...style} name="bar-chart-outline" />;
 
 export const SearchIcon = style => <Icon {...style} name="search" />;

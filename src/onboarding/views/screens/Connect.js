@@ -1,118 +1,69 @@
 import React from 'react';
-import {View, SafeAreaView} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import {
   Button,
-  Input,
-  Layout,
-  StyleService,
   Text,
   useStyleSheet,
+  StyleService,
+  Layout,
 } from '@ui-kitten/components';
-import {EyeIcon, EyeOffIcon, PersonIcon} from '../components/Extras';
-
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faUserCircle} from '@fortawesome/free-solid-svg-icons';
 
 export default ({navigation}) => {
-  const [email, setEmail] = React.useState();
-  const [password, setPassword] = React.useState();
-  const [passwordVisible, setPasswordVisible] = React.useState(false);
-
   const styles = useStyleSheet(themedStyles);
-
-  const onSignUpButtonPress = (): void => {
-    navigation && navigation.navigate('SignUp2');
-  };
-
-  const onForgotPasswordButtonPress = (): void => {
-    navigation && navigation.navigate('ForgotPassword');
-  };
-
-  const onPasswordIconPress = (): void => {
-    setPasswordVisible(!passwordVisible);
-  };
-
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text category="h1" status="control">
-          Hello
-        </Text>
-        <Text style={styles.signInLabel} category="s1" status="control">
-          Sign in to your account
-        </Text>
-      </View>
-      <Layout style={styles.formContainer} level="1">
-        <Input
-          placeholder="Email"
-          icon={PersonIcon}
-          value={email}
-          onChangeText={setEmail}
-        />
-        <Input
-          style={styles.passwordInput}
-          placeholder="Password"
-          icon={passwordVisible ? EyeIcon : EyeOffIcon}
-          value={password}
-          secureTextEntry={!passwordVisible}
-          onChangeText={setPassword}
-          onIconPress={onPasswordIconPress}
-        />
-        <View style={styles.forgotPasswordContainer}>
+      <Layout style={styles.container} level="2">
+        <Layout style={styles.headerContainer} level="2">
+          <FontAwesomeIcon
+            style={styles.image}
+            icon={faUserCircle}
+            size={216}
+          />
+          <Text style={styles.text} category="h3">
+            Create Account
+          </Text>
+          <Text style={styles.text} category="s1">
+            You can connect to WeOS our platform to make it easier to make it
+            easier to share information between devices. You can learn more
+            about WeOS here.
+          </Text>
+        </Layout>
+        <Layout level="2" style={styles.buttonContainer}>
+          <Button style={styles.buttonConnct}>WeOS Connect</Button>
           <Button
-            style={styles.forgotPasswordButton}
-            appearance="ghost"
             status="basic"
-            onPress={onForgotPasswordButtonPress}>
-            Forgot your password?
+            onPress={() => navigation.navigate('Complete')}>
+            Skip
           </Button>
-        </View>
+        </Layout>
       </Layout>
-      <Button style={styles.signInButton} size="giant">
-        SIGN IN
-      </Button>
-      <Button
-        style={styles.signUpButton}
-        appearance="ghost"
-        status="basic"
-        onPress={onSignUpButtonPress}>
-        Don't have an account? Create
-      </Button>
     </SafeAreaView>
   );
 };
 
 const themedStyles = StyleService.create({
   container: {
-    backgroundColor: 'background-basic-color-1',
+    height: '100%',
+    padding: 16,
+  },
+  image: {
+    color: 'color-primary-default',
   },
   headerContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: 216,
-    backgroundColor: 'color-primary-default',
-  },
-  formContainer: {
     flex: 1,
-    paddingTop: 32,
-    paddingHorizontal: 16,
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
   },
-  signInLabel: {
-    marginTop: 16,
+  text: {
+    color: '$color-basic-700',
+    textAlign: 'center',
   },
-  signInButton: {
-    marginHorizontal: 16,
+  buttonGroup: {
+    paddingVertical: 16,
   },
-  signUpButton: {
-    marginVertical: 12,
-    marginHorizontal: 16,
-  },
-  forgotPasswordContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
-  passwordInput: {
-    marginTop: 16,
-  },
-  forgotPasswordButton: {
-    paddingHorizontal: 0,
+  buttonConnct: {
+    marginBottom: 16,
   },
 });
