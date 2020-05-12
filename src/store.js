@@ -12,7 +12,7 @@ const initialState = {
   },
   eventCount: 0,
   token: null,
-  applicationId: '36212c03-040b-4139-867f-bd76485f4084', // TODO add actual applicationId
+  applicationId: '747f53e4-8552-428b-a50d-945bbfff2bdd', // TODO add actual applicationId
 };
 const middlewares = [thunk];
 
