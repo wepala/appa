@@ -1,21 +1,11 @@
 import {connect} from 'react-redux';
-import List from '../views/screens/List';
+import {Controller} from '../../controller';
+import {getLogsByFilter} from '../model/selectors';
 
-const mapStateToProps = state => {
-  return {
-    currentTask: state.currentTask,
-    data: Object.values(state.tasks.getById),
-    total: Object.values(state.tasks).length,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onStartTask: () => {},
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(List);
+export default class LogsController extends Controller {
+  configureState(state, props): {} {
+    return {
+      items: getLogsByFilter(state, props),
+    };
+  }
+}
