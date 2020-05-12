@@ -22,18 +22,22 @@ export default ({item, index, onPress}) => {
       <Layout style={styles.row}>
         <Layout style={styles.column1}>
           <Button
+            testID="UserAvatar"
             status="basic"
             appearance="ghost"
             accessoryLeft={PersonIcon}
           />
         </Layout>
         <Layout style={styles.column2}>
-          <Text category="s1">{item.title}</Text>
-          <Text>{loggedDate}</Text>
-          <Text>{loggedTime}</Text>
+          <Text testID="LogTitle" category="s1">
+            {item.title}
+          </Text>
+          <Text testID="LogDate">{loggedDate}</Text>
+          <Text testID="LogTime">{loggedTime}</Text>
         </Layout>
         <Layout style={styles.column1}>
           <Button
+            testID="MoreButton"
             appearance="ghost"
             status="basic"
             accessoryLeft={MoreVerticalIcon}
