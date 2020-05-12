@@ -9,7 +9,6 @@ import {setEventCount} from '../actions';
 
 const mapStateToProps = state => {
   return {
-    token: state.token,
     eventCount: state.eventCount,
   };
 };
@@ -25,7 +24,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 const Sync = ({
-  token,
   eventCount,
   children,
   syncTask,
@@ -36,7 +34,7 @@ const Sync = ({
   const [isSyncComplete, setSyncComplete] = useState(false);
 
   useEffect(() => {
-    if (token && eventCount === 0) {
+    if (eventCount === 0) {
       fetchEvents()
         .then(data => {
           for (let event of data.events) {
