@@ -30,7 +30,7 @@ export default ({navigation, items, contentContainerStyle}) => {
       <Layout style={styles.container}>
         <LogFilter />
         <List
-          contentContainerStyle={[styles.list, contentContainerStyle]}
+          contentContainerStyle={[contentContainerStyle, styles.list]}
           numColumns={1}
           data={items}
           renderItem={renderItem}
@@ -44,9 +44,11 @@ const themedStyles = StyleService.create({
   container: {
     padding: 16,
     flex: 1,
+    backgroundColor: '$background-basic-color-1',
   },
   list: {
     padding: 0,
     backgroundColor: '$background-basic-color-1',
+    flex: 1,
   },
 });
