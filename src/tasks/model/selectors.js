@@ -1,6 +1,8 @@
 import {createSelector} from 'reselect';
 import moment from 'moment';
-const tasksSelector = state => Object.values(state.getById);
+const tasksSelector = state => {
+  return Object.values(state.tasks.getById);
+};
 /**
  * Get tasks by date
  *

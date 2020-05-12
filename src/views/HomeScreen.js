@@ -8,9 +8,8 @@ import {connect} from 'react-redux';
 //import the different modules
 import MainMenu from './components/MainMenu';
 import Tasks from '../tasks/views/screens/Main';
+import Logs from '../logs/views/screens/Main';
 import Onboarding from '../onboarding/views/screens/Main';
-import Logs from '../logs/controllers/Logs';
-import Projects from '../projects/controllers/Main';
 import Reports from '../reports/controllers/Main';
 import Support from '../support/views/screens/Support';
 
@@ -35,7 +34,6 @@ const HomeScreen = ({navigation, onBoarded}) => {
         screenOptions={{gestureEnabled: true}}
         drawerContent={props => <MainMenu {...props} />}>
         <Screen name="Agenda" component={Tasks} />
-        <Screen name="Projects" component={Projects} />
         <Screen name="Logs" component={Logs} />
         <Screen name="Reports" component={Reports} />
         <Screen name="Settings" component={Tasks} />
