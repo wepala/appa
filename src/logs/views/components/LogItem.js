@@ -54,19 +54,20 @@ const themedStyles = StyleService.create({
     display: 'flex',
     flexDirection: 'row',
     backgroundColor: 'transparent',
+    justifyContent: 'flex-start',
   },
 
   column1: {
     backgroundColor: 'transparent',
+    flexBasis: 'auto',
     flexShrink: 0,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   column2: {
     backgroundColor: 'transparent',
-    paddingVertical: 2,
     paddingHorizontal: 16,
     justifyContent: 'space-between',
-    width: '80%',
+    width: '65%',
   },
 
   avatar: {
