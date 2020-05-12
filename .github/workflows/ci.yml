@@ -36,7 +36,7 @@ jobs:
 
   build-android-debug:
     runs-on: ubuntu-18.04
-    needs: install-and-test
+    needs: [install-and-test]
     if: "!contains(github.ref, 'release/')"
 
     steps:
@@ -80,7 +80,7 @@ jobs:
 
   build-android:
     runs-on: ubuntu-18.04
-    needs: install-and-test
+    needs: [install-and-test]
     if: contains(github.ref, 'release/')
 
     steps:
@@ -127,7 +127,7 @@ jobs:
 
   build-ios:
     runs-on: macos-10.15
-    needs: install-and-test
+    needs: [install-and-test]
     if: contains(github.ref, 'release/')
 
     steps:
@@ -175,7 +175,7 @@ jobs:
           SLACK_USERNAME: WeAgenda
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
-  build-success-notification:
+  build-success-notification-release:
     runs-on: ubuntu-18.04
     if: contains(github.ref, 'release/')
     needs: [build-android, build-ios]
@@ -191,10 +191,10 @@ jobs:
           SLACK_USERNAME: WeAgenda
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
-  test-success-notification:
+  build-success-notification:
     runs-on: ubuntu-18.04
     if: "!contains(github.ref, 'release/')"
-    needs: [install-and-test]
+    needs: [build-android]
     steps:
       - name: Send success notification
         uses: rtCamp/action-slack-notify@v2.0.0
