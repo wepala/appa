@@ -3,6 +3,7 @@ import {getTasksByDate} from '../model/selectors';
 import moment from 'moment';
 import {startTask, updateTask} from '../model/commands';
 import {addTimeLog} from '../../logs/model/commands';
+import {getTaskTimeSpentByDate} from '../../logs/model/selectors';
 
 /**
  * Agenda List Controller. Provides handlers and data for the agenda list
@@ -33,7 +34,7 @@ export default class AgendaController extends Controller {
   startTask(id) {
     return new Promise(resolve => {
       this.dispatch(startTask(id));
-      this.dispatch(addTimeLog(id, moment()));
+      this.dispatch(addTimeLog(id, moment().format()));
       resolve();
     });
   }
@@ -41,8 +42,9 @@ export default class AgendaController extends Controller {
   //in order to use reselector I had to override the configureState function of the controller
   configureState(state) {
     return {
-      items: getTasksByDate(state.tasks, moment().format('YYYY-MM-DD')),
+      items: getTasksByDate(state, moment().format('YYYY-MM-DD')),
       currentItem: state.tasks.currentTask,
+      timeTotals: getTaskTimeSpentByDate(state, moment().format('YYYY-MM-DD')),
     };
   }
 }

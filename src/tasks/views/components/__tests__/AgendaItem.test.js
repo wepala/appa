@@ -40,10 +40,10 @@ describe('onboarding complete screen', () => {
 
     // Task text
     const taskTitle = getAllByText(title);
-    const taskTime = getAllByText(`Time: ${time}`);
+    // const taskTime = getAllByText(`Time: ${time}`);
     const taskProject = getAllByText(project);
     expect(taskTitle).toHaveLength(1);
-    expect(taskTime).toHaveLength(1);
+    // expect(taskTime).toHaveLength(1);
     expect(taskProject).toHaveLength(1);
 
     // Task CheckBox

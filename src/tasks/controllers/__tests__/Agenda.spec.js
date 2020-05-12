@@ -2,13 +2,15 @@ import {mockTasks} from '../../__tests__/fixtures';
 import AgendaController from '../Agenda';
 import {startTask, updateTask} from '../../model/commands';
 import {addTimeLog} from '../../../logs/model/commands';
+import {mockLogs} from '../../../logs/__tests__/fixtures';
 
 describe('Agenda Controller', () => {
-  it('should have a property that only shows the items for today', () => {
-    const mockedState = {
-      tasks: mockTasks,
-    };
+  const mockedState = {
+    tasks: mockTasks,
+    logs: mockLogs,
+  };
 
+  it('should have a property that only shows the items for today', () => {
     const controller = new AgendaController();
     const state = controller.configureState(mockedState);
     expect(state.items).toBeArrayOfSize(4);
@@ -36,9 +38,7 @@ describe('Agenda Controller', () => {
   });
 
   it('should return the current task being worked on', () => {
-    const mockInitialState = {
-      tasks: mockTasks,
-    };
+    const mockInitialState = mockedState;
     mockInitialState.tasks.currentTask =
       mockInitialState.tasks.getById['36212c03-040b-4139-867f-bd76485f4084'];
     const controller = new AgendaController();
