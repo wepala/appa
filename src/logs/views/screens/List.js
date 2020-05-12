@@ -8,6 +8,7 @@ import {
 } from '@ui-kitten/components';
 import LogItem from '../components/LogItem';
 import LogFilter from '../components/LogsFilter';
+import TopBar from '../components/TopBar';
 
 export default ({navigation, items, contentContainerStyle}) => {
   const styles = useStyleSheet(themedStyles);
@@ -25,7 +26,7 @@ export default ({navigation, items, contentContainerStyle}) => {
 
   return (
     <Layout style={styles.container}>
-      <Text>Top bar placeholder for logs</Text>
+      <TopBar navigation={navigation} />
       <LogFilter />
       <List
         contentContainerStyle={[styles.list, contentContainerStyle]}
