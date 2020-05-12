@@ -19,14 +19,24 @@ export default class DetailController extends Controller {
         };
   }
 
-  onSave(title, description, dueDate, addToAgenda = false, project = '') {
+  onSave(
+    title,
+    description,
+    dueDate,
+    addToAgenda = false,
+    estimatedTime = 15,
+    estimatedUnit = 'minutes',
+  ) {
     return new Promise(resolve => {
       const task = {
         title: title,
         description: description,
         dueDate: dueDate,
         agendas: addToAgenda ? [moment().format('YYYY-MM-DD')] : [],
-        project: project,
+        estimatedTime:
+          estimatedUnit == 'minutes'
+            ? estimatedTime * 60
+            : estimatedTime * 60 * 60,
         created: moment(),
       };
       //TODO execute command to create task
