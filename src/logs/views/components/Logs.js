@@ -1,6 +1,13 @@
-import {List, Text, StyleService, useStyleSheet} from '@ui-kitten/components';
 import React from 'react';
+import {
+  Layout,
+  Text,
+  List,
+  StyleService,
+  useStyleSheet,
+} from '@ui-kitten/components';
 import LogItem from '../components/LogItem';
+import LogFilter from '../components/LogsFilter';
 
 export default ({navigation, data, contentContainerStyle}) => {
   const styles = useStyleSheet(themedStyles);
@@ -17,21 +24,26 @@ export default ({navigation, data, contentContainerStyle}) => {
   );
 
   return (
-    <>
+    <Layout style={styles.container}>
       <Text>Top bar placeholder for logs</Text>
+      <LogFilter />
       <List
-        contentContainerStyle={[styles.container, contentContainerStyle]}
+        contentContainerStyle={[styles.list, contentContainerStyle]}
         numColumns={1}
         data={data}
         renderItem={renderItem}
       />
-    </>
+    </Layout>
   );
 };
 
 const themedStyles = StyleService.create({
   container: {
+    backgroundColor: '$background-basic-color-1',
     padding: 16,
+  },
+  list: {
+    padding: 0,
     backgroundColor: '$background-basic-color-1',
   },
 });
