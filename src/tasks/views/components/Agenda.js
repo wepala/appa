@@ -39,13 +39,6 @@ export default ({
     );
   };
 
-  useEffect(() => {
-    return () => {
-      console.log('Add a log when unmounting');
-      if (currentItem) startTask(currentItem.id);
-    };
-  }, [startTask]);
-
   return (
     <Layout style={styles.container} testID={'AgendaLayout'}>
       {currentItem ? (
