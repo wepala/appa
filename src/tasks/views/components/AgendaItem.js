@@ -11,21 +11,32 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components';
 
-const TaskItem = ({item, index, onPress, onComplete, onStart, timeSpentToday}) => {
+const TaskItem = ({
+  item,
+  index,
+  onPress,
+  onComplete,
+  onStart,
+  setCurrentIndex,
+  timeSpentToday,
+  active,
+}) => {
   const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
+  let hours = parseInt(timeSpentToday / 3600, 10);
+  let minutes = parseInt(timeSpentToday / 60, 10) % 60;
+  let seconds = timeSpentToday % 60;
 
   return (
     <Card
       testID={'TaskItem'}
-      style={styles.item}
+      style={active ? [styles.item, styles.active] : styles.item}
       onPress={onPress}
-      status={checked && 'success'}>
+      status={checked ? 'success' : active ? 'basic' : null}>
       <Layout style={styles.row}>
         <Layout style={styles.column1}>
           <CheckBox
             testID={'TaskCheckBox'}
-            status="success"
             checked={checked}
             onChange={() =>
               onComplete(item.id, !checked).then(toggleCheck(!checked))
@@ -36,7 +47,11 @@ const TaskItem = ({item, index, onPress, onComplete, onStart, timeSpentToday}) =
           <Text category="s1" style={checked && styles.checked}>
             {item.title}
           </Text>
-          <Text style={styles.time}>Time: {timeSpentToday} seconds</Text>
+          <Text style={styles.time}>
+            Time: {hours > 0 ? `${hours}hrs ` : null}
+            {minutes > 0 ? `${minutes}mins ` : null}
+            {`${seconds}secs`}
+          </Text>
           {item.project !== '' && (
             <Text style={styles.project}>{item.project}</Text>
           )}
@@ -48,7 +63,10 @@ const TaskItem = ({item, index, onPress, onComplete, onStart, timeSpentToday}) =
             size="small"
             status="success"
             accessoryLeft={PlayIcon}
-            onPress={() => onStart(item.id)}
+            onPress={() => {
+              onStart(item.id);
+              setCurrentIndex(index);
+            }}
           />
         </Layout>
       </Layout>
@@ -65,6 +83,7 @@ const themedStyles = StyleService.create({
   row: {
     display: 'flex',
     flexDirection: 'row',
+    backgroundColor: 'transparent',
   },
 
   column1: {
@@ -97,6 +116,9 @@ const themedStyles = StyleService.create({
     fontStyle: 'italic',
     textDecorationLine: 'line-through',
     color: '$color-basic-600',
+  },
+  active: {
+    backgroundColor: '$background-basic-color-2',
   },
 });
 

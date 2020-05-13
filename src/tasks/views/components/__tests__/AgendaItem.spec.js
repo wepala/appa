@@ -59,6 +59,7 @@ describe('onboarding complete screen', () => {
       project,
     };
     const onPressItem = jest.fn();
+    const setCurrentIndex = jest.fn();
     const onComplete = jest.fn(
       () =>
         new Promise(function(resolve) {
@@ -78,6 +79,7 @@ describe('onboarding complete screen', () => {
             item={itemData}
             onPress={onPressItem}
             onComplete={onComplete}
+            setCurrentIndex={setCurrentIndex}
           />
         </ApplicationProvider>
       </>,
@@ -99,6 +101,7 @@ describe('onboarding complete screen', () => {
       project,
     };
     const onPressItem = jest.fn();
+    const setCurrentIndex = jest.fn();
     const onComplete = jest.fn(
       () =>
         new Promise(function(resolve) {
@@ -125,6 +128,7 @@ describe('onboarding complete screen', () => {
             onPress={onPressItem}
             onComplete={onComplete}
             onStart={onStart}
+            setCurrentIndex={setCurrentIndex}
           />
         </ApplicationProvider>
       </>,

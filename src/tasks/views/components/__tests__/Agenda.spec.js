@@ -21,7 +21,7 @@ describe('Agenda List View', () => {
             ...eva.light,
             ...theme,
           }}>
-          <Agenda currentItem={currentItem} />
+          <Agenda currentItem={currentItem} timeTotals={[20, 90]} />
         </ApplicationProvider>
       </>,
     );

@@ -68,6 +68,10 @@ export const StarIcon = style => <Icon {...style} name="star" />;
 
 export const StarOutlineIcon = style => <Icon {...style} name="star-outline" />;
 
+export const StopOutlineIcon = style => (
+  <Icon {...style} name="stop-circle-outline" />
+);
+
 export const TrashIcon = style => <Icon {...style} name="trash" />;
 
 export const AssetAuthIcon = style => <Icon {...style} name="auth" />;
