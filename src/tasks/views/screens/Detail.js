@@ -70,6 +70,7 @@ export default ({navigation, route, getTask, onSave, section}) => {
               style={styles.input}
               label="Task Title"
               placeholder="Enter title here"
+              clearButtonMode="unless-editing"
               value={form.title}
               onChangeText={val => {
                 setForm(val.trimLeft(), 'title');
@@ -87,6 +88,8 @@ export default ({navigation, route, getTask, onSave, section}) => {
                   label="Estimated Time"
                   placeholder="30"
                   keyboardType="numeric"
+                  maxLength={3}
+                  clearButtonMode="unless-editing"
                   value={form.timeEstimate}
                   onChangeText={val => {
                     setForm(val.trimLeft(), 'timeEstimate');
@@ -122,6 +125,7 @@ export default ({navigation, route, getTask, onSave, section}) => {
               multiline={true}
               placeholder=""
               label="Description"
+              clearButtonMode="unless-editing"
               value={form.description}
               onChangeText={val => setForm(val.trimLeft(), 'description')}
             />
@@ -130,6 +134,7 @@ export default ({navigation, route, getTask, onSave, section}) => {
               style={styles.input}
               accessoryRight={CalendarIcon}
               label="Due Date"
+              clearButtonMode="unless-editing"
               date={form.dueDate}
               ref={datePicker}
               onSelect={val => {

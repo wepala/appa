@@ -40,18 +40,33 @@ export default ({navigation, route}) => {
               style={styles.input}
               label="Task Title"
               placeholder="Enter title here"
+              clearButtonMode="unless-editing"
             />
             <Layout style={styles.row}>
-              <Layout style={styles.column1}>
+              <Layout style={[styles.column, styles.columnFirst]}>
                 <Input
-                  testID="TaskEstTime"
+                  testID="LoggedHour"
                   style={styles.input}
-                  label="Estimated Time"
-                  placeholder="30"
+                  label="Hour"
+                  placeholder="12"
                   keyboardType="numeric"
+                  maxLength={2}
+                  accessoryRight={ClockIcon}
+                  clearButtonMode="unless-editing"
                 />
               </Layout>
-              <Layout style={styles.column2} />
+              <Layout style={[styles.column, styles.columnSecond]}>
+                <Input
+                  testID="LoggedMinute"
+                  style={styles.input}
+                  label="Minute"
+                  placeholder="30"
+                  keyboardType="numeric"
+                  maxLength={2}
+                  accessoryRight={ClockIcon}
+                  clearButtonMode="unless-editing"
+                />
+              </Layout>
             </Layout>
             <Divider />
 
@@ -92,19 +107,20 @@ const themedStyles = StyleService.create({
   },
   input: {
     marginBottom: 16,
+    width: '100%',
   },
   row: {
     display: 'flex',
     flexDirection: 'row',
   },
-  column1: {
-    flexShrink: 0,
-    width: '30%',
-    flexBasis: 'auto',
-    marginRight: 16,
+  column: {
+    flex: 1,
   },
-  column2: {
-    flexGrow: 1,
+  columnFirst: {
+    marginRight: 8,
+  },
+  columnSecond: {
+    marginLeft: 8,
   },
 
   buttonGroup: {
