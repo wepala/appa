@@ -1,23 +1,13 @@
-import React, {createRef} from 'react';
-import {useForm, useValidated} from '../../../weosHelpers';
+import React from 'react';
 import {
-  Text,
   Button,
-  Datepicker,
   Divider,
   Input,
   Layout,
   StyleService,
-  Select,
-  SelectItem,
   useStyleSheet,
-  IndexPath,
 } from '@ui-kitten/components';
-import {
-  AlertIcon,
-  CalendarIcon,
-  ClockIcon,
-} from '../../../views/components/Icons';
+import {AlertIcon, ClockIcon} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
 import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
 
@@ -72,6 +62,7 @@ export default ({navigation, route}) => {
 
             <Layout style={styles.buttonGroup}>
               <Button
+                testID="CancelButton"
                 status="basic"
                 style={styles.buttonCancel}
                 size="giant"
