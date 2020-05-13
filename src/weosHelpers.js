@@ -1,9 +1,9 @@
 import {useState} from 'react';
 import {connect} from 'react-redux';
 
-export const Component = (controller, view) => {
+export const Component = (controller, view, props = {}) => {
   return connect(
-    state => controller.configureState(state),
+    state => controller.configureState(state, props),
     dispatch => controller.configureDispatch(dispatch),
   )(view);
 };

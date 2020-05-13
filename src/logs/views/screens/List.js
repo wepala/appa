@@ -1,81 +1,54 @@
 import React from 'react';
-import {View, SafeAreaView} from 'react-native';
 import {
-  Button,
-  Input,
   Layout,
-  StyleService,
   Text,
+  List,
+  StyleService,
   useStyleSheet,
 } from '@ui-kitten/components';
+import LogItem from '../components/LogItem';
+import LogFilter from '../components/LogsFilter';
+import TopBar from '../components/TopBar';
 
-
-export default ({navigation}) => {
-  const [email, setEmail] = React.useState();
-  const [password, setPassword] = React.useState();
-  const [passwordVisible, setPasswordVisible] = React.useState(false);
-
+export default ({navigation, items, contentContainerStyle}) => {
   const styles = useStyleSheet(themedStyles);
-
-  const onSignUpButtonPress = (): void => {
-    navigation && navigation.navigate('SignUp2');
+  const onItemPress = index => {
+    console.log(items, index);
+    navigation.navigate('UpdateTask', {
+      itemId: items[index].id,
+    });
   };
 
-  const onForgotPasswordButtonPress = (): void => {
-    navigation && navigation.navigate('ForgotPassword');
-  };
-
-  const onPasswordIconPress = (): void => {
-    setPasswordVisible(!passwordVisible);
-  };
+  //method to render each item in the list
+  const renderItem = ({index, item}) => (
+    <LogItem item={item} index={index} onPress={() => onItemPress(index)} />
+  );
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text category="h1" status="control">
-          Logs
-        </Text>
-        <Text style={styles.signInLabel} category="s1" status="control">
-          List of logs here
-        </Text>
-      </View>
-    </SafeAreaView>
+    <>
+      <TopBar navigation={navigation} />
+      <Layout style={styles.container}>
+        <LogFilter />
+        <List
+          contentContainerStyle={[contentContainerStyle, styles.list]}
+          numColumns={1}
+          data={items}
+          renderItem={renderItem}
+        />
+      </Layout>
+    </>
   );
 };
 
 const themedStyles = StyleService.create({
   container: {
-    backgroundColor: 'background-basic-color-1',
-  },
-  headerContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: 216,
-    backgroundColor: 'color-primary-default',
-  },
-  formContainer: {
+    padding: 16,
     flex: 1,
-    paddingTop: 32,
-    paddingHorizontal: 16,
+    backgroundColor: '$background-basic-color-1',
   },
-  signInLabel: {
-    marginTop: 16,
-  },
-  signInButton: {
-    marginHorizontal: 16,
-  },
-  signUpButton: {
-    marginVertical: 12,
-    marginHorizontal: 16,
-  },
-  forgotPasswordContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
-  passwordInput: {
-    marginTop: 16,
-  },
-  forgotPasswordButton: {
-    paddingHorizontal: 0,
+  list: {
+    padding: 0,
+    backgroundColor: '$background-basic-color-1',
+    flex: 1,
   },
 });

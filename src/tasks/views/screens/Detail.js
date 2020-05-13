@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createRef} from 'react';
 import {useForm, useValidated} from '../../../weosHelpers';
 import {
   Text,
@@ -56,6 +56,8 @@ export default ({navigation, route, getTask, onSave, section}) => {
       ).then(() => navigation.goBack());
     }
   };
+
+  const datePicker = createRef();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -129,8 +131,10 @@ export default ({navigation, route, getTask, onSave, section}) => {
               accessoryRight={CalendarIcon}
               label="Due Date"
               date={form.dueDate}
+              ref={datePicker}
               onSelect={val => {
                 setForm(val, 'dueDate');
+                datePicker.current.blur();
               }}
             />
             <Divider />
