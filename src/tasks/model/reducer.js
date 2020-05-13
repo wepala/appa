@@ -48,7 +48,7 @@ const tasks = (state = {currentTask: null, getById: {}}, action) => {
       return Object.assign({}, state, {
         currentTask: {
           ...state.getById[action.meta.id],
-          startTime: new moment(),
+          startTime: moment(),
         },
       });
     default:

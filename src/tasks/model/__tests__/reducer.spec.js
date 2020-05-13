@@ -66,14 +66,16 @@ describe('task reducer', function() {
   it('should assign the specified task to currentTask when the startTask action is called', () => {
     let initialState = mockTasks;
 
+    jest.spyOn(Date, 'now').mockReturnValueOnce('2020-06-13T04:00:00.000Z');
     let state = tasks(
       initialState,
       startTask('36212c03-040b-4139-867f-bd76485f4084'),
     );
 
-    expect(state.currentTask).toBe(
-      mockTasks.getById['36212c03-040b-4139-867f-bd76485f4084'],
-    );
+    expect(state.currentTask).toBe({
+      ...mockTasks.getById['36212c03-040b-4139-867f-bd76485f4084'],
+      startTime: '2020-06-13T04:00:00.000Z',
+    });
     expect(state === initialState).toBe(false);
   });
 });
