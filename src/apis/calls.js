@@ -1,8 +1,9 @@
 import axios from 'axios';
 import store from '../store';
+import {API_URL} from 'react-native-dotenv';
 
 export const eventsApi = axios.create({
-  baseURL: 'https://api.wepala.weos-dev.com',
+  baseURL: API_URL,
 });
 
 eventsApi.interceptors.request.use(
