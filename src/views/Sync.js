@@ -38,11 +38,14 @@ const Sync = ({
       fetchEvents()
         .then(data => {
           for (let event of data.events) {
+            delete event.meta;
+
             switch (event.type) {
               case ADD_TASK:
                 syncTask(event.payload);
                 break;
               case UPDATE_TASK:
+                event.payload.meta = {id: event.payload.id};
                 updateTask(event.payload.id, event.payload);
                 break;
               case REMOVE_TASK:
