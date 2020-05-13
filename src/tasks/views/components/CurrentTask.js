@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
-
+import moment from 'moment';
 import {
   Text,
   Card,
@@ -34,14 +34,20 @@ export default ({item, index, timeSpentToday, onPress}) => {
   const styles = useStyleSheet(themedStyles);
   item = item === undefined ? {title: 'Lorem Ipsum', project: ''} : item;
 
-  const [timer, setTimer] = useState(timeSpentToday);
+  const startedAt = moment(item.startTime);
+  let now = moment();
+  let diff = now.diff(startedAt, 'seconds');
+
+  const [timer, setTimer] = useState(timeSpentToday + diff);
   useEffect(() => {
-    setTimer(timeSpentToday);
-  }, [timeSpentToday]);
+    setTimer(timeSpentToday + diff);
+  }, [timeSpentToday, diff]);
 
   useInterval(() => {
     setTimer(timer + 1);
+    now = moment();
   }, 1000);
+
   let hours = parseInt(timer / 3600, 10);
   let minutes = parseInt(timer / 60, 10) % 60;
   let seconds = timer % 60;
