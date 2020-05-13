@@ -145,7 +145,7 @@ export default ({navigation, route, getTask, onSave, section}) => {
                 style={styles.buttonCancel}
                 size="giant"
                 Cancel
-                onPress={() => console.log('Cancelled')}>
+                onPress={() => navigation.goBack()}>
                 Cancel
               </Button>
               <Button

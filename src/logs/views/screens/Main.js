@@ -4,6 +4,7 @@ import {SafeAreaView} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Component} from '../../../weosHelpers';
 import LogsController from '../../controllers/Logs';
+import Detail from './Detail';
 
 const {Navigator, Screen} = createStackNavigator();
 
@@ -14,6 +15,7 @@ export default props => (
         name="LogList"
         component={new Component(new LogsController(), List, props)}
       />
+      <Screen name="CreateLog" component={Detail} />
     </Navigator>
   </SafeAreaView>
 );
