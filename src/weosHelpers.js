@@ -17,9 +17,7 @@ export const useForm = initValues => {
   return [
     values,
     (val, key) => {
-      // console.log('Value changing,', val, key);
       setvalues({...values, [key]: val});
-      // console.log(values);
     },
   ];
 };
@@ -30,7 +28,6 @@ export const useValidated = (form, validated) => {
   return [
     valid,
     (data, currentValid) => {
-      // console.log('Submitted', data.title, form.timeEstimate);
       if (data.title === '') {
         currentValid.title = false;
       } else {

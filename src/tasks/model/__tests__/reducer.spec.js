@@ -1,4 +1,3 @@
-import moment from 'moment';
 import tasks from '../reducer';
 import {addTask, removeTask, startTask, updateTask} from '../commands';
 import {mockTasks} from '../../__tests__/fixtures';
