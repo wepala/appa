@@ -25,8 +25,6 @@ const Sync = ({eventCount, children, updateEventCount, dispatch}) => {
       fetchEvents()
         .then(data => {
           for (let event of data.events) {
-            delete event.meta;
-
             event.meta = {id: event.payload.id};
             dispatch(event);
           }
