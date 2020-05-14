@@ -1,4 +1,6 @@
 import React from 'react';
+import {useForm, useValidated} from '../../../weosHelpers';
+
 import {
   Button,
   Divider,
@@ -6,6 +8,9 @@ import {
   Layout,
   StyleService,
   useStyleSheet,
+  Select,
+  SelectItem,
+  IndexPath,
 } from '@ui-kitten/components';
 import {AlertIcon, ClockIcon} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
@@ -15,10 +20,28 @@ export default ({navigation, route}) => {
   const styles = useStyleSheet(themedStyles);
   const id = route.params?.id;
 
+  const log = {};
+  const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
+  const timeOfDay = ['AM', 'PM'];
+  const [form, setForm] = useForm({
+    title: log.title,
+    hour: log.hour,
+    minute: log.minute,
+    timeOfDay: new IndexPath(0),
+  });
+  const [valid, setValid, clearValid] = useValidated(form, {
+    title: true,
+    hour: true,
+    minute: true,
+    timeOfDay: true,
+  });
+
   const onSubmit = () => {
+    console.log('Submitting form', form);
+    setValid(form, valid);
+
     const section = route.params?.section;
   };
-
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.container}>
@@ -31,6 +54,13 @@ export default ({navigation, route}) => {
               label="Task Title"
               placeholder="Enter title here"
               clearButtonMode="unless-editing"
+              onChangeText={val => {
+                setForm(val.trimLeft(), 'title');
+                clearValid();
+              }}
+              status={!valid.title && 'danger'}
+              captionIcon={!valid.title && AlertIcon}
+              caption={!valid.title && 'Title cannot be blank'}
             />
             <Layout style={styles.row}>
               <Layout style={[styles.column, styles.columnFirst]}>
@@ -41,7 +71,6 @@ export default ({navigation, route}) => {
                   placeholder="12"
                   keyboardType="numeric"
                   maxLength={2}
-                  accessoryRight={ClockIcon}
                   clearButtonMode="unless-editing"
                 />
               </Layout>
@@ -53,9 +82,26 @@ export default ({navigation, route}) => {
                   placeholder="30"
                   keyboardType="numeric"
                   maxLength={2}
-                  accessoryRight={ClockIcon}
                   clearButtonMode="unless-editing"
                 />
+              </Layout>
+              <Layout style={[styles.column, styles.columnThird]}>
+                <Select
+                  testID="LoggedAMPM"
+                  style={styles.input}
+                  label=" "
+                  accessoryRight={ClockIcon}
+                  value={timeOfDay[form.timeOfDay.row]}
+                  selectedIndex={form.timeOfDay}
+                  clearButtonMode="unless-editing"
+                  onSelect={index => {
+                    console.log(form.timeOfDay.row);
+                    setForm(index, 'timeOfDay');
+                  }}>
+                  {timeOfDay.map((unit, index) => (
+                    <SelectItem key={index + ''} title={unit} />
+                  ))}
+                </Select>
               </Layout>
             </Layout>
             <Divider />
@@ -111,6 +157,10 @@ const themedStyles = StyleService.create({
     marginRight: 8,
   },
   columnSecond: {
+    marginLeft: 8,
+    marginRight: 8,
+  },
+  columnThird: {
     marginLeft: 8,
   },
 

@@ -30,7 +30,6 @@ export const useValidated = (form, validated) => {
   return [
     valid,
     (data, currentValid) => {
-      console.log('Submitted', data.title, form.timeEstimate);
       if (data.title === '') {
         currentValid.title = false;
       } else {
