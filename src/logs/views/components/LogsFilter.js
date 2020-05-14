@@ -1,15 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
+import moment from 'moment';
 import {
   Layout,
   Select,
   SelectItem,
-  Datepicker,
+  RangeDatepicker,
   useStyleSheet,
   StyleService,
 } from '@ui-kitten/components';
 import {CalendarIcon, ArrowDownIcon} from '../../../views/components/Icons';
 
 const LogsFilter = () => {
+  const [range, setRange] = useState({
+    startDate: moment().toDate(),
+    endDate: moment().toDate(),
+  });
+
   const styles = useStyleSheet(themedStyles);
   return (
     <Layout>
@@ -38,12 +44,13 @@ const LogsFilter = () => {
         </Layout>
       </Layout>
       <Layout style={styles.row}>
-        <Layout style={[styles.column, styles.firstColumn]}>
-          <Datepicker placeholder="Start Date" accessoryRight={CalendarIcon} />
-        </Layout>
-        <Layout style={[styles.column, styles.secondColumn]}>
-          <Datepicker placeholder="End Date" accessoryRight={CalendarIcon} />
-        </Layout>
+        <RangeDatepicker
+          style={styles.dateRange}
+          placeholder="Date Range"
+          range={range}
+          onSelect={nextRange => setRange(nextRange)}
+          accessoryRight={CalendarIcon}
+        />
       </Layout>
     </Layout>
   );
@@ -64,6 +71,9 @@ const themedStyles = StyleService.create({
   },
   secondColumn: {
     paddingLeft: 8,
+  },
+  dateRange: {
+    width: '100%',
   },
 });
 

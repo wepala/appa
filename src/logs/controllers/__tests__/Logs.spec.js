@@ -4,7 +4,7 @@ import LogsController from '../Logs';
 
 describe('Log Controller', () => {
   const mockState = {
-    task: mockTasks,
+    tasks: mockTasks,
     logs: mockLogs,
   };
 

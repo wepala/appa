@@ -1,7 +1,7 @@
 import {createSelector} from 'reselect';
 import moment from 'moment';
 import {getTasksByDate} from '../../tasks/model/selectors';
-
+import {tasksSelector} from '../../tasks/model/selectors';
 export const getByTaskSelector = (state, taskId) =>
   state.logs.getByTaskId.get(taskId);
 export const getByIdSelector = state => state.logs.getById;
@@ -109,9 +109,17 @@ const getLogItems = (state, props = {}) => {
 
 const makeLogsByFilter = () =>
   createSelector(
-    [getLogItems],
-    items => {
-      return items;
+    [getLogItems, tasksSelector],
+    (items, tasks) => {
+      return (items = items.map(log => {
+        let taskIndex = tasks.findIndex(task => {
+          return task.id === log.taskId;
+        });
+        return {
+          ...log,
+          ...tasks[taskIndex],
+        };
+      }));
     },
   );
 
