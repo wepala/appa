@@ -7,12 +7,12 @@ import LogsController from '../../controllers/Logs';
 
 const {Navigator, Screen} = createStackNavigator();
 
-export default props => (
+export default () => (
   <SafeAreaView style={{flex: 1}}>
     <Navigator screenOptions={{gestureEnabled: false, headerShown: false}}>
       <Screen
         name="LogList"
-        component={new Component(new LogsController(), List, props)}
+        component={new Component(new LogsController(), List)}
       />
     </Navigator>
   </SafeAreaView>
