@@ -9,13 +9,11 @@ import AgendaItem from '../AgendaItem';
 describe('onboarding complete screen', () => {
   const title = 'My Task';
   const time = '9:07 AM';
-  const project = 'Projecct X';
 
   it('Should render a correctly given item prop', async () => {
     const itemData = {
       title,
       time,
-      project,
     };
     const onPressItem = jest.fn();
     const {getAllByText, getAllByTestId} = render(
@@ -41,10 +39,7 @@ describe('onboarding complete screen', () => {
     // Task text
     const taskTitle = getAllByText(title);
     // const taskTime = getAllByText(`Time: ${time}`);
-    const taskProject = getAllByText(project);
     expect(taskTitle).toHaveLength(1);
-    // expect(taskTime).toHaveLength(1);
-    expect(taskProject).toHaveLength(1);
     // Task CheckBox
     const checkBox = getAllByTestId('TaskCheckBox');
     expect(checkBox).toHaveLength(1);
@@ -56,7 +51,6 @@ describe('onboarding complete screen', () => {
     const itemData = {
       title,
       time,
-      project,
     };
     const onPressItem = jest.fn();
     const setCurrentIndex = jest.fn();
@@ -98,7 +92,6 @@ describe('onboarding complete screen', () => {
     const itemData = {
       title,
       time,
-      project,
     };
     const onPressItem = jest.fn();
     const setCurrentIndex = jest.fn();

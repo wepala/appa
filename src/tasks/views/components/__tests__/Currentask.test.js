@@ -15,7 +15,6 @@ describe('Current Task component', () => {
     const itemData = {
       title,
       totalTime,
-      project,
     };
     const onPressItem = jest.fn();
     const {getAllByText, getAllByTestId} = render(
@@ -41,10 +40,8 @@ describe('Current Task component', () => {
     // Task text
     const taskTitle = getAllByText(title);
     const taskTotalTime = getAllByTestId('TotalTime');
-    const taskProject = getAllByText(project);
     expect(taskTitle).toHaveLength(1);
     expect(taskTotalTime).toHaveLength(1);
-    expect(taskProject).toHaveLength(1);
 
     // // Task Button
     const button = getAllByTestId('TaskButton');

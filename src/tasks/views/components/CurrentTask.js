@@ -38,7 +38,7 @@ export default ({item, index, timeSpentToday, onPress}) => {
   let now = moment();
   let diff = now.diff(startedAt, 'seconds');
 
-  const [timer, setTimer] = useState(timeSpentToday + diff);
+  const [timer, setTimer] = useState();
   useEffect(() => {
     setTimer(timeSpentToday + diff);
   }, [timeSpentToday, diff]);
@@ -56,11 +56,12 @@ export default ({item, index, timeSpentToday, onPress}) => {
     <Card testID="CurrentTask" style={styles.item} onPress={onPress}>
       <Layout style={styles.row}>
         <Layout style={styles.column1}>
-          <Text category="s1">{item.title}</Text>
-          {item.project !== '' && <Text category="s2">{item.project}</Text>}
+          <Text numberOfLines={2} category="h5" style={styles.title}>
+            {item.title}
+          </Text>
         </Layout>
         <Layout style={styles.column2}>
-          <Text testID="TotalTime" category="h5">
+          <Text testID="TotalTime" category="h6">
             {hours > 0 ? `${hours} hrs ` : null}
             {minutes > 0 ? `${minutes} mins ` : null}
             {`${seconds} secs`}
@@ -97,14 +98,19 @@ const themedStyles = StyleService.create({
 
   column1: {
     backgroundColor: 'transparent',
-    flexShrink: 0,
-    flexGrow: 1,
-    justifyContent: 'space-around',
+    width: '50%',
   },
   column2: {
+    alignItems: 'flex-end',
     backgroundColor: 'transparent',
+    width: '50%',
+  },
+  title: {},
+  description: {
+    paddingVertical: 8,
+    fontStyle: 'italic',
   },
   button: {
-    marginTop: 8,
+    marginTop: 4,
   },
 });
