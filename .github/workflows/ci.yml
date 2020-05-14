@@ -2,7 +2,7 @@ name: Test and Build Android & iOS
 on: [push, pull_request]
 
 jobs:
-  install-and-test:
+  install-test-and-build:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -22,33 +22,6 @@ jobs:
       - name: Run tests
         run: |
           npm run lint && npm test
-      - name: Send failure notification
-        uses: rtCamp/action-slack-notify@v2.0.0
-        if: failure()
-        env:
-          SLACK_CHANNEL: weagenda
-          SLACK_COLOR: "#FF0000"
-          SLACK_ICON: https://github.com/wepala.png?size=48
-          SLACK_MESSAGE: You entered code that was not linted or your tests failed
-          SLACK_TITLE: Lint/Test failed
-          SLACK_USERNAME: WeAgenda
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-
-  build-android-debug:
-    runs-on: ubuntu-18.04
-    needs: [install-and-test]
-    if: "!contains(github.ref, 'release/')"
-
-    steps:
-      - name: checkout
-        uses: actions/checkout@v2
-      - name: setup node @ version
-        uses: actions/setup-node@v1
-        with:
-          node-version: 13
-      - name: Install npm dependencies
-        run: |
-          npm install
       - name: Install JDK for SDK to work
         uses: actions/setup-java@v1
         with:
@@ -77,8 +50,8 @@ jobs:
           SLACK_CHANNEL: weagenda
           SLACK_COLOR: "#FF0000"
           SLACK_ICON: https://github.com/wepala.png?size=48
-          SLACK_MESSAGE: Tests passed for your code changes but we aren't able to generate and Android app
-          SLACK_TITLE: Could not build debug Android APK
+          SLACK_MESSAGE: Your recent update was not correctly linted, failed tests or could not build an app
+          SLACK_TITLE: Lint/Test failed
           SLACK_USERNAME: WeAgenda
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
@@ -205,7 +178,7 @@ jobs:
   build-success-notification:
     runs-on: ubuntu-18.04
     if: "!contains(github.ref, 'release/')"
-    needs: [build-android]
+    needs: [install-test-and-build]
     steps:
       - name: Send success notification
         uses: rtCamp/action-slack-notify@v2.0.0
@@ -213,7 +186,7 @@ jobs:
           SLACK_CHANNEL: weagenda
           SLACK_COLOR: "#32BD65"
           SLACK_ICON: https://github.com/wepala.png?size=48
-          SLACK_MESSAGE: We were able to test your code without problems. Not bad
+          SLACK_MESSAGE: We were able to test and build your code without problems. Not bad
           SLACK_TITLE: Branch tests passed
           SLACK_USERNAME: WeAgenda
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
