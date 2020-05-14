@@ -1,4 +1,4 @@
-export default {
+const events = {
   events: [
     {
       type: 'ADD_TASK',
@@ -30,7 +30,7 @@ export default {
       },
       meta: {
         id: '56268018-3057-4a75-80f2-281df7221c9i',
-        seqeuenceNo: 1,
+        seqeuenceNo: 0,
         created: '2020-04-14T20:00:59+00:00',
       },
     },
@@ -47,7 +47,7 @@ export default {
       },
       meta: {
         id: '56268018-3057-4a75-80f2-281df7221c9f',
-        seqeuenceNo: 2,
+        seqeuenceNo: 0,
         created: '2020-04-14',
       },
     },
@@ -88,3 +88,9 @@ export default {
   ],
   currentCount: 5,
 };
+
+it('should have events', () => {
+  expect(events).toBeObject();
+});
+
+export default events;
