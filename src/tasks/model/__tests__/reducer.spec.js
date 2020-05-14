@@ -1,3 +1,4 @@
+import moment from 'moment';
 import tasks from '../reducer';
 import {addTask, removeTask, startTask, updateTask} from '../commands';
 import {mockTasks} from '../../__tests__/fixtures';
@@ -64,9 +65,9 @@ describe('task reducer', function() {
   });
 
   it('should assign the specified task to currentTask when the startTask action is called', () => {
-    let initialState = mockTasks;
+    jest.spyOn(Date, 'now').mockReturnValueOnce('2020-06-13');
 
-    jest.spyOn(Date, 'now').mockReturnValueOnce('2020-06-13T04:00:00.000Z');
+    let initialState = mockTasks;
     let state = tasks(
       initialState,
       startTask('36212c03-040b-4139-867f-bd76485f4084'),
@@ -74,7 +75,7 @@ describe('task reducer', function() {
 
     expect(state.currentTask).toBe({
       ...mockTasks.getById['36212c03-040b-4139-867f-bd76485f4084'],
-      startTime: '2020-06-13T04:00:00.000Z',
+      startTime: '2020-06-13T00:00:00.000Z',
     });
     expect(state === initialState).toBe(false);
   });

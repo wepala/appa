@@ -38,7 +38,7 @@ export default ({item, index, timeSpentToday, onPress}) => {
   let now = moment();
   let diff = now.diff(startedAt, 'seconds');
 
-  const [timer, setTimer] = useState(timeSpentToday + diff);
+  const [timer, setTimer] = useState();
   useEffect(() => {
     setTimer(timeSpentToday + diff);
   }, [timeSpentToday, diff]);
