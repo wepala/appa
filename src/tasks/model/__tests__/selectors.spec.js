@@ -7,10 +7,7 @@ describe('Task Selectors', () => {
     const mockState = {
       tasks: mockTasks,
     };
-    const items = getTasksByDate(
-      mockState,
-      moment().format('YYYY-MM-DD'),
-    );
+    const items = getTasksByDate(mockState, moment().format('YYYY-MM-DD'));
     expect(items).toBeArrayOfSize(4);
   });
 

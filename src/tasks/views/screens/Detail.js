@@ -1,7 +1,6 @@
 import React, {createRef} from 'react';
 import {useForm, useValidated} from '../../../weosHelpers';
 import {
-  Text,
   Button,
   Datepicker,
   Divider,
@@ -21,12 +20,12 @@ import {
 import DetailTopBar from '../components/DetailTopBar';
 import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
 
-export default ({navigation, route, getTask, onSave, section}) => {
+export default ({navigation, route, getTask, onSave}) => {
   const styles = useStyleSheet(themedStyles);
   const id = route.params?.id;
   const task = getTask(id);
 
-  const timeUnits = ['Minutes', 'Hours'];
+  const timeUnits = ['minutes', 'hours'];
   const [form, setForm] = useForm({
     title: task.title,
     timeEstimate: task.timeEstimate,
@@ -46,13 +45,14 @@ export default ({navigation, route, getTask, onSave, section}) => {
   const onSubmit = () => {
     const section = route.params?.section;
     setValid(form, valid);
-    console.log('Validated Values', valid);
     if (valid.title && valid.timeEstimate) {
       onSave(
         form.title,
         form.description,
         form.dueDate,
         section === 'agenda',
+        form.timeEstimate,
+        timeUnits[form.timeUnit.row],
       ).then(() => navigation.goBack());
     }
   };

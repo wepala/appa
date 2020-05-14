@@ -22,11 +22,12 @@ describe('Task Create Controller', () => {
       expectedTask.description,
       expectedTask.dueDate,
       false,
-      '',
     );
     expect(dispatch).toBeCalled();
     const command = dispatch.mock.calls[dispatch.mock.calls.length - 1][0];
     expect(command.payload.title).toBe(expectedTask.title);
+    //the default estimate time is 15 minutes converted to seconds
+    expect(command.payload.estimatedTime).toBe(15 * 60);
     expect(promise).toBeDefined();
   });
   it('should create a task on the current agenda when add to agenda is true', () => {
@@ -48,11 +49,13 @@ describe('Task Create Controller', () => {
       expectedTask.description,
       expectedTask.dueDate,
       true,
-      '',
+      2,
+      'hours',
     );
     expect(dispatch).toBeCalled();
     const command = dispatch.mock.calls[dispatch.mock.calls.length - 1][0];
     expect(command.payload.title).toBe(expectedTask.title);
+    expect(command.payload.estimatedTime).toBe(2 * 3600);
   });
 
   it('should return a task when getTask is called', () => {
