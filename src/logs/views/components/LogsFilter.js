@@ -20,31 +20,21 @@ const LogsFilter = () => {
   return (
     <Layout>
       <Layout style={styles.row}>
-        <Layout style={[styles.column, styles.firstColumn]}>
-          <Select
-            placeholder="All Projects"
-            selectedIndex={0}
-            onSelect={index => console.log(index)}
-            accessoryRight={ArrowDownIcon}>
-            <SelectItem title="Option 1" />
-            <SelectItem title="Option 2" />
-            <SelectItem title="Option 3" />
-          </Select>
-        </Layout>
-        <Layout style={[styles.column, styles.secondColumn]}>
-          <Select
-            placeholder="All Tasks"
-            selectedIndex={0}
-            onSelect={index => console.log(index)}
-            accessoryRight={ArrowDownIcon}>
-            <SelectItem title="Option 1" />
-            <SelectItem title="Option 2" />
-            <SelectItem title="Option 3" />
-          </Select>
-        </Layout>
+        <Select
+          testID={'SelectTask'}
+          style={styles.tasksSelect}
+          placeholder="All Tasks"
+          selectedIndex={0}
+          onSelect={index => console.log(index)}
+          accessoryRight={ArrowDownIcon}>
+          <SelectItem title="Option 1" />
+          <SelectItem title="Option 2" />
+          <SelectItem title="Option 3" />
+        </Select>
       </Layout>
       <Layout style={styles.row}>
         <RangeDatepicker
+          testID="DateRange"
           style={styles.dateRange}
           placeholder="Date Range"
           range={range}
@@ -63,14 +53,8 @@ const themedStyles = StyleService.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  column: {
-    width: '50%',
-  },
-  firstColumn: {
-    paddingRight: 8,
-  },
-  secondColumn: {
-    paddingLeft: 8,
+  tasksSelect: {
+    width: '100%',
   },
   dateRange: {
     width: '100%',
