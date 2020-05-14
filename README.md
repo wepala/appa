@@ -1,4 +1,6 @@
-# Project Title
+# WeAgenda
+
+![Test and Build Android & iOS](https://github.com/msanatan/weagenda/workflows/Test%20and%20Build%20Android%20&%20iOS/badge.svg)
 
 WeAgenda is a task management application
 
@@ -27,7 +29,7 @@ Clone the repository
 Give the example
 ```
 
-Install the dependencies 
+Install the dependencies
 
 ```
 npm install
@@ -35,10 +37,10 @@ npm install
 
 ## Running the tests
 
-To run all the tests 
+To run all the tests
 
 ```
-npm test 
+npm test
 ```
 
 ### Break down into end to end tests
@@ -72,7 +74,7 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/wepala/weagenda/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/wepala/weagenda/tags).
 
 ## Authors
 
@@ -82,7 +84,7 @@ See also the list of [contributors](https://github.com/wepala/weagenda/contribut
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the AGPL License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 

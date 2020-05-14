@@ -7,10 +7,7 @@ describe('Task Selectors', () => {
     const mockState = {
       tasks: mockTasks,
     };
-    const items = getTasksByDate(
-      mockState.tasks,
-      moment().format('YYYY-MM-DD'),
-    );
+    const items = getTasksByDate(mockState, moment().format('YYYY-MM-DD'));
     expect(items).toBeArrayOfSize(4);
   });
 
@@ -18,7 +15,7 @@ describe('Task Selectors', () => {
     const mockState = {
       tasks: mockTasks,
     };
-    const items = getIncompleteTasks(mockState.tasks);
+    const items = getIncompleteTasks(mockState);
     expect(items).toBeArrayOfSize(4);
     //confirm the list is sorted in descending order by date
     expect(items[0].title).toBe('No Project Today Task');

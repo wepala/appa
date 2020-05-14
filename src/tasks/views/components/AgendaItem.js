@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ClockIcon, PlayIcon} from '../../../views/components/Icons';
+import {PlayIcon} from '../../../views/components/Icons';
 
 import {
   Text,
@@ -11,7 +11,7 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components';
 
-const TaskItem = ({item, index, onPress, onComplete, onStart}) => {
+const TaskItem = ({item, onPress, onComplete, onStart, timeSpentToday}) => {
   const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
 
@@ -36,7 +36,7 @@ const TaskItem = ({item, index, onPress, onComplete, onStart}) => {
           <Text category="s1" style={checked && styles.checked}>
             {item.title}
           </Text>
-          <Text style={styles.time}>Time: {item.time}</Text>
+          <Text style={styles.time}>Time: {timeSpentToday} seconds</Text>
           {item.project !== '' && (
             <Text style={styles.project}>{item.project}</Text>
           )}

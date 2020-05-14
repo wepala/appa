@@ -1,8 +1,4 @@
-import {
-  ADD_PROJECT,
-  REMOVE_PROJECT,
-  UPDATE_PROJECT,
-} from './commandTypes';
+import {ADD_PROJECT, REMOVE_PROJECT, UPDATE_PROJECT} from './commandTypes';
 
 export const addProject = project => {
   return {
