@@ -46,7 +46,6 @@ export default ({navigation, route, getTask, onSave, section}) => {
   const onSubmit = () => {
     const section = route.params?.section;
     setValid(form, valid);
-    console.log('Validated Values', valid);
     if (valid.title && valid.timeEstimate) {
       onSave(
         form.title,
