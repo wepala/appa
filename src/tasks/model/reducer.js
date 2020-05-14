@@ -19,11 +19,19 @@ const tasks = (state = {currentTask: null, getById: {}}, action) => {
           [id]: state.getById[id],
         });
       });
+
       //add the new task
-      const generatedId = uuidv4();
-      getById = Object.assign({}, getById, {
-        [generatedId]: Object.assign({}, action.payload, {id: generatedId}),
-      });
+      if (action.payload.id) {
+        getById = Object.assign({}, getById, {
+          [action.payload.id]: Object.assign({}, action.payload),
+        });
+      } else {
+        const generatedId = uuidv4();
+        getById = Object.assign({}, getById, {
+          [generatedId]: Object.assign({}, action.payload, {id: generatedId}),
+        });
+      }
+
       //return the updated state
       return Object.assign({}, state, {getById: getById});
     case REMOVE_TASK:
@@ -53,10 +61,6 @@ const tasks = (state = {currentTask: null, getById: {}}, action) => {
       return Object.assign({}, state, {
         currentTask: state.getById[action.meta.id],
       });
-    case SYNC_TASK:
-      let newState = Object.assign({}, state);
-      newState.getById[action.payload.id] = action.payload;
-      return newState;
     default:
       return state;
   }

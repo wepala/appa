@@ -26,7 +26,7 @@ const mapDispatchToProps = dispatch => {
 const Sync = ({
   eventCount,
   children,
-  syncTask,
+  addTask,
   removeTask,
   updateTask,
   updateEventCount,
@@ -42,7 +42,7 @@ const Sync = ({
 
             switch (event.type) {
               case ADD_TASK:
-                syncTask(event.payload);
+                addTask(event.payload);
                 break;
               case UPDATE_TASK:
                 event.payload.meta = {id: event.payload.id};

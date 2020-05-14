@@ -1,11 +1,5 @@
 import tasks from '../reducer';
-import {
-  addTask,
-  removeTask,
-  startTask,
-  updateTask,
-  syncTask,
-} from '../commands';
+import {addTask, removeTask, startTask, updateTask} from '../commands';
 import {mockTasks} from '../../__tests__/fixtures';
 
 describe('task reducer', function() {
@@ -93,28 +87,28 @@ describe('task reducer', function() {
   });
 
   it('should add tasks when syncing', () => {
-    let mockInitialState = expectedInitialState;
-    tasks(
+    let mockInitialState = {currentTask: null, getById: {}};
+    let state = tasks(
       mockInitialState,
-      syncTask({
+      addTask({
         title: 'new task title',
         id: '36212c03-040b-4139-867f-bd76485f4084',
       }),
     );
-    tasks(
-      mockInitialState,
-      syncTask({
+    state = tasks(
+      state,
+      addTask({
         title: 'second task title',
         id: '36212c03-040b-4139-867f-bd76485f4088',
       }),
     );
 
-    expect(Object.keys(mockInitialState).length).toEqual(2);
-    expect(
-      mockInitialState.getById['36212c03-040b-4139-867f-bd76485f4084'].title,
-    ).toBe('new task title');
-    expect(
-      mockInitialState.getById['36212c03-040b-4139-867f-bd76485f4088'].title,
-    ).toBe('second task title');
+    expect(Object.keys(state.getById).length).toEqual(2);
+    expect(state.getById['36212c03-040b-4139-867f-bd76485f4084'].title).toBe(
+      'new task title',
+    );
+    expect(state.getById['36212c03-040b-4139-867f-bd76485f4088'].title).toBe(
+      'second task title',
+    );
   });
 });
