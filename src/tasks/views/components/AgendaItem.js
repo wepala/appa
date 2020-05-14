@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ClockIcon, PlayIcon} from '../../../views/components/Icons';
+import {PlayIcon} from '../../../views/components/Icons';
 
 import {
   Text,
@@ -11,7 +11,7 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components';
 
-const TaskItem = ({item, index, onPress, onComplete, onStart, timeSpentToday}) => {
+const TaskItem = ({item, onPress, onComplete, onStart, timeSpentToday}) => {
   const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
 
