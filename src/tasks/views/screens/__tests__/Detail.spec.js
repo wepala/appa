@@ -30,7 +30,7 @@ describe('Task Detail Screen', () => {
     const task = mockTasks.getById['7a5fe6af-27f5-486b-a32d-4d3d0437d0c3'];
     task.dueDate = moment(task.dueDate).toDate();
 
-    const {getAllByTestId} = render(
+    const {getAllByTestId, unmount} = render(
       <>
         <IconRegistry icons={EvaIconsPack} />
         <ApplicationProvider
@@ -88,5 +88,7 @@ describe('Task Detail Screen', () => {
     fireEvent.changeText(taskTime[0], '20');
     fireEvent.press(submitButton[0]);
     expect(onSave).toBeCalled();
+
+    unmount();
   });
 });
