@@ -24,6 +24,12 @@ describe('Task Detail Screen', () => {
           resolve();
         }),
     );
+    const onUpdate = jest.fn(
+      () =>
+        new Promise(function(resolve) {
+          resolve();
+        }),
+    );
     const route = {
       param: {},
     };
@@ -40,6 +46,7 @@ describe('Task Detail Screen', () => {
             ...theme,
           }}>
           <Detail
+            onUpdate={onUpdate}
             onSave={onSave}
             task={task}
             navigation={navigation}
@@ -87,7 +94,7 @@ describe('Task Detail Screen', () => {
     fireEvent.changeText(taskTitle[0], 'New Title');
     fireEvent.changeText(taskTime[0], '20');
     fireEvent.press(submitButton[0]);
-    expect(onSave).toBeCalled();
+    expect(onUpdate).toBeCalled();
 
     unmount();
   });
