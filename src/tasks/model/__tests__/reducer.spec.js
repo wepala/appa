@@ -85,30 +85,4 @@ describe('task reducer', function() {
     );
     expect(state === initialState).toBe(false);
   });
-
-  it('should add tasks when syncing', () => {
-    let mockInitialState = {currentTask: null, getById: {}};
-    let state = tasks(
-      mockInitialState,
-      addTask({
-        title: 'new task title',
-        id: '36212c03-040b-4139-867f-bd76485f4084',
-      }),
-    );
-    state = tasks(
-      state,
-      addTask({
-        title: 'second task title',
-        id: '36212c03-040b-4139-867f-bd76485f4088',
-      }),
-    );
-
-    expect(Object.keys(state.getById).length).toEqual(2);
-    expect(state.getById['36212c03-040b-4139-867f-bd76485f4084'].title).toBe(
-      'new task title',
-    );
-    expect(state.getById['36212c03-040b-4139-867f-bd76485f4088'].title).toBe(
-      'second task title',
-    );
-  });
 });

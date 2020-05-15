@@ -1,7 +1,6 @@
-import {ADD_TASK, REMOVE_TASK, START_TASK, UPDATE_TASK} from './commandTypes';
-
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
+import {ADD_TASK, REMOVE_TASK, START_TASK, UPDATE_TASK} from './commandTypes';
 
 const tasks = (state = {currentTask: null, getById: {}}, action) => {
   let getById = {};
@@ -15,16 +14,10 @@ const tasks = (state = {currentTask: null, getById: {}}, action) => {
       });
 
       //add the new task
-      if (action.payload.id) {
-        getById = Object.assign({}, getById, {
-          [action.payload.id]: Object.assign({}, action.payload),
-        });
-      } else {
-        const generatedId = uuidv4();
-        getById = Object.assign({}, getById, {
-          [generatedId]: Object.assign({}, action.payload, {id: generatedId}),
-        });
-      }
+      const generatedId = uuidv4();
+      getById = Object.assign({}, getById, {
+        [generatedId]: Object.assign({}, action.payload, {id: generatedId}),
+      });
 
       //return the updated state
       return Object.assign({}, state, {getById: getById});
