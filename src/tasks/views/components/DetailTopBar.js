@@ -6,8 +6,9 @@ import {
 import {ArrowIosBackIcon, TrashIcon} from '../../../views/components/Icons';
 import React from 'react';
 
-export default ({navigation, title, section}) => {
+export default ({navigation, route, title, section}) => {
   title = title === undefined ? 'WeAgenda' : title;
+  const id = route.params?.id;
 
   const goBack = () => {
     navigation.goBack();
@@ -22,7 +23,7 @@ export default ({navigation, title, section}) => {
       navigation.navigate('CreateTask', {section: section});
     };
 
-    return <TopNavigationAction icon={TrashIcon} onPress={showCreate} />;
+    return <TopNavigationAction icon={id && TrashIcon} onPress={showCreate} />;
   };
 
   return (
