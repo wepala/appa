@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Icon, IconElement} from '@ui-kitten/components';
+import {Icon} from '@ui-kitten/components';
 
 export const AlertIcon = style => (
   <Icon {...style} name="alert-triangle-outline" />
@@ -68,6 +68,10 @@ export const SupportIcon = style => <Icon {...style} name="phone-outline" />;
 export const StarIcon = style => <Icon {...style} name="star" />;
 
 export const StarOutlineIcon = style => <Icon {...style} name="star-outline" />;
+
+export const StopOutlineIcon = style => (
+  <Icon {...style} name="stop-circle-outline" />
+);
 
 export const TrashIcon = style => <Icon {...style} name="trash" />;
 
