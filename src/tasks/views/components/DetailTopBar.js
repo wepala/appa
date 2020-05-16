@@ -7,6 +7,7 @@ import {ArrowIosBackIcon, TrashIcon} from '../../../views/components/Icons';
 import React from 'react';
 
 export default ({navigation, route, title, section}) => {
+  console.log('Detailtopbar', section);
   title = title === undefined ? 'WeAgenda' : title;
   const id = route.params?.id;
 

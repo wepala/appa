@@ -23,8 +23,10 @@ import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
 export default ({navigation, route, getTask, onSave, onUpdate}) => {
   const styles = useStyleSheet(themedStyles);
   const id = route.params?.id;
+  const section = route.params?.section;
+
   const task = getTask(id);
-  console.log('recieved backlog item', id, task);
+  console.log('recieved backlog item', section);
 
   const timeUnits = ['minutes', 'hours'];
   const [form, setForm] = useForm({
@@ -76,7 +78,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.container}>
-        <DetailTopBar navigation={navigation} route={route} />
+        <DetailTopBar navigation={navigation} route={route} section={section} />
         <ScrollView>
           <Layout style={styles.form}>
             <Input
