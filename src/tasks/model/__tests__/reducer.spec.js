@@ -36,6 +36,13 @@ describe('task reducer', function() {
     mockInitialState.getById['36212c03-040b-4139-867f-bd76485f4084'] = {
       title: 'test task',
     };
+    mockInitialState.getById['36212c03-040b-4139-867f-bd76485f4083'] = {
+      title: 'test 3 task',
+    };
+    mockInitialState.getById['36212c03-040b-4139-867f-bd76485f4082'] = {
+      title: 'test 4 task',
+    };
+
     let state = tasks(
       mockInitialState,
       removeTask('36212c03-040b-4139-867f-bd76485f4084'),
@@ -43,6 +50,8 @@ describe('task reducer', function() {
     expect(
       state.getById['36212c03-040b-4139-867f-bd76485f4084'],
     ).not.toBeDefined();
+    expect(state.getById['36212c03-040b-4139-867f-bd76485f4083']).toBeDefined();
+    expect(state.getById['36212c03-040b-4139-867f-bd76485f4082']).toBeDefined();
     expect(state === mockInitialState).toBe(false);
   });
 

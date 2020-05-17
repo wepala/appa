@@ -10,6 +10,9 @@ const initialState = {
   tasks: {
     getById: {},
   },
+  eventCount: 0,
+  token: null,
+  applicationId: '747f53e4-8552-428b-a50d-945bbfff2bdd',
 };
 const middlewares = [thunk];
 

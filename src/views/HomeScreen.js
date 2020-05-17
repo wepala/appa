@@ -13,6 +13,7 @@ import Logs from '../logs/controllers/Main';
 import Projects from '../projects/controllers/Main';
 import Reports from '../reports/controllers/Main';
 import Support from '../support/views/screens/Support';
+import Sync from './Sync';
 
 const {Navigator, Screen} = createDrawerNavigator();
 
@@ -48,7 +49,11 @@ const HomeScreen = ({navigation, onBoarded}) => {
     if (!onBoarded) {
       return <Onboarding />;
     } else {
-      return <MainStackScreen />;
+      return (
+        <Sync>
+          <MainStackScreen />
+        </Sync>
+      );
     }
   };
 
