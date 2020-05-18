@@ -4,7 +4,7 @@ import DetailController from '../../controllers/Detail';
 import Detail from './Detail';
 import {SafeAreaView} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Component} from '../../../weosHelpers';
+import {Component} from '../../../weos/helpers';
 
 const {Navigator, Screen} = createStackNavigator();
 

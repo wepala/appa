@@ -13,7 +13,7 @@ import Logs from '../logs/controllers/Main';
 import Projects from '../projects/controllers/Main';
 import Reports from '../reports/controllers/Main';
 import Support from '../support/views/screens/Support';
-import Sync from './Sync';
+import Sync from '../weos/views/Sync';
 
 const {Navigator, Screen} = createDrawerNavigator();
 

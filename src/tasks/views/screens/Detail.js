@@ -1,5 +1,5 @@
 import React from 'react';
-import {useForm, useValidated} from '../../../weosHelpers';
+import {useForm, useValidated} from '../../../weos/helpers';
 import {
   Button,
   Datepicker,

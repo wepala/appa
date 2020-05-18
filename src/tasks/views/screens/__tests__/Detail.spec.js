@@ -7,7 +7,6 @@ import {default as theme} from '../../../../../theme.json';
 import Detail from '../Detail';
 import {mockTasks} from '../../../__tests__/fixtures';
 import moment from 'moment';
-import {useForm, useValidated} from '../../../../weosHelpers';
 
 describe('Task Detail Screen', () => {
   it('should have a submit button that calls onSubmit then navigates back', () => {
