@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from 'react-native-testing-library';
+import {render, fireEvent, cleanup, act} from 'react-native-testing-library';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
@@ -7,16 +7,22 @@ import {default as theme} from '../../../../../theme.json';
 import CurrentTask from '../CurrentTask';
 
 describe('Current Task component', () => {
+  beforeAll(() => {
+    jest.useFakeTimers();
+  });
+  afterAll(() => {
+    cleanup();
+  });
+
   const title = 'My Task';
   const totalTime = '4h 23m 32s';
-
   it('Should render a correctly given item prop', async () => {
     const itemData = {
       title,
       totalTime,
     };
     const onPressItem = jest.fn();
-    const {getAllByText, getAllByTestId} = render(
+    const {getAllByText, getAllByTestId, unmount} = render(
       <>
         <IconRegistry icons={EvaIconsPack} />
         <ApplicationProvider
@@ -29,6 +35,7 @@ describe('Current Task component', () => {
         </ApplicationProvider>
       </>,
     );
+    act(() => jest.advanceTimersByTime(1000));
 
     // Task Item
     const item = getAllByTestId('CurrentTask');
@@ -42,8 +49,9 @@ describe('Current Task component', () => {
     expect(taskTitle).toHaveLength(1);
     expect(taskTotalTime).toHaveLength(1);
 
-    // // Task Button
+    // Task Button
     const button = getAllByTestId('TaskButton');
     expect(button).toHaveLength(1);
+    unmount();
   });
 });
