@@ -8,7 +8,7 @@ export const eventsApi = axios.create({
 
 eventsApi.interceptors.request.use(
   function(config) {
-    const {token, applicationId, eventCount} = store.getState();
+    const {applicationId, eventCount} = store.getState().weos;
     config.headers.Authorization = `Bearer ${TEMP_USER_JWT}`;
     config.headers.ETag = `${applicationId}.${eventCount}`;
     return config;
