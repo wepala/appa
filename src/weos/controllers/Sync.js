@@ -6,4 +6,13 @@ export default class SyncController extends Controller {
   }
 
   getEvents() {}
+
+  pushEvents() {
+    return new Promise((resolve, reject) => {
+      resolve({
+        message: 'Ok',
+        sequenceNo: 0,
+      });
+    });
+  }
 }
