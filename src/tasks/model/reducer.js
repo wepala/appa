@@ -1,6 +1,7 @@
 import {ADD_TASK, REMOVE_TASK, START_TASK, UPDATE_TASK} from './commandTypes';
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
+import moment from 'moment';
 
 const tasks = (state = {currentTask: null, getById: {}}, action) => {
   let getById = {};
@@ -45,7 +46,10 @@ const tasks = (state = {currentTask: null, getById: {}}, action) => {
       return Object.assign({}, state, {getById: getById});
     case START_TASK:
       return Object.assign({}, state, {
-        currentTask: state.getById[action.meta.id],
+        currentTask: {
+          ...state.getById[action.meta.id],
+          startTime: moment(),
+        },
       });
     default:
       return state;

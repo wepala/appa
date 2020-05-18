@@ -17,9 +17,7 @@ export const useForm = initValues => {
   return [
     values,
     (val, key) => {
-      console.log('Value changing,', val, key);
       setvalues({...values, [key]: val});
-      console.log(values);
     },
   ];
 };
@@ -30,11 +28,7 @@ export const useValidated = (form, validated) => {
   return [
     valid,
     (data, currentValid) => {
-      if (data.title === '') {
-        currentValid.title = false;
-      } else {
-        currentValid.title = true;
-      }
+      currentValid.title = data.title !== '';
       if (
         data.timeEstimate === '' ||
         data.timeEstimate === '0' ||
