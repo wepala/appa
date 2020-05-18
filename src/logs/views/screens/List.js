@@ -10,7 +10,14 @@ import LogItem from '../components/LogItem';
 import LogFilter from '../components/LogsFilter';
 import TopBar from '../components/TopBar';
 
-export default ({navigation, items, contentContainerStyle}) => {
+export default ({
+  navigation,
+  items,
+  contentContainerStyle,
+  startTime,
+  endTime,
+  taskId,
+}) => {
   const styles = useStyleSheet(themedStyles);
   const onItemPress = index => {
     console.log(items, index);

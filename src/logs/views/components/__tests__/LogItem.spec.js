@@ -34,7 +34,6 @@ describe('LogItem', () => {
     expect(userAvatar).toBeTruthy();
 
     expect(logTitle).toBeTruthy();
-    console.log(logTitle);
     expect(logTitle.props.children).toEqual('My Task');
 
     expect(logDate).toBeTruthy();

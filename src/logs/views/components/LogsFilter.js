@@ -10,7 +10,8 @@ import {
 } from '@ui-kitten/components';
 import {CalendarIcon, ArrowDownIcon} from '../../../views/components/Icons';
 
-const LogsFilter = () => {
+const LogsFilter = props => {
+  console.log('Logs filter props', props);
   const [range, setRange] = useState({
     startDate: moment().toDate(),
     endDate: moment().toDate(),

@@ -16,7 +16,6 @@ export default ({item, index, onPress}) => {
   console.log('Log item', item);
   let loggedDate = moment(item.startTime).format('Do MMM, YYYY');
   let loggedTime = moment(item.startTime).format('h:mm:ss a');
-  console.log(loggedTime);
   return (
     <Card style={styles.item} onPress={onPress}>
       <Layout style={styles.row}>
