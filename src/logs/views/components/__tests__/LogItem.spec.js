@@ -10,7 +10,7 @@ describe('LogItem', () => {
   it('Should render all fields given a log item', async () => {
     const item = {
       title: 'My Task',
-      startTime: '2020-05-12T13:00:00-04:00',
+      startTime: '2020-05-12T13:00:00',
     };
     const {getByTestId} = render(
       <>
