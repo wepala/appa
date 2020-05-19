@@ -37,12 +37,12 @@ export class SafeAreaLayoutComponent extends React.Component<SafeAreaLayoutProps
   }
 
   createInsets = (insets, safeAreaInsets: EdgeInsets, style): FlexStyle[] => {
-    return React.Children.map(insets, inset =>
+    return React.Children.map(insets, (inset) =>
       INSETS[inset].toStyle(safeAreaInsets, style),
     );
   };
 
-  renderComponent = safeAreaInsets => {
+  renderComponent = (safeAreaInsets) => {
     const {style, insets, themedStyle, ...viewProps} = this.props;
 
     return (
