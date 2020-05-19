@@ -4,7 +4,7 @@ import {updateTask} from '../model/commands';
 
 export default class BacklogController extends Controller {
   addToAgenda(task, date) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.dispatch(
         updateTask(task.id, {agendas: task.agendas.concat([date])}),
       );
