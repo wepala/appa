@@ -24,13 +24,19 @@ describe('Task Detail Screen', () => {
           resolve();
         }),
     );
+    const onUpdate = jest.fn(
+      () =>
+        new Promise(function(resolve) {
+          resolve();
+        }),
+    );
     const route = {
       param: {},
     };
     const task = mockTasks.getById['7a5fe6af-27f5-486b-a32d-4d3d0437d0c3'];
     task.dueDate = moment(task.dueDate).toDate();
 
-    const {getAllByTestId} = render(
+    const {getAllByTestId, unmount} = render(
       <>
         <IconRegistry icons={EvaIconsPack} />
         <ApplicationProvider
@@ -40,6 +46,7 @@ describe('Task Detail Screen', () => {
             ...theme,
           }}>
           <Detail
+            onUpdate={onUpdate}
             onSave={onSave}
             task={task}
             navigation={navigation}
@@ -87,6 +94,8 @@ describe('Task Detail Screen', () => {
     fireEvent.changeText(taskTitle[0], 'New Title');
     fireEvent.changeText(taskTime[0], '20');
     fireEvent.press(submitButton[0]);
-    expect(onSave).toBeCalled();
+    expect(onUpdate).toBeCalled();
+
+    unmount();
   });
 });

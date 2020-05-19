@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createRef} from 'react';
 import {useForm, useValidated} from '../../../weosHelpers';
 import {
   Button,
@@ -20,24 +20,25 @@ import {
 import DetailTopBar from '../components/DetailTopBar';
 import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
 
-export default ({navigation, route, getTask, onSave}) => {
+export default ({navigation, route, getTask, onSave, onUpdate}) => {
   const styles = useStyleSheet(themedStyles);
   const id = route.params?.id;
+  const section = route.params?.section;
+
   const task = getTask(id);
+  console.log('recieved backlog item', section);
 
   const timeUnits = ['minutes', 'hours'];
   const [form, setForm] = useForm({
     title: task.title,
-    timeEstimate: task.timeEstimate,
+    timeEstimate: parseInt(task.estimatedTime / 60, 10) || '',
     timeUnit: new IndexPath(0),
-    project: task.project,
     description: task.description,
     dueDate: task.dueDate,
   });
   const [valid, setValid, clearValid] = useValidated(form, {
     title: true,
     timeEstimate: true,
-    project: true,
     description: true,
     dueDate: true,
   });
@@ -45,22 +46,39 @@ export default ({navigation, route, getTask, onSave}) => {
   const onSubmit = () => {
     const section = route.params?.section;
     setValid(form, valid);
-    if (valid.title && valid.timeEstimate) {
-      onSave(
-        form.title,
-        form.description,
-        form.dueDate,
-        section === 'agenda',
-        form.timeEstimate,
-        timeUnits[form.timeUnit.row],
-      ).then(() => navigation.goBack());
+    console.log('Submitting', form);
+    if (valid.title) {
+      console.log('UPDATING\n\n');
+      if (task.id) {
+        onUpdate(
+          navigation,
+          task,
+          form.title,
+          form.description,
+          form.dueDate,
+          task.agendas,
+        ).then(() => navigation.goBack());
+      } else {
+        console.log('NEW TASK\n\n');
+
+        onSave(
+          form.title,
+          form.description,
+          form.dueDate,
+          section === 'agenda',
+          form.timeEstimate,
+          timeUnits[form.timeUnit.row],
+        ).then(() => navigation.goBack());
+      }
     }
   };
+
+  const datePicker = createRef();
 
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.container}>
-        <DetailTopBar navigation={navigation} />
+        <DetailTopBar navigation={navigation} route={route} section={section} />
         <ScrollView>
           <Layout style={styles.form}>
             <Input
@@ -85,7 +103,7 @@ export default ({navigation, route, getTask, onSave}) => {
                   label="Estimated Time"
                   placeholder="30"
                   keyboardType="numeric"
-                  value={form.timeEstimate}
+                  value={`${form.timeEstimate}`}
                   onChangeText={val => {
                     setForm(val.trimLeft(), 'timeEstimate');
                     clearValid();
@@ -129,8 +147,10 @@ export default ({navigation, route, getTask, onSave}) => {
               accessoryRight={CalendarIcon}
               label="Due Date"
               date={form.dueDate}
+              ref={datePicker}
               onSelect={val => {
                 setForm(val, 'dueDate');
+                datePicker.current.blur();
               }}
             />
             <Divider />

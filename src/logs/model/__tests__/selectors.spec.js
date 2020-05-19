@@ -4,6 +4,7 @@ import {
   getTimeSpentByTaskId,
   getTimeSpentByDay,
   getTaskTimeSpentByDate,
+  getLogsByFilter,
 } from '../selectors';
 import {mockTasks} from '../../../tasks/__tests__/fixtures';
 import {addTimeLog} from '../commands';
@@ -62,5 +63,25 @@ describe('Time Log Selectors', () => {
   it('should have select to get the totals by date for each task on the date', () => {
     const timeTotals = getTaskTimeSpentByDate(mockState, '2020-05-08');
     expect(timeTotals[0]).toBe(3600);
+  });
+
+  it('should provide a selector for getting a list of logs based on filters chosen', () => {
+    let props = {};
+    let logs = getLogsByFilter(mockState, props);
+    //no filters
+    expect(logs).toBeArrayOfSize(10);
+    //filter by date
+    props = Object.assign({}, props, {
+      startTime: '2020-05-08T00:00:00-04:00',
+      endTime: '2020-05-08T23:59:59-04:00',
+    });
+    logs = getLogsByFilter(mockState, props);
+    expect(logs).toBeArrayOfSize(4);
+    //add task filter
+    props = Object.assign({}, props, {
+      taskId: '36212c03-040b-4139-867f-bd76485f4084',
+    });
+    logs = getLogsByFilter(mockState, props);
+    expect(logs).toBeArrayOfSize(1);
   });
 });

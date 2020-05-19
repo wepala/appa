@@ -5,8 +5,10 @@ import BacklogItem from './BacklogItem';
 
 export default ({navigation, items, contentContainerStyle}) => {
   const onItemPress = index => {
+    console.log(items[index].id);
+
     navigation.navigate('UpdateTask', {
-      itemId: items[index].id,
+      id: items[index].id,
     });
   };
 
