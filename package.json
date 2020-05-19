@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest",
+    "test": "TZ=UTC jest",
     "lint": "./node_modules/.bin/eslint .",
     "lint-fix": "./node_modules/.bin/eslint --fix .",
     "bundle-android": "mkdir -p android/app/src/main/assets && rm -rf android/app/build && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
