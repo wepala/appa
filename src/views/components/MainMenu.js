@@ -34,17 +34,6 @@ export default ({navigation}) => {
       }
       case 2: {
         navigation.toggleDrawer();
-        navigation.navigate('Reports');
-        return;
-      }
-
-      case 3: {
-        navigation.toggleDrawer();
-        navigation.navigate('Settings');
-        return;
-      }
-      case 4: {
-        navigation.toggleDrawer();
         navigation.navigate('Support');
         return;
       }
@@ -80,9 +69,9 @@ export default ({navigation}) => {
         onSelect={onItemSelect}>
         <DrawerItem title={'Agenda'} accessoryLeft={AssetCalendarIcon} />
         <DrawerItem title={'Time Log'} accessoryLeft={ClockIcon} />
-        <DrawerItem title={'Reports'} accessoryLeft={ReportIcon} />
+        {/* <DrawerItem title={'Reports'} accessoryLeft={ReportIcon} /> */}
         <Divider />
-        <DrawerItem title={'Settings'} accessoryLeft={SettingsIcon} />
+        {/* <DrawerItem title={'Settings'} accessoryLeft={SettingsIcon} /> */}
         <DrawerItem title={'Support'} accessoryLeft={SupportIcon} />
       </Drawer>
     </SafeAreaView>
