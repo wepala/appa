@@ -1,6 +1,5 @@
-import React from 'react';
-import {useForm, useValidated} from '../../../weosHelpers';
-
+import React, {useState} from 'react';
+import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
 import {
   Button,
   Divider,
@@ -11,17 +10,17 @@ import {
   Select,
   SelectItem,
   IndexPath,
+  Autocomplete,
+  AutocompleteItem,
 } from '@ui-kitten/components';
+import {useForm, useValidated} from '../../../weosHelpers';
 import {AlertIcon, ClockIcon} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
-import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
 
 export default ({navigation, route}) => {
   const styles = useStyleSheet(themedStyles);
-  const id = route.params?.id;
 
   const log = {};
-  const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
   const timeOfDay = ['AM', 'PM'];
   const [form, setForm] = useForm({
     title: log.title,
@@ -36,32 +35,60 @@ export default ({navigation, route}) => {
     timeOfDay: true,
   });
 
+  // TODO Dummy tasks, subsitute with real tasks from state
+  const tasks = [
+    {title: 'Finish Agenda-19', id: 3},
+    {title: 'Finish Agenda-93', id: 4},
+    {title: 'Finish Agenda-3', id: 4},
+  ];
+
+  const [data, setData] = useState(tasks);
+
   const onSubmit = () => {
     console.log('Submitting form', form);
     setValid(form, valid);
 
     const section = route.params?.section;
+    navigation.goBack();
   };
+
+  const selectTask = index => {
+    setForm(tasks[index].title, 'title');
+    clearValid();
+  };
+
+  const renderTaskOption = (item, index) => (
+    <AutocompleteItem key={index} title={item.title} />
+  );
+
+  const filter = (item, query) =>
+    item.title.toLowerCase().includes(query.toLowerCase());
+
+  const onChangeTask = query => {
+    setForm(query.trimLeft(), 'title');
+    clearValid();
+    setData(tasks.filter(task => filter(task, query)));
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.container}>
         <DetailTopBar navigation={navigation} />
         <ScrollView>
           <Layout style={styles.form}>
-            <Input
+            <Autocomplete
               testID="TaskTitle"
+              label="Entry Title"
+              value={form.title}
+              placeholder="Enter text for entry here"
               style={styles.input}
-              label="Task Title"
-              placeholder="Enter title here"
-              clearButtonMode="unless-editing"
-              onChangeText={val => {
-                setForm(val.trimLeft(), 'title');
-                clearValid();
-              }}
-              status={!valid.title && 'danger'}
+              tatus={!valid.title && 'danger'}
               captionIcon={!valid.title && AlertIcon}
               caption={!valid.title && 'Title cannot be blank'}
-            />
+              onSelect={selectTask}
+              onChangeText={onChangeTask}>
+              {data.map(renderTaskOption)}
+            </Autocomplete>
             <Layout style={styles.row}>
               <Layout style={[styles.column, styles.columnFirst]}>
                 <Input
