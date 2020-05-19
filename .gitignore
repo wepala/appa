@@ -60,3 +60,4 @@ buck-out/
 
 # Test Coverage
 /coverage
+.env
