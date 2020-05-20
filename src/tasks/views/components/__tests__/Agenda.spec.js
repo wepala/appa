@@ -12,7 +12,7 @@ describe('Agenda List View', () => {
     const currentItem =
       mockTasks.getById['36212c03-040b-4139-867f-bd76485f4084'];
 
-    const {getAllByTestId} = render(
+    const {getAllByTestId, unmount} = render(
       <>
         <IconRegistry icons={EvaIconsPack} />
         <ApplicationProvider
@@ -29,5 +29,6 @@ describe('Agenda List View', () => {
     // Task Item
     const item = getAllByTestId('AgendaLayout');
     expect(item).toHaveLength(1);
+    unmount();
   });
 });

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 export const Component = (controller, view) => {
   return connect(
-    state => controller.configureState(state),
+    (state, props) => controller.configureState(state, props),
     dispatch => controller.configureDispatch(dispatch),
   )(view);
 };

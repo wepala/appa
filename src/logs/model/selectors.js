@@ -1,7 +1,7 @@
 import {createSelector} from 'reselect';
 import moment from 'moment';
 import {getTasksByDate} from '../../tasks/model/selectors';
-
+import {tasksSelector} from '../../tasks/model/selectors';
 export const getByTaskSelector = (state, taskId) =>
   state.logs.getByTaskId.get(taskId);
 export const getByIdSelector = state => state.logs.getById;
@@ -87,3 +87,40 @@ export const getTaskTimeSpentByDate = createSelector(
     });
   },
 );
+
+const getLogItems = (state, props = {}) => {
+  let items = [...state.logs.getById.values()];
+  if (props.startTime !== undefined || props.endTime !== undefined) {
+    if (props.startTime !== undefined) {
+      items = items.filter(item => item.startTime >= props.startTime);
+    }
+
+    if (props.endTime !== undefined) {
+      items = items.filter(item => item.startTime <= props.endTime);
+    }
+  }
+
+  if (props.taskId !== undefined) {
+    items = items.filter(item => item.taskId === props.taskId);
+  }
+
+  return items;
+};
+
+const makeLogsByFilter = () =>
+  createSelector(
+    [getLogItems, tasksSelector],
+    (items, tasks) => {
+      return (items = items.map(log => {
+        let taskIndex = tasks.findIndex(task => {
+          return task.id === log.taskId;
+        });
+        return {
+          ...log,
+          ...tasks[taskIndex],
+        };
+      }));
+    },
+  );
+
+export const getLogsByFilter = makeLogsByFilter();
