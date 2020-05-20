@@ -111,16 +111,17 @@ const makeLogsByFilter = () =>
   createSelector(
     [getLogItems, tasksSelector],
     (items, tasks) => {
-      return (items = items.map(log => {
-        let taskIndex = tasks.findIndex(task => {
-          return task.id === log.taskId;
-        });
-        return {
-          ...log,
-          ...tasks[taskIndex],
-        };
-      }));
-      // .filter(item => item.taskId !== '_stop')
+      return (items = items
+        .filter(item => item.taskId !== '_stop')
+        .map(log => {
+          let taskIndex = tasks.findIndex(task => {
+            return task.id === log.taskId;
+          });
+          return {
+            ...log,
+            ...tasks[taskIndex],
+          };
+        }));
     },
   );
 
