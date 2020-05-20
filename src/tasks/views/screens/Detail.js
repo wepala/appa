@@ -24,20 +24,24 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
   const styles = useStyleSheet(themedStyles);
   const id = route.params?.id;
   const section = route.params?.section;
-
   const task = getTask(id);
-  console.log('Task recieved', task);
 
   const timeUnits = ['minutes', 'hours'];
+  // Convert estimated time from seconds to either minutes/hours
+  let estimatedTime, timeUnit;
+  if (id) {
+    estimatedTime =
+      task.estimatedTime % 3600 === 0
+        ? parseInt(task.estimatedTime / 3600, 10)
+        : parseInt(task.estimatedTime / 60, 10);
+    timeUnit =
+      task.estimatedTime % 3600 === 0 ? new IndexPath(1) : new IndexPath(0);
+  }
 
   const [form, setForm] = useForm({
     title: task.title,
-    timeEstimate:
-      task.estimatedTime % 3600 === 0 // Show time as hours or minutes
-        ? parseInt(task.estimatedTime / 3600, 10)
-        : parseInt(task.estimatedTime / 60, 10),
-    timeUnit:
-      task.estimatedTime % 3600 === 0 ? new IndexPath(1) : new IndexPath(0), // Show time unit as hours or minutes
+    timeEstimate: id ? estimatedTime : '',
+    timeUnit: id ? timeUnit : new IndexPath(0),
     description: task.description,
     dueDate: task.dueDate,
   });
@@ -50,15 +54,12 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
 
   const onSubmit = () => {
     setValid(form, valid);
-    console.log('Submitting', form);
     if (valid.title) {
-      console.log('UPDATING\n\n');
       if (task.id) {
         let estimatedTime =
           timeUnits[form.timeUnit.row] === 'minutes'
             ? form.timeEstimate * 60
             : form.timeEstimate * 60 * 60;
-        console.log('Converted time', estimatedTime);
         onUpdate(
           navigation,
           task,
@@ -69,8 +70,6 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
           true, // Add to backlog or agendas
         );
       } else {
-        console.log('NEW TASK\n\n');
-
         onSave(
           form.title,
           form.description,
