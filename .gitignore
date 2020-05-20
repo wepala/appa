@@ -60,3 +60,6 @@ buck-out/
 
 # Test Coverage
 /coverage
+
+# Ignore enviroment file
+.env

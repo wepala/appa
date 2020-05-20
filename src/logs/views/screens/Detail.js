@@ -17,7 +17,7 @@ import {useForm, useValidated} from '../../../weosHelpers';
 import {AlertIcon, ClockIcon} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
 
-export default ({navigation, route}) => {
+export default ({navigation, route, getTasks}) => {
   const styles = useStyleSheet(themedStyles);
 
   const log = {};
@@ -35,13 +35,7 @@ export default ({navigation, route}) => {
     timeOfDay: true,
   });
 
-  // TODO Dummy tasks, subsitute with real tasks from state
-  const tasks = [
-    {title: 'Finish Agenda-19', id: 3},
-    {title: 'Finish Agenda-93', id: 4},
-    {title: 'Finish Agenda-3', id: 4},
-  ];
-
+  const tasks = getTasks();
   const [data, setData] = useState(tasks);
 
   const onSubmit = () => {
@@ -73,7 +67,7 @@ export default ({navigation, route}) => {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.container}>
-        <DetailTopBar navigation={navigation} />
+        <DetailTopBar navigation={navigation} title="Time Log" />
         <ScrollView>
           <Layout style={styles.form}>
             <Autocomplete
