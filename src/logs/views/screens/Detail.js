@@ -73,7 +73,7 @@ export default ({navigation, route}) => {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.container}>
-        <DetailTopBar navigation={navigation} />
+        <DetailTopBar navigation={navigation} title="Time Log" />
         <ScrollView>
           <Layout style={styles.form}>
             <Autocomplete

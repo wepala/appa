@@ -16,6 +16,7 @@ export default () => (
         component={new Component(new LogsController(), List)}
       />
       <Screen name="CreateLog" component={Detail} />
+      <Screen name="UpdateLog" component={Detail} initialParams={{id: ''}} />
     </Navigator>
   </SafeAreaView>
 );
