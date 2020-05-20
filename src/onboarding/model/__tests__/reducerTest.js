@@ -1,7 +1,7 @@
 import onboard from '../reducer';
 import {onBoardUser} from '../commands';
 
-describe('onboarding reducer', function () {
+describe('onboarding reducer', function() {
   const expectedInitialState = {onBoarded: false};
 
   it('should return initial model', () => {

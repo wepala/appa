@@ -29,7 +29,7 @@ export default ({item, index, onPress}) => {
         </Layout>
         <Layout style={styles.column2}>
           <Text testID="LogTitle" category="s1">
-            {item.title}
+            {item.taskId !== '_stop' ? item.title : 'Stopped'}
           </Text>
           <Text testID="LogDate">{loggedDate}</Text>
           <Text testID="LogTime">{loggedTime}</Text>
