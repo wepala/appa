@@ -20,13 +20,13 @@ describe('Task Detail Screen', () => {
     };
     const onSave = jest.fn(
       () =>
-        new Promise(function (resolve) {
+        new Promise(function(resolve) {
           resolve();
         }),
     );
     const onUpdate = jest.fn(
       () =>
-        new Promise(function (resolve) {
+        new Promise(function(resolve) {
           resolve();
         }),
     );
