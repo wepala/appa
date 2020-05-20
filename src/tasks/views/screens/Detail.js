@@ -44,20 +44,25 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
   });
 
   const onSubmit = () => {
-    const section = route.params?.section;
     setValid(form, valid);
     console.log('Submitting', form);
     if (valid.title) {
       console.log('UPDATING\n\n');
       if (task.id) {
+        let estimatedTime =
+          timeUnits[form.timeUnit.row] === 'minutes'
+            ? form.timeEstimate * 60
+            : form.timeEstimate * 60 * 60;
+        console.log('Converted time', estimatedTime);
         onUpdate(
           navigation,
           task,
           form.title,
           form.description,
           form.dueDate,
-          task.agendas,
-        ).then(() => navigation.goBack());
+          estimatedTime,
+          true, // Add to backlog or agendas
+        );
       } else {
         console.log('NEW TASK\n\n');
 
@@ -88,7 +93,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               placeholder="Enter title here"
               clearButtonMode="unless-editing"
               value={form.title}
-              onChangeText={(val) => {
+              onChangeText={val => {
                 setForm(val.trimLeft(), 'title');
                 clearValid();
               }}
@@ -105,7 +110,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
                   placeholder="30"
                   keyboardType="numeric"
                   value={`${form.timeEstimate}`}
-                  onChangeText={(val) => {
+                  onChangeText={val => {
                     setForm(val.trimLeft(), 'timeEstimate');
                     clearValid();
                   }}
@@ -123,7 +128,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
                   value={timeUnits[form.timeUnit.row]}
                   style={styles.input}
                   selectedIndex={form.timeUnit}
-                  onSelect={(index) => {
+                  onSelect={index => {
                     console.log(form.timeUnit.row);
                     setForm(index, 'timeUnit');
                   }}>
@@ -141,7 +146,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               label="Description"
               clearButtonMode="unless-editing"
               value={form.description}
-              onChangeText={(val) => setForm(val.trimLeft(), 'description')}
+              onChangeText={val => setForm(val.trimLeft(), 'description')}
             />
             <Datepicker
               testID="TaskDueDate"
@@ -151,7 +156,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               clearButtonMode="unless-editing"
               date={form.dueDate}
               ref={datePicker}
-              onSelect={(val) => {
+              onSelect={val => {
                 setForm(val, 'dueDate');
                 datePicker.current.blur();
               }}
