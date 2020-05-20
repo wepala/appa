@@ -99,7 +99,7 @@ jobs:
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-      - name: Upload debug APK
+      - name: Upload release APK
         uses: actions/upload-artifact@v2
         with:
           name: app-release.apk
