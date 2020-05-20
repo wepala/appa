@@ -14,7 +14,7 @@ export default ({
 }) => {
   const styles = useStyleSheet(themedStyles);
   const [currentIndex, setCurrentIndex] = useState(-1);
-  const onItemPress = index => {
+  const onItemPress = (index) => {
     navigation.navigate('UpdateTask', {
       id: items[index].id,
     });

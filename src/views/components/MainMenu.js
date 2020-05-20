@@ -20,7 +20,7 @@ import {
 } from './Icons';
 
 export default ({navigation}) => {
-  const onItemSelect = index => {
+  const onItemSelect = (index) => {
     switch (index.row) {
       case 0: {
         navigation.toggleDrawer();
@@ -33,17 +33,6 @@ export default ({navigation}) => {
         return;
       }
       case 2: {
-        navigation.toggleDrawer();
-        navigation.navigate('Reports');
-        return;
-      }
-
-      case 3: {
-        navigation.toggleDrawer();
-        navigation.navigate('Settings');
-        return;
-      }
-      case 4: {
         navigation.toggleDrawer();
         navigation.navigate('Support');
         return;
@@ -80,9 +69,9 @@ export default ({navigation}) => {
         onSelect={onItemSelect}>
         <DrawerItem title={'Agenda'} accessoryLeft={AssetCalendarIcon} />
         <DrawerItem title={'Time Log'} accessoryLeft={ClockIcon} />
-        <DrawerItem title={'Reports'} accessoryLeft={ReportIcon} />
+        {/* <DrawerItem title={'Reports'} accessoryLeft={ReportIcon} /> */}
         <Divider />
-        <DrawerItem title={'Settings'} accessoryLeft={SettingsIcon} />
+        {/* <DrawerItem title={'Settings'} accessoryLeft={SettingsIcon} /> */}
         <DrawerItem title={'Support'} accessoryLeft={SupportIcon} />
       </Drawer>
     </SafeAreaView>

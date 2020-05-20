@@ -40,6 +40,6 @@ describe('LogItem', () => {
     expect(logDate.props.children).toEqual('12th May, 2020');
 
     expect(logTime).toBeTruthy();
-    expect(logTime.props.children).toEqual('1:00:00 pm');
+    expect(logTime.props.children).toEqual('5:00:00 pm');
   });
 });
