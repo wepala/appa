@@ -40,12 +40,14 @@ export const EyeIcon = style => <Icon {...style} name="eye-outline" />;
 
 export const EyeOffIcon = style => <Icon {...style} name="eye-off-outline" />;
 export const FilterIcon = style => <Icon {...style} name="funnel-outline" />;
+export const FlashIcon = style => <Icon {...style} name="flash-outline" />;
 
 export const PersonIcon = style => <Icon {...style} name="person-outline" />;
 
 export const GithubIcon = style => <Icon {...style} name="github" />;
 
 export const GridIcon = style => <Icon {...style} name="grid-outline" />;
+export const InfoIcon = style => <Icon {...style} name="info-outline" />;
 
 export const LayoutIcon = style => <Icon {...style} name="layout-outline" />;
 

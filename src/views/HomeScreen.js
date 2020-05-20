@@ -11,7 +11,7 @@ import Tasks from '../tasks/views/screens/Main';
 import Logs from '../logs/views/screens/Main';
 import Onboarding from '../onboarding/views/screens/Main';
 import Reports from '../reports/controllers/Main';
-import Settings from '../settings/views/screens/Settings';
+import Settings from '../settings/views/screens/Main';
 import Support from '../support/views/screens/Support';
 
 const {Navigator, Screen} = createDrawerNavigator();
