@@ -5,6 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {Component} from '../../../weosHelpers';
 import LogsController from '../../controllers/Logs';
 import Detail from './Detail';
+import DetailController from '../../controllers/Detail';
 
 const {Navigator, Screen} = createStackNavigator();
 
@@ -15,7 +16,10 @@ export default () => (
         name="LogList"
         component={new Component(new LogsController(), List)}
       />
-      <Screen name="CreateLog" component={Detail} />
+      <Screen
+        name="CreateLog"
+        component={new Component(new DetailController(), Detail)}
+      />
       <Screen name="UpdateLog" component={Detail} initialParams={{id: ''}} />
     </Navigator>
   </SafeAreaView>
