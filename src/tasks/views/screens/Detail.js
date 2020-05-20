@@ -26,13 +26,18 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
   const section = route.params?.section;
 
   const task = getTask(id);
-  console.log('recieved backlog item', section);
+  console.log('Task recieved', task);
 
   const timeUnits = ['minutes', 'hours'];
+
   const [form, setForm] = useForm({
     title: task.title,
-    timeEstimate: parseInt(task.estimatedTime / 60, 10) || '',
-    timeUnit: new IndexPath(0),
+    timeEstimate:
+      task.estimatedTime % 3600 === 0 // Show time as hours or minutes
+        ? parseInt(task.estimatedTime / 3600, 10)
+        : parseInt(task.estimatedTime / 60, 10),
+    timeUnit:
+      task.estimatedTime % 3600 === 0 ? new IndexPath(1) : new IndexPath(0), // Show time unit as hours or minutes
     description: task.description,
     dueDate: task.dueDate,
   });
