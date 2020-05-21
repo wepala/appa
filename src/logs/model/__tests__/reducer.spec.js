@@ -70,6 +70,8 @@ describe('logs reducer', function() {
     expect(timeLogState.getByTime.get(mockedUpdateLog.startTime)).toEqual(
       mockedUpdateLog.id,
     );
+
+    expect(timeLogState === state).toBe(false);
   });
 
   it('should handle removing a log', () => {
@@ -83,5 +85,6 @@ describe('logs reducer', function() {
       expect.arrayContaining([log.id]),
     );
     expect(timeLogState.getById.get(log.id)).not.toBeDefined();
+    expect(timeLogState === state).toBe(false);
   });
 });
