@@ -45,22 +45,33 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
 
   const onSubmit = () => {
     setValid(form, valid);
-    if (form.title && form.taskId) {
-      let startTime = moment().format();
+    if (!form.taskId || !form.title) {
+      setValid(valid, {taskId: false});
+      return;
+    }
 
-      if (form.hours || form.minutes) {
-        startTime = moment(
-          `${form.hours}${form.minutes}`,
-          `hmm ${form.timeOfDay}`,
-        ).format();
+    let startTime = moment().format();
+
+    if (form.hours || form.minutes) {
+      form.hours = form.hours ? form.hours : 0;
+      form.minutes = form.minutes ? form.minutes : 0;
+      let meridiem = form.timeOfDay.row ? 0 : 1;
+      startTime = moment(
+        `${form.hours} ${form.minutes} ${timeOfDay[form.timeOfDay.row]}`,
+        `h mm ${timeOfDay[meridiem]}`,
+      );
+
+      if (!startTime.isValid()) {
+        setValid(valid, {hours: false, minutes: false});
+        return;
       }
-      if (log.id) {
-        onUpdate(log.id, form.taskId, startTime).then(() =>
-          navigation.goBack(),
-        );
-      } else {
-        onSave(form.taskId, startTime).then(() => navigation.goBack());
-      }
+
+      startTime = startTime.format();
+    }
+    if (log.id) {
+      onUpdate(log.id, form.taskId, startTime).then(() => navigation.goBack());
+    } else {
+      onSave(form.taskId, startTime).then(() => navigation.goBack());
     }
   };
 
@@ -83,7 +94,7 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
 
   const onChangeTask = query => {
     setForm(query.trimLeft(), 'title');
-    clearValid();
+    // clearValid();
     setData(tasks.filter(task => filter(task, query)));
   };
 
@@ -99,9 +110,9 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
               value={form.title}
               placeholder="Enter text for entry here"
               style={styles.input}
-              status={!valid.title && !valid.taskId && 'danger'}
-              captionIcon={!valid.title && !valid.taskId && AlertIcon}
-              caption={!valid.title && !valid.taskId && 'Title cannot be blank'}
+              status={!valid.taskId && 'danger'}
+              captionIcon={!valid.taskId && AlertIcon}
+              caption={!valid.taskId && 'Provide a valid task'}
               onSelect={selectTask}
               onChangeText={onChangeTask}>
               {data.map(renderTaskOption)}
@@ -113,6 +124,9 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
                   style={styles.input}
                   label="Hour"
                   value={form.hours}
+                  status={!valid.hours && 'danger'}
+                  captionIcon={!valid.hours && AlertIcon}
+                  caption={!valid.hours && 'Provide valid time'}
                   placeholder="12"
                   keyboardType="numeric"
                   maxLength={2}
@@ -126,6 +140,9 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
                   style={styles.input}
                   label="Minute"
                   value={form.minutes}
+                  status={!valid.minutes && 'danger'}
+                  captionIcon={!valid.minutes && AlertIcon}
+                  caption={!valid.minutes && 'Provide valid time'}
                   placeholder="30"
                   keyboardType="numeric"
                   maxLength={2}
