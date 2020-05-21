@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import moment from 'moment';
 import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
 import {
   Button,
@@ -17,37 +18,59 @@ import {useForm, useValidated} from '../../../weosHelpers';
 import {AlertIcon, ClockIcon} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
 
-export default ({navigation, route, getTasks}) => {
+export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
   const styles = useStyleSheet(themedStyles);
 
-  const log = {};
+  const logId = route.params?.id;
+
+  const log = getLog(logId);
   const timeOfDay = ['AM', 'PM'];
-  const [form, setForm] = useForm({
-    title: log.title,
-    hour: log.hour,
-    minute: log.minute,
+  const [form, setForm, setMultipleValues] = useForm({
+    title: log.task.title,
+    taskId: log.taskId,
+    hours: log.hours,
+    minutes: log.minutes,
     timeOfDay: new IndexPath(0),
   });
   const [valid, setValid, clearValid] = useValidated(form, {
     title: true,
-    hour: true,
-    minute: true,
+    hours: true,
+    minutes: true,
     timeOfDay: true,
+    taskId: true,
   });
 
   const tasks = getTasks();
   const [data, setData] = useState(tasks);
 
   const onSubmit = () => {
-    console.log('Submitting form', form);
     setValid(form, valid);
+    if (form.title && form.taskId) {
+      let startTime = moment().format();
 
-    const section = route.params?.section;
-    navigation.goBack();
+      if (form.hours || form.minutes) {
+        startTime = moment(
+          `${form.hours}${form.minutes}`,
+          `hmm ${form.timeOfDay}`,
+        ).format();
+      }
+      if (log.id) {
+        onUpdate(log.id, form.taskId, startTime).then(() =>
+          navigation.goBack(),
+        );
+      } else {
+        onSave(form.taskId, startTime).then(() => navigation.goBack());
+      }
+    }
   };
 
   const selectTask = index => {
-    setForm(tasks[index].title, 'title');
+    let task = tasks[index];
+    setMultipleValues({
+      taskId: task.id,
+      title: task.title,
+    });
+
     clearValid();
   };
 
@@ -76,9 +99,9 @@ export default ({navigation, route, getTasks}) => {
               value={form.title}
               placeholder="Enter text for entry here"
               style={styles.input}
-              tatus={!valid.title && 'danger'}
-              captionIcon={!valid.title && AlertIcon}
-              caption={!valid.title && 'Title cannot be blank'}
+              status={!valid.title && !valid.taskId && 'danger'}
+              captionIcon={!valid.title && !valid.taskId && AlertIcon}
+              caption={!valid.title && !valid.taskId && 'Title cannot be blank'}
               onSelect={selectTask}
               onChangeText={onChangeTask}>
               {data.map(renderTaskOption)}
@@ -89,10 +112,12 @@ export default ({navigation, route, getTasks}) => {
                   testID="LoggedHour"
                   style={styles.input}
                   label="Hour"
+                  value={form.hours}
                   placeholder="12"
                   keyboardType="numeric"
                   maxLength={2}
                   clearButtonMode="unless-editing"
+                  onChangeText={val => setForm(val.trimLeft(), 'hours')}
                 />
               </Layout>
               <Layout style={[styles.column, styles.columnSecond]}>
@@ -100,10 +125,12 @@ export default ({navigation, route, getTasks}) => {
                   testID="LoggedMinute"
                   style={styles.input}
                   label="Minute"
+                  value={form.minutes}
                   placeholder="30"
                   keyboardType="numeric"
                   maxLength={2}
                   clearButtonMode="unless-editing"
+                  onChangeText={val => setForm(val.trimLeft(), 'minutes')}
                 />
               </Layout>
               <Layout style={[styles.column, styles.columnThird]}>

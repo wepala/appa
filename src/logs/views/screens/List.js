@@ -20,9 +20,8 @@ export default ({
 }) => {
   const styles = useStyleSheet(themedStyles);
   const onItemPress = index => {
-    console.log(items, index);
     navigation.navigate('UpdateLog', {
-      itemId: items[index].id,
+      id: items[index].id,
     });
   };
 
