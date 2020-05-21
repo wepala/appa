@@ -88,8 +88,7 @@ jobs:
           echo "y" | sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;20.0.5594570" --sdk_root=${ANDROID_SDK_ROOT}
       - name: Generate keystore
         run: |
-          echo -e "${{ secrets.ANDROID_KEYSTORE }}" > release.keystore.asc
-          gpg -d --passphrase "${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" --batch release.keystore.asc > android/app/release.keystore
+          echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 -d > android/app/release.keystore
       - name: Build release APK
         run: |
           npm run bundle-android
