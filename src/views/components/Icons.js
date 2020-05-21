@@ -36,6 +36,7 @@ export const ClockIcon = style => <Icon {...style} name="clock-outline" />;
 
 export const CloseIcon = style => <Icon {...style} name="close" />;
 
+export const EditIcon = style => <Icon {...style} name="edit-2-outline" />;
 export const EyeIcon = style => <Icon {...style} name="eye-outline" />;
 
 export const EyeOffIcon = style => <Icon {...style} name="eye-off-outline" />;
@@ -54,13 +55,22 @@ export const LayoutIcon = style => <Icon {...style} name="layout-outline" />;
 export const ListIcon = style => <Icon {...style} name="list" />;
 
 export const MenuIcon = style => <Icon {...style} name="menu" />;
+export const MessageIcon = style => (
+  <Icon {...style} name="message-circle-outline" />
+);
 
 export const MoreVerticalIcon = style => (
   <Icon {...style} name="more-vertical" />
 );
 
+export const PaperPlaneIcon = style => (
+  <Icon {...style} name="paper-plane-outline" />
+);
 export const ProjectIcon = style => <Icon {...style} name="folder-outline" />;
 export const PlayIcon = style => <Icon {...style} name="play-circle" />;
+export const QuestionIcon = style => (
+  <Icon {...style} name="question-mark-circle-outline" />
+);
 export const ReportIcon = style => <Icon {...style} name="bar-chart-outline" />;
 
 export const SearchIcon = style => <Icon {...style} name="search" />;
