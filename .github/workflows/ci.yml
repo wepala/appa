@@ -91,7 +91,6 @@ jobs:
           echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 -d > android/app/release.keystore
       - name: Build release APK
         run: |
-          npm run bundle-android
           cd android && ./gradlew clean assembleRelease
         env:
           API_URL: ${{ secrets.API_URL }}
