@@ -117,9 +117,10 @@ const makeLogsByFilter = () =>
           let taskIndex = tasks.findIndex(task => {
             return task.id === log.taskId;
           });
+          console.log(log, tasks[taskIndex]);
           return {
-            ...log,
             ...tasks[taskIndex],
+            ...log,
           };
         }));
     },
