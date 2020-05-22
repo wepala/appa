@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {ThemeContext} from '../../../../theme.context';
 import {
   Button,
   Layout,
@@ -13,8 +14,9 @@ import {FlashIcon, InfoIcon, ClockIcon} from '../../../views/components/Icons';
 import TopBar from '../components/TopBar';
 import {SafeAreaView} from 'react-native';
 
-export default ({navigation, route, toggleTheme, currentTheme}) => {
-  const [checked, toggleCheck] = useState(currentTheme);
+export default ({navigation, route}) => {
+  const themeContext = React.useContext(ThemeContext);
+  const [checked, toggleCheck] = useState(themeContext.theme === 'dark');
   const styles = useStyleSheet(themedStyles);
   return (
     <SafeAreaView style={styles.container}>
@@ -33,14 +35,19 @@ export default ({navigation, route, toggleTheme, currentTheme}) => {
           </Layout>
         </Layout>
         <Layout style={styles.row}>
-          <Toggle
-            checked={checked}
-            onChange={isChecked => {
-              toggleCheck(isChecked);
-              toggleTheme(isChecked);
-            }}>
-            {checked ? 'Dark' : 'Light'}
-          </Toggle>
+          <Layout style={styles.column1}>
+            <Text category="h5">Theme</Text>
+          </Layout>
+          <Layout style={styles.column2}>
+            <Toggle
+              checked={checked}
+              onChange={isChecked => {
+                toggleCheck(isChecked);
+                themeContext.toggleTheme();
+              }}>
+              {checked ? 'Dark' : 'Light'}
+            </Toggle>
+          </Layout>
         </Layout>
         <Layout style={styles.row}>
           <Layout style={styles.column1}>
@@ -74,11 +81,12 @@ const themedStyles = StyleService.create({
     flexDirection: 'row',
     paddingVertical: 16,
     alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   column1: {
     flexGrow: 1,
     marginRight: 16,
-    justifyContent: 'flex-start',
+    justifyContent: '',
   },
   column2: {
     flexGrow: 0,

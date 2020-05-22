@@ -4,6 +4,7 @@ import * as eva from '@eva-design/eva';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import {default as brandTheme} from './theme.json';
+import {ThemeContext} from './theme.context';
 
 import HomeScreen from './src/views/HomeScreen';
 import {Provider} from 'react-redux';
@@ -12,21 +13,22 @@ import {Provider} from 'react-redux';
 import store from './src/store';
 
 export default () => {
-  const {light, dark, mapping} = eva;
-  const [theme, setTheme] = useState(light);
+  const [theme, setTheme] = React.useState('light');
 
-  const toggleTheme = checked => {
-    const nextTheme = checked ? dark : light;
+  const toggleTheme = () => {
+    const nextTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(nextTheme);
   };
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider mapping={mapping} theme={{...theme, ...brandTheme}}>
-        <Provider store={store}>
-          <HomeScreen toggleTheme={toggleTheme} currentTheme={theme === dark} />
-        </Provider>
-      </ApplicationProvider>
+      <ThemeContext.Provider value={{theme, toggleTheme}}>
+        <ApplicationProvider {...eva} theme={{...eva[theme], ...brandTheme}}>
+          <Provider store={store}>
+            <HomeScreen />
+          </Provider>
+        </ApplicationProvider>
+      </ThemeContext.Provider>
     </>
   );
 };
