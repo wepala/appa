@@ -38,7 +38,6 @@ export default ({
       />
     );
   };
-  console.log('Current ITEM', currentItem);
   return (
     <Layout style={styles.container} testID={'AgendaLayout'}>
       {currentItem && currentItem.id ? (
@@ -46,7 +45,7 @@ export default ({
           testID={'CurrentTask'}
           item={currentItem}
           timeSpentToday={timeTotals[currentIndex]}
-          stopTask={startTask} // LOL
+          stopTask={startTask}
         />
       ) : null}
       <List
