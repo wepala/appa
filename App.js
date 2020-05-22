@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, {useState} from 'react';
 import * as eva from '@eva-design/eva';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
@@ -11,13 +11,18 @@ import {Provider} from 'react-redux';
 //store
 import store from './src/store';
 
-export default () => (
-  <>
-    <IconRegistry icons={EvaIconsPack} />
-    <ApplicationProvider {...eva} theme={{...eva.light, ...theme}}>
-      <Provider store={store}>
-        <HomeScreen />
-      </Provider>
-    </ApplicationProvider>
-  </>
-);
+export default () => {
+  const {light, dark} = eva;
+  const [mode, setMode] = useState(false);
+  setMode(mode => (mode ? light : dark));
+  return (
+    <>
+      <IconRegistry icons={EvaIconsPack} />
+      <ApplicationProvider {...eva} theme={{...eva.light, ...theme}}>
+        <Provider store={store}>
+          <HomeScreen />
+        </Provider>
+      </ApplicationProvider>
+    </>
+  );
+};
