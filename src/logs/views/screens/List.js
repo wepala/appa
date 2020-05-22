@@ -17,6 +17,8 @@ export default ({
   startTime,
   endTime,
   taskId,
+  tasks,
+  setFilters,
 }) => {
   const styles = useStyleSheet(themedStyles);
   const onItemPress = (index) => {
@@ -35,7 +37,7 @@ export default ({
     <>
       <TopBar navigation={navigation} />
       <Layout style={styles.container}>
-        <LogFilter />
+        <LogFilter tasks={tasks} setFilters={setFilters} />
         <List
           contentContainerStyle={[contentContainerStyle, styles.list]}
           numColumns={1}

@@ -89,6 +89,7 @@ export const getTaskTimeSpentByDate = createSelector(
 );
 
 const getLogItems = (state, props = {}) => {
+  console.log('inside selector =========> ', props.startTime, props.endTime, props.taskId)
   let items = [...state.logs.getById.values()];
   if (props.startTime !== undefined || props.endTime !== undefined) {
     if (props.startTime !== undefined) {

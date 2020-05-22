@@ -7,15 +7,32 @@ import {
   RangeDatepicker,
   useStyleSheet,
   StyleService,
+  IndexPath,
 } from '@ui-kitten/components';
 import {CalendarIcon, ArrowDownIcon} from '../../../views/components/Icons';
 
-const LogsFilter = (props) => {
-  console.log('Logs filter props', props);
+const LogsFilter = ({tasks, setFilters}) => {
   const [range, setRange] = useState({
-    startDate: moment().toDate(),
-    endDate: moment().toDate(),
+    startDate: moment(),
+    endDate: moment(),
   });
+
+  const [selectedTaskIndex, setSelectedTaskIndex] = useState(new IndexPath(0));
+
+  const renderTaskOption = (task) => (
+    <SelectItem key={task.id} title={task.title} />
+  );
+
+  const filter = {
+    task: tasks[selectedTaskIndex.row],
+  };
+
+  const onSelectTask = (index) => {
+    setSelectedTaskIndex(index);
+    const startTime = range.startDate//.format('YYYY-MM-DD');
+    const endTime = range.startDate//.format('YYYY-MM-DD');
+    setFilters(startTime, endTime, tasks[index.row].id);
+  };
 
   const styles = useStyleSheet(themedStyles);
   return (
@@ -23,14 +40,13 @@ const LogsFilter = (props) => {
       <Layout style={styles.row}>
         <Select
           testID={'SelectTask'}
+          value={filter.task.title}
           style={styles.tasksSelect}
           placeholder="All Tasks"
           selectedIndex={0}
-          onSelect={(index) => console.log(index)}
+          onSelect={onSelectTask}
           accessoryRight={ArrowDownIcon}>
-          <SelectItem title="Option 1" />
-          <SelectItem title="Option 2" />
-          <SelectItem title="Option 3" />
+          {tasks.map(renderTaskOption)}
         </Select>
       </Layout>
       <Layout style={styles.row}>
