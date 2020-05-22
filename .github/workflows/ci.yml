@@ -114,60 +114,59 @@ jobs:
           SLACK_USERNAME: WeAgenda
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
-  # build-ios:
-  #   runs-on: macos-10.15
-  #   if: contains(github.ref, 'release/')
+  build-ios:
+    runs-on: macos-10.15
+    if: contains(github.ref, 'release/')
 
-  #   steps:
-  #     - name: checkout
-  #       uses: actions/checkout@v2
-  #     - name: setup node @ version
-  #       uses: actions/setup-node@v1
-  #       with:
-  #         node-version: 13
-  #     - name: Install npm dependencies
-  #       run: |
-  #         npm install
-  #     - name: Install pod dependencies
-  #       run: |
-  #         cd ios && pod install
-  #     - name: Build app
-  #       run: |
-  #         cd ios
-  #         xcodebuild clean archive \
-  #           -workspace WeAgenda.xcworkspace \
-  #           -scheme WeAgenda \
-  #           -configuration Release \
-  #           -archivePath build/WeAgenda.xcarchive \
-  #           -allowProvisioningUpdates \
-  #           IPHONEOS_DEPLOYMENT_TARGET=9.0
-  #         xcodebuild \
-  #           -exportArchive \
-  #           -archivePath build/WeAgenda.xcarchive \
-  #           -exportPath . \
-  #           -exportOptionsPlist WeAgenda/Info.plist
-  #     - name: Upload Artifact
-  #       uses: actions/upload-artifact@v2
-  #       with:
-  #         name: WeAgenda.ipa
-  #         path: ios/
-  #     - name: Send failure notification
-  #       uses: rtCamp/action-slack-notify@v2.0.0
-  #       if: failure()
-  #       env:
-  #         SLACK_CHANNEL: weagenda
-  #         SLACK_COLOR: "#FF0000"
-  #         SLACK_ICON: https://github.com/wepala.png?size=48
-  #         SLACK_MESSAGE: Tests passed for your code changes but we aren't able to generate and iOS app
-  #         SLACK_TITLE: Could not build iOS app
-  #         SLACK_USERNAME: WeAgenda
-  #         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup node @ version
+        uses: actions/setup-node@v1
+        with:
+          node-version: 13
+      - name: Install npm dependencies
+        run: |
+          npm install
+      - name: Install pod dependencies
+        run: |
+          cd ios && pod install
+      - name: Build app
+        run: |
+          cd ios
+          xcodebuild clean archive \
+            -workspace WeAgenda.xcworkspace \
+            -scheme WeAgenda \
+            -configuration Release \
+            -archivePath build/WeAgenda.xcarchive \
+            -allowProvisioningUpdates \
+            IPHONEOS_DEPLOYMENT_TARGET=9.0
+          xcodebuild \
+            -exportArchive \
+            -archivePath build/WeAgenda.xcarchive \
+            -exportPath . \
+            -exportOptionsPlist WeAgenda/Info.plist
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: WeAgenda.ipa
+          path: ios/
+      - name: Send failure notification
+        uses: rtCamp/action-slack-notify@v2.0.0
+        if: failure()
+        env:
+          SLACK_CHANNEL: weagenda
+          SLACK_COLOR: "#FF0000"
+          SLACK_ICON: https://github.com/wepala.png?size=48
+          SLACK_MESSAGE: Tests passed for your code changes but we aren't able to generate and iOS app
+          SLACK_TITLE: Could not build iOS app
+          SLACK_USERNAME: WeAgenda
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
   build-success-notification-release:
     runs-on: ubuntu-18.04
     if: contains(github.ref, 'release/')
-    # needs: [build-android, build-ios]
-    needs: [build-android]
+    needs: [build-android, build-ios]
     steps:
       - name: Send success notification
         uses: rtCamp/action-slack-notify@v2.0.0
