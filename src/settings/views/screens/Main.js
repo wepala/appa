@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Button,
   Layout,
@@ -7,13 +7,14 @@ import {
   SelectItem,
   useStyleSheet,
   Text,
-  IndexPath,
+  Toggle,
 } from '@ui-kitten/components';
 import {FlashIcon, InfoIcon, ClockIcon} from '../../../views/components/Icons';
 import TopBar from '../components/TopBar';
-import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
+import {SafeAreaView} from 'react-native';
 
-export default ({navigation, route}) => {
+export default ({navigation, route, toggleTheme, currentTheme}) => {
+  const [checked, toggleCheck] = useState(currentTheme);
   const styles = useStyleSheet(themedStyles);
   return (
     <SafeAreaView style={styles.container}>
@@ -30,6 +31,16 @@ export default ({navigation, route}) => {
           <Layout style={styles.column2}>
             <Button size="small" appearance="ghost" accessoryRight={InfoIcon} />
           </Layout>
+        </Layout>
+        <Layout style={styles.row}>
+          <Toggle
+            checked={checked}
+            onChange={isChecked => {
+              toggleCheck(isChecked);
+              toggleTheme(isChecked);
+            }}>
+            {checked ? 'Dark' : 'Light'}
+          </Toggle>
         </Layout>
         <Layout style={styles.row}>
           <Layout style={styles.column1}>
@@ -67,6 +78,7 @@ const themedStyles = StyleService.create({
   column1: {
     flexGrow: 1,
     marginRight: 16,
+    justifyContent: 'flex-start',
   },
   column2: {
     flexGrow: 0,

@@ -30,7 +30,14 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const HomeScreen = ({navigation, onBoarded}) => {
+const HomeScreen = ({navigation, onBoarded, toggleTheme, currentTheme}) => {
+  const SettingsWithTheme = props => (
+    <Settings
+      {...props}
+      toggleTheme={toggleTheme}
+      currentTheme={currentTheme}
+    />
+  );
   const MainStackScreen = () => {
     return (
       <Navigator
@@ -39,7 +46,7 @@ const HomeScreen = ({navigation, onBoarded}) => {
         <Screen name="Agenda" component={Tasks} />
         <Screen name="Logs" component={Logs} />
         <Screen name="Reports" component={Reports} />
-        <Screen name="Settings" component={Settings} />
+        <Screen name="Settings" component={SettingsWithTheme} />
         <Screen name="Support" component={Support} />
         <Screen name="About" component={About} />
         <Screen name="Customize" component={Customize} />
