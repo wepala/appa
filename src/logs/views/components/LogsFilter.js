@@ -13,8 +13,8 @@ import {CalendarIcon, ArrowDownIcon} from '../../../views/components/Icons';
 
 const LogsFilter = ({tasks, setFilters}) => {
   const [range, setRange] = useState({
-    startDate: moment(),
-    endDate: moment(),
+    startDate: moment().toDate(),
+    endDate: moment().toDate(),
   });
 
   const [selectedTaskIndex, setSelectedTaskIndex] = useState(new IndexPath(0));
@@ -24,13 +24,13 @@ const LogsFilter = ({tasks, setFilters}) => {
   );
 
   const filter = {
-    task: tasks[selectedTaskIndex.row],
+    task: (tasks.length && tasks[selectedTaskIndex.row].title) || '',
   };
 
   const onSelectTask = (index) => {
     setSelectedTaskIndex(index);
-    const startTime = range.startDate//.format('YYYY-MM-DD');
-    const endTime = range.startDate//.format('YYYY-MM-DD');
+    const startTime = moment(range.startDate).format('YYYY-MM-DD');
+    const endTime = moment(range.endDate).format('YYYY-MM-DD');
     setFilters(startTime, endTime, tasks[index.row].id);
   };
 
@@ -40,7 +40,7 @@ const LogsFilter = ({tasks, setFilters}) => {
       <Layout style={styles.row}>
         <Select
           testID={'SelectTask'}
-          value={filter.task.title}
+          value={filter.task}
           style={styles.tasksSelect}
           placeholder="All Tasks"
           selectedIndex={0}
