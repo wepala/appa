@@ -42,6 +42,7 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
 
   const tasks = getTasks();
   const [data, setData] = useState(tasks);
+  let startTime = moment();
 
   const onSubmit = () => {
     setValid(form, valid);
@@ -50,11 +51,9 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
       return;
     }
 
-    let startTime = moment().format();
-
     if (form.hours || form.minutes) {
-      form.hours = form.hours ? form.hours : 0;
-      form.minutes = form.minutes ? form.minutes : 0;
+      form.hours = form.hours ? form.hours : startTime.hours();
+      form.minutes = form.minutes ? form.minutes : startTime.minutes();
       let meridiem = form.timeOfDay.row ? 0 : 1;
       startTime = moment(
         `${form.hours} ${form.minutes} ${timeOfDay[form.timeOfDay.row]}`,
@@ -65,9 +64,10 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
         setValid(valid, {hours: false, minutes: false});
         return;
       }
-
-      startTime = startTime.format();
     }
+
+    startTime = startTime.format();
+
     if (log.id) {
       onUpdate(log.id, form.taskId, startTime).then(() => navigation.goBack());
     } else {
@@ -75,7 +75,7 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
     }
   };
 
-  const selectTask = index => {
+  const selectTask = (index) => {
     let task = tasks[index];
     setMultipleValues({
       taskId: task.id,
@@ -92,10 +92,10 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
   const filter = (item, query) =>
     item.title.toLowerCase().includes(query.toLowerCase());
 
-  const onChangeTask = query => {
+  const onChangeTask = (query) => {
     setForm(query.trimLeft(), 'title');
     // clearValid();
-    setData(tasks.filter(task => filter(task, query)));
+    setData(tasks.filter((task) => filter(task, query)));
   };
 
   return (
@@ -109,7 +109,7 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
               label="Entry Title"
               value={form.title}
               placeholder="Enter text for entry here"
-              style={styles.input}
+              style={styles.autocomplete}
               status={!valid.taskId && 'danger'}
               captionIcon={!valid.taskId && AlertIcon}
               caption={!valid.taskId && 'Provide a valid task'}
@@ -127,11 +127,11 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
                   status={!valid.hours && 'danger'}
                   captionIcon={!valid.hours && AlertIcon}
                   caption={!valid.hours && 'Provide valid time'}
-                  placeholder="12"
+                  placeholder={startTime.hours().toString()}
                   keyboardType="numeric"
                   maxLength={2}
                   clearButtonMode="unless-editing"
-                  onChangeText={val => setForm(val.trimLeft(), 'hours')}
+                  onChangeText={(val) => setForm(val.trimLeft(), 'hours')}
                 />
               </Layout>
               <Layout style={[styles.column, styles.columnSecond]}>
@@ -143,11 +143,11 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
                   status={!valid.minutes && 'danger'}
                   captionIcon={!valid.minutes && AlertIcon}
                   caption={!valid.minutes && 'Provide valid time'}
-                  placeholder="30"
+                  placeholder={startTime.minutes().toString()}
                   keyboardType="numeric"
                   maxLength={2}
                   clearButtonMode="unless-editing"
-                  onChangeText={val => setForm(val.trimLeft(), 'minutes')}
+                  onChangeText={(val) => setForm(val.trimLeft(), 'minutes')}
                 />
               </Layout>
               <Layout style={[styles.column, styles.columnThird]}>
@@ -159,7 +159,7 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
                   value={timeOfDay[form.timeOfDay.row]}
                   selectedIndex={form.timeOfDay}
                   clearButtonMode="unless-editing"
-                  onSelect={index => {
+                  onSelect={(index) => {
                     console.log(form.timeOfDay.row);
                     setForm(index, 'timeOfDay');
                   }}>
@@ -209,6 +209,9 @@ const themedStyles = StyleService.create({
   },
   input: {
     marginBottom: 16,
+    width: '100%',
+  },
+  autocomplete: {
     width: '100%',
   },
   row: {
