@@ -10,7 +10,7 @@ import {
 } from '@ui-kitten/components';
 import {CalendarIcon, ArrowDownIcon} from '../../../views/components/Icons';
 
-const LogsFilter = (props) => {
+const LogsFilter = props => {
   console.log('Logs filter props', props);
   const [range, setRange] = useState({
     startDate: moment().toDate(),
@@ -26,7 +26,7 @@ const LogsFilter = (props) => {
           style={styles.tasksSelect}
           placeholder="All Tasks"
           selectedIndex={0}
-          onSelect={(index) => console.log(index)}
+          onSelect={index => console.log(index)}
           accessoryRight={ArrowDownIcon}>
           <SelectItem title="Option 1" />
           <SelectItem title="Option 2" />
@@ -39,7 +39,7 @@ const LogsFilter = (props) => {
           style={styles.dateRange}
           placeholder="Date Range"
           range={range}
-          onSelect={(nextRange) => setRange(nextRange)}
+          onSelect={nextRange => setRange(nextRange)}
           accessoryRight={CalendarIcon}
         />
       </Layout>

@@ -19,7 +19,7 @@ export default ({
   taskId,
 }) => {
   const styles = useStyleSheet(themedStyles);
-  const onItemPress = (index) => {
+  const onItemPress = index => {
     console.log(items, index);
     navigation.navigate('UpdateTask', {
       itemId: items[index].id,

@@ -7,7 +7,7 @@ import TopBar from '../components/TopBar';
 import {Component} from '../../../weosHelpers';
 import BacklogController from '../../controllers/Backlog';
 
-export default (props) => {
+export default props => {
   const {navigation} = props;
   //setup tabs for current task list and backlog
   const Tabs = createMaterialTopTabNavigator();

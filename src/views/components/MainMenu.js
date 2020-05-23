@@ -20,7 +20,7 @@ import {
 } from './Icons';
 
 export default ({navigation}) => {
-  const onItemSelect = (index) => {
+  const onItemSelect = index => {
     switch (index.row) {
       case 0: {
         navigation.toggleDrawer();

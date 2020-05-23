@@ -4,9 +4,7 @@ import {StyleSheet} from 'react-native';
 import BacklogItem from './BacklogItem';
 
 export default ({navigation, items, contentContainerStyle}) => {
-  const onItemPress = (index) => {
-    console.log(items[index].id);
-
+  const onItemPress = index => {
     navigation.navigate('UpdateTask', {
       id: items[index].id,
     });
