@@ -42,7 +42,6 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
 
   const tasks = getTasks();
   const [data, setData] = useState(tasks);
-  let startTime = moment();
 
   const onSubmit = () => {
     setValid(form, valid);
@@ -51,19 +50,18 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
       return;
     }
 
-    if (form.hours || form.minutes) {
-      form.hours = form.hours ? form.hours : startTime.hours();
-      form.minutes = form.minutes ? form.minutes : startTime.minutes();
-      let meridiem = form.timeOfDay.row ? 0 : 1;
-      startTime = moment(
-        `${form.hours} ${form.minutes} ${timeOfDay[form.timeOfDay.row]}`,
-        `h mm ${timeOfDay[meridiem]}`,
-      );
+    const today = moment();
+    form.hours = form.hours ? form.hours : today.hours();
+    form.minutes = form.minutes ? form.minutes : today.minutes();
+    let meridiem = form.timeOfDay.row ? 0 : 1;
+    let startTime = moment(
+      `${form.hours} ${form.minutes} ${timeOfDay[form.timeOfDay.row]}`,
+      `h mm ${timeOfDay[meridiem]}`,
+    );
 
-      if (!startTime.isValid()) {
-        setValid(valid, {hours: false, minutes: false});
-        return;
-      }
+    if (!startTime.isValid()) {
+      setValid(valid, {hours: false, minutes: false});
+      return;
     }
 
     startTime = startTime.format();
@@ -126,8 +124,8 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
                   value={form.hours}
                   status={!valid.hours && 'danger'}
                   captionIcon={!valid.hours && AlertIcon}
-                  caption={!valid.hours && 'Provide valid time'}
-                  placeholder={startTime.hours().toString()}
+                  caption={!valid.hours && 'Provide valid hour'}
+                  placeholder="12"
                   keyboardType="numeric"
                   maxLength={2}
                   clearButtonMode="unless-editing"
@@ -142,8 +140,8 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
                   value={form.minutes}
                   status={!valid.minutes && 'danger'}
                   captionIcon={!valid.minutes && AlertIcon}
-                  caption={!valid.minutes && 'Provide valid time'}
-                  placeholder={startTime.minutes().toString()}
+                  caption={!valid.minutes && 'Provide valid minutes'}
+                  placeholder="30"
                   keyboardType="numeric"
                   maxLength={2}
                   clearButtonMode="unless-editing"
