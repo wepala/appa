@@ -1,7 +1,7 @@
 import {createTransform} from 'redux-persist';
 
 export const mapTransformer = createTransform(
-  (inboundState, key) => {
+  (inboundState) => {
     return {
       ...inboundState,
       getById: JSON.stringify(Array.from(inboundState.getById)),
@@ -9,7 +9,7 @@ export const mapTransformer = createTransform(
       getByTaskId: JSON.stringify(Array.from(inboundState.getByTaskId)),
     };
   },
-  (outboundState, key) => {
+  (outboundState) => {
     return {
       ...outboundState,
       getById: new Map(JSON.parse(outboundState.getById)),
