@@ -22,7 +22,10 @@ export default ({navigation, onComplete}) => {
             Don't hesitate to reach out with your feedback
           </Text>
         </Layout>
-        <Button testID={'CompleteButton'} onPress={() => onComplete()}>
+        <Button
+          style={styles.button}
+          testID={'CompleteButton'}
+          onPress={() => onComplete()}>
           Complete
         </Button>
       </ImageBackground>
@@ -52,10 +55,7 @@ const themedStyles = StyleService.create({
     color: '#fff',
     textAlign: 'center',
   },
-  buttonGroup: {
-    paddingVertical: 16,
-  },
-  buttonConnct: {
-    marginBottom: 16,
+  button: {
+    width: '100%',
   },
 });

@@ -14,7 +14,6 @@ export default () => (
     screenOptions={{
       gestureEnabled: false,
     }}
-    mode="modal"
     initialRouteName="Welcome">
     <Screen name="Welcome" component={Welcome} />
     <Screen name="Connect" component={Connect} />
