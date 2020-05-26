@@ -20,17 +20,18 @@ import DetailTopBar from '../components/DetailTopBar';
 
 export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
   const styles = useStyleSheet(themedStyles);
-
   const logId = route.params?.id;
-
   const log = getLog(logId);
   const timeOfDay = ['AM', 'PM'];
+  const today = moment();
+  const currentTime = today.format('hh:mm:A').split(':');
+  const timeOfDayIndex = timeOfDay.index(currentTime[2]);
   const [form, setForm, setMultipleValues] = useForm({
     title: log.task.title,
     taskId: log.taskId,
-    hours: log.hours,
-    minutes: log.minutes,
-    timeOfDay: new IndexPath(0),
+    hours: log.hours || currentTime[0],
+    minutes: log.minutes || currentTime[1],
+    timeOfDay: new IndexPath(timeOfDayIndex),
   });
   const [valid, setValid, clearValid] = useValidated(form, {
     title: true,
@@ -50,7 +51,6 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
       return;
     }
 
-    const today = moment();
     form.hours = form.hours ? form.hours : today.hours();
     form.minutes = form.minutes ? form.minutes : today.minutes();
     let meridiem = form.timeOfDay.row ? 0 : 1;
