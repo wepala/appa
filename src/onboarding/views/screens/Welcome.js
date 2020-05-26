@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, Image} from 'react-native';
+import {SafeAreaView, ImageBackground} from 'react-native';
 import {
   Button,
   Text,
@@ -7,72 +7,58 @@ import {
   StyleService,
   Layout,
 } from '@ui-kitten/components';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faHandSparkles} from '@fortawesome/free-solid-svg-icons';
-import {faGithub} from '@fortawesome/free-brands-svg-icons';
+import background from '../../../../assets/images/brand/welcome.png';
 
 export default ({navigation}) => {
   const styles = useStyleSheet(themedStyles);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Layout style={styles.container} level="2">
-        <Layout style={styles.headerContainer} level="2">
-          <FontAwesomeIcon
-            style={styles.image}
-            icon={faHandSparkles}
-            size={216}
-          />
-          <Text style={styles.text} category="h3">
-            Welcome to WeAgenda
+      <ImageBackground source={background} style={styles.image}>
+        <Layout style={styles.headerContainer}>
+          <Text style={styles.text} category="h4">
+            Welcome to
           </Text>
-          <Text style={styles.text} category="s1">
-            A fully customizable app built by Wepala and made better by you!
-          </Text>
-          <Text>
-            <FontAwesomeIcon style={styles.license} icon={faGithub} size={50} />
-            <Image
-              style={styles.agpl}
-              source={require('../../../../assets/images/agpl.png')}
-            />
+          <Text style={[styles.text, styles.appa]} category="h1">
+            Appa
           </Text>
         </Layout>
-        <Layout level="2" style={styles.buttonContainer}>
-          <Button onPress={() => navigation.navigate('Connect')}>
-            Continue
-          </Button>
-        </Layout>
-      </Layout>
+        <Button
+          style={styles.button}
+          onPress={() => navigation.navigate('Connect')}>
+          Continue
+        </Button>
+      </ImageBackground>
     </SafeAreaView>
   );
 };
 
 const themedStyles = StyleService.create({
   container: {
-    height: '100%',
-    padding: 16,
+    flex: 1,
   },
   image: {
-    color: 'color-primary-default',
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'flex-end',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: 16,
   },
   headerContainer: {
-    flex: 1,
     justifyContent: 'space-evenly',
     alignItems: 'center',
+    backgroundColor: 'transparent',
+    paddingBottom: 16,
   },
   text: {
-    color: '$color-basic-700',
+    color: '#fff',
     textAlign: 'center',
   },
-  license: {
-    paddingRight: 100,
+  appa: {
+    fontSize: 85,
   },
-
-  agpl: {
-    height: 50,
-    width: 120,
-  },
-  buttonGroup: {
-    paddingVertical: 16,
+  button: {
+    width: '100%',
   },
 });

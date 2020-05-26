@@ -10,7 +10,12 @@ import {Component} from '../../../weosHelpers';
 const {Navigator, Screen} = createStackNavigator();
 
 export default () => (
-  <Navigator initialRouteName="Welcome" screenOptions={{gestureEnabled: false}}>
+  <Navigator
+    screenOptions={{
+      gestureEnabled: false,
+    }}
+    mode="modal"
+    initialRouteName="Welcome">
     <Screen name="Welcome" component={Welcome} />
     <Screen name="Connect" component={Connect} />
     <Screen

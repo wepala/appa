@@ -1,0 +1,9 @@
+{
+  "strict": {
+    "text-font-family": "Geometria",
+
+    "text-heading-1-font-size": 36,
+    "text-heading-1-font-weight": "800"
+    // "text-heading-1-font-family": "Cera Round Pro"
+  }
+}

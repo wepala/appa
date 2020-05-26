@@ -25,7 +25,9 @@ describe('Backlog Controller', () => {
     controller.configureState(mockedState);
     const state = controller.configureDispatch(dispatch);
     const today = moment().format('YYYY-MM-DD');
-    const futureDate = moment().add(2, 'days').format('YYYY-MM-DD');
+    const futureDate = moment()
+      .add(2, 'days')
+      .format('YYYY-MM-DD');
     const task = mockTasks.getById['7a5fe6af-27f5-486b-a32d-4d3d0437d0c3'];
     state.addToAgenda(task, today);
     expect(dispatch).toBeCalledWith(
