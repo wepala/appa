@@ -28,7 +28,7 @@ export default ({navigation, route}) => {
         <Layout style={styles.row}>
           <Layout style={styles.column1}>
             <Text category="h5">Personalization</Text>
-            <Text category="s2">Choose you Colour</Text>
+            <Text category="s2">Choose your Colour</Text>
           </Layout>
           <Layout style={styles.column2}>
             <Button size="small" appearance="ghost" accessoryRight={InfoIcon} />
@@ -57,7 +57,12 @@ export default ({navigation, route}) => {
             </Text>
           </Layout>
           <Layout style={styles.column2}>
-            <Button size="small" appearance="ghost" accessoryRight={InfoIcon} />
+            <Button
+              style={styles.buttonConnect}
+              size="small"
+              appearance="ghost"
+              accessoryRight={InfoIcon}
+            />
           </Layout>
         </Layout>
         <Select accessoryRight={ClockIcon}>
@@ -98,10 +103,16 @@ const themedStyles = StyleService.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
-  buttonCancel: {
-    flexBasis: 'auto',
-    flexShrink: 0,
-    marginRight: 16,
+  buttonConnect: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 5.46,
+
+    elevation: 9,
   },
   buttonSubmit: {
     flexGrow: 1,
