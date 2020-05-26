@@ -25,7 +25,7 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
   const timeOfDay = ['AM', 'PM'];
   const today = moment();
   const currentTime = today.format('hh:mm:A').split(':');
-  const timeOfDayIndex = timeOfDay.index(currentTime[2]);
+  const timeOfDayIndex = timeOfDay.indexOf(currentTime[2]);
   const [form, setForm, setMultipleValues] = useForm({
     title: log.task.title,
     taskId: log.taskId,
