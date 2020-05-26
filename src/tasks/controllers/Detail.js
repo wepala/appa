@@ -27,7 +27,7 @@ export default class DetailController extends Controller {
     estimatedTime = 15,
     estimatedUnit = 'minutes',
   ) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       const task = {
         title: title,
         description: description,
@@ -46,12 +46,21 @@ export default class DetailController extends Controller {
     });
   }
 
-  onUpdate(navigation, task, title, description, dueDate, currentAgenda) {
+  onUpdate(
+    navigation,
+    task,
+    title,
+    description,
+    dueDate,
+    estimatedTime,
+    currentAgenda,
+  ) {
     const updatedTask = {
-      title: title,
-      description: description,
-      dueDate: dueDate,
-      currentAgenda: currentAgenda,
+      title,
+      description,
+      dueDate,
+      estimatedTime,
+      currentAgenda,
     };
     //TODO execute command to update task
     this.dispatch(updateTask(task.id, updatedTask));

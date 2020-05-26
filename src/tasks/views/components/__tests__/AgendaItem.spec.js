@@ -56,7 +56,7 @@ describe('onboarding complete screen', () => {
     const setCurrentIndex = jest.fn();
     const onComplete = jest.fn(
       () =>
-        new Promise(function (resolve) {
+        new Promise(function(resolve) {
           resolve();
         }),
     );
@@ -97,13 +97,13 @@ describe('onboarding complete screen', () => {
     const setCurrentIndex = jest.fn();
     const onComplete = jest.fn(
       () =>
-        new Promise(function (resolve) {
+        new Promise(function(resolve) {
           resolve();
         }),
     );
     const onStart = jest.fn(
       () =>
-        new Promise(function (resolve) {
+        new Promise(function(resolve) {
           resolve();
         }),
     );

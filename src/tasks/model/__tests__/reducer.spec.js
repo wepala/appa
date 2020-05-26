@@ -2,7 +2,7 @@ import tasks from '../reducer';
 import {addTask, removeTask, startTask, updateTask} from '../commands';
 import {mockTasks} from '../../__tests__/fixtures';
 
-describe('task reducer', function () {
+describe('task reducer', function() {
   const expectedInitialState = {currentTask: null, getById: {}};
 
   it('should return initial model', () => {

@@ -24,15 +24,24 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
   const styles = useStyleSheet(themedStyles);
   const id = route.params?.id;
   const section = route.params?.section;
-
   const task = getTask(id);
-  console.log('recieved backlog item', section);
 
   const timeUnits = ['minutes', 'hours'];
+  // Convert estimated time from seconds to either minutes/hours
+  let estimatedTime, timeUnit;
+  if (id) {
+    estimatedTime =
+      task.estimatedTime % 3600 === 0
+        ? parseInt(task.estimatedTime / 3600, 10)
+        : parseInt(task.estimatedTime / 60, 10);
+    timeUnit =
+      task.estimatedTime % 3600 === 0 ? new IndexPath(1) : new IndexPath(0);
+  }
+
   const [form, setForm] = useForm({
     title: task.title,
-    timeEstimate: parseInt(task.estimatedTime / 60, 10) || '',
-    timeUnit: new IndexPath(0),
+    timeEstimate: id ? estimatedTime : '',
+    timeUnit: id ? timeUnit : new IndexPath(0),
     description: task.description,
     dueDate: task.dueDate,
   });
@@ -44,23 +53,23 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
   });
 
   const onSubmit = () => {
-    const section = route.params?.section;
     setValid(form, valid);
-    console.log('Submitting', form);
     if (valid.title) {
-      console.log('UPDATING\n\n');
       if (task.id) {
+        let estimatedTime =
+          timeUnits[form.timeUnit.row] === 'minutes'
+            ? form.timeEstimate * 60
+            : form.timeEstimate * 60 * 60;
         onUpdate(
           navigation,
           task,
           form.title,
           form.description,
           form.dueDate,
-          task.agendas,
-        ).then(() => navigation.goBack());
+          estimatedTime,
+          true, // Add to backlog or agendas
+        );
       } else {
-        console.log('NEW TASK\n\n');
-
         onSave(
           form.title,
           form.description,
@@ -86,8 +95,9 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               style={styles.input}
               label="Task Title"
               placeholder="Enter title here"
+              clearButtonMode="unless-editing"
               value={form.title}
-              onChangeText={(val) => {
+              onChangeText={val => {
                 setForm(val.trimLeft(), 'title');
                 clearValid();
               }}
@@ -104,7 +114,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
                   placeholder="30"
                   keyboardType="numeric"
                   value={`${form.timeEstimate}`}
-                  onChangeText={(val) => {
+                  onChangeText={val => {
                     setForm(val.trimLeft(), 'timeEstimate');
                     clearValid();
                   }}
@@ -122,7 +132,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
                   value={timeUnits[form.timeUnit.row]}
                   style={styles.input}
                   selectedIndex={form.timeUnit}
-                  onSelect={(index) => {
+                  onSelect={index => {
                     console.log(form.timeUnit.row);
                     setForm(index, 'timeUnit');
                   }}>
@@ -138,17 +148,19 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               multiline={true}
               placeholder=""
               label="Description"
+              clearButtonMode="unless-editing"
               value={form.description}
-              onChangeText={(val) => setForm(val.trimLeft(), 'description')}
+              onChangeText={val => setForm(val.trimLeft(), 'description')}
             />
             <Datepicker
               testID="TaskDueDate"
               style={styles.input}
               accessoryRight={CalendarIcon}
               label="Due Date"
+              clearButtonMode="unless-editing"
               date={form.dueDate}
               ref={datePicker}
-              onSelect={(val) => {
+              onSelect={val => {
                 setForm(val, 'dueDate');
                 datePicker.current.blur();
               }}
@@ -161,7 +173,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
                 style={styles.buttonCancel}
                 size="giant"
                 Cancel
-                onPress={() => console.log('Cancelled')}>
+                onPress={() => navigation.goBack()}>
                 Cancel
               </Button>
               <Button
