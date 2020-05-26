@@ -117,7 +117,7 @@ const makeLogsByFilter = () =>
         });
         return {
           ...log,
-          ...tasks[taskIndex],
+          task: tasks[taskIndex],
         };
       }));
     },

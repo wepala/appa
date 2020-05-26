@@ -9,9 +9,20 @@ import {getTasksByDate} from '../../tasks/model/selectors';
 
 export default class DetailController extends Controller {
   getLog(id) {
+    let task = {
+      title: '',
+      description: '',
+      dueDate: moment().toDate(),
+      completed: true,
+      agendas: [],
+    };
+
     if (id) {
       const log = this.state.logs.getById.get(id);
-      const task = this.state.tasks.getById[log.taskId];
+
+      if (log.taskId) {
+        task = this.state.tasks.getById[log.taskId];
+      }
 
       return {...log, task: task};
     }
@@ -19,7 +30,7 @@ export default class DetailController extends Controller {
     return {
       id: '',
       startTime: moment().toDate(),
-      taskId: '',
+      task: task,
     };
   }
 

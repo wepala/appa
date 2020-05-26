@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import moment from 'moment';
 import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
 import {
   Button,
@@ -17,37 +18,68 @@ import {useForm, useValidated} from '../../../weosHelpers';
 import {AlertIcon, ClockIcon} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
 
-export default ({navigation, route, getTasks}) => {
+export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
   const styles = useStyleSheet(themedStyles);
 
-  const log = {};
+  const logId = route.params?.id;
+
+  const log = getLog(logId);
   const timeOfDay = ['AM', 'PM'];
-  const [form, setForm] = useForm({
-    title: log.title,
-    hour: log.hour,
-    minute: log.minute,
+  const [form, setForm, setMultipleValues] = useForm({
+    title: log.task.title,
+    taskId: log.taskId,
+    hours: log.hours,
+    minutes: log.minutes,
     timeOfDay: new IndexPath(0),
   });
   const [valid, setValid, clearValid] = useValidated(form, {
     title: true,
-    hour: true,
-    minute: true,
+    hours: true,
+    minutes: true,
     timeOfDay: true,
+    taskId: true,
   });
 
   const tasks = getTasks();
   const [data, setData] = useState(tasks);
 
   const onSubmit = () => {
-    console.log('Submitting form', form);
     setValid(form, valid);
+    if (!form.taskId || !form.title) {
+      setValid(valid, {taskId: false});
+      return;
+    }
 
-    const section = route.params?.section;
-    navigation.goBack();
+    const today = moment();
+    form.hours = form.hours ? form.hours : today.hours();
+    form.minutes = form.minutes ? form.minutes : today.minutes();
+    let meridiem = form.timeOfDay.row ? 0 : 1;
+    let startTime = moment(
+      `${form.hours} ${form.minutes} ${timeOfDay[form.timeOfDay.row]}`,
+      `h mm ${timeOfDay[meridiem]}`,
+    );
+
+    if (!startTime.isValid()) {
+      setValid(valid, {hours: false, minutes: false});
+      return;
+    }
+
+    startTime = startTime.format();
+
+    if (log.id) {
+      onUpdate(log.id, form.taskId, startTime).then(() => navigation.goBack());
+    } else {
+      onSave(form.taskId, startTime).then(() => navigation.goBack());
+    }
   };
 
-  const selectTask = index => {
-    setForm(tasks[index].title, 'title');
+  const selectTask = (index) => {
+    let task = tasks[index];
+    setMultipleValues({
+      taskId: task.id,
+      title: task.title,
+    });
+
     clearValid();
   };
 
@@ -58,10 +90,10 @@ export default ({navigation, route, getTasks}) => {
   const filter = (item, query) =>
     item.title.toLowerCase().includes(query.toLowerCase());
 
-  const onChangeTask = query => {
+  const onChangeTask = (query) => {
     setForm(query.trimLeft(), 'title');
-    clearValid();
-    setData(tasks.filter(task => filter(task, query)));
+    // clearValid();
+    setData(tasks.filter((task) => filter(task, query)));
   };
 
   return (
@@ -75,10 +107,10 @@ export default ({navigation, route, getTasks}) => {
               label="Entry Title"
               value={form.title}
               placeholder="Enter text for entry here"
-              style={styles.input}
-              tatus={!valid.title && 'danger'}
-              captionIcon={!valid.title && AlertIcon}
-              caption={!valid.title && 'Title cannot be blank'}
+              style={styles.autocomplete}
+              status={!valid.taskId && 'danger'}
+              captionIcon={!valid.taskId && AlertIcon}
+              caption={!valid.taskId && 'Provide a valid task'}
               onSelect={selectTask}
               onChangeText={onChangeTask}>
               {data.map(renderTaskOption)}
@@ -89,10 +121,15 @@ export default ({navigation, route, getTasks}) => {
                   testID="LoggedHour"
                   style={styles.input}
                   label="Hour"
+                  value={form.hours}
+                  status={!valid.hours && 'danger'}
+                  captionIcon={!valid.hours && AlertIcon}
+                  caption={!valid.hours && 'Provide valid hour'}
                   placeholder="12"
                   keyboardType="numeric"
                   maxLength={2}
                   clearButtonMode="unless-editing"
+                  onChangeText={(val) => setForm(val.trimLeft(), 'hours')}
                 />
               </Layout>
               <Layout style={[styles.column, styles.columnSecond]}>
@@ -100,10 +137,15 @@ export default ({navigation, route, getTasks}) => {
                   testID="LoggedMinute"
                   style={styles.input}
                   label="Minute"
+                  value={form.minutes}
+                  status={!valid.minutes && 'danger'}
+                  captionIcon={!valid.minutes && AlertIcon}
+                  caption={!valid.minutes && 'Provide valid minutes'}
                   placeholder="30"
                   keyboardType="numeric"
                   maxLength={2}
                   clearButtonMode="unless-editing"
+                  onChangeText={(val) => setForm(val.trimLeft(), 'minutes')}
                 />
               </Layout>
               <Layout style={[styles.column, styles.columnThird]}>
@@ -115,7 +157,7 @@ export default ({navigation, route, getTasks}) => {
                   value={timeOfDay[form.timeOfDay.row]}
                   selectedIndex={form.timeOfDay}
                   clearButtonMode="unless-editing"
-                  onSelect={index => {
+                  onSelect={(index) => {
                     console.log(form.timeOfDay.row);
                     setForm(index, 'timeOfDay');
                   }}>
@@ -165,6 +207,9 @@ const themedStyles = StyleService.create({
   },
   input: {
     marginBottom: 16,
+    width: '100%',
+  },
+  autocomplete: {
     width: '100%',
   },
   row: {
