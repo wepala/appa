@@ -21,35 +21,33 @@ export default ({navigation, route}) => {
   return (
     <SafeAreaView style={styles.container}>
       <TopBar navigation={navigation} title="Customize" />
-      <Layout style={styles.container}>
-        <Layout style={styles.row}>
-          <Layout style={styles.column}>
-            <Text category="h5">Developers</Text>
-            <Text category="s2">
-              If you can code then jump right in and make the changes you want!
-            </Text>
-            <Text category="s2">Our code is free and open source!</Text>
-          </Layout>
-        </Layout>
-        <Layout style={styles.row}>
+      <Text category="h1" style={styles.title}>
+        Make Appa yours
+      </Text>
+      <Layout style={styles.row}>
+        <Layout style={styles.column}>
+          <Text category="h5" style={styles.subTitle}>
+            DEVELOPERS
+          </Text>
+          <Text category="s1" style={styles.description}>
+            If you can code then jump right in and make the changes you want!
+            Our code is free and open source!
+          </Text>
           <FontAwesomeIcon icon={faGithub} size={100} color={'#444'} />
         </Layout>
-        <Divider style={styles.divider} />
-        <Layout style={styles.row}>
-          <Layout style={styles.column}>
-            <Text category="h5">Non-developers</Text>
-            <Text category="s2">
-              Need some help modifying Appa to work the way you want?
-            </Text>
-            <Text category="s2">No problem, we;ll take of it for you.</Text>
-          </Layout>
-        </Layout>
-        <Layout style={styles.row}>
+        <Layout style={styles.column}>
+          <Text category="h5" style={styles.subTitle}>
+            NON-DEVELOPERS
+          </Text>
+          <Text category="s1" style={styles.description}>
+            Need some help modifying Appa to work the way you want? No problem,
+            we;ll take of it for you.
+          </Text>
           <Button
-            accessoryRight={MessageIcon}
-            status="info"
+            size="large"
+            style={styles.buttonHelp}
             onPress={() => navigation.navigate('Help')}>
-            Get Help
+            GET HELP
           </Button>
         </Layout>
       </Layout>
@@ -61,20 +59,31 @@ const themedStyles = StyleService.create({
   container: {
     flex: 1,
     backgroundColor: '$background-basic-color-1',
-    padding: 16,
   },
   row: {
     display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 16,
+    flex: 1,
+    justifyContent: 'space-around',
+    padding: 16,
   },
   column: {
-    flexGrow: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
   },
-
-  divider: {
-    marginVertical: 32,
+  title: {
+    textAlign: 'center',
+    marginTop: 32,
+  },
+  subTitle: {
+    paddingBottom: 32,
+  },
+  description: {
+    textAlign: 'center',
+    paddingHorizontal: 32,
+    paddingBottom: 32,
+  },
+  buttonHelp: {
+    width: '100%',
   },
 });

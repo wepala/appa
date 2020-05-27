@@ -1,0 +1,12 @@
+{
+  "strict": {
+    "text-font-family": "Geometria",
+
+    "text-heading-1-font-size": 36,
+    "text-heading-1-font-weight": "800",
+
+    "text-heading-2-font-weight": "900",
+
+    "text-heading-3-font-weight": "800"
+  }
+}
