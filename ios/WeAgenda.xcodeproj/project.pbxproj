@@ -23,8 +23,6 @@
 		02C750B4BBE144508FDE2693 /* Geometria-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 753563E52A6A43C88601AC82 /* Geometria-Light.ttf */; };
 		B9D2DADCA5344EF6BB13B746 /* Geometria.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCEEBD3B3E8E49EB871C3C1E /* Geometria.ttf */; };
 		78F17B2AC4234C0BB60D5752 /* CeraRoundProRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7AED7DC77924420BBB484626 /* CeraRoundProRegular.otf */; };
-		D28B8669EA534A0ABE9A14B6 /* Cera Round Pro Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8900FE20F2974188B5A54467 /* Cera Round Pro Bold.otf */; };
-		5C5010431C2F4B90845989E6 /* CeraRoundProBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 103B78913CB74207B8965A7E /* CeraRoundProBold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,8 +73,6 @@
 		753563E52A6A43C88601AC82 /* Geometria-Light.ttf */ = {isa = PBXFileReference; name = "Geometria-Light.ttf"; path = "../assets/fonts/Geometria-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		BCEEBD3B3E8E49EB871C3C1E /* Geometria.ttf */ = {isa = PBXFileReference; name = "Geometria.ttf"; path = "../assets/fonts/Geometria.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		7AED7DC77924420BBB484626 /* CeraRoundProRegular.otf */ = {isa = PBXFileReference; name = "CeraRoundProRegular.otf"; path = "../assets/fonts/CeraRoundProRegular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8900FE20F2974188B5A54467 /* Cera Round Pro Bold.otf */ = {isa = PBXFileReference; name = "Cera Round Pro Bold.otf"; path = "../assets/fonts/Cera Round Pro Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		103B78913CB74207B8965A7E /* CeraRoundProBold.otf */ = {isa = PBXFileReference; name = "CeraRoundProBold.otf"; path = "../assets/fonts/CeraRoundProBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,8 +210,6 @@
 				753563E52A6A43C88601AC82 /* Geometria-Light.ttf */,
 				BCEEBD3B3E8E49EB871C3C1E /* Geometria.ttf */,
 				7AED7DC77924420BBB484626 /* CeraRoundProRegular.otf */,
-				8900FE20F2974188B5A54467 /* Cera Round Pro Bold.otf */,
-				103B78913CB74207B8965A7E /* CeraRoundProBold.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
