@@ -41,7 +41,7 @@ export default ({navigation, route}) => {
           <Layout style={styles.column2}>
             <Toggle
               checked={checked}
-              onChange={isChecked => {
+              onChange={(isChecked) => {
                 toggleCheck(isChecked);
                 themeContext.toggleTheme();
               }}>
