@@ -72,8 +72,8 @@ describe('Time Log Selectors', () => {
     expect(logs).toBeArrayOfSize(10);
     //filter by date
     props = Object.assign({}, props, {
-      startTime: '2020-05-08T00:00:00-04:00',
-      endTime: '2020-05-08T23:59:59-04:00',
+      startTime: '2020-05-08',
+      endTime: '2020-05-08',
     });
     logs = getLogsByFilter(mockState, props);
     expect(logs).toBeArrayOfSize(4);

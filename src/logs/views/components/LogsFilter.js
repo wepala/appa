@@ -11,7 +11,7 @@ import {
 } from '@ui-kitten/components';
 import {CalendarIcon, ArrowDownIcon} from '../../../views/components/Icons';
 
-const LogsFilter = ({tasks, setFilters}) => {
+const LogsFilter = ({tasks, onSetFilters}) => {
   const [range, setRange] = useState({
     startDate: moment().toDate(),
     endDate: moment().toDate(),
@@ -31,7 +31,15 @@ const LogsFilter = ({tasks, setFilters}) => {
     setSelectedTaskIndex(index);
     const startTime = moment(range.startDate).format('YYYY-MM-DD');
     const endTime = moment(range.endDate).format('YYYY-MM-DD');
-    setFilters(startTime, endTime, tasks[index.row].id);
+    onSetFilters(startTime, endTime, tasks[index.row].id);
+  };
+
+  const setDateRange = (dateRange) => {
+    setRange(dateRange);
+    const startDate = moment(dateRange.startDate).format('YYYY-MM-DD');
+    const endDate = moment(dateRange.endDate).format('YYYY-MM-DD');
+    const taskId = tasks[selectedTaskIndex] && tasks[selectedTaskIndex].id;
+    onSetFilters(startDate, endDate, taskId);
   };
 
   const styles = useStyleSheet(themedStyles);
@@ -43,7 +51,6 @@ const LogsFilter = ({tasks, setFilters}) => {
           value={filter.task}
           style={styles.tasksSelect}
           placeholder="All Tasks"
-          selectedIndex={0}
           onSelect={onSelectTask}
           accessoryRight={ArrowDownIcon}>
           {tasks.map(renderTaskOption)}
@@ -55,7 +62,7 @@ const LogsFilter = ({tasks, setFilters}) => {
           style={styles.dateRange}
           placeholder="Date Range"
           range={range}
-          onSelect={(nextRange) => setRange(nextRange)}
+          onSelect={setDateRange}
           accessoryRight={CalendarIcon}
         />
       </Layout>
