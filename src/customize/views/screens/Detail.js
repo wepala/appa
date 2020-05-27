@@ -10,7 +10,7 @@ import {
   useStyleSheet,
   Text,
 } from '@ui-kitten/components';
-import {QuestionIcon} from '../../../views/components/Icons';
+import {ArrowDownIcon} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
 import {SafeAreaView} from 'react-native';
 
@@ -32,7 +32,7 @@ export default ({navigation, route}) => {
             <Select
               style={[styles.select, styles.paddingBottom]}
               placeholder="Select reason"
-              accessoryRight={QuestionIcon}>
+              accessoryRight={ArrowDownIcon}>
               <SelectItem title="Bug" />
               <SelectItem title="Feature" />
             </Select>
