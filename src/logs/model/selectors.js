@@ -4,16 +4,16 @@ import {getTasksByDate} from '../../tasks/model/selectors';
 import {tasksSelector} from '../../tasks/model/selectors';
 export const getByTaskSelector = (state, taskId) =>
   state.logs.getByTaskId.get(taskId);
-export const getByIdSelector = state => state.logs.getById;
-export const getByTimeSelector = state => [...state.logs.getByTime.keys()];
+export const getByIdSelector = (state) => state.logs.getById;
+export const getByTimeSelector = (state) => [...state.logs.getByTime.keys()];
 
 export const getTimesByDate = (state, date) => {
-  const times = [...state.logs.getByTime.keys()].filter(time => {
+  const times = [...state.logs.getByTime.keys()].filter((time) => {
     return time.startsWith(date);
   });
 
   const result = new Map();
-  times.forEach(time => {
+  times.forEach((time) => {
     result.set(time, state.logs.getByTime.get(time));
   });
   return result;
@@ -25,10 +25,10 @@ export const getTimesByDate = (state, date) => {
  */
 export const getTimeSpentByDay = createSelector(
   [getTimesByDate],
-  timesByDate => {
+  (timesByDate) => {
     const times = [...timesByDate.keys()];
     return times
-      .map(time =>
+      .map((time) =>
         times[times.indexOf(time) + 1] !== undefined
           ? moment(times[times.indexOf(time) + 1]).diff(time, 'seconds')
           : null,
@@ -43,7 +43,7 @@ export const getTimeSpentByDay = createSelector(
  */
 export const getLogsByTaskId = createSelector(
   [getByTaskSelector, getByIdSelector],
-  (logIds, logs) => logIds.map(logId => logs.get(logId)),
+  (logIds, logs) => logIds.map((logId) => logs.get(logId)),
 );
 /**
  * Get the amount of time spent by task id
@@ -55,7 +55,7 @@ export const getTimeSpentByTaskId = createSelector(
   (logIds, logs, times) => {
     //do a map reduce such that we sum the time difference between the log item we're looking at and the adjacent log
     return logIds
-      .map(logId =>
+      .map((logId) =>
         moment(times[times.indexOf(logs.get(logId).startTime) + 1]).diff(
           logs.get(logId).startTime,
           'seconds',
@@ -70,13 +70,13 @@ export const getTaskTimeSpentByDate = createSelector(
   (logsByTime, tasks, logs) => {
     const values = [...logsByTime.values()];
     const times = [...logsByTime.keys()];
-    return tasks.map(task => {
+    return tasks.map((task) => {
       const filteredTimes = times.filter(
         (time, index) => logs.get(values[index])?.taskId === task.id,
       );
       return filteredTimes.length > 0
         ? filteredTimes
-            .map(time => {
+            .map((time) => {
               const endTime = times[times.indexOf(time) + 1];
               return endTime !== undefined
                 ? moment(endTime).diff(time, 'seconds')
@@ -92,38 +92,35 @@ const getLogItems = (state, props = {}) => {
   let items = [...state.logs.getById.values()];
   if (props.startTime !== undefined || props.endTime !== undefined) {
     if (props.startTime !== undefined) {
-      items = items.filter(item => item.startTime >= props.startTime);
+      items = items.filter((item) => item.startTime >= props.startTime);
     }
 
     if (props.endTime !== undefined) {
-      items = items.filter(item => item.startTime <= props.endTime);
+      items = items.filter((item) => item.startTime <= props.endTime);
     }
   }
 
   if (props.taskId !== undefined) {
-    items = items.filter(item => item.taskId === props.taskId);
+    items = items.filter((item) => item.taskId === props.taskId);
   }
 
   return items;
 };
 
 const makeLogsByFilter = () =>
-  createSelector(
-    [getLogItems, tasksSelector],
-    (items, tasks) => {
-      return (items = items
-        .filter(item => item.taskId !== '_stop')
-        .map(log => {
-          let taskIndex = tasks.findIndex(task => {
-            return task.id === log.taskId;
-          });
-          console.log(log, tasks[taskIndex]);
-          return {
-            ...tasks[taskIndex],
-            ...log,
-          };
-        }));
-    },
-  );
+  createSelector([getLogItems, tasksSelector], (items, tasks) => {
+    return (items = items
+      .filter((item) => item.taskId !== '_stop')
+      .map((log) => {
+        let taskIndex = tasks.findIndex((task) => {
+          return task.id === log.taskId;
+        });
+        console.log(log, tasks[taskIndex]);
+        return {
+          ...tasks[taskIndex],
+          ...log,
+        };
+      }));
+  });
 
 export const getLogsByFilter = makeLogsByFilter();
