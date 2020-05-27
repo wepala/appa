@@ -19,7 +19,7 @@ export default class AgendaController extends Controller {
    * @returns {Promise<R>}
    */
   setTaskCompletion(id, state = true) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.dispatch(updateTask(id, {complete: state}));
       resolve();
     });
@@ -32,7 +32,7 @@ export default class AgendaController extends Controller {
    * @returns {Promise<R>}
    */
   startTask(id) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.dispatch(startTask(id));
       this.dispatch(addTimeLog(id, moment().format()));
       resolve();

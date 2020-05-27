@@ -4,14 +4,14 @@ import {connect} from 'react-redux';
 export const Component = (controller, view) => {
   return connect(
     (state, props) => controller.configureState(state, props),
-    dispatch => controller.configureDispatch(dispatch),
+    (dispatch) => controller.configureDispatch(dispatch),
   )(view);
 };
 
 // Form Hooks
 
 // Handles setting of form data
-export const useForm = initValues => {
+export const useForm = (initValues) => {
   const [values, setvalues] = useState(initValues);
 
   return [
@@ -19,7 +19,7 @@ export const useForm = initValues => {
     (val, key) => {
       setvalues({...values, [key]: val});
     },
-    properties => {
+    (properties) => {
       setvalues({...values, ...properties});
     },
   ];

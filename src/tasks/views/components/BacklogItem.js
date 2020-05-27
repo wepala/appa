@@ -25,7 +25,6 @@ const BacklogItem = ({item, index, onPress}) => {
             {item.title}
           </Text>
           <Text style={styles.time}>Time: 30m out of 1h</Text>
-          <Text category="s2">Project X</Text>
         </Layout>
         <Layout style={styles.column1}>
           <Button

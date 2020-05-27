@@ -27,7 +27,7 @@ export default class DetailController extends Controller {
     estimatedTime = 15,
     estimatedUnit = 'minutes',
   ) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const task = {
         title: title,
         description: description,

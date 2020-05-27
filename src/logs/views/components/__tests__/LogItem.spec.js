@@ -10,7 +10,7 @@ describe('LogItem', () => {
   it('Should render all fields given a log item', async () => {
     const item = {
       id: 'f4cb9236-2df7-4abd-8c06-cb836865a1c3',
-      startTime: '2020-05-12T13:00:00',
+      startTime: '2020-05-12T13:00:00-04:00',
       task: {title: 'My Task'},
     };
     const {getByTestId} = render(
@@ -41,6 +41,6 @@ describe('LogItem', () => {
     expect(logDate.props.children).toEqual('12th May, 2020');
 
     expect(logTime).toBeTruthy();
-    expect(logTime.props.children).toEqual('1:00:00 pm');
+    expect(logTime.props.children).toEqual('5:00:00 pm');
   });
 });

@@ -3,7 +3,7 @@ import moment from 'moment';
 import {addTimeLog, updateTimeLog, removeTimeLog} from '../commands';
 import {mockLogs} from '../../__tests__/fixtures';
 
-describe('logs reducer', function() {
+describe('logs reducer', function () {
   const expectedInitialState = {
     getByTaskId: new Map(),
     getById: new Map(),

@@ -35,14 +35,14 @@ export default class DetailController extends Controller {
   }
 
   onSave(taskId, startTime) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.dispatch(addTimeLog(taskId, startTime));
       resolve();
     });
   }
 
   onUpdate(logId, taskId, startTime) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.dispatch(updateTimeLog(logId, taskId, startTime));
       resolve();
     });
@@ -53,7 +53,7 @@ export default class DetailController extends Controller {
   }
 
   onRemove(logId) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.dispatch(removeTimeLog(logId));
       resolve();
     });

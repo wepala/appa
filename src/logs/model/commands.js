@@ -23,7 +23,7 @@ export const updateTimeLog = (logId, taskId, startTime) => {
   };
 };
 
-export const removeTimeLog = logId => {
+export const removeTimeLog = (logId) => {
   return {
     type: REMOVE_LOG,
     payload: {
