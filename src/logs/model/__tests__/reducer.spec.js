@@ -2,7 +2,7 @@ import logs from '../reducer';
 import moment from 'moment';
 import {addTimeLog} from '../commands';
 
-describe('logs reducer', function() {
+describe('logs reducer', function () {
   const expectedInitialState = {
     getByTaskId: new Map(),
     getById: new Map(),

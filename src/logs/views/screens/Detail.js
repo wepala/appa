@@ -54,7 +54,7 @@ export default ({navigation, route}) => {
               label="Task Title"
               placeholder="Enter title here"
               clearButtonMode="unless-editing"
-              onChangeText={val => {
+              onChangeText={(val) => {
                 setForm(val.trimLeft(), 'title');
                 clearValid();
               }}
@@ -94,7 +94,7 @@ export default ({navigation, route}) => {
                   value={timeOfDay[form.timeOfDay.row]}
                   selectedIndex={form.timeOfDay}
                   clearButtonMode="unless-editing"
-                  onSelect={index => {
+                  onSelect={(index) => {
                     console.log(form.timeOfDay.row);
                     setForm(index, 'timeOfDay');
                   }}>
