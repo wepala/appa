@@ -1,4 +1,5 @@
 import React from 'react';
+import LinearGradient from 'react-native-linear-gradient';
 import {
   Button,
   Layout,
@@ -8,9 +9,8 @@ import {
   SelectItem,
   useStyleSheet,
   Text,
-  IndexPath,
 } from '@ui-kitten/components';
-import {QuestionIcon, PaperPlaneIcon} from '../../../views/components/Icons';
+import {QuestionIcon} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
 import {SafeAreaView} from 'react-native';
 
@@ -19,79 +19,78 @@ export default ({navigation, route}) => {
   return (
     <SafeAreaView style={styles.container}>
       <DetailTopBar title="Appa Modification Request" navigation={navigation} />
-      <Layout style={styles.container}>
+      <LinearGradient
+        colors={['#b0d9ff', '#eff9ff']}
+        style={styles.linearGradient}>
+        <Text category="h1" style={styles.title}>
+          Appa Modification Request
+        </Text>
         <Layout style={styles.row}>
           <Layout style={styles.column}>
-            <Input placeholder="Appa Lappa" label="Your name" />
-          </Layout>
-        </Layout>
-        <Layout style={styles.row}>
-          <Layout style={styles.column}>
-            <Input placeholder="agenda@appa.com" label="Email Address" />
-          </Layout>
-        </Layout>
-        <Layout style={styles.row}>
-          <Layout style={styles.column}>
-            <Select placeholder="Select reason" accessoryRight={QuestionIcon}>
+            <Input style={styles.paddingBottom} placeholder="Your name" />
+            <Input style={styles.paddingBottom} placeholder="Email Address" />
+            <Select
+              style={[styles.select, styles.paddingBottom]}
+              placeholder="Select reason"
+              accessoryRight={QuestionIcon}>
               <SelectItem title="Bug" />
               <SelectItem title="Feature" />
             </Select>
-          </Layout>
-        </Layout>
-        <Layout style={styles.row}>
-          <Layout style={styles.column}>
             <Input
-              placeholder="agenda@appa.com"
-              label="Type your message"
+              style={styles.paddingBottom}
+              placeholder="Type your message"
               multiline={true}
               numberOfLines={10}
             />
-          </Layout>
-        </Layout>
-        <Layout style={styles.row}>
-          <Layout style={styles.column}>
-            <Button status="success" accessoryRight={PaperPlaneIcon}>
-              Send Request
+            <Button size="large" style={styles.buttonSend}>
+              SEND REQUEST
             </Button>
           </Layout>
         </Layout>
-      </Layout>
+      </LinearGradient>
     </SafeAreaView>
   );
 };
 
 const themedStyles = StyleService.create({
+  linearGradient: {
+    flex: 1,
+  },
   container: {
     flex: 1,
-    backgroundColor: '$background-basic-color-1',
-    padding: 16,
   },
   row: {
     display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 16,
+    flex: 1,
+    justifyContent: 'flex-start',
+    padding: 16,
+    backgroundColor: 'transparent',
   },
   column: {
-    flexGrow: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
+    backgroundColor: 'transparent',
   },
-  column2: {
-    flexGrow: 0,
+  title: {
+    textAlign: 'center',
+    marginTop: 32,
   },
-
-  buttonGroup: {
-    marginTop: 16,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+  subTitle: {
+    paddingBottom: 32,
   },
-  buttonCancel: {
-    flexBasis: 'auto',
-    flexShrink: 0,
-    marginRight: 16,
+  description: {
+    textAlign: 'center',
+    paddingHorizontal: 32,
+    paddingBottom: 32,
   },
-  buttonSubmit: {
-    flexGrow: 1,
+  select: {
+    width: '100%',
+  },
+  buttonSend: {
+    width: '100%',
+  },
+  paddingBottom: {
+    paddingBottom: 16,
   },
 });

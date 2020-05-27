@@ -18,13 +18,13 @@ import Customize from '../customize/views/screens/Main';
 
 const {Navigator, Screen} = createDrawerNavigator();
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     onBoarded: state.onboard.onBoarded,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onShowConnect: () => {},
   };
@@ -35,7 +35,7 @@ const HomeScreen = ({navigation, onBoarded}) => {
     return (
       <Navigator
         screenOptions={{gestureEnabled: true}}
-        drawerContent={props => <MainMenu {...props} />}>
+        drawerContent={(props) => <MainMenu {...props} />}>
         <Screen name="Agenda" component={Tasks} />
         <Screen name="Logs" component={Logs} />
         <Screen name="Reports" component={Reports} />
@@ -80,7 +80,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

@@ -86,7 +86,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               label="Task Title"
               placeholder="Enter title here"
               value={form.title}
-              onChangeText={val => {
+              onChangeText={(val) => {
                 setForm(val.trimLeft(), 'title');
                 clearValid();
               }}
@@ -103,7 +103,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
                   placeholder="30"
                   keyboardType="numeric"
                   value={`${form.timeEstimate}`}
-                  onChangeText={val => {
+                  onChangeText={(val) => {
                     setForm(val.trimLeft(), 'timeEstimate');
                     clearValid();
                   }}
@@ -121,7 +121,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
                   value={timeUnits[form.timeUnit.row]}
                   style={styles.input}
                   selectedIndex={form.timeUnit}
-                  onSelect={index => {
+                  onSelect={(index) => {
                     console.log(form.timeUnit.row);
                     setForm(index, 'timeUnit');
                   }}>
@@ -138,7 +138,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               placeholder=""
               label="Description"
               value={form.description}
-              onChangeText={val => setForm(val.trimLeft(), 'description')}
+              onChangeText={(val) => setForm(val.trimLeft(), 'description')}
             />
             <Datepicker
               testID="TaskDueDate"
@@ -147,7 +147,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               label="Due Date"
               date={form.dueDate}
               ref={datePicker}
-              onSelect={val => {
+              onSelect={(val) => {
                 setForm(val, 'dueDate');
                 datePicker.current.blur();
               }}
