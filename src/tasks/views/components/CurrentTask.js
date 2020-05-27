@@ -83,7 +83,7 @@ export default ({item, index, timeSpentToday, onPress}) => {
 
 const themedStyles = StyleService.create({
   item: {
-    backgroundColor: '$background-basic-color-3',
+    backgroundColor: '$color-primary-500',
     padding: 0,
     marginBottom: 16,
   },
@@ -104,7 +104,9 @@ const themedStyles = StyleService.create({
     backgroundColor: 'transparent',
     width: '50%',
   },
-  title: {},
+  title: {
+    color: '#fafafa',
+  },
   description: {
     paddingVertical: 8,
     fontStyle: 'italic',
