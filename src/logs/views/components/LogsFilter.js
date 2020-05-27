@@ -7,7 +7,6 @@ import {
   RangeDatepicker,
   useStyleSheet,
   StyleService,
-  IndexPath,
 } from '@ui-kitten/components';
 import {CalendarIcon, ArrowDownIcon} from '../../../views/components/Icons';
 
@@ -17,15 +16,15 @@ const LogsFilter = ({tasks, onSetFilters}) => {
     endDate: moment().toDate(),
   });
 
-  const [selectedTaskIndex, setSelectedTaskIndex] = useState(new IndexPath(0));
+  const [selectedTaskIndex, setSelectedTaskIndex] = useState();
 
   const renderTaskOption = (task) => (
     <SelectItem key={task.id} title={task.title} />
   );
 
-  const filter = {
-    task: (tasks.length && tasks[selectedTaskIndex.row].title) || '',
-  };
+  const taskTitle =
+    (tasks.length && selectedTaskIndex && tasks[selectedTaskIndex.row].title) ||
+    '';
 
   const onSelectTask = (index) => {
     setSelectedTaskIndex(index);
@@ -38,7 +37,10 @@ const LogsFilter = ({tasks, onSetFilters}) => {
     setRange(dateRange);
     const startDate = moment(dateRange.startDate).format('YYYY-MM-DD');
     const endDate = moment(dateRange.endDate).format('YYYY-MM-DD');
-    const taskId = tasks[selectedTaskIndex] && tasks[selectedTaskIndex].id;
+    const taskId =
+      selectedTaskIndex && tasks.length
+        ? tasks[selectedTaskIndex.row].id
+        : undefined;
     onSetFilters(startDate, endDate, taskId);
   };
 
@@ -48,7 +50,7 @@ const LogsFilter = ({tasks, onSetFilters}) => {
       <Layout style={styles.row}>
         <Select
           testID={'SelectTask'}
-          value={filter.task}
+          value={taskTitle}
           style={styles.tasksSelect}
           placeholder="All Tasks"
           onSelect={onSelectTask}
