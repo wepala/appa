@@ -1,7 +1,7 @@
 import projects from '../reducer';
 import {addProject, removeProject, updateProject} from '../commands';
 
-describe('projects reducer', function() {
+describe('projects reducer', function () {
   const expectedInitialState = {getByIds: {}};
 
   it('should return initial model', () => {

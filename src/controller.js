@@ -7,7 +7,7 @@ export class Controller {
     this.dispatch = dispatch;
     let proto = Object.getPrototypeOf(this);
     while (proto) {
-      Object.getOwnPropertyNames(proto).forEach(name => {
+      Object.getOwnPropertyNames(proto).forEach((name) => {
         if (
           name !== 'constructor' &&
           name !== 'configureState' &&
@@ -43,7 +43,7 @@ export class Controller {
     this.state = state;
     let proto = Object.getPrototypeOf(this);
     while (proto) {
-      Object.getOwnPropertyNames(proto).forEach(name => {
+      Object.getOwnPropertyNames(proto).forEach((name) => {
         if (
           name !== 'constructor' &&
           name !== 'configureState' &&

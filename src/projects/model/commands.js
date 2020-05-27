@@ -1,13 +1,13 @@
 import {ADD_PROJECT, REMOVE_PROJECT, UPDATE_PROJECT} from './commandTypes';
 
-export const addProject = project => {
+export const addProject = (project) => {
   return {
     type: ADD_PROJECT,
     payload: project,
   };
 };
 
-export const removeProject = projectId => {
+export const removeProject = (projectId) => {
   return {
     type: REMOVE_PROJECT,
     payload: projectId,

@@ -8,7 +8,7 @@ const tasks = (state = {currentTask: null, getById: {}}, action) => {
   switch (action.type) {
     case ADD_TASK:
       //deep copy the getById
-      Object.keys(state.getById).map(id => {
+      Object.keys(state.getById).map((id) => {
         getById = Object.assign({}, getById, {
           [id]: state.getById[id],
         });
@@ -22,7 +22,7 @@ const tasks = (state = {currentTask: null, getById: {}}, action) => {
       return Object.assign({}, state, {getById: getById});
     case REMOVE_TASK:
       //deep copy the getById
-      Object.keys(state.getById).map(id => {
+      Object.keys(state.getById).map((id) => {
         getById = Object.assign({}, getById, {
           [id]: state.getById[id],
         });
@@ -32,7 +32,7 @@ const tasks = (state = {currentTask: null, getById: {}}, action) => {
       delete getById[action.payload];
       return Object.assign({}, state, {getById: getById});
     case UPDATE_TASK:
-      Object.keys(state.getById).map(id => {
+      Object.keys(state.getById).map((id) => {
         if (id === action.meta.id) {
           getById = Object.assign({}, getById, {
             [id]: Object.assign({}, state.getById[id], action.payload),
