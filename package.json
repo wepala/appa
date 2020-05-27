@@ -6,10 +6,10 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest",
+    "test": "TZ=UTC jest",
     "lint": "./node_modules/.bin/eslint .",
     "lint-fix": "./node_modules/.bin/eslint --fix .",
-    "build-android": "mkdir -p android/app/src/main/assets && rm -rf android/app/build && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && cd android && ./gradlew clean assembleDebug"
+    "bundle-android": "mkdir -p android/app/src/main/assets && rm -rf android/app/build && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
   },
   "dependencies": {
     "@eva-design/eva": "^2.0.0-alpha.1",
@@ -53,10 +53,10 @@
     "@babel/preset-flow": "^7.9.0",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/runtime": "7.9.2",
-    "@react-native-community/eslint-config": "0.0.5",
+    "@react-native-community/eslint-config": "^1.1.0",
     "@testing-library/react-hooks": "^3.2.1",
     "babel-jest": "^24.9.0",
-    "eslint": "6.8.0",
+    "eslint": "^6.8.0",
     "eslint-plugin-detox": "^1.0.0",
     "eslint-plugin-jest": "^23.9.0",
     "husky": "^4.2.5",
@@ -66,7 +66,8 @@
     "metro-react-native-babel-preset": "0.58.0",
     "react-native-dotenv": "^0.2.0",
     "react-native-testing-library": "^1.13.2",
-    "react-test-renderer": "^16.11.0"
+    "react-test-renderer": "^16.11.0",
+    "weak-napi": "^2.0.1"
   },
   "husky": {
     "hooks": {

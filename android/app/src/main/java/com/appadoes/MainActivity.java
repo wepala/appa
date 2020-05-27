@@ -1,4 +1,4 @@
-package com.weos.weagenda;
+package com.appadoes;
 
 import com.facebook.react.ReactActivity;
 

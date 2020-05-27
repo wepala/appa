@@ -8,22 +8,21 @@ import {connect} from 'react-redux';
 //import the different modules
 import MainMenu from './components/MainMenu';
 import Tasks from '../tasks/views/screens/Main';
+import Logs from '../logs/views/screens/Main';
 import Onboarding from '../onboarding/views/screens/Main';
-import Logs from '../logs/controllers/Main';
-import Projects from '../projects/controllers/Main';
 import Reports from '../reports/controllers/Main';
 import Support from '../support/views/screens/Support';
 import Sync from './Sync';
 
 const {Navigator, Screen} = createDrawerNavigator();
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     onBoarded: state.onboard.onBoarded,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onShowConnect: () => {},
   };
@@ -34,9 +33,8 @@ const HomeScreen = ({navigation, onBoarded}) => {
     return (
       <Navigator
         screenOptions={{gestureEnabled: true}}
-        drawerContent={props => <MainMenu {...props} />}>
+        drawerContent={(props) => <MainMenu {...props} />}>
         <Screen name="Agenda" component={Tasks} />
-        <Screen name="Projects" component={Projects} />
         <Screen name="Logs" component={Logs} />
         <Screen name="Reports" component={Reports} />
         <Screen name="Settings" component={Tasks} />
@@ -82,7 +80,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

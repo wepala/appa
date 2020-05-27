@@ -3,23 +3,21 @@ import {connect} from 'react-redux';
 
 export const Component = (controller, view) => {
   return connect(
-    state => controller.configureState(state),
-    dispatch => controller.configureDispatch(dispatch),
+    (state, props) => controller.configureState(state, props),
+    (dispatch) => controller.configureDispatch(dispatch),
   )(view);
 };
 
 // Form Hooks
 
 // Handles setting of form data
-export const useForm = initValues => {
+export const useForm = (initValues) => {
   const [values, setvalues] = useState(initValues);
 
   return [
     values,
     (val, key) => {
-      console.log('Value changing,', val, key);
       setvalues({...values, [key]: val});
-      console.log(values);
     },
   ];
 };
@@ -30,12 +28,7 @@ export const useValidated = (form, validated) => {
   return [
     valid,
     (data, currentValid) => {
-      console.log('Submitted', data.title, form.timeEstimate);
-      if (data.title === '') {
-        currentValid.title = false;
-      } else {
-        currentValid.title = true;
-      }
+      currentValid.title = data.title !== '';
       if (
         data.timeEstimate === '' ||
         data.timeEstimate === '0' ||

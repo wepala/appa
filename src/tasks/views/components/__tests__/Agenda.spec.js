@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from 'react-native-testing-library';
-import {ApplicationProvider, IconRegistry, Button} from '@ui-kitten/components';
+import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
 import {default as theme} from '../../../../../theme.json';
@@ -12,7 +12,7 @@ describe('Agenda List View', () => {
     const currentItem =
       mockTasks.getById['36212c03-040b-4139-867f-bd76485f4084'];
 
-    const {getAllByTestId} = render(
+    const {getAllByTestId, unmount} = render(
       <>
         <IconRegistry icons={EvaIconsPack} />
         <ApplicationProvider
@@ -21,7 +21,7 @@ describe('Agenda List View', () => {
             ...eva.light,
             ...theme,
           }}>
-          <Agenda currentItem={currentItem} />
+          <Agenda currentItem={currentItem} timeTotals={[20, 90]} />
         </ApplicationProvider>
       </>,
     );
@@ -29,5 +29,6 @@ describe('Agenda List View', () => {
     // Task Item
     const item = getAllByTestId('AgendaLayout');
     expect(item).toHaveLength(1);
+    unmount();
   });
 });

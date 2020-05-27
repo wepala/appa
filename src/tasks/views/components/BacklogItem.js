@@ -15,7 +15,7 @@ const BacklogItem = ({item, index, onPress}) => {
   const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
   return (
-    <Card style={styles.item} onPress={onPress}>
+    <Card style={styles.item} onPress={() => onPress(index)}>
       <Layout style={styles.row}>
         <Layout style={styles.column1}>
           <CheckBox checked={checked} onChange={toggleCheck} />
@@ -25,7 +25,6 @@ const BacklogItem = ({item, index, onPress}) => {
             {item.title}
           </Text>
           <Text style={styles.time}>Time: 30m out of 1h</Text>
-          <Text category="s2">Project X</Text>
         </Layout>
         <Layout style={styles.column1}>
           <Button

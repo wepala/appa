@@ -1,13 +1,14 @@
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
 import {ADD_TASK, REMOVE_TASK, START_TASK, UPDATE_TASK} from './commandTypes';
+import moment from 'moment';
 
 const tasks = (state = {currentTask: null, getById: {}}, action) => {
   let getById = {};
   switch (action.type) {
     case ADD_TASK:
       //deep copy the getById
-      Object.keys(state.getById).map(id => {
+      Object.keys(state.getById).map((id) => {
         getById = Object.assign({}, getById, {
           [id]: state.getById[id],
         });
@@ -23,7 +24,7 @@ const tasks = (state = {currentTask: null, getById: {}}, action) => {
       return Object.assign({}, state, {getById: getById});
     case REMOVE_TASK:
       //deep copy the getById
-      Object.keys(state.getById).map(id => {
+      Object.keys(state.getById).map((id) => {
         getById = Object.assign({}, getById, {
           [id]: state.getById[id],
         });
@@ -32,7 +33,7 @@ const tasks = (state = {currentTask: null, getById: {}}, action) => {
       delete getById[action.payload];
       return Object.assign({}, state, {getById: getById});
     case UPDATE_TASK:
-      Object.keys(state.getById).map(id => {
+      Object.keys(state.getById).map((id) => {
         if (id === action.meta.id) {
           getById = Object.assign({}, getById, {
             [id]: Object.assign({}, state.getById[id], action.payload),
@@ -46,7 +47,10 @@ const tasks = (state = {currentTask: null, getById: {}}, action) => {
       return Object.assign({}, state, {getById: getById});
     case START_TASK:
       return Object.assign({}, state, {
-        currentTask: state.getById[action.meta.id],
+        currentTask: {
+          ...state.getById[action.meta.id],
+          startTime: moment(),
+        },
       });
     default:
       return state;

@@ -1,24 +1,28 @@
 import React from 'react';
-import {render, fireEvent} from 'react-native-testing-library';
+import {render, fireEvent, cleanup, act} from 'react-native-testing-library';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
 import {default as theme} from '../../../../../theme.json';
-import AgendaItem from '../AgendaItem';
+import CurrentTask from '../CurrentTask';
 
-describe('onboarding complete screen', () => {
+describe('Current Task component', () => {
+  beforeAll(() => {
+    jest.useFakeTimers();
+  });
+  afterAll(() => {
+    cleanup();
+  });
+
   const title = 'My Task';
-  const time = '9:07 AM';
-  const project = 'Project X';
-
+  const totalTime = '4h 23m 32s';
   it('Should render a correctly given item prop', async () => {
     const itemData = {
       title,
-      time,
-      project,
+      totalTime,
     };
     const onPressItem = jest.fn();
-    const {getAllByText, getAllByTestId} = render(
+    const {getAllByText, getAllByTestId, unmount} = render(
       <>
         <IconRegistry icons={EvaIconsPack} />
         <ApplicationProvider
@@ -27,31 +31,27 @@ describe('onboarding complete screen', () => {
             ...eva.light,
             ...theme,
           }}>
-          <AgendaItem item={itemData} onPress={onPressItem} />
+          <CurrentTask item={itemData} onPress={onPressItem} />
         </ApplicationProvider>
       </>,
     );
+    act(() => jest.advanceTimersByTime(1000));
 
     // Task Item
-    const item = getAllByTestId('TaskItem');
+    const item = getAllByTestId('CurrentTask');
     expect(item).toHaveLength(1);
     fireEvent.press(item[0]);
     expect(onPressItem).toHaveBeenCalled();
 
     // Task text
     const taskTitle = getAllByText(title);
-    // const taskTime = getAllByText(`Time: ${time}`);
-    const taskProject = getAllByText(project);
+    const taskTotalTime = getAllByTestId('TotalTime');
     expect(taskTitle).toHaveLength(1);
-    // expect(taskTime).toHaveLength(1);
-    expect(taskProject).toHaveLength(1);
-
-    // Task CheckBox
-    const checkBox = getAllByTestId('TaskCheckBox');
-    expect(checkBox).toHaveLength(1);
+    expect(taskTotalTime).toHaveLength(1);
 
     // Task Button
     const button = getAllByTestId('TaskButton');
     expect(button).toHaveLength(1);
+    unmount();
   });
 });

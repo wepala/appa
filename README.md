@@ -1,6 +1,6 @@
 # WeAgenda
 
-![Test and Build Android & iOS](https://github.com/msanatan/weagenda/workflows/Test%20and%20Build%20Android%20&%20iOS/badge.svg)
+![Test and Build Android & iOS](https://github.com/wepala/weagenda/workflows/Test%20and%20Build%20Android%20&%20iOS/badge.svg)
 
 WeAgenda is a task management application
 
@@ -61,7 +61,16 @@ Give an example
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Deployments are done through Github actions. They are automatically triggered for Android and iOS when a pull request is made for a **release branch**. They are also triggered when new commits are pushed to a release branch.
+
+For Android releases, we need the following information setup:
+
+* ANDROID_KEYSTORE \- Base64 encoded key store
+* ANDROID_KEYSTORE_PASSWORD \- Password for the key store
+* ANDROID_KEY_ALIAS \- Alias/name of the key
+* ANDROID_KEY_PASSWORD \- Password for the key
+
+For iOS, we currently need a developer team added to the project to create an IPA.
 
 ## Built With
 
