@@ -1,5 +1,6 @@
-package com.weos.weagenda;
+package com.appadoes;
 
+import com.appadoes.MainActivity;
 import com.wix.detox.Detox;
 
 import org.junit.Rule;

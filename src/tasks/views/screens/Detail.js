@@ -26,7 +26,6 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
   const section = route.params?.section;
 
   const task = getTask(id);
-  console.log('recieved backlog item', section);
 
   const timeUnits = ['minutes', 'hours'];
   const [form, setForm] = useForm({
@@ -34,7 +33,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
     timeEstimate: parseInt(task.estimatedTime / 60, 10) || '',
     timeUnit: new IndexPath(0),
     description: task.description,
-    dueDate: task.dueDate,
+    dueDate: new Date(task.dueDate),
   });
   const [valid, setValid, clearValid] = useValidated(form, {
     title: true,
