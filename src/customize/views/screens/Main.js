@@ -1,6 +1,6 @@
 import React from 'react';
 import Customize from './Customize';
-import Detail from './Detail';
+import Detail from '../../controllers/Detail';
 import {SafeAreaView} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 

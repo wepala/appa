@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
+import {SafeAreaView} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {
   Button,
@@ -12,9 +13,16 @@ import {
 } from '@ui-kitten/components';
 import {ArrowDownIcon} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
-import {SafeAreaView} from 'react-native';
+import {RequestContext} from '../../../weosHelpers';
 
 export default ({navigation, route}) => {
+  const {status, makeRequest} = useContext(RequestContext);
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    reason: '',
+    details: '',
+  });
   const styles = useStyleSheet(themedStyles);
   return (
     <SafeAreaView style={styles.container}>
@@ -42,7 +50,10 @@ export default ({navigation, route}) => {
               multiline={true}
               numberOfLines={10}
             />
-            <Button size="large" style={styles.buttonSend}>
+            <Button
+              size="large"
+              style={styles.buttonSend}
+              onPress={() => makeRequest(form)}>
               SEND REQUEST
             </Button>
           </Layout>
