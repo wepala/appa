@@ -43,7 +43,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
     timeEstimate: id ? estimatedTime : '',
     timeUnit: id ? timeUnit : new IndexPath(0),
     description: task.description,
-    dueDate: task.dueDate,
+    dueDate: new Date(task.dueDate),
   });
   const [valid, setValid, clearValid] = useValidated(form, {
     title: true,
