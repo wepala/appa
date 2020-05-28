@@ -88,15 +88,19 @@ export const getTaskTimeSpentByDate = createSelector(
   },
 );
 
-const getLogItems = (state, props = {}) => {
+export const getLogItems = (state, props = {}) => {
   let items = [...state.logs.getById.values()];
   if (props.startTime !== undefined || props.endTime !== undefined) {
     if (props.startTime !== undefined) {
-      items = items.filter((item) => item.startTime >= props.startTime);
+      items = items.filter(
+        (item) => item.startTime.substring(0, 10) >= props.startTime,
+      );
     }
 
     if (props.endTime !== undefined) {
-      items = items.filter((item) => item.startTime <= props.endTime);
+      items = items.filter(
+        (item) => item.startTime.substring(0, 10) <= props.endTime,
+      );
     }
   }
 

@@ -1,11 +1,5 @@
-import React from 'react';
-import {
-  Layout,
-  Text,
-  List,
-  StyleService,
-  useStyleSheet,
-} from '@ui-kitten/components';
+import React, {useState} from 'react';
+import {Layout, List, StyleService, useStyleSheet} from '@ui-kitten/components';
 import LogItem from '../components/LogItem';
 import LogFilter from '../components/LogsFilter';
 import TopBar from '../components/TopBar';
@@ -14,9 +8,8 @@ export default ({
   navigation,
   items,
   contentContainerStyle,
-  startTime,
-  endTime,
-  taskId,
+  tasks,
+  setFilters,
 }) => {
   const styles = useStyleSheet(themedStyles);
   const onItemPress = (index) => {
@@ -31,15 +24,25 @@ export default ({
     <LogItem item={item} index={index} onPress={() => onItemPress(index)} />
   );
 
+  let [logs, setLogs] = useState(items);
+
+  const onSetFilters = (startTime, endTime, taskId) => {
+    setLogs(setFilters(startTime, endTime, taskId));
+  };
+
   return (
     <>
       <TopBar navigation={navigation} />
       <Layout style={styles.container}>
-        <LogFilter />
+        <LogFilter
+          tasks={tasks}
+          setFilters={setFilters}
+          onSetFilters={onSetFilters}
+        />
         <List
           contentContainerStyle={[contentContainerStyle, styles.list]}
           numColumns={1}
-          data={items}
+          data={logs}
           renderItem={renderItem}
         />
       </Layout>
@@ -56,6 +59,5 @@ const themedStyles = StyleService.create({
   list: {
     padding: 0,
     backgroundColor: '$background-basic-color-1',
-    flex: 1,
   },
 });
