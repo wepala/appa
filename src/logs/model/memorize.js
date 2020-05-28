@@ -18,8 +18,8 @@ export const memorizeLogsFilter = (state) => {
         });
 
         return {
+          task: tasks[taskIndex],
           ...log,
-          ...tasks[taskIndex],
         };
       }));
 

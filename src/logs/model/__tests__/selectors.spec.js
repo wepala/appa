@@ -68,15 +68,15 @@ describe('Time Log Selectors', () => {
   it('should provide a selector for getting a list of logs based on filters chosen', () => {
     let props = {};
     let logs = getLogsByFilter(mockState, props);
-    //no filters
-    expect(logs).toBeArrayOfSize(10);
+    // only tasks logs
+    expect(logs).toBeArrayOfSize(7);
     //filter by date
     props = Object.assign({}, props, {
       startTime: '2020-05-08',
       endTime: '2020-05-08',
     });
     logs = getLogsByFilter(mockState, props);
-    expect(logs).toBeArrayOfSize(4);
+    expect(logs).toBeArrayOfSize(3);
     //add task filter
     props = Object.assign({}, props, {
       taskId: '36212c03-040b-4139-867f-bd76485f4084',
