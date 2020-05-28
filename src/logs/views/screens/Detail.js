@@ -90,9 +90,25 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
   const filter = (item, query) =>
     item.title.toLowerCase().includes(query.toLowerCase());
 
+  const onBlurTask = () => {
+    const title = form.title;
+
+    if (!form.taskId) {
+      let task = tasks.find((item) =>
+        item.title.toLowerCase().includes(title.toLowerCase()),
+      );
+
+      if (task) {
+        setMultipleValues({
+          taskId: task.id,
+          title: task.title,
+        });
+      }
+    }
+  };
+
   const onChangeTask = (query) => {
     setForm(query.trimLeft(), 'title');
-    // clearValid();
     setData(tasks.filter((task) => filter(task, query)));
   };
 
@@ -112,7 +128,8 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
               captionIcon={!valid.taskId && AlertIcon}
               caption={!valid.taskId && 'Provide a valid task'}
               onSelect={selectTask}
-              onChangeText={onChangeTask}>
+              onChangeText={onChangeTask}
+              onBlur={onBlurTask}>
               {data.map(renderTaskOption)}
             </Autocomplete>
             <Layout style={styles.row}>
