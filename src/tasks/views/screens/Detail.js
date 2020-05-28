@@ -26,7 +26,6 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
   const section = route.params?.section;
 
   const task = getTask(id);
-  console.log('recieved backlog item', section);
 
   const timeUnits = ['minutes', 'hours'];
   const [form, setForm] = useForm({
@@ -34,7 +33,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
     timeEstimate: parseInt(task.estimatedTime / 60, 10) || '',
     timeUnit: new IndexPath(0),
     description: task.description,
-    dueDate: task.dueDate,
+    dueDate: new Date(task.dueDate),
   });
   const [valid, setValid, clearValid] = useValidated(form, {
     title: true,
@@ -86,6 +85,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               style={styles.input}
               label="Task Title"
               placeholder="Enter title here"
+              clearButtonMode="unless-editing"
               value={form.title}
               onChangeText={(val) => {
                 setForm(val.trimLeft(), 'title');
@@ -138,6 +138,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               multiline={true}
               placeholder=""
               label="Description"
+              clearButtonMode="unless-editing"
               value={form.description}
               onChangeText={(val) => setForm(val.trimLeft(), 'description')}
             />
@@ -146,6 +147,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               style={styles.input}
               accessoryRight={CalendarIcon}
               label="Due Date"
+              clearButtonMode="unless-editing"
               date={form.dueDate}
               ref={datePicker}
               onSelect={(val) => {
@@ -161,7 +163,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
                 style={styles.buttonCancel}
                 size="giant"
                 Cancel
-                onPress={() => console.log('Cancelled')}>
+                onPress={() => navigation.goBack()}>
                 Cancel
               </Button>
               <Button

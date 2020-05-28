@@ -38,14 +38,14 @@ export default ({
       />
     );
   };
-
   return (
     <Layout style={styles.container} testID={'AgendaLayout'}>
-      {currentItem ? (
+      {currentItem && currentItem.id ? (
         <CurrentTask
           testID={'CurrentTask'}
           item={currentItem}
           timeSpentToday={timeTotals[currentIndex]}
+          stopTask={startTask}
         />
       ) : null}
       <List
