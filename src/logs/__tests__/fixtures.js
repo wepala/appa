@@ -61,7 +61,7 @@ export const mockLogs = {
       '68e5110a-05c4-43af-b187-8eaa4e7584c1',
       {
         id: '68e5110a-05c4-43af-b187-8eaa4e7584c1',
-        startTime: moment(),
+        startTime: moment().format(),
         taskId: 'de2c2c26-cadb-4f06-a819-b1ffcfba35b0',
       },
     ],
@@ -69,7 +69,7 @@ export const mockLogs = {
       '4838181e-304b-4324-92dd-08ea01cfd121',
       {
         id: '4838181e-304b-4324-92dd-08ea01cfd121',
-        startTime: moment(),
+        startTime: moment().format(),
         taskId: 'caac3188-4666-4b1f-9ad8-20c65a2871d2',
       },
     ],
@@ -77,7 +77,7 @@ export const mockLogs = {
       'e834fac7-eb5f-4134-95e5-c8217a2d0a59',
       {
         id: 'e834fac7-eb5f-4134-95e5-c8217a2d0a59',
-        startTime: moment(),
+        startTime: moment().format(),
         taskId: '_stop',
       },
     ],
