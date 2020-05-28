@@ -117,7 +117,7 @@ const makeLogsByFilter = () =>
         });
         console.log(log, tasks[taskIndex]);
         return {
-          ...tasks[taskIndex],
+          task: tasks[taskIndex],
           ...log,
         };
       }));
