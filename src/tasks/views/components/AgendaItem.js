@@ -35,71 +35,60 @@ const TaskItem = ({
   };
 
   return (
-    <Layout style={styles.row}>
-      <Layout style={styles.column1}>
-        <CheckBox
-          testID={'TaskCheckBox'}
-          checked={checked}
-          onChange={() =>
-            onComplete(item.id, !checked).then(toggleCheck(!checked))
-          }
-        />
+    <Card
+      testID={'TaskItem'}
+      style={styles.item}
+      onPress={onPress}
+      status={checked ? 'success' : active ? 'basic' : null}>
+      <Layout style={styles.row}>
+        <Layout style={styles.column1}>
+          <CheckBox
+            testID={'TaskCheckBox'}
+            checked={checked}
+            onChange={() =>
+              onComplete(item.id, !checked).then(toggleCheck(!checked))
+            }
+          />
+        </Layout>
+        <Layout style={styles.column2}>
+          <Text
+            numberOfLines={1}
+            category="s1"
+            style={checked && styles.checked}>
+            {item.title}
+          </Text>
+          <Text style={styles.timeSpent}>
+            Time:{' '}
+            {currentTimeSpent.hours > 0
+              ? `${currentTimeSpent.hours}hrs `
+              : null}
+            {currentTimeSpent.minutes > 0
+              ? `${currentTimeSpent.minutes}mins `
+              : null}
+            {`${currentTimeSpent.seconds}secs`}
+          </Text>
+          <Text style={styles.estimatedTime}>
+            Estimated:{' '}
+            {estimatedTime.hours > 0 ? `${estimatedTime.hours}hrs ` : null}
+            {estimatedTime.minutes > 0 ? `${estimatedTime.minutes}mins ` : null}
+            {`${estimatedTime.seconds}secs`}
+          </Text>
+        </Layout>
+
+        <Layout style={styles.column1}>
+          <Button
+            testID={'TaskButton'}
+            size="small"
+            status="success"
+            accessoryLeft={PlayIcon}
+            onPress={() => {
+              onStart(item.id);
+              setCurrentIndex(index);
+            }}
+          />
+        </Layout>
       </Layout>
-      <Layout style={styles.column2}>
-        <Card
-          testID={'TaskItem'}
-          style={
-            checked
-              ? [styles.item, styles.checkedItem]
-              : active
-              ? [styles.item, styles.activeItem]
-              : styles.item
-          }
-          onPress={onPress}
-          x>
-          <Layout style={styles.row}>
-            <Layout style={styles.column1}>
-              <Text
-                numberOfLines={1}
-                category="s1"
-                style={checked && styles.checked}>
-                {item.title}
-              </Text>
-              <Text style={styles.timeSpent}>
-                Time:{' '}
-                {currentTimeSpent.hours > 0
-                  ? `${currentTimeSpent.hours}hrs `
-                  : null}
-                {currentTimeSpent.minutes > 0
-                  ? `${currentTimeSpent.minutes}mins `
-                  : null}
-                {`${currentTimeSpent.seconds}secs`}
-              </Text>
-              <Text style={styles.estimatedTime}>
-                Estimated:{' '}
-                {estimatedTime.hours > 0 ? `${estimatedTime.hours}hrs ` : null}
-                {estimatedTime.minutes > 0
-                  ? `${estimatedTime.minutes}mins `
-                  : null}
-                {`${estimatedTime.seconds}secs`}
-              </Text>
-            </Layout>
-            <Layout style={styles.column2}>
-              <Button
-                testID={'TaskButton'}
-                size="small"
-                status="success"
-                accessoryLeft={PlayIcon}
-                onPress={() => {
-                  onStart(item.id);
-                  setCurrentIndex(index);
-                }}
-              />
-            </Layout>
-          </Layout>
-        </Card>
-      </Layout>
-    </Layout>
+    </Card>
   );
 };
 
@@ -107,14 +96,6 @@ const themedStyles = StyleService.create({
   item: {
     marginVertical: 8,
     padding: 0,
-  },
-  activeItem: {
-    borderLeftWidth: 9,
-    borderLeftColor: '$color-primary-500',
-  },
-  checkedItem: {
-    borderLeftWidth: 9,
-    borderLeftColor: '$color-success-500',
   },
 
   row: {
@@ -132,12 +113,13 @@ const themedStyles = StyleService.create({
   column2: {
     backgroundColor: 'transparent',
     paddingVertical: 2,
-    paddingLeft: 16,
+    paddingHorizontal: 16,
     justifyContent: 'space-between',
-    flex: 1,
+    width: '80%',
   },
   timeSpent: {
     paddingVertical: 8,
+    color: '$color-basic-700',
     justifyContent: 'center',
   },
   estimatedTime: {

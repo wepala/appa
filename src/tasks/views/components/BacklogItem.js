@@ -24,7 +24,9 @@ const BacklogItem = ({item, index, onPress}) => {
           <Text category="s1" style={styles.task}>
             {item.title}
           </Text>
-          <Text style={styles.time}>Time: 30m out of 1h</Text>
+          <Text category="s2" style={styles.time}>
+            Time: 30m out of 1h
+          </Text>
         </Layout>
         <Layout style={styles.column1}>
           <Button
@@ -67,7 +69,6 @@ const themedStyles = StyleService.create({
     marginBottom: 4,
   },
   time: {
-    color: '$color-basic-700',
     marginBottom: 4,
   },
   icon: {

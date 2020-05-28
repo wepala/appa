@@ -30,7 +30,7 @@ const useInterval = (callback, delay) => {
   }, [delay]);
 };
 
-export default ({item, index, timeSpentToday, onPress}) => {
+export default ({item, index, timeSpentToday, onPress, stopTask}) => {
   const styles = useStyleSheet(themedStyles);
   item = item === undefined ? {title: 'Lorem Ipsum', project: ''} : item;
 
@@ -73,7 +73,8 @@ export default ({item, index, timeSpentToday, onPress}) => {
           style={styles.button}
           status="danger"
           size="small"
-          accessoryRight={StopOutlineIcon}>
+          accessoryRight={StopOutlineIcon}
+          onPress={() => stopTask('_stop')}>
           Stop
         </Button>
       </Layout>
@@ -83,7 +84,7 @@ export default ({item, index, timeSpentToday, onPress}) => {
 
 const themedStyles = StyleService.create({
   item: {
-    backgroundColor: '$color-primary-500',
+    backgroundColor: '$background-basic-color-3',
     padding: 0,
     marginBottom: 16,
   },
@@ -104,9 +105,7 @@ const themedStyles = StyleService.create({
     backgroundColor: 'transparent',
     width: '50%',
   },
-  title: {
-    color: '#fafafa',
-  },
+  title: {},
   description: {
     paddingVertical: 8,
     fontStyle: 'italic',

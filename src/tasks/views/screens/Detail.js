@@ -85,6 +85,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               style={styles.input}
               label="Task Title"
               placeholder="Enter title here"
+              clearButtonMode="unless-editing"
               value={form.title}
               onChangeText={(val) => {
                 setForm(val.trimLeft(), 'title');
@@ -137,6 +138,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               multiline={true}
               placeholder=""
               label="Description"
+              clearButtonMode="unless-editing"
               value={form.description}
               onChangeText={(val) => setForm(val.trimLeft(), 'description')}
             />
@@ -145,6 +147,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               style={styles.input}
               accessoryRight={CalendarIcon}
               label="Due Date"
+              clearButtonMode="unless-editing"
               date={form.dueDate}
               ref={datePicker}
               onSelect={(val) => {
@@ -160,7 +163,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
                 style={styles.buttonCancel}
                 size="giant"
                 Cancel
-                onPress={() => console.log('Cancelled')}>
+                onPress={() => navigation.goBack()}>
                 Cancel
               </Button>
               <Button

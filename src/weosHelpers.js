@@ -19,6 +19,9 @@ export const useForm = (initValues) => {
     (val, key) => {
       setvalues({...values, [key]: val});
     },
+    (properties) => {
+      setvalues({...values, ...properties});
+    },
   ];
 };
 // Handles validation of fields belonging to form data

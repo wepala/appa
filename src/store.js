@@ -13,6 +13,11 @@ const initialState = {
   tasks: {
     getById: {},
   },
+  logs: {
+    getByTaskId: new Map(),
+    getById: new Map(),
+    getByTime: new Map(),
+  },
 };
 const middlewares = [thunk];
 

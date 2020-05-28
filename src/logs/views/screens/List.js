@@ -20,9 +20,8 @@ export default ({
 }) => {
   const styles = useStyleSheet(themedStyles);
   const onItemPress = (index) => {
-    console.log(items, index);
-    navigation.navigate('UpdateTask', {
-      itemId: items[index].id,
+    navigation.navigate('UpdateLog', {
+      id: items[index].id,
     });
   };
 
@@ -33,7 +32,7 @@ export default ({
 
   return (
     <>
-      <TopBar navigation={navigation} />
+      <TopBar navigation={navigation} title="Time Log" />
       <Layout style={styles.container}>
         <LogFilter />
         <List

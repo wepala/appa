@@ -44,8 +44,8 @@ def flipper_post_install(installer)
   end
 end
 
-target 'WeAgenda' do
-  # Pods for WeAgenda
+target 'AppaTimeTracker' do
+  # Pods for AppaTimeTracker
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -77,8 +77,7 @@ target 'WeAgenda' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-
-  target 'WeAgendaTests' do
+  target 'AppaTimeTrackerTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -95,10 +94,10 @@ target 'WeAgenda' do
   end
 end
 
-target 'WeAgenda-tvOS' do
-  # Pods for WeAgenda-tvOS
+target 'AppaTimeTracker-tvOS' do
+  # Pods for AppaTimeTracker-tvOS
 
-  target 'WeAgenda-tvOSTests' do
+  target 'AppaTimeTracker-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end
