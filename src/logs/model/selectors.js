@@ -109,15 +109,18 @@ const getLogItems = (state, props = {}) => {
 
 const makeLogsByFilter = () =>
   createSelector([getLogItems, tasksSelector], (items, tasks) => {
-    return (items = items.map((log) => {
-      let taskIndex = tasks.findIndex((task) => {
-        return task.id === log.taskId;
-      });
-      return {
-        ...log,
-        task: tasks[taskIndex],
-      };
-    }));
+    return (items = items
+      .filter((item) => item.taskId !== '_stop')
+      .map((log) => {
+        let taskIndex = tasks.findIndex((task) => {
+          return task.id === log.taskId;
+        });
+        console.log(log, tasks[taskIndex]);
+        return {
+          ...tasks[taskIndex],
+          ...log,
+        };
+      }));
   });
 
 export const getLogsByFilter = makeLogsByFilter();
