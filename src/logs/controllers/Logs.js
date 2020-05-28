@@ -10,8 +10,11 @@ export default class LogsController extends Controller {
     const filter = memorizeLogsFilter(state);
 
     return {
-      items: getLogsByFilter(state, props), //this.filterByTask(state, props),
-      tasks: getTasksByDate(state, moment().format('YYYY-MM-DD')),
+      items: getLogsByFilter(state, props),
+      tasks: [
+        {id: undefined, title: 'All Tasks'},
+        ...getTasksByDate(state, moment().format('YYYY-MM-DD')),
+      ],
       setFilters: (startTime, endTime, taskId) =>
         filter(startTime, endTime, taskId),
     };
