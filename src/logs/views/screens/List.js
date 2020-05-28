@@ -56,6 +56,5 @@ const themedStyles = StyleService.create({
   list: {
     padding: 0,
     backgroundColor: '$background-basic-color-1',
-    flex: 1,
   },
 });

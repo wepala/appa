@@ -4,10 +4,19 @@ import {SUPPORT_URL, SENDER, DESTINATION} from 'react-native-dotenv';
 
 import DetailScreen from '../views/screens/Detail';
 import {RequestContext} from '../../weosHelpers';
+import {useState} from 'react';
+import {useEffect} from 'react';
 
 const value = {
   status: null,
-  makeRequest: (form) =>
+  makeRequest(form) {
+    this.status = 'pending';
+  },
+};
+const Detail = (props) => {
+  const [status, setStatus] = useState('init');
+  const makeRequest = (form) => {
+    setStatus('pending');
     axios({
       method: 'post',
       url: SUPPORT_URL,
@@ -20,18 +29,16 @@ const value = {
       },
     })
       .then((res) => {
-        console.log('Success!!', res.status);
-        this.status = 'success';
+        console.log('Success!!', res.data);
+        setStatus('success');
       })
       .catch((error) => {
         console.log('Error!!', error);
-        this.status = 'error';
-      }),
+        setStatus('error');
+      });
+  };
+
+  return <DetailScreen {...props} status={status} makeRequest={makeRequest} />;
 };
-const Detail = (props) => (
-  <RequestContext.Provider value={value}>
-    <DetailScreen {...props} />
-  </RequestContext.Provider>
-);
 
 export default Detail;
