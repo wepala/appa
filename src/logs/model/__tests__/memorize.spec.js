@@ -16,4 +16,14 @@ describe('Memorize', () => {
     let result = filterFn(startDate, endDate, taskId);
     expect(result.length).toBe(1);
   });
+
+  it('should use cached result when filter params are the same', () => {
+    let taskId = '36212c03-040b-4139-867f-bd76485f4084';
+    let startDate = '2020-05-08';
+    let endDate = '2020-05-08';
+    let filterFn = memorizeLogsFilter(mockState);
+    let result = filterFn(startDate, endDate, taskId);
+    let result2 = filterFn(startDate, endDate, taskId);
+    expect(result2).toBe(result);
+  });
 });
