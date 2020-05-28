@@ -14,7 +14,7 @@ export default () => (
     <Navigator screenOptions={{gestureEnabled: false, headerShown: false}}>
       <Screen
         name="LogList"
-        component={new Component(new LogsController(), List)}
+        component={Component(new LogsController(), List)}
       />
       <Screen
         name="CreateLog"
