@@ -5,17 +5,45 @@ import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
 import {default as theme} from '../../../../../theme.json';
 import Detail from '../Detail';
-import {mockTasks} from '../../../__tests__/fixtures';
-import moment from 'moment';
+import {mockLogs} from '../../../__tests__/fixtures';
+import {mockTasks} from '../../../../tasks/__tests__/fixtures';
 
 describe('Log Detail Screen', () => {
   it('should render 3 inputs and 2', () => {
+    const getLog = jest.fn(() => ({
+      ...mockLogs.getById.get('f4cb9236-2df7-4abd-8c06-cb836865a1c3'),
+      task: mockTasks.getById['7a5fe6af-27f5-486b-a32d-4d3d0437d0c3'],
+    }));
+
+    const getTasks = jest.fn(() => Object.values(mockTasks.getById));
+
     const navigation = {
       goBack: jest.fn(),
     };
     const route = {
       param: {},
     };
+
+    const onSave = jest.fn(
+      () =>
+        new Promise(function (resolve) {
+          resolve();
+        }),
+    );
+
+    const onUpdate = jest.fn(
+      () =>
+        new Promise(function (resolve) {
+          resolve();
+        }),
+    );
+
+    const onRemove = jest.fn(
+      () =>
+        new Promise(function (resolve) {
+          resolve();
+        }),
+    );
 
     const {getAllByTestId} = render(
       <>
@@ -26,7 +54,15 @@ describe('Log Detail Screen', () => {
             ...eva.light,
             ...theme,
           }}>
-          <Detail navigation={navigation} route={route} />
+          <Detail
+            onUpdate={onUpdate}
+            onSave={onSave}
+            navigation={navigation}
+            route={route}
+            getLog={getLog}
+            onRemove={onRemove}
+            getTasks={getTasks}
+          />
         </ApplicationProvider>
       </>,
     );
