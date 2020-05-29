@@ -21,9 +21,8 @@ export default ({navigation}) => {
           </Text>
           <Button style={styles.buttonConnect}>WeOS Connect</Button>
           <Text style={styles.text} category="s1">
-            You can connect to WeOS our platform to make it easier to make it
-            easier to share information between devices. You can learn more
-            about WeOS here.
+            You can connect to WeOS our platform to make it easier to share
+            information between devices. You can learn more about WeOS here.
           </Text>
         </Layout>
         <Button
