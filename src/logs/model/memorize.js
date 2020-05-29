@@ -12,16 +12,18 @@ export const memorizeLogsFilter = (state) => {
     if (cache[key]) {
       return cache[key];
     } else {
-      let result = (logs = logs.map((log) => {
-        let taskIndex = tasks.findIndex((task) => {
-          return task.id === log.taskId;
-        });
+      let result = logs
+        .filter((log) => log.taskId !== '_stop')
+        .map((log) => {
+          let taskIndex = tasks.findIndex((task) => {
+            return task.id === log.taskId;
+          });
 
-        return {
-          task: tasks[taskIndex],
-          ...log,
-        };
-      }));
+          return {
+            task: tasks[taskIndex],
+            ...log,
+          };
+        });
 
       cache[key] = result;
       return result;
