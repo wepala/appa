@@ -13,7 +13,8 @@ import {
 import {
   AssetCalendarIcon,
   ClockIcon,
-  ProjectIcon,
+  InfoIcon,
+  EditIcon,
   ReportIcon,
   SettingsIcon,
   SupportIcon,
@@ -32,9 +33,24 @@ export default ({navigation}) => {
         navigation.navigate('Logs');
         return;
       }
-      case 2: {
+      case 3: {
+        navigation.toggleDrawer();
+        navigation.navigate('Settings');
+        return;
+      }
+      case 4: {
         navigation.toggleDrawer();
         navigation.navigate('Support');
+        return;
+      }
+      case 5: {
+        navigation.toggleDrawer();
+        navigation.navigate('Customize');
+        return;
+      }
+      case 6: {
+        navigation.toggleDrawer();
+        navigation.navigate('About');
         return;
       }
     }
@@ -71,8 +87,10 @@ export default ({navigation}) => {
         <DrawerItem title={'Time Log'} accessoryLeft={ClockIcon} />
         {/* <DrawerItem title={'Reports'} accessoryLeft={ReportIcon} /> */}
         <Divider />
-        {/* <DrawerItem title={'Settings'} accessoryLeft={SettingsIcon} /> */}
+        <DrawerItem title={'Settings'} accessoryLeft={SettingsIcon} />
         <DrawerItem title={'Support'} accessoryLeft={SupportIcon} />
+        <DrawerItem title={'Customize'} accessoryLeft={EditIcon} />
+        <DrawerItem title={'About'} accessoryLeft={InfoIcon} />
       </Drawer>
     </SafeAreaView>
   );

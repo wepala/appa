@@ -1,5 +1,6 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
+import {SafeAreaView, ImageBackground} from 'react-native';
+
 import {
   Button,
   Text,
@@ -7,38 +8,30 @@ import {
   StyleService,
   Layout,
 } from '@ui-kitten/components';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faUserCircle} from '@fortawesome/free-solid-svg-icons';
+import background from '../../../../assets/images/brand/connect.png';
 
 export default ({navigation}) => {
   const styles = useStyleSheet(themedStyles);
   return (
     <SafeAreaView style={styles.container}>
-      <Layout style={styles.container} level="2">
-        <Layout style={styles.headerContainer} level="2">
-          <FontAwesomeIcon
-            style={styles.image}
-            icon={faUserCircle}
-            size={216}
-          />
-          <Text style={styles.text} category="h3">
+      <ImageBackground source={background} style={styles.image}>
+        <Layout style={styles.headerContainer}>
+          <Text style={styles.text} category="h2">
             Create Account
           </Text>
+          <Button style={styles.buttonConnect}>WeOS Connect</Button>
           <Text style={styles.text} category="s1">
-            You can connect to WeOS our platform to make it easier to make it
-            easier to share information between devices. You can learn more
-            about WeOS here.
+            You can connect to WeOS our platform to make it easier to share
+            information between devices. You can learn more about WeOS here.
           </Text>
         </Layout>
-        <Layout level="2" style={styles.buttonContainer}>
-          <Button style={styles.buttonConnct}>WeOS Connect</Button>
-          <Button
-            status="basic"
-            onPress={() => navigation.navigate('Complete')}>
-            Skip
-          </Button>
-        </Layout>
-      </Layout>
+        <Button
+          style={styles.buttonSkip}
+          appearance="outline"
+          onPress={() => navigation.navigate('Complete')}>
+          Skip
+        </Button>
+      </ImageBackground>
     </SafeAreaView>
   );
 };
@@ -46,24 +39,32 @@ export default ({navigation}) => {
 const themedStyles = StyleService.create({
   container: {
     height: '100%',
-    padding: 16,
+    flex: 1,
   },
   image: {
-    color: 'color-primary-default',
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'flex-end',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: 16,
   },
   headerContainer: {
-    flex: 1,
     justifyContent: 'space-evenly',
     alignItems: 'center',
+    backgroundColor: 'transparent',
+    paddingBottom: 16,
+    width: '100%',
   },
   text: {
     color: '$color-basic-700',
     textAlign: 'center',
   },
-  buttonGroup: {
-    paddingVertical: 16,
+  buttonSkip: {
+    width: '100%',
   },
-  buttonConnct: {
+  buttonConnect: {
     marginBottom: 16,
+    width: '100%',
   },
 });
