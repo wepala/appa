@@ -21,7 +21,6 @@ const TaskItem = ({
   timeSpentToday,
   active,
 }) => {
-  console.log(active);
   const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
   let currentTimeSpent = {
