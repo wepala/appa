@@ -39,7 +39,7 @@ export default ({
           onSetFilters={onSetFilters}
         />
         <List
-          contentContainerStyle={[contentContainerStyle, styles.list]}
+          style={[styles.list, contentContainerStyle]}
           numColumns={1}
           data={logs}
           renderItem={renderItem}
@@ -51,12 +51,13 @@ export default ({
 
 const themedStyles = StyleService.create({
   container: {
-    padding: 16,
+    paddingVertical: 16,
     flex: 1,
-    backgroundColor: '$background-basic-color-1',
+    backgroundColor: '#edf8ff',
+    // backgroundColor: '$background-basic-color-1',
   },
   list: {
     padding: 0,
-    backgroundColor: '$background-basic-color-1',
+    backgroundColor: 'transparent',
   },
 });

@@ -8,7 +8,6 @@ import {
   StyleService,
   useStyleSheet,
 } from '@ui-kitten/components';
-import {CalendarIcon} from '../../../views/components/Icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCalendarAlt} from '@fortawesome/free-solid-svg-icons';
 
@@ -48,8 +47,9 @@ const BacklogItem = ({item, index, onPress}) => {
               size="tiny"
               appearance="outline"
               onPress={() => {
-                onStart(item.id);
-                setCurrentIndex(index);
+                console.log('Start Task from backlog?', item);
+                // onStart(item.id);
+                // setCurrentIndex(index);
               }}>
               <FontAwesomeIcon icon={faCalendarAlt} color="#Ff985f" />
             </Button>
@@ -113,25 +113,6 @@ const themedStyles = StyleService.create({
     paddingTop: 10,
     paddingBottom: 6,
     paddingHorizontal: 4,
-  },
-  checkBox: {
-    backgroundColor: 'transparent',
-  },
-
-  // States
-  active: {
-    card: {
-      borderLeftColor: '$color-primary-500',
-    },
-  },
-  checked: {
-    title: {
-      fontStyle: 'italic',
-      textDecorationLine: 'line-through',
-    },
-    card: {
-      backgroundColor: '#edf8ff',
-    },
   },
 });
 
