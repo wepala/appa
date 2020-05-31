@@ -14,7 +14,6 @@ describe('onboarding complete screen', () => {
     jest.mock('@fortawesome/react-native-fontawesome', () => ({
       FontAwesomeIcon: '',
     }));
-
     const itemData = {
       title,
       time,

@@ -1,5 +1,6 @@
-import {List, Layout, StyleService, useStyleSheet} from '@ui-kitten/components';
 import React, {useState} from 'react';
+import {List, Layout, StyleService, useStyleSheet} from '@ui-kitten/components';
+import LinearGradient from 'react-native-linear-gradient';
 import AgendaItem from '../components/AgendaItem';
 import CurrentTask from '../components/CurrentTask';
 
@@ -39,22 +40,24 @@ export default ({
     );
   };
   return (
-    <Layout style={styles.container} testID={'AgendaLayout'}>
-      {currentItem && currentItem.id ? (
-        <CurrentTask
-          testID={'CurrentTask'}
-          item={currentItem}
-          timeSpentToday={timeTotals[currentIndex]}
-          stopTask={startTask}
+    <LinearGradient colors={['#edf8ff', '#fff']} style={styles.linearGradient}>
+      <Layout style={styles.container} testID={'AgendaLayout'}>
+        {currentItem && currentItem.id ? (
+          <CurrentTask
+            testID={'CurrentTask'}
+            item={currentItem}
+            timeSpentToday={timeTotals[currentIndex]}
+            stopTask={startTask}
+          />
+        ) : null}
+        <List
+          style={[styles.list, contentContainerStyle]}
+          numColumns={1}
+          data={items}
+          renderItem={renderItem}
         />
-      ) : null}
-      <List
-        style={[styles.list, contentContainerStyle]}
-        numColumns={1}
-        data={items}
-        renderItem={renderItem}
-      />
-    </Layout>
+      </Layout>
+    </LinearGradient>
   );
 };
 
@@ -62,9 +65,13 @@ const themedStyles = StyleService.create({
   container: {
     padding: 16,
     flex: 1,
+    backgroundColor: 'transparent',
+  },
+  linearGradient: {
+    flex: 1,
   },
   list: {
     padding: 0,
-    backgroundColor: '$background-basic-color-1',
+    backgroundColor: 'transparent',
   },
 });
