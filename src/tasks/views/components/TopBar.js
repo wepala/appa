@@ -1,10 +1,10 @@
+import React from 'react';
 import {
   Divider,
   TopNavigation,
   TopNavigationAction,
 } from '@ui-kitten/components';
 import {MenuIcon, PlusIcon} from '../../../views/components/Icons';
-import React from 'react';
 
 export default ({navigation, title}) => {
   title = title === undefined ? 'WeAgenda' : title;
