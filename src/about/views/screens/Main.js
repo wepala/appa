@@ -64,11 +64,12 @@ const themedStyles = StyleService.create({
     resizeMode: 'cover',
     justifyContent: 'flex-end',
     flexDirection: 'column',
+    backgroundColor: '#444',
+    paddingHorizontal: 16,
   },
   container: {
     flex: 1,
     backgroundColor: 'transparent',
-    paddingHorizontal: 16,
   },
   row: {
     display: 'flex',
