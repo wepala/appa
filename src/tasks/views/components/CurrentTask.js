@@ -57,9 +57,9 @@ export default ({item, index, timeSpentToday, onPress, stopTask}) => {
         <Text numberOfLines={1} category="h5" style={styles.title}>
           {item.title}
         </Text>
-        {/* <Text style={styles.title} category="s2">
-          teste
-        </Text> */}
+        <Text style={styles.title} category="s2">
+          teste rinig aksidnoans
+        </Text>
         {item.project ? <Text category="s2">{item.project}</Text> : null}
       </Card>
       <Card disabled style={styles.subCard.item}>
@@ -101,7 +101,8 @@ const themedStyles = StyleService.create({
     shadowRadius: 7,
   },
   card: {
-    height: 110,
+    height: 'auto',
+    paddingBottom: 32,
     backgroundColor: '$color-primary-500',
     borderRadius: 7,
     borderColor: 'transparent',
