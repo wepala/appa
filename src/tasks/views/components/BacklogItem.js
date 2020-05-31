@@ -1,6 +1,4 @@
 import React, {useState} from 'react';
-import {AssetCalendarIcon} from '../../../views/components/Icons';
-
 import {
   Text,
   Card,
@@ -10,72 +8,125 @@ import {
   StyleService,
   useStyleSheet,
 } from '@ui-kitten/components';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faCalendarAlt} from '@fortawesome/free-solid-svg-icons';
 
 const BacklogItem = ({item, index, onPress}) => {
   const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
   return (
-    <Card style={styles.item} onPress={() => onPress(index)}>
-      <Layout style={styles.row}>
-        <Layout style={styles.column1}>
-          <CheckBox checked={checked} onChange={toggleCheck} />
+    <Layout style={styles.item}>
+      <CheckBox
+        testID={'TaskCheckBox'}
+        style={styles.checkBox}
+        status="primary"
+        checked={checked}
+        onChange={() =>
+          onComplete(item.id, !checked).then(toggleCheck(!checked))
+        }
+      />
+      <Card testID={'TaskItem'} style={styles.card} onPress={onPress}>
+        <Layout style={styles.row}>
+          <Layout style={styles.column1}>
+            <Text
+              numberOfLines={1}
+              category="h6"
+              style={checked && styles.checked.title}>
+              {item.title}
+            </Text>
+            <Text category="s2" appearance="hint" style={styles.timeSpent}>
+              Time Spent:{' '}
+            </Text>
+          </Layout>
+
+          <Layout style={styles.column2}>
+            <Button
+              testID={'TaskButton'}
+              style={styles.buttonStart}
+              status="warning"
+              size="small"
+              appearance="outline"
+              onPress={() => {
+                onStart(item.id);
+                setCurrentIndex(index);
+              }}>
+              <FontAwesomeIcon icon={faCalendarAlt} color="#Ff985f" />
+            </Button>
+          </Layout>
         </Layout>
-        <Layout style={styles.column2}>
-          <Text category="s1" style={styles.task}>
-            {item.title}
-          </Text>
-          <Text category="s2" style={styles.time}>
-            Time: 30m out of 1h
-          </Text>
-        </Layout>
-        <Layout style={styles.column1}>
-          <Button
-            size="small"
-            appearance="ghost"
-            status="basic"
-            accessoryLeft={AssetCalendarIcon}
-          />
-        </Layout>
-      </Layout>
-    </Card>
+      </Card>
+    </Layout>
   );
 };
 
 const themedStyles = StyleService.create({
   item: {
-    marginVertical: 8,
-    padding: 0,
+    marginVertical: 16,
+    paddingHorizontal: 16,
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+
+    shadowColor: '#777',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+  },
+
+  card: {
+    marginLeft: 16,
+    borderRadius: 7,
+    borderColor: 'transparent',
+    borderWidth: 0,
+    borderLeftWidth: 10,
+    flex: 1,
   },
 
   row: {
-    display: 'flex',
     flexDirection: 'row',
+    backgroundColor: 'transparent',
   },
 
   column1: {
     backgroundColor: 'transparent',
-    flexBasis: 'auto',
-    flexShrink: 0,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
+    flex: 1,
+    marginRight: 8,
   },
   column2: {
     backgroundColor: 'transparent',
-    flexGrow: 1,
-    paddingVertical: 2,
-    paddingHorizontal: 16,
-    justifyContent: 'space-between',
+    width: 'auto',
   },
-  task: {
-    marginBottom: 4,
+
+  timeSpent: {},
+  estimatedTime: {
+    textAlign: 'center',
   },
-  time: {
-    marginBottom: 4,
+  buttonStart: {
+    textAlign: 'center',
   },
-  icon: {
-    width: 20,
-    height: 20,
-    margin: 0,
-    padding: 0,
+  checkBox: {
+    backgroundColor: 'transparent',
+  },
+
+  // States
+  active: {
+    card: {
+      borderLeftColor: '#4381FF',
+    },
+  },
+  checked: {
+    title: {
+      fontStyle: 'italic',
+      textDecorationLine: 'line-through',
+    },
+    card: {
+      backgroundColor: '#edf8ff',
+    },
   },
 });
 

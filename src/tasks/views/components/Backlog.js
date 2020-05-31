@@ -17,6 +17,7 @@ export default ({navigation, items, contentContainerStyle}) => {
 
   return (
     <List
+      style={styles.list}
       contentContainerStyle={[styles.container, contentContainerStyle]}
       numColumns={1}
       data={items}
@@ -27,7 +28,13 @@ export default ({navigation, items, contentContainerStyle}) => {
 
 const styles = StyleSheet.create({
   container: {
+    paddingVertical: 16,
     flex: 1,
-    padding: 16,
+    backgroundColor: '#edf8ff',
+    // backgroundColor: '$background-basic-color-1',
+  },
+  list: {
+    padding: 0,
+    backgroundColor: 'transparent',
   },
 });
