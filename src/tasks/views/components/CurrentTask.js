@@ -57,9 +57,6 @@ export default ({item, index, timeSpentToday, onPress, stopTask}) => {
         <Text numberOfLines={1} category="h5" style={styles.title}>
           {item.title}
         </Text>
-        <Text style={styles.title} category="s2">
-          teste rinig aksidnoans
-        </Text>
         {item.project ? <Text category="s2">{item.project}</Text> : null}
       </Card>
       <Card disabled style={styles.subCard.item}>
@@ -75,7 +72,7 @@ export default ({item, index, timeSpentToday, onPress, stopTask}) => {
             status="danger"
             size="tiny"
             onPress={() => stopTask('_stop')}>
-            Stop
+            stop
           </Button>
         </Layout>
       </Card>
@@ -139,7 +136,7 @@ const themedStyles = StyleService.create({
     },
   },
   button: {
-    borderRadius: 7,
+    borderRadius: 10,
     fontSize: 18,
   },
 });
