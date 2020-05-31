@@ -40,35 +40,31 @@ export default ({
     );
   };
   return (
-    <LinearGradient colors={['#edf8ff', '#fff']} style={styles.linearGradient}>
-      <Layout style={styles.container} testID={'AgendaLayout'}>
-        {currentItem && currentItem.id ? (
-          <CurrentTask
-            testID={'CurrentTask'}
-            item={currentItem}
-            timeSpentToday={timeTotals[currentIndex]}
-            stopTask={startTask}
-          />
-        ) : null}
-        <List
-          style={[styles.list, contentContainerStyle]}
-          numColumns={1}
-          data={items}
-          renderItem={renderItem}
+    <Layout style={styles.container} testID={'AgendaLayout'}>
+      {currentItem && currentItem.id ? (
+        <CurrentTask
+          testID={'CurrentTask'}
+          item={currentItem}
+          timeSpentToday={timeTotals[currentIndex]}
+          stopTask={startTask}
         />
-      </Layout>
-    </LinearGradient>
+      ) : null}
+      <List
+        style={[styles.list, contentContainerStyle]}
+        numColumns={1}
+        data={items}
+        renderItem={renderItem}
+      />
+    </Layout>
   );
 };
 
 const themedStyles = StyleService.create({
   container: {
-    padding: 16,
+    paddingVertical: 16,
     flex: 1,
-    backgroundColor: 'transparent',
-  },
-  linearGradient: {
-    flex: 1,
+    backgroundColor: '#edf8ff',
+    // backgroundColor: '$background-basic-color-1',
   },
   list: {
     padding: 0,
