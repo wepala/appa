@@ -122,11 +122,13 @@ const themedStyles = StyleService.create({
   card: {
     marginLeft: 16,
     borderRadius: 7,
+    backgroundColor: '#fff',
+
     borderColor: '#fff',
     borderWidth: 0,
     borderLeftWidth: 10,
     flex: 1,
-    elevation: 5,
+    elevation: 7,
   },
 
   row: {
@@ -163,16 +165,17 @@ const themedStyles = StyleService.create({
   // States
   active: {
     card: {
-      borderLeftColor: '#4381FF',
+      borderColor: '#4381FF',
     },
   },
   checked: {
     title: {
-      fontStyle: 'italic',
       textDecorationLine: 'line-through',
     },
     card: {
       backgroundColor: '#edf8ff',
+      borderColor: '#edf8ff',
+      borderLeftColor: '#edf8ff',
     },
   },
 });
