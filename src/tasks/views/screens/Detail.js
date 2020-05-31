@@ -235,5 +235,6 @@ const themedStyles = StyleService.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 7,
+    elevation: 5,
   },
 });

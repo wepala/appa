@@ -86,6 +86,7 @@ const themedStyles = StyleService.create({
     borderColor: 'transparent',
     borderWidth: 0,
     flex: 1,
+    elevation: 5,
   },
 
   row: {

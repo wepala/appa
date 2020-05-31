@@ -107,6 +107,7 @@ const themedStyles = StyleService.create({
     flex: 1,
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
+    elevation: 5,
   },
   title: {
     color: '#fff',
@@ -123,6 +124,7 @@ const themedStyles = StyleService.create({
       borderWidth: 0,
       alignItems: 'flex-end',
       justifyContent: 'center',
+      elevation: 5,
     },
     content: {
       display: 'flex',

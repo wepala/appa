@@ -81,10 +81,11 @@ const themedStyles = StyleService.create({
   card: {
     marginLeft: 16,
     borderRadius: 7,
-    borderColor: 'transparent',
+    borderColor: '#fff',
     borderWidth: 0,
     borderLeftWidth: 10,
     flex: 1,
+    elevation: 5,
   },
 
   row: {
