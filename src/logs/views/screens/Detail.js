@@ -123,7 +123,7 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
               label="Entry Title"
               value={form.title}
               placeholder="Enter text for entry here"
-              style={styles.autocomplete}
+              style={[styles.autocomplete, styles.input]}
               status={!valid.taskId && 'danger'}
               captionIcon={!valid.taskId && AlertIcon}
               caption={!valid.taskId && 'Provide a valid task'}
@@ -184,7 +184,6 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
                 </Select>
               </Layout>
             </Layout>
-            <Divider />
 
             <Layout style={styles.buttonGroup}>
               <Button
@@ -192,16 +191,16 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
                 status="basic"
                 style={styles.buttonCancel}
                 size="giant"
-                Cancel
+                appearance="outline"
                 onPress={() => navigation.goBack()}>
-                Cancel
+                CANCEL
               </Button>
               <Button
                 testID="SubmitButton"
                 style={styles.buttonSubmit}
                 size="giant"
                 onPress={onSubmit}>
-                Submit
+                OK
               </Button>
             </Layout>
           </Layout>
@@ -254,11 +253,25 @@ const themedStyles = StyleService.create({
     justifyContent: 'flex-end',
   },
   buttonCancel: {
-    flexBasis: 'auto',
-    flexShrink: 0,
+    paddingTop: 10,
+    paddingBottom: 6,
+    paddingHorizontal: 4,
+    width: '40%',
     marginRight: 16,
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
   },
   buttonSubmit: {
+    paddingTop: 10,
+    paddingBottom: 6,
+    paddingHorizontal: 4,
     flexGrow: 1,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
   },
 });
