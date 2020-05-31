@@ -21,6 +21,7 @@ const TaskItem = ({
   timeSpentToday,
   active,
 }) => {
+  console.log(active);
   const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
   let currentTimeSpent = {
@@ -162,7 +163,7 @@ const themedStyles = StyleService.create({
   // States
   active: {
     card: {
-      borderLeftColor: '$color-primary-500',
+      borderLeftColor: '#4381FF',
     },
   },
   checked: {
