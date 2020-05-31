@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
-import {PlayIcon} from '../../../views/components/Icons';
-
 import {
   Text,
   Card,
-  Layout,
   Button,
+  Layout,
   CheckBox,
   StyleService,
   useStyleSheet,
 } from '@ui-kitten/components';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faPlay} from '@fortawesome/free-solid-svg-icons';
 
 const TaskItem = ({
   item,
@@ -35,60 +35,58 @@ const TaskItem = ({
   };
 
   return (
-    <Card
-      testID={'TaskItem'}
-      style={styles.item}
-      onPress={onPress}
-      status={checked ? 'success' : active ? 'basic' : null}>
-      <Layout style={styles.row}>
-        <Layout style={styles.column1}>
-          <CheckBox
-            testID={'TaskCheckBox'}
-            checked={checked}
-            onChange={() =>
-              onComplete(item.id, !checked).then(toggleCheck(!checked))
-            }
-          />
-        </Layout>
-        <Layout style={styles.column2}>
-          <Text
-            numberOfLines={1}
-            category="s1"
-            style={checked && styles.checked}>
-            {item.title}
-          </Text>
-          <Text style={styles.timeSpent}>
-            Time:{' '}
-            {currentTimeSpent.hours > 0
-              ? `${currentTimeSpent.hours}hrs `
-              : null}
-            {currentTimeSpent.minutes > 0
-              ? `${currentTimeSpent.minutes}mins `
-              : null}
-            {`${currentTimeSpent.seconds}secs`}
-          </Text>
-          <Text style={styles.estimatedTime}>
-            Estimated:{' '}
-            {estimatedTime.hours > 0 ? `${estimatedTime.hours}hrs ` : null}
-            {estimatedTime.minutes > 0 ? `${estimatedTime.minutes}mins ` : null}
-            {`${estimatedTime.seconds}secs`}
-          </Text>
-        </Layout>
+    <Layout style={styles.item}>
+      <CheckBox
+        testID={'TaskCheckBox'}
+        checked={checked}
+        onChange={() =>
+          onComplete(item.id, !checked).then(toggleCheck(!checked))
+        }
+      />
+      <Card testID={'TaskItem'} style={styles.card} onPress={onPress}>
+        <Layout style={styles.row}>
+          <Layout style={styles.column1}>
+            <Text
+              numberOfLines={1}
+              category="h6"
+              style={checked && styles.checked}>
+              {item.title}
+            </Text>
+            {timeSpentToday > 0 ? (
+              <Text style={styles.timeSpent}>
+                Time Spent:{' '}
+                {currentTimeSpent.hours > 0
+                  ? `${currentTimeSpent.hours} h `
+                  : null}
+                {currentTimeSpent.minutes > 0
+                  ? `${currentTimeSpent.minutes} m `
+                  : null}
+                {`${currentTimeSpent.seconds} s`}
+              </Text>
+            ) : null}
+          </Layout>
 
-        <Layout style={styles.column1}>
-          <Button
-            testID={'TaskButton'}
-            size="small"
-            status="success"
-            accessoryLeft={PlayIcon}
-            onPress={() => {
-              onStart(item.id);
-              setCurrentIndex(index);
-            }}
-          />
+          <Layout style={styles.column2}>
+            <Button
+              testID={'TaskButton'}
+              style={styles.buttonStart}
+              status="primary"
+              size="small"
+              appearance="ghost"
+              onPress={() => {
+                onStart(item.id);
+                setCurrentIndex(index);
+              }}>
+              <FontAwesomeIcon icon={faPlay} color="#4381FF" />
+            </Button>
+            <Text status="primary" category="s2" style={styles.estimatedTime}>
+              {estimatedTime.hours > 0 ? `${estimatedTime.hours}h ` : null}
+              {estimatedTime.minutes > 0 ? `${estimatedTime.minutes}m ` : null}
+            </Text>
+          </Layout>
         </Layout>
-      </Layout>
-    </Card>
+      </Card>
+    </Layout>
   );
 };
 
@@ -96,45 +94,44 @@ const themedStyles = StyleService.create({
   item: {
     marginVertical: 8,
     padding: 0,
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+  },
+
+  card: {
+    marginLeft: 16,
+    borderRadius: 10,
+    flex: 1,
   },
 
   row: {
-    display: 'flex',
     flexDirection: 'row',
     backgroundColor: 'transparent',
   },
 
   column1: {
     backgroundColor: 'transparent',
-    flexBasis: 'auto',
-    flexShrink: 0,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
+    width: '75%',
+    marginRight: 8,
   },
   column2: {
     backgroundColor: 'transparent',
-    paddingVertical: 2,
-    paddingHorizontal: 16,
-    justifyContent: 'space-between',
-    width: '80%',
+    width: '25%',
   },
-  timeSpent: {
-    paddingVertical: 8,
-    color: '$color-basic-700',
-    justifyContent: 'center',
-  },
+
+  timeSpent: {},
   estimatedTime: {
-    color: '$color-basic-600',
+    textAlign: 'center',
+    fontSize: 12,
   },
-  icon: {
-    width: 20,
-    height: 20,
-    margin: 0,
-    padding: 0,
+  buttonStart: {
+    textAlign: 'center',
   },
   checked: {
     fontStyle: 'italic',
     textDecorationLine: 'line-through',
-    color: '$color-basic-600',
   },
 });
 

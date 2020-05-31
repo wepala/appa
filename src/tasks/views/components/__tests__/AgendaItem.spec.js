@@ -11,6 +11,10 @@ describe('onboarding complete screen', () => {
   const time = '9:07 AM';
 
   it('Should render a correctly given item prop', async () => {
+    jest.mock('@fortawesome/react-native-fontawesome', () => ({
+      FontAwesomeIcon: '',
+    }));
+
     const itemData = {
       title,
       time,
