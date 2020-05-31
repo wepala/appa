@@ -121,7 +121,7 @@ const themedStyles = StyleService.create({
   // States
   active: {
     card: {
-      borderLeftColor: '#4381FF',
+      borderLeftColor: '$color-primary-500',
     },
   },
   checked: {

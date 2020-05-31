@@ -136,12 +136,13 @@ const themedStyles = StyleService.create({
   column1: {
     backgroundColor: 'transparent',
     justifyContent: 'space-around',
-    width: '75%',
+    flex: 1,
     marginRight: 8,
   },
   column2: {
     backgroundColor: 'transparent',
-    width: '25%',
+    width: 'auto',
+    justifyContent: 'center',
   },
 
   timeSpent: {},
@@ -150,6 +151,9 @@ const themedStyles = StyleService.create({
   },
   buttonStart: {
     textAlign: 'center',
+    paddingTop: 10,
+    paddingBottom: 6,
+    paddingHorizontal: 4,
   },
   checkBox: {
     backgroundColor: 'transparent',
@@ -158,7 +162,7 @@ const themedStyles = StyleService.create({
   // States
   active: {
     card: {
-      borderLeftColor: '#4381FF',
+      borderLeftColor: '$color-primary-500',
     },
   },
   checked: {
