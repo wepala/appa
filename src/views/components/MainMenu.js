@@ -15,7 +15,7 @@ import {
   ClockIcon,
   InfoIcon,
   EditIcon,
-  ReportIcon,
+  StarIcon,
   SettingsIcon,
   SupportIcon,
 } from './Icons';
@@ -49,6 +49,11 @@ export default ({navigation}) => {
         return;
       }
       case 6: {
+        navigation.toggleDrawer();
+        navigation.navigate('Features');
+        return;
+      }
+      case 7: {
         navigation.toggleDrawer();
         navigation.navigate('About');
         return;
@@ -90,6 +95,7 @@ export default ({navigation}) => {
         <DrawerItem title={'Settings'} accessoryLeft={SettingsIcon} />
         <DrawerItem title={'Support'} accessoryLeft={SupportIcon} />
         <DrawerItem title={'Customize'} accessoryLeft={EditIcon} />
+        <DrawerItem title={'Features'} accessoryLeft={StarIcon} />
         <DrawerItem title={'About'} accessoryLeft={InfoIcon} />
       </Drawer>
     </SafeAreaView>
