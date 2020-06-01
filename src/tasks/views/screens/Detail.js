@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createRef} from 'react';
 import {useForm, useValidated} from '../../../weosHelpers';
 import {
   Button,
@@ -20,47 +20,74 @@ import {
 import DetailTopBar from '../components/DetailTopBar';
 import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
 
-export default ({navigation, route, getTask, onSave}) => {
+export default ({navigation, route, getTask, onSave, onUpdate}) => {
   const styles = useStyleSheet(themedStyles);
   const id = route.params?.id;
+  const section = route.params?.section;
   const task = getTask(id);
 
   const timeUnits = ['minutes', 'hours'];
+  // Convert estimated time from seconds to either minutes/hours
+  let estimatedTime, timeUnit;
+  if (id) {
+    estimatedTime =
+      task.estimatedTime % 3600 === 0
+        ? parseInt(task.estimatedTime / 3600, 10)
+        : parseInt(task.estimatedTime / 60, 10);
+    timeUnit =
+      task.estimatedTime % 3600 === 0 ? new IndexPath(1) : new IndexPath(0);
+  }
+
   const [form, setForm] = useForm({
     title: task.title,
-    timeEstimate: task.timeEstimate,
-    timeUnit: new IndexPath(0),
-    project: task.project,
+    timeEstimate: id ? estimatedTime : '',
+    timeUnit: id ? timeUnit : new IndexPath(0),
     description: task.description,
-    dueDate: task.dueDate,
+    dueDate: new Date(task.dueDate),
   });
   const [valid, setValid, clearValid] = useValidated(form, {
     title: true,
     timeEstimate: true,
-    project: true,
     description: true,
     dueDate: true,
   });
 
   const onSubmit = () => {
-    const section = route.params?.section;
     setValid(form, valid);
-    if (valid.title && valid.timeEstimate) {
-      onSave(
-        form.title,
-        form.description,
-        form.dueDate,
-        section === 'agenda',
-        form.timeEstimate,
-        timeUnits[form.timeUnit.row],
-      ).then(() => navigation.goBack());
+    if (valid.title) {
+      if (task.id) {
+        let estimatedTime =
+          timeUnits[form.timeUnit.row] === 'minutes'
+            ? form.timeEstimate * 60
+            : form.timeEstimate * 60 * 60;
+        onUpdate(
+          navigation,
+          task,
+          form.title,
+          form.description,
+          form.dueDate,
+          estimatedTime,
+          true, // Add to backlog or agendas
+        );
+      } else {
+        onSave(
+          form.title,
+          form.description,
+          form.dueDate,
+          section === 'agenda',
+          form.timeEstimate,
+          timeUnits[form.timeUnit.row],
+        ).then(() => navigation.goBack());
+      }
     }
   };
+
+  const datePicker = createRef();
 
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.container}>
-        <DetailTopBar navigation={navigation} />
+        <DetailTopBar navigation={navigation} route={route} section={section} />
         <ScrollView>
           <Layout style={styles.form}>
             <Input
@@ -68,8 +95,9 @@ export default ({navigation, route, getTask, onSave}) => {
               style={styles.input}
               label="Task Title"
               placeholder="Enter title here"
+              clearButtonMode="unless-editing"
               value={form.title}
-              onChangeText={val => {
+              onChangeText={(val) => {
                 setForm(val.trimLeft(), 'title');
                 clearValid();
               }}
@@ -85,8 +113,8 @@ export default ({navigation, route, getTask, onSave}) => {
                   label="Estimated Time"
                   placeholder="30"
                   keyboardType="numeric"
-                  value={form.timeEstimate}
-                  onChangeText={val => {
+                  value={`${form.timeEstimate}`}
+                  onChangeText={(val) => {
                     setForm(val.trimLeft(), 'timeEstimate');
                     clearValid();
                   }}
@@ -104,7 +132,7 @@ export default ({navigation, route, getTask, onSave}) => {
                   value={timeUnits[form.timeUnit.row]}
                   style={styles.input}
                   selectedIndex={form.timeUnit}
-                  onSelect={index => {
+                  onSelect={(index) => {
                     console.log(form.timeUnit.row);
                     setForm(index, 'timeUnit');
                   }}>
@@ -120,17 +148,21 @@ export default ({navigation, route, getTask, onSave}) => {
               multiline={true}
               placeholder=""
               label="Description"
+              clearButtonMode="unless-editing"
               value={form.description}
-              onChangeText={val => setForm(val.trimLeft(), 'description')}
+              onChangeText={(val) => setForm(val.trimLeft(), 'description')}
             />
             <Datepicker
               testID="TaskDueDate"
               style={styles.input}
               accessoryRight={CalendarIcon}
               label="Due Date"
+              clearButtonMode="unless-editing"
               date={form.dueDate}
-              onSelect={val => {
+              ref={datePicker}
+              onSelect={(val) => {
                 setForm(val, 'dueDate');
+                datePicker.current.blur();
               }}
             />
             <Divider />
@@ -141,7 +173,7 @@ export default ({navigation, route, getTask, onSave}) => {
                 style={styles.buttonCancel}
                 size="giant"
                 Cancel
-                onPress={() => console.log('Cancelled')}>
+                onPress={() => navigation.goBack()}>
                 Cancel
               </Button>
               <Button

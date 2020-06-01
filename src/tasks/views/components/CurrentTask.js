@@ -30,7 +30,7 @@ const useInterval = (callback, delay) => {
   }, [delay]);
 };
 
-export default ({item, timeSpentToday, onPress}) => {
+export default ({item, index, timeSpentToday, onPress, stopTask}) => {
   const styles = useStyleSheet(themedStyles);
   item = item === undefined ? {title: 'Lorem Ipsum', project: ''} : item;
 
@@ -45,7 +45,6 @@ export default ({item, timeSpentToday, onPress}) => {
 
   useInterval(() => {
     setTimer(timer + 1);
-    now = moment();
   }, 1000);
 
   let hours = parseInt(timer / 3600, 10);
@@ -74,7 +73,8 @@ export default ({item, timeSpentToday, onPress}) => {
           style={styles.button}
           status="danger"
           size="small"
-          accessoryRight={StopOutlineIcon}>
+          accessoryRight={StopOutlineIcon}
+          onPress={() => stopTask('_stop')}>
           Stop
         </Button>
       </Layout>

@@ -20,7 +20,7 @@ import {
   CODE_CHALLENGE_METHOD,
 } from 'react-native-dotenv';
 
-const PKCEWrapper = props => {
+const PKCEWrapper = (props) => {
   const styles = useStyleSheet(themedStyles);
   const [isAuth, setAuth] = useState(false);
   useEffect(() => {

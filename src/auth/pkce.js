@@ -9,7 +9,7 @@ import qs from 'querystring';
 // } from '../state/token/actions';
 
 // Async storage funcs
-const storeVerifier = async verifier => {
+const storeVerifier = async (verifier) => {
   try {
     await AsyncStorage.setItem('VERIFIER', verifier);
   } catch (error) {
@@ -48,30 +48,30 @@ export const config = {
 };
 
 // Preamble for setting up authorizeURL function
-export const generateState = redirect_uri => {
+export const generateState = (redirect_uri) => {
   return randomString();
 };
 
-const base64URLEncode = str => {
+const base64URLEncode = (str) => {
   return str
     .toString('base64')
     .replace(/\+/g, '-')
     .replace(/\//g, '_')
-    .replace(/=/g, '');
+    .replace(/[=]/g, '');
 };
 
 export const verifier = randomString({length: 40});
-const sha256base64urlencode = str => {
+const sha256base64urlencode = (str) => {
   // https://tools.ietf.org/html/rfc7636#appendix-A
   // https://tools.ietf.org/html/rfc4648#section-5
   return new Hashes.SHA256()
     .b64(str)
     .replace(/\+/g, '-')
     .replace(/\//g, '_')
-    .replace(/=+/g, '');
+    .replace(/[=]+/g, '');
 };
 
-export const challenge = codeVerifier => sha256base64urlencode(codeVerifier);
+export const challenge = (codeVerifier) => sha256base64urlencode(codeVerifier);
 
 // Authorize URL, (used to redirect to login with code challenge)
 export const authorizeURL = () => {
