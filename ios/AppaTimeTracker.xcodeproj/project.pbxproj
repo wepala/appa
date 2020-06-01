@@ -309,6 +309,7 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 2PNFD8677U;
 						LastSwiftMigration = 1120;
+						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -645,6 +646,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2PNFD8677U;
 				ENABLE_BITCODE = NO;
@@ -662,6 +665,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.appadoes;
 				PRODUCT_NAME = "Appa: Time Tracker";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -675,6 +679,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2PNFD8677U;
 				ENABLE_BITCODE = NO;
@@ -688,6 +694,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.appadoes;
 				PRODUCT_NAME = "Appa: Time Tracker";
+				PROVISIONING_PROFILE_SPECIFIER = "Appa Does";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
