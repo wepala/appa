@@ -136,11 +136,11 @@ jobs:
           npm test
       - name: Generate and install certs
         run: |
-          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles\
-          echo "${{ secrets.IOS_PROVISIONING_PROFILE }}" | base64 -d > ~/Library/MobileDevice/Provisioning\ Profiles\${{ secrets.IOS_PROVISIONING_PROFILE_ID }}.mobileprovision
-          echo "${{ secrets.IOS_CERTIFICATE }}" | base64 -d > Certificates.p12
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles/
+          echo "${{ secrets.IOS_PROVISIONING_PROFILE }}" | base64 -d > ~/Library/MobileDevice/Provisioning\ Profiles/${{ secrets.IOS_PROVISIONING_PROFILE_ID }}.mobileprovision
+          echo "${{ secrets.IOS_CERTIFICATE }}" | base64 -d > ios/Certificates.p12
           security create-keychain -p "" build.keychain
-          security import Certificates.p12 -t agg -k ~/Library/Keychains/build.keychain -P "" -A
+          security import ios/Certificates.p12 -t agg -k ~/Library/Keychains/build.keychain -P "" -A
           security list-keychains -s ~/Library/Keychains/build.keychain
           security default-keychain -s ~/Library/Keychains/build.keychain
           security unlock-keychain -p "" ~/Library/Keychains/build.keychain
