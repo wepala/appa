@@ -146,24 +146,23 @@ jobs:
         run: |
           cd ios
           xcodebuild clean archive \
-            -workspace WeAgenda.xcworkspace \
-            -scheme WeAgenda \
+            -workspace AppaTimeTracker.xcworkspace \
+            -scheme AppaTimeTracker \
             -configuration Release \
-            -archivePath build/WeAgenda.xcarchive \
+            -archivePath build/AppaTimeTracker.xcarchive \
             -allowProvisioningUpdates \
-            IPHONEOS_DEPLOYMENT_TARGET=9.0 \
             PROVISIONING_PROFILE=${{ secrets.IOS_PROVISIONING_PROFILE_ID }} \
             CODE_SIGN_IDENTITY=${{ secrets.IOS_SIGNING_IDENTITY }}
 
           xcodebuild \
             -exportArchive \
-            -archivePath build/WeAgenda.xcarchive \
+            -archivePath build/AppaTimeTracker.xcarchive \
             -exportPath . \
-            -exportOptionsPlist WeAgenda/Info.plist
+            -exportOptionsPlist AppaTimeTracker/Info.plist
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: WeAgenda.ipa
+          name: AppaTimeTracker.ipa
           path: ios/
       - name: Send failure notification
         uses: rtCamp/action-slack-notify@v2.0.0
