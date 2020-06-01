@@ -163,13 +163,13 @@ jobs:
           xcodebuild \
             -exportArchive \
             -archivePath build/AppaTimeTracker.xcarchive \
-            -exportPath . \
-            -exportOptionsPlist AppaTimeTracker/Info.plist
+            -exportPath ./build
+            -exportOptionsPlist ci.plist
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
           name: AppaTimeTracker.ipa
-          path: ios/
+          path: ios/build
       - name: Send failure notification
         uses: rtCamp/action-slack-notify@v2.0.0
         if: failure()
