@@ -1,4 +1,6 @@
 import React from 'react';
+import {SafeAreaView} from 'react-native';
+import {useForm} from '../../../weosHelpers';
 import {
   Button,
   Layout,
@@ -9,9 +11,13 @@ import {
 } from '@ui-kitten/components';
 import LinearGradient from 'react-native-linear-gradient';
 import TopBar from '../components/TopBar';
-import {SafeAreaView} from 'react-native';
 
-export default ({navigation, route}) => {
+export default ({navigation, route, status, addFeedback}) => {
+  const [form, setForm] = useForm({
+    title: 'New feedback',
+    desc: 'Some great feedback',
+  });
+
   const styles = useStyleSheet(themedStyles);
   return (
     <SafeAreaView style={styles.container}>
@@ -59,9 +65,10 @@ export default ({navigation, route}) => {
           <Button
             size="giant"
             style={styles.buttonSubmit}
-            onPress={() => navigation.navigate('Help')}>
+            onPress={() => addFeedback(form)}>
             SUBMIT
           </Button>
+          <Text category="c1">{status}</Text>
         </Layout>
       </LinearGradient>
     </SafeAreaView>

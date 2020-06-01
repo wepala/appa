@@ -15,7 +15,7 @@ import Settings from '../settings/views/screens/Main';
 import About from '../about/views/screens/Main';
 import Support from '../support/views/screens/Support';
 import Customize from '../customize/views/screens/Main';
-import Features from '../features/views/screens/Main';
+import Features from '../features/controllers/Main';
 
 const {Navigator, Screen} = createDrawerNavigator();
 
