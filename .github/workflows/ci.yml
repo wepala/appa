@@ -148,7 +148,7 @@ jobs:
       - name: Install pod dependencies
         run: |
           cd ios && pod install
-      - name: Build app
+      - name: Build and archive app
         run: |
           cd ios
           xcodebuild clean archive \
@@ -157,8 +157,8 @@ jobs:
             -configuration Release \
             -archivePath build/AppaTimeTracker.xcarchive \
             -allowProvisioningUpdates \
-            PROVISIONING_PROFILE=${{ secrets.IOS_PROVISIONING_PROFILE_ID }} \
-            CODE_SIGN_IDENTITY=${{ secrets.IOS_SIGNING_IDENTITY }}
+            PROVISIONING_PROFILE="${{ secrets.IOS_PROVISIONING_PROFILE_ID }}" \
+            CODE_SIGN_IDENTITY="${{ secrets.IOS_SIGNING_IDENTITY }}"
 
           xcodebuild \
             -exportArchive \
