@@ -29,6 +29,7 @@ const Main = (props) => {
         setStatus('success');
 
         console.log('Success', res);
+        props.navigation.goBack();
       })
       .catch((error) => {
         setStatus('failure');

@@ -77,6 +77,7 @@ export default ({
                       key={story.id}
                       style={[styles.item, styles.itemLeft]}>
                       <Button
+                        testID="StoryButton"
                         style={styles.buttonOptions}
                         status="info"
                         appearance={
@@ -93,6 +94,7 @@ export default ({
                       key={story.id}
                       style={[styles.item, styles.itemRight]}>
                       <Button
+                        testID="StoryButton"
                         style={styles.buttonOptions}
                         status="info"
                         appearance={
@@ -109,6 +111,7 @@ export default ({
               : null}
           </Layout>
           <Button
+            testID="SubmitButton"
             disabled={!form.tags.length || form.title === ''}
             size="giant"
             style={styles.buttonSubmit}
