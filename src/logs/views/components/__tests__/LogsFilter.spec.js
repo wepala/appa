@@ -5,9 +5,13 @@ import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
 import {default as theme} from '../../../../../theme.json';
 import LogsFilter from '../LogsFilter';
+import {mockTasks} from '../../../../tasks/__tests__/fixtures';
 
 describe('LogsFilter', () => {
   it('Should render both inputs (select & date range)', async () => {
+    const tasks = Object.values(mockTasks.getById);
+    const setFilters = jest.fn();
+
     const {getAllByTestId} = render(
       <>
         <IconRegistry icons={EvaIconsPack} />
@@ -17,7 +21,7 @@ describe('LogsFilter', () => {
             ...eva.light,
             ...theme,
           }}>
-          <LogsFilter />
+          <LogsFilter tasks={tasks} setFilters={setFilters} />
         </ApplicationProvider>
       </>,
     );
