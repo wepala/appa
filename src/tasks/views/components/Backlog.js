@@ -29,7 +29,6 @@ export default ({navigation, items, contentContainerStyle}) => {
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 16,
-    flex: 1,
     backgroundColor: '#edf8ff',
     // backgroundColor: '$background-basic-color-1',
   },
