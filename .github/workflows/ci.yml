@@ -164,7 +164,7 @@ jobs:
           xcodebuild \
             -exportArchive \
             -archivePath build/AppaTimeTracker.xcarchive \
-            -exportPath ./build
+            -exportPath ./build \
             -exportOptionsPlist ci.plist
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
