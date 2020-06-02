@@ -140,11 +140,12 @@ jobs:
           echo "${{ secrets.IOS_PROVISIONING_PROFILE }}" | base64 -d > ~/Library/MobileDevice/Provisioning\ Profiles/${{ secrets.IOS_PROVISIONING_PROFILE_ID }}.mobileprovision
           echo "${{ secrets.IOS_CERTIFICATE }}" | base64 -d > ios/Certificates.p12
           security create-keychain -p "" build.keychain
-          security import ios/Certificates.p12 -t agg -k ~/Library/Keychains/build.keychain -P "" -A
-          security list-keychains -s ~/Library/Keychains/build.keychain
-          security default-keychain -s ~/Library/Keychains/build.keychain
-          security unlock-keychain -p "" ~/Library/Keychains/build.keychain
-          security set-key-partition-list -S apple-tool:,apple: -s -k "" ~/Library/Keychains/build.keychain
+          security list-keychains -d user -s build.keychain $(security list-keychains -d user | sed s/\"//g)
+          security list-keychains
+          security set-keychain-settings build.keychain
+          security unlock-keychain -p "" build.keychain
+          security import ios/Certificates.p12 -k build.keychain -P "" -T "/usr/bin/codesign"
+          security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
       - name: Install pod dependencies
         run: |
           cd ios && pod install
