@@ -22,21 +22,18 @@ export default ({navigation, route}) => {
     <SafeAreaView style={styles.container}>
       <TopBar title="Settings" navigation={navigation} route={route} />
       <Layout style={styles.container}>
-        <Button appearance="primary" accessoryRight={FlashIcon}>
+        <Button appearance="primary" size="giant" style={styles.buttonConnect}>
           WeOS Connect
         </Button>
         <Layout style={styles.row}>
           <Layout style={styles.column1}>
-            <Text category="h5">Personalization</Text>
+            <Text category="h5">PERSONALIZATION</Text>
             <Text category="s2">Choose your Colour</Text>
-          </Layout>
-          <Layout style={styles.column2}>
-            <Button size="small" appearance="ghost" accessoryRight={InfoIcon} />
           </Layout>
         </Layout>
         <Layout style={styles.row}>
           <Layout style={styles.column1}>
-            <Text category="h5">Theme</Text>
+            <Text category="h5">THEME</Text>
           </Layout>
           <Layout style={styles.column2}>
             <Toggle
@@ -51,18 +48,10 @@ export default ({navigation, route}) => {
         </Layout>
         <Layout style={styles.row}>
           <Layout style={styles.column1}>
-            <Text category="h5">Timeout Settings</Text>
+            <Text category="h5">TIMEOUT SETTINGS</Text>
             <Text category="s2">
               Time before the timer is automatically stopped
             </Text>
-          </Layout>
-          <Layout style={styles.column2}>
-            <Button
-              style={styles.buttonConnect}
-              size="small"
-              appearance="ghost"
-              accessoryRight={InfoIcon}
-            />
           </Layout>
         </Layout>
         <Select accessoryRight={ClockIcon}>
@@ -78,23 +67,26 @@ export default ({navigation, route}) => {
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
-    backgroundColor: '$background-basic-color-1',
+    backgroundColor: '#edf8ff',
     padding: 16,
   },
   row: {
     display: 'flex',
     flexDirection: 'row',
-    paddingVertical: 16,
+    paddingVertical: 32,
     alignItems: 'center',
     justifyContent: 'flex-start',
+    backgroundColor: 'transparent',
   },
   column1: {
     flexGrow: 1,
     marginRight: 16,
     justifyContent: '',
+    backgroundColor: 'transparent',
   },
   column2: {
     flexGrow: 0,
+    backgroundColor: 'transparent',
   },
 
   buttonGroup: {
@@ -104,15 +96,18 @@ const themedStyles = StyleService.create({
     justifyContent: 'flex-end',
   },
   buttonConnect: {
+    marginTop: 32,
+    paddingTop: 10,
+    paddingBottom: 6,
+    paddingHorizontal: 4,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 5,
     },
-    shadowOpacity: 0.32,
-    shadowRadius: 5.46,
-
-    elevation: 9,
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+    elevation: 5,
   },
   buttonSubmit: {
     flexGrow: 1,
