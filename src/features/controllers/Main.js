@@ -1,36 +1,72 @@
 import React, {useState} from 'react';
-import {Init} from 'roadmap-node';
-import {ROADMAP_EMAIL, ROADMAP_TOKEN} from 'react-native-dotenv';
+import axios from 'axios';
+import {
+  ROADMAP_EMAIL,
+  ROADMAP_TOKEN,
+  ROADMAP_BASEURL,
+  ROADMAP_ID,
+} from 'react-native-dotenv';
 import base64 from 'react-native-base64';
 
 import MainScreen from '../views/screens/Main';
 
-let client = new Init(
-  'akeem.philbert+roadmap@wepala.com',
-  base64.encode(
-    '5ed50f12acb0fca3e911ab3d|6dee38d6-0ace-48eb-b510-6e25c0e540c0',
-  ),
-);
-
 const Main = (props) => {
   const [status, setStatus] = useState('init');
-  const addFeedback = (form) => {
-    const feedback = {...form, roadmapId: '5ed5164b31d74e9553c4f5eb'};
-    setStatus('pending');
+  const [stories, setStories] = useState([]);
+  const token = base64.encode(`${ROADMAP_EMAIL}:${ROADMAP_TOKEN}`);
 
-    console.log(feedback, '\n', client.apiKey);
-    client.Feedback.add(feedback, (err, f) => {
-      if (err) {
-        console.log('Error', err.status, err.message);
-        setStatus('failure');
-      } else {
-        console.log('Created Feedback', f);
+  const addFeedback = (form) => {
+    setStatus('pending');
+    const feedback = {...form, roadmapId: ROADMAP_ID};
+
+    axios
+      .post(`${ROADMAP_BASEURL}/feedback`, feedback, {
+        headers: {
+          Authorization: `Basic ${token}`,
+        },
+      })
+      .then((res) => {
         setStatus('success');
-      }
-    });
+
+        console.log('Success', res);
+      })
+      .catch((error) => {
+        setStatus('failure');
+
+        console.log('Error', error);
+      });
   };
 
-  return <MainScreen {...props} status={status} addFeedback={addFeedback} />;
+  const getStories = () => {
+    return axios({
+      url: `${ROADMAP_BASEURL}/stories/${ROADMAP_ID}`,
+      method: 'get',
+      headers: {
+        Authorization: `Basic ${token}`,
+      },
+    })
+      .then((res) => {
+        setStatus('success');
+        setStories(res.data);
+        console.log('Success', res.data);
+        return res.data;
+      })
+      .catch((error) => {
+        setStatus('failure');
+        setStories(null);
+        console.log('Error', error);
+      });
+  };
+
+  return (
+    <MainScreen
+      {...props}
+      status={status}
+      addFeedback={addFeedback}
+      getStories={getStories}
+      stories={stories}
+    />
+  );
 };
 
 export default Main;

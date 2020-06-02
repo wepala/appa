@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native';
-import {useForm} from '../../../weosHelpers';
 import {
   Button,
   Layout,
@@ -11,12 +10,39 @@ import {
 } from '@ui-kitten/components';
 import LinearGradient from 'react-native-linear-gradient';
 import TopBar from '../components/TopBar';
+import {useEffect} from 'react';
 
-export default ({navigation, route, status, addFeedback}) => {
-  const [form, setForm] = useForm({
-    title: 'New feedback',
-    desc: 'Some great feedback',
+export default ({
+  navigation,
+  route,
+  status,
+  addFeedback,
+  getStories,
+  stories,
+}) => {
+  useEffect(() => {
+    if (!stories.length) {
+      getStories();
+    }
+  }, [getStories, stories]);
+
+  const [form, setForm] = useState({
+    title: null,
+    desc: '',
+    tags: [],
   });
+
+  const toggleOption = (option) => {
+    const index = form.tags.indexOf(option);
+    let tags = form.tags;
+    if (index > -1) {
+      tags.splice(index, 1);
+    } else {
+      tags.push(option);
+    }
+    setForm({...form, tags});
+    console.log(form);
+  };
 
   const styles = useStyleSheet(themedStyles);
   return (
@@ -37,38 +63,58 @@ export default ({navigation, route, status, addFeedback}) => {
             clearButtonMode="unless-editing"
             numberOfLines={3}
             maxLength={100}
-            // value={form.description}
-            // onChangeText={(val) => setForm(val.trimLeft(), 'description')}
+            value={form.description}
+            onChangeText={(val) => setForm({...form, title: val})}
           />
+          <Text style={styles.label} category="s2">
+            Tags
+          </Text>
           <Layout style={styles.grid}>
-            <Layout style={[styles.item, styles.itemRight]}>
-              <Button style={styles.buttonOptions} status="basic">
-                Feature
-              </Button>
-            </Layout>
-            <Layout style={[styles.item, styles.itemLeft]}>
-              <Button style={styles.buttonOptions} status="basic">
-                Feature
-              </Button>
-            </Layout>
-            <Layout style={[styles.item, styles.itemRight]}>
-              <Button style={styles.buttonOptions} status="basic">
-                Feature
-              </Button>
-            </Layout>
-            <Layout style={[styles.item, styles.itemLeft]}>
-              <Button style={styles.buttonOptions} status="basic">
-                Feature
-              </Button>
-            </Layout>
+            {stories.length > 0 || stories === null
+              ? stories.map((story, index) => {
+                  return index % 2 === 0 ? (
+                    <Layout
+                      key={story.id}
+                      style={[styles.item, styles.itemLeft]}>
+                      <Button
+                        style={styles.buttonOptions}
+                        status="info"
+                        appearance={
+                          form.tags.indexOf(story.title) > -1
+                            ? 'filled'
+                            : 'outline'
+                        }
+                        onPress={() => toggleOption(story.title)}>
+                        {story.title}
+                      </Button>
+                    </Layout>
+                  ) : (
+                    <Layout
+                      key={story.id}
+                      style={[styles.item, styles.itemRight]}>
+                      <Button
+                        style={styles.buttonOptions}
+                        status="info"
+                        appearance={
+                          form.tags.indexOf(story.title) > -1
+                            ? 'filled'
+                            : 'outline'
+                        }
+                        onPress={() => toggleOption(story.title)}>
+                        {story.title}
+                      </Button>
+                    </Layout>
+                  );
+                })
+              : null}
           </Layout>
           <Button
+            disabled={!form.tags.length || form.title === ''}
             size="giant"
             style={styles.buttonSubmit}
             onPress={() => addFeedback(form)}>
             SUBMIT
           </Button>
-          <Text category="c1">{status}</Text>
         </Layout>
       </LinearGradient>
     </SafeAreaView>
@@ -122,6 +168,9 @@ const themedStyles = StyleService.create({
     textAlign: 'center',
     paddingHorizontal: 32,
     paddingBottom: 32,
+  },
+  label: {
+    marginBottom: 8,
   },
   buttonOptions: {
     width: '100%',
