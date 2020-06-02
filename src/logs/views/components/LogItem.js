@@ -13,7 +13,6 @@ import {
 
 export default ({item, index, onPress}) => {
   const styles = useStyleSheet(themedStyles);
-  console.log('Log item', item);
   let loggedDate = moment(item.startTime).format('Do MMM, YYYY');
   let loggedTime = moment(item.startTime).format('h:mm:ss a');
   return (
