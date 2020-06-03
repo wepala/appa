@@ -24,16 +24,34 @@
           }
         }
       }
-    }
-  },
-  "Select": {
-    "appearances": {
-      "default": {
-        "variantGroups": {
-          "status": {
-            "basic": {
-              "borderColor": "border-basic-color-3",
-              "backgroundColor": "background-basic-color-1"
+    },
+    "Select": {
+      "appearances": {
+        "default": {
+          "variantGroups": {
+            "status": {
+              "basic": {
+                "borderColor": "border-basic-color-3",
+                "backgroundColor": "background-basic-color-1"
+              },
+              "primary": {
+                "borderColor": "color-primary-default",
+                "backgroundColor": "background-basic-color-1"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Datepicker": {
+      "appearances": {
+        "default": {
+          "variantGroups": {
+            "status": {
+              "basic": {
+                "borderColor": "border-basic-color-3",
+                "backgroundColor": "background-basic-color-1"
+              }
             }
           }
         }

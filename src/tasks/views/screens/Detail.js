@@ -124,6 +124,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               </Layout>
               <Layout style={styles.column2}>
                 <Select
+                  status="basic"
                   accessoryRight={ClockIcon}
                   label="  "
                   value={timeUnits[form.timeUnit.row]}
@@ -150,6 +151,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               onChangeText={(val) => setForm(val.trimLeft(), 'description')}
             />
             <Datepicker
+              status="basic"
               testID="TaskDueDate"
               style={styles.input}
               accessoryRight={CalendarIcon}
