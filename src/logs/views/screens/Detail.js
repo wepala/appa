@@ -24,13 +24,18 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
   const log = getLog(logId);
   const timeOfDay = ['AM', 'PM'];
   const today = moment();
-  const currentTime = today.format('hh:mm:A').split(':');
-  const timeOfDayIndex = timeOfDay.indexOf(currentTime[2]);
+  const [logHours, logMinutes, logMeridiem] =
+    log && moment(log.startTime).format('hh:mm:A').split(':');
+  console.log(logMeridiem);
+  const [hours, minutes, currMeridiem] = today.format('hh:mm:A').split(':');
+  const timeOfDayIndex = log
+    ? timeOfDay.indexOf(logMeridiem)
+    : timeOfDay.indexOf(currMeridiem);
   const [form, setForm, setMultipleValues] = useForm({
     title: log.task.title,
     taskId: log.taskId,
-    hours: log.hours || currentTime[0],
-    minutes: log.minutes || currentTime[1],
+    hours: (log && logHours) || hours,
+    minutes: (log && logMinutes) || minutes,
     timeOfDay: new IndexPath(timeOfDayIndex),
   });
   const [valid, setValid, clearValid] = useValidated(form, {

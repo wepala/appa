@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
+import {SectionContext} from '../../context/section-context';
 import {List, Layout, StyleService, useStyleSheet} from '@ui-kitten/components';
-import LinearGradient from 'react-native-linear-gradient';
 import AgendaItem from '../components/AgendaItem';
 import CurrentTask from '../components/CurrentTask';
 
@@ -20,6 +20,14 @@ export default ({
       id: items[index].id,
     });
   };
+
+  const context = useContext(SectionContext);
+
+  useEffect(() => {
+    if (navigation.isFocused()) {
+      context.setSection('agenda');
+    }
+  });
   //method to render each item in the list
   const renderItem = ({index, item}) => {
     // if there is a current item that is this item, set the totalTimes index to this item

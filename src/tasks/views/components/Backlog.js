@@ -1,7 +1,8 @@
 import {List} from '@ui-kitten/components';
-import React from 'react';
+import React, {useEffect, useContext} from 'react';
 import {StyleSheet} from 'react-native';
 import BacklogItem from './BacklogItem';
+import {SectionContext} from '../../context/section-context';
 
 export default ({navigation, items, contentContainerStyle}) => {
   const onItemPress = (index) => {
@@ -9,6 +10,14 @@ export default ({navigation, items, contentContainerStyle}) => {
       id: items[index].id,
     });
   };
+
+  const context = useContext(SectionContext);
+
+  useEffect(() => {
+    if (navigation.isFocused()) {
+      context.setSection('backlog');
+    }
+  });
 
   //method to render each item in the list
   const renderItem = ({index, item}) => (
