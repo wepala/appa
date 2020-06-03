@@ -11,7 +11,7 @@ import {
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCalendarAlt} from '@fortawesome/free-solid-svg-icons';
 
-const BacklogItem = ({item, index, onPress}) => {
+const BacklogItem = ({item, index, onPress, onComplete}) => {
   const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
   return (

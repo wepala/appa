@@ -220,11 +220,12 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
-    backgroundColor: '2',
+    backgroundColor: '$background-basic-color-2',
   },
   form: {
     flex: 1,
     padding: 16,
+    backgroundColor: 'transparent',
   },
   input: {
     marginBottom: 16,
@@ -236,19 +237,24 @@ const themedStyles = StyleService.create({
   row: {
     display: 'flex',
     flexDirection: 'row',
+    backgroundColor: 'transparent',
   },
   column: {
     flex: 1,
+    backgroundColor: 'transparent',
   },
   columnFirst: {
     marginRight: 8,
+    backgroundColor: 'transparent',
   },
   columnSecond: {
     marginLeft: 8,
     marginRight: 8,
+    backgroundColor: 'transparent',
   },
   columnThird: {
     marginLeft: 8,
+    backgroundColor: 'transparent',
   },
 
   buttonGroup: {
@@ -256,6 +262,7 @@ const themedStyles = StyleService.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    backgroundColor: 'transparent',
   },
   buttonCancel: {
     paddingTop: 10,

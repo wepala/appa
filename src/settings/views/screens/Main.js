@@ -71,7 +71,7 @@ export default ({navigation, route}) => {
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
-    backgroundColor: '$background-basic-color-1',
+    backgroundColor: '$background-basic-color-2',
     padding: 16,
   },
   row: {
