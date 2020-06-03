@@ -17,14 +17,11 @@ const Main = (props) => {
 
   const addFeedback = (form) => {
     setStatus('pending');
-    const feedback = {...form, roadmapId: ROADMAP_ID};
+    const feedback = {...form, id: ROADMAP_ID};
+    console.log('Submitting feedback:', feedback);
 
     axios
-      .post(`${ROADMAP_BASEURL}/feedback`, feedback, {
-        headers: {
-          Authorization: `Basic ${token}`,
-        },
-      })
+      .post(`${ROADMAP_BASEURL}/roadmaps/feedback`, feedback)
       .then((res) => {
         setStatus('success');
 

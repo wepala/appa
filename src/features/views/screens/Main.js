@@ -28,7 +28,11 @@ export default ({
 
   const [form, setForm] = useState({
     title: null,
-    desc: '',
+    user: {
+      first: 'Appa',
+      last: 'Bear',
+      email: 'appatest@mail.com',
+    },
     tags: [],
   });
 
@@ -189,7 +193,7 @@ const themedStyles = StyleService.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 7,
-    elevation: 5,
+    // elevation: 5,
   },
   buttonSubmit: {
     width: '100%',
@@ -203,6 +207,6 @@ const themedStyles = StyleService.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 7,
-    elevation: 5,
+    // elevation: 5,
   },
 });
