@@ -9,6 +9,7 @@ import {
   useStyleSheet,
   Text,
   Toggle,
+  Icon,
 } from '@ui-kitten/components';
 import {FlashIcon, InfoIcon, ClockIcon} from '../../../views/components/Icons';
 import TopBar from '../components/TopBar';
@@ -19,7 +20,7 @@ export default ({navigation, route}) => {
   const [checked, toggleCheck] = useState(themeContext.theme === 'dark');
   const styles = useStyleSheet(themedStyles);
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={{flex: 1}}>
       <TopBar title="Settings" navigation={navigation} route={route} />
       <Layout style={styles.container}>
         <Button appearance="primary" size="giant" style={styles.buttonConnect}>
@@ -28,7 +29,10 @@ export default ({navigation, route}) => {
         <Layout style={styles.row}>
           <Layout style={styles.column1}>
             <Text category="h5">PERSONALIZATION</Text>
-            <Text category="s2">Choose your Colour</Text>
+            <Layout style={styles.row}>
+              <Text category="s2">Choose your Colour</Text>
+              <Icon style={styles.icon} name="info-outline" />
+            </Layout>
           </Layout>
         </Layout>
         <Layout style={styles.row}>
@@ -67,7 +71,7 @@ export default ({navigation, route}) => {
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
-    backgroundColor: '#edf8ff',
+    backgroundColor: '$background-basic-color-1',
     padding: 16,
   },
   row: {
@@ -81,12 +85,18 @@ const themedStyles = StyleService.create({
   column1: {
     flexGrow: 1,
     marginRight: 16,
-    justifyContent: '',
     backgroundColor: 'transparent',
   },
   column2: {
     flexGrow: 0,
     backgroundColor: 'transparent',
+  },
+
+  icon: {
+    width: 16,
+    height: 16,
+    marginLeft: 8,
+    color: '$color-basic-700',
   },
 
   buttonGroup: {

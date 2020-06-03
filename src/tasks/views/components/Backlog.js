@@ -1,10 +1,11 @@
-import {List} from '@ui-kitten/components';
+import {List, StyleService, useStyleSheet} from '@ui-kitten/components';
 import React, {useEffect, useContext} from 'react';
 import {StyleSheet} from 'react-native';
 import BacklogItem from './BacklogItem';
 import {SectionContext} from '../../context/section-context';
 
 export default ({navigation, items, contentContainerStyle}) => {
+  const styles = useStyleSheet(themedStyles);
   const onItemPress = (index) => {
     navigation.navigate('UpdateTask', {
       id: items[index].id,
@@ -34,11 +35,10 @@ export default ({navigation, items, contentContainerStyle}) => {
   );
 };
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   container: {
     paddingVertical: 16,
-    backgroundColor: '#edf8ff',
-    // backgroundColor: '$background-basic-color-1',
+    backgroundColor: '$background-basic-color-2',
     flex: 1,
   },
   list: {

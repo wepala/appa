@@ -81,7 +81,7 @@ const themedStyles = StyleService.create({
   card: {
     marginLeft: 16,
     borderRadius: 7,
-    borderColor: '#fff',
+    borderColor: '$background-basic-color-1',
     borderWidth: 0,
     borderLeftWidth: 10,
     flex: 1,
@@ -111,6 +111,7 @@ const themedStyles = StyleService.create({
   },
   buttonStart: {
     textAlign: 'center',
+    alignItems: 'center',
     paddingTop: 10,
     paddingBottom: 6,
     paddingHorizontal: 4,

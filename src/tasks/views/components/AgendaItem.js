@@ -122,10 +122,12 @@ const themedStyles = StyleService.create({
   card: {
     marginLeft: 16,
     borderRadius: 7,
-    backgroundColor: '#fff',
+    backgroundColor: '$background-basic-color-1',
 
-    borderColor: '#fff',
-    borderWidth: 0,
+    borderColor: '$background-basic-color-1',
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+    borderRightWidth: 0,
     borderLeftWidth: 10,
     flex: 1,
     elevation: 7,
@@ -173,9 +175,8 @@ const themedStyles = StyleService.create({
       textDecorationLine: 'line-through',
     },
     card: {
-      backgroundColor: '#edf8ff',
-      borderColor: '#edf8ff',
-      borderLeftColor: '#edf8ff',
+      backgroundColor: '$background-basic-color-2',
+      borderLeftColor: '$background-basic-color-2',
     },
   },
 });

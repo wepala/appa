@@ -98,6 +98,7 @@ const themedStyles = StyleService.create({
     width: 'auto',
     justifyContent: 'center',
     marginRight: 16,
+    backgroundColor: 'transparent',
   },
   column2: {
     backgroundColor: 'transparent',
@@ -108,6 +109,7 @@ const themedStyles = StyleService.create({
   column3: {
     width: 'auto',
     justifyContent: 'center',
+    backgroundColor: 'transparent',
   },
 
   buttonOptions: {

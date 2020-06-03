@@ -192,7 +192,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
-    backgroundColor: '#edf8ff',
+    backgroundColor: '$background-basic-color-2',
   },
   form: {
     flex: 1,

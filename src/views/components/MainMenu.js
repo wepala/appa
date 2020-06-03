@@ -9,18 +9,21 @@ import {
   Layout,
   MenuItemType,
   Text,
+  StyleService,
+  useStyleSheet,
 } from '@ui-kitten/components';
 import {
   AssetCalendarIcon,
   ClockIcon,
-  InfoIcon,
-  EditIcon,
+  QuestionIcon,
+  GridIcon,
   ReportIcon,
   SettingsIcon,
   SupportIcon,
 } from './Icons';
 
 export default ({navigation}) => {
+  const styles = useStyleSheet(themedStyles);
   const onItemSelect = (index) => {
     switch (index.row) {
       case 0: {
@@ -57,14 +60,17 @@ export default ({navigation}) => {
   };
 
   const renderHeader = () => (
-    <Layout style={styles.header} level="2">
+    <Layout style={styles.header}>
       <View style={styles.profileContainer}>
         <Avatar
           size="giant"
-          source={require('../../../assets/images/we-logo-blue.png')}
+          shape="rounded"
+          source={{
+            uri: 'https://cdn.roadmap.space/logos/5ed5164b31d74e9553c4f5eb.png',
+          }}
         />
         <Text style={styles.profileName} category="h6">
-          WeAgenda
+          Appa Does
         </Text>
       </View>
     </Layout>
@@ -89,27 +95,29 @@ export default ({navigation}) => {
         <Divider />
         <DrawerItem title={'Settings'} accessoryLeft={SettingsIcon} />
         <DrawerItem title={'Support'} accessoryLeft={SupportIcon} />
-        <DrawerItem title={'Customize'} accessoryLeft={EditIcon} />
-        <DrawerItem title={'About'} accessoryLeft={InfoIcon} />
+        <DrawerItem title={'Customize'} accessoryLeft={GridIcon} />
+        <DrawerItem title={'About'} accessoryLeft={QuestionIcon} />
       </Drawer>
     </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   safeArea: {
     flex: 1,
   },
   header: {
-    height: 128,
+    paddingVertical: 32,
     paddingHorizontal: 16,
     justifyContent: 'center',
+    backgroundColor: '$color-primary-500',
   },
   profileContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   profileName: {
+    color: '#fff',
     marginHorizontal: 16,
   },
 });
