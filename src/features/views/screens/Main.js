@@ -28,11 +28,12 @@ export default ({
 
   const [form, setForm] = useState({
     title: null,
-    user: {
-      first: 'Appa',
-      last: 'Bear',
-      email: 'appatest@mail.com',
-    },
+    // To be used when auth is available
+    // user: {
+    //   first: 'Appa',
+    //   last: 'Bear',
+    //   email: 'appatest@mail.com',
+    // },
     tags: [],
   });
 
