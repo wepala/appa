@@ -85,5 +85,13 @@ const themedStyles = StyleService.create({
   },
   buttonHelp: {
     width: '100%',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+    elevation: 5,
   },
 });
