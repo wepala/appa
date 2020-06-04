@@ -56,63 +56,66 @@ jobs:
           SLACK_USERNAME: WeAgenda
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
-  # build-android:
-  #   runs-on: ${{ matrix.os }}
-  #   if: contains(github.ref, 'release/')
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-18.04]
-  #       node: [13]
+  build-android:
+    runs-on: ${{ matrix.os }}
+    if: contains(github.ref, 'release/')
+    strategy:
+      matrix:
+        os: [ubuntu-18.04]
+        node: [13]
 
-  #   steps:
-  #     - name: checkout
-  #       uses: actions/checkout@v2
-  #     - name: setup node @ version
-  #       uses: actions/setup-node@v1
-  #       with:
-  #         node-version: ${{ matrix.node }}
-  #     - name: Install npm dependencies
-  #       run: |
-  #         npm install
-  #     - name: Run tests
-  #       run: |
-  #         npm run lint && npm test
-  #     - name: Install JDK for SDK to work
-  #       uses: actions/setup-java@v1
-  #       with:
-  #         java-version: 12 # The JDK version to make available on the path.
-  #         java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
-  #         architecture: x64 # (x64 or x86) - defaults to x64
-  #     - name: Install NDK # Temp fix for ongoing gradle issue
-  #       run: |
-  #         echo "y" | sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;20.0.5594570" --sdk_root=${ANDROID_SDK_ROOT}
-  #     - name: Generate keystore
-  #       run: |
-  #         echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 -d > android/app/release.keystore
-  #     - name: Build release APK
-  #       run: |
-  #         cd android && ./gradlew clean bundleRelease
-  #       env:
-  #         API_URL: ${{ secrets.API_URL }}
-  #         ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-  #         ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-  #         ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-  #     - name: Upload release APK
-  #       uses: actions/upload-artifact@v2
-  #       with:
-  #         name: app-release.aab
-  #         path: android/app/build/outputs/bundle/release/
-  #     - name: Send failure notification
-  #       uses: rtCamp/action-slack-notify@v2.0.0
-  #       if: failure()
-  #       env:
-  #         SLACK_CHANNEL: weagenda
-  #         SLACK_COLOR: "#FF0000"
-  #         SLACK_ICON: https://github.com/wepala.png?size=48
-  #         SLACK_MESSAGE: Tests passed for your code changes but we aren't able to generate and Android app
-  #         SLACK_TITLE: Could not build Android APK
-  #         SLACK_USERNAME: WeAgenda
-  #         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup node @ version
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Install npm dependencies
+        run: |
+          npm install
+      - name: Lint code
+        run: |
+          npm run lint
+      - name: Test code
+        run: |
+          npm test
+      - name: Install JDK for SDK to work
+        uses: actions/setup-java@v1
+        with:
+          java-version: 12 # The JDK version to make available on the path.
+          java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
+          architecture: x64 # (x64 or x86) - defaults to x64
+      - name: Install NDK # Temp fix for ongoing gradle issue
+        run: |
+          echo "y" | sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;20.0.5594570" --sdk_root=${ANDROID_SDK_ROOT}
+      - name: Generate keystore
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 -d > android/app/release.keystore
+      - name: Build release APK
+        run: |
+          cd android && ./gradlew clean bundleRelease
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - name: Upload release APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-release.aab
+          path: android/app/build/outputs/bundle/release/
+      - name: Send failure notification
+        uses: rtCamp/action-slack-notify@v2.0.0
+        if: failure()
+        env:
+          SLACK_CHANNEL: weagenda
+          SLACK_COLOR: "#FF0000"
+          SLACK_ICON: https://github.com/wepala.png?size=48
+          SLACK_MESSAGE: Tests passed for your code changes but we aren't able to generate and Android app
+          SLACK_TITLE: Could not build Android APK
+          SLACK_USERNAME: WeAgenda
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
   build-ios:
     runs-on: macos-10.15
@@ -190,8 +193,7 @@ jobs:
   build-success-notification-release:
     runs-on: ubuntu-18.04
     if: contains(github.ref, 'release/')
-    # needs: [build-android, build-ios]
-    needs: [build-ios]
+    needs: [build-android, build-ios]
     steps:
       - name: Send success notification
         uses: rtCamp/action-slack-notify@v2.0.0
