@@ -9,7 +9,6 @@ import Main from '../Main';
 import {mockStories} from '../../../__tests__/fixtures';
 
 describe('Features Screen', () => {
-  const getStories = jest.fn();
   const navigation = {
     goBack: jest.fn(),
   };
@@ -25,19 +24,13 @@ describe('Features Screen', () => {
             ...eva.light,
             ...theme,
           }}>
-          <Main
-            addFeedback={addFeedback}
-            stories={mockStories}
-            getStories={getStories}
-            navigation={navigation}
-          />
+          <Main addFeedback={addFeedback} navigation={navigation} />
         </ApplicationProvider>
       </>,
     );
 
-    expect(getStories).not.toBeCalled();
     const storyButton = getAllByTestId('StoryButton');
-    expect(storyButton).toHaveLength(3);
+    expect(storyButton).toHaveLength(4);
 
     const submitButton = getAllByTestId('SubmitButton');
     expect(submitButton).toHaveLength(1);

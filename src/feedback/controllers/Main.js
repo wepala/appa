@@ -12,7 +12,6 @@ import MainScreen from '../views/screens/Main';
 
 const Main = (props) => {
   const [status, setStatus] = useState('init');
-  const [stories, setStories] = useState([]);
   const token = base64.encode(`${ROADMAP_EMAIL}:${ROADMAP_TOKEN}`);
 
   const addFeedback = (form) => {
@@ -35,36 +34,7 @@ const Main = (props) => {
       });
   };
 
-  const getStories = () => {
-    return axios({
-      url: `${ROADMAP_BASEURL}/stories/${ROADMAP_ID}`,
-      method: 'get',
-      headers: {
-        Authorization: `Basic ${token}`,
-      },
-    })
-      .then((res) => {
-        setStatus('success');
-        setStories(res.data);
-        console.log('Success', res.data);
-        return res.data;
-      })
-      .catch((error) => {
-        setStatus('failure');
-        setStories(null);
-        console.log('Error', error);
-      });
-  };
-
-  return (
-    <MainScreen
-      {...props}
-      status={status}
-      addFeedback={addFeedback}
-      getStories={getStories}
-      stories={stories}
-    />
-  );
+  return <MainScreen {...props} status={status} addFeedback={addFeedback} />;
 };
 
 export default Main;

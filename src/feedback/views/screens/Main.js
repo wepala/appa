@@ -10,22 +10,15 @@ import {
 } from '@ui-kitten/components';
 import LinearGradient from 'react-native-linear-gradient';
 import TopBar from '../components/TopBar';
-import {useEffect} from 'react';
 
-export default ({
-  navigation,
-  route,
-  status,
-  addFeedback,
-  getStories,
-  stories,
-}) => {
-  useEffect(() => {
-    if (!stories.length) {
-      getStories();
-    }
-  }, [getStories, stories]);
+const tags = [
+  {id: '1', title: 'Bug'},
+  {id: '2', title: 'Enhancement'},
+  {id: '3', title: 'Feature'},
+  {id: '4', title: 'Analytics'},
+];
 
+export default ({navigation, route, status, addFeedback}) => {
   const [form, setForm] = useState({
     title: null,
     // To be used when auth is available
@@ -75,40 +68,38 @@ export default ({
             Tags
           </Text>
           <Layout style={styles.grid}>
-            {stories.length > 0 || stories === null
-              ? stories.map((story, index) => {
+            {tags.length > 0 || tags === null
+              ? tags.map((tag, index) => {
                   return index % 2 === 0 ? (
-                    <Layout
-                      key={story.id}
-                      style={[styles.item, styles.itemLeft]}>
+                    <Layout key={tag.id} style={[styles.item, styles.itemLeft]}>
                       <Button
                         testID="StoryButton"
                         style={styles.buttonOptions}
                         status="info"
                         appearance={
-                          form.tags.indexOf(story.title) > -1
+                          form.tags.indexOf(tag.title) > -1
                             ? 'filled'
                             : 'outline'
                         }
-                        onPress={() => toggleOption(story.title)}>
-                        {story.title}
+                        onPress={() => toggleOption(tag.title)}>
+                        {tag.title}
                       </Button>
                     </Layout>
                   ) : (
                     <Layout
-                      key={story.id}
+                      key={tag.id}
                       style={[styles.item, styles.itemRight]}>
                       <Button
                         testID="StoryButton"
                         style={styles.buttonOptions}
                         status="info"
                         appearance={
-                          form.tags.indexOf(story.title) > -1
+                          form.tags.indexOf(tag.title) > -1
                             ? 'filled'
                             : 'outline'
                         }
-                        onPress={() => toggleOption(story.title)}>
-                        {story.title}
+                        onPress={() => toggleOption(tag.title)}>
+                        {tag.title}
                       </Button>
                     </Layout>
                   );
