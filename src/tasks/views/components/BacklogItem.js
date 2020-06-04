@@ -17,7 +17,7 @@ const BacklogItem = ({navigation, item, index, onPress, addToAgenda}) => {
   const styles = useStyleSheet(themedStyles);
 
   const onAddToAgenda = () => {
-    addToAgenda(item, moment().format()).then(() =>
+    addToAgenda(item, moment().format('YYYY-MM-DD')).then(() =>
       navigation.navigate('Today'),
     );
   };

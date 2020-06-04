@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import {render, fireEvent, act} from 'react-native-testing-library';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
@@ -74,6 +75,7 @@ describe('BacklogItem', () => {
           resolve();
         }),
     );
+    const today = moment().format('YYYY-MM-DD');
     const {getAllByTestId} = render(
       <>
         <IconRegistry icons={EvaIconsPack} />
@@ -100,5 +102,6 @@ describe('BacklogItem', () => {
       fireEvent.press(item[0]);
     });
     expect(addToAgenda).toHaveBeenCalled();
+    expect(addToAgenda).toHaveBeenCalledWith(itemData, today);
   });
 });
