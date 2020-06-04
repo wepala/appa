@@ -7,6 +7,10 @@ import {default as theme} from '../../../../../theme.json';
 import Agenda from '../Agenda';
 import {mockTasks} from '../../../__tests__/fixtures';
 
+jest.mock('@fortawesome/react-native-fontawesome', () => ({
+  FontAwesomeIcon: '',
+}));
+
 describe('Agenda List View', () => {
   it('should display the task being worked on at the top', () => {
     const currentItem =

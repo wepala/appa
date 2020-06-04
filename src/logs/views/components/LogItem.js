@@ -22,6 +22,7 @@ export default ({item, index, onPress}) => {
         <Layout style={styles.row}>
           <Layout style={styles.column1}>
             <Avatar
+              testID="UserAvatar"
               style={styles.avatar}
               shape="round"
               size="medium"

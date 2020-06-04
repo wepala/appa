@@ -20,7 +20,6 @@ Copy the contents of the `.env-dist` file into the `.env` and fill out the blank
 SUPPORT_URL = https://XXXXXXXXXXXXXX
 SENDER = XXXXXXXX@XXXXX
 DESTINATION = XXXXXXXX@XXXXX
-BEARER = Bearer XXXXXXXXXXXXXXXXXXX
 ```
 
 ### Prerequisites
