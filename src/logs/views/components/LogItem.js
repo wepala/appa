@@ -83,8 +83,9 @@ const themedStyles = StyleService.create({
   },
 
   card: {
+    backgroundColor: '$background-basic-color-1',
     borderRadius: 7,
-    borderColor: 'transparent',
+    borderColor: '$background-basic-color-1',
     borderWidth: 0,
     flex: 1,
     elevation: 5,
