@@ -22,11 +22,9 @@ export default ({navigation, route, status, addFeedback}) => {
   const [form, setForm] = useState({
     title: null,
     // To be used when auth is available
-    // user: {
-    //   first: 'Appa',
-    //   last: 'Bear',
-    //   email: 'appatest@mail.com',
-    // },
+    user: {
+    first: 'userFirstName', last: 'UserLastName', email: 'userEmail@mail.com',
+    },
     tags: [],
   });
 
