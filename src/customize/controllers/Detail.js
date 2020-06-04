@@ -31,9 +31,6 @@ const Detail = (props) => {
     axios({
       method: 'post',
       url: SUPPORT_URL,
-      headers: {
-        Authorization: BEARER,
-      },
       data: {
         meta: {
           sender: SENDER,
