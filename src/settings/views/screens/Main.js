@@ -107,9 +107,6 @@ const themedStyles = StyleService.create({
   },
   buttonConnect: {
     marginTop: 32,
-    paddingTop: 10,
-    paddingBottom: 6,
-    paddingHorizontal: 4,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

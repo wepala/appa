@@ -47,6 +47,7 @@ export default ({
       />
     );
   };
+
   return (
     <Layout style={styles.container} testID={'AgendaLayout'}>
       {currentItem && currentItem.id ? (

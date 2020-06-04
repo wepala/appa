@@ -156,9 +156,6 @@ const themedStyles = StyleService.create({
   },
   buttonStart: {
     textAlign: 'center',
-    paddingTop: 10,
-    paddingBottom: 6,
-    paddingHorizontal: 4,
   },
   checkBox: {
     backgroundColor: 'transparent',

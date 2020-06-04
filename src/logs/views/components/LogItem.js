@@ -115,8 +115,5 @@ const themedStyles = StyleService.create({
 
   buttonOptions: {
     textAlign: 'center',
-    paddingTop: 10,
-    paddingBottom: 6,
-    paddingHorizontal: 4,
   },
 });

@@ -229,18 +229,12 @@ const themedStyles = StyleService.create({
     backgroundColor: 'transparent',
   },
   buttonCancel: {
-    paddingTop: 10,
-    paddingBottom: 6,
-    paddingHorizontal: 4,
     width: '40%',
     marginRight: 16,
     backgroundColor: 'transparent',
     justifyContent: 'center',
   },
   buttonSubmit: {
-    paddingTop: 10,
-    paddingBottom: 6,
-    paddingHorizontal: 4,
     flexGrow: 1,
     shadowColor: '#000',
     shadowOffset: {
