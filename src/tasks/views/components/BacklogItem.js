@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import moment from 'moment';
 import {AssetCalendarIcon} from '../../../views/components/Icons';
 
 import {
@@ -11,27 +12,39 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components';
 
-const BacklogItem = ({item, index, onPress}) => {
+const BacklogItem = ({navigation, item, index, onPress, addToAgenda}) => {
   const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
+
+  const onAddToAgenda = () => {
+    addToAgenda(item, moment().format()).then(() =>
+      navigation.navigate('Today'),
+    );
+  };
   return (
     <Card style={styles.item} onPress={() => onPress(index)}>
       <Layout style={styles.row}>
         <Layout style={styles.column1}>
-          <CheckBox checked={checked} onChange={toggleCheck} />
+          <CheckBox
+            checked={checked}
+            onChange={toggleCheck}
+            testID={'TaskCheckBox'}
+          />
         </Layout>
         <Layout style={styles.column2}>
-          <Text category="s1" style={styles.task}>
+          <Text category="s1" style={styles.task} testID={'TaskTitle'}>
             {item.title}
           </Text>
           <Text style={styles.time}>Time: 30m out of 1h</Text>
         </Layout>
         <Layout style={styles.column1}>
           <Button
+            testID={'AddToAgenda'}
             size="small"
             appearance="ghost"
             status="basic"
             accessoryLeft={AssetCalendarIcon}
+            onPress={onAddToAgenda}
           />
         </Layout>
       </Layout>
