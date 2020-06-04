@@ -1,4 +1,4 @@
-import React, {createRef} from 'react';
+import React, {createRef, useContext} from 'react';
 import {useForm, useValidated} from '../../../weosHelpers';
 import {
   Button,
@@ -19,11 +19,13 @@ import {
 } from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
 import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
+import {SectionContext} from '../../context/section-context';
 
 export default ({navigation, route, getTask, onSave, onUpdate}) => {
   const styles = useStyleSheet(themedStyles);
   const id = route.params?.id;
-  const section = route.params?.section;
+  const section = useContext(SectionContext).section;
+
   const task = getTask(id);
 
   const timeUnits = ['minutes', 'hours'];
