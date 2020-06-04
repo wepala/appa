@@ -18,13 +18,11 @@ export default () => (
   <>
     <IconRegistry icons={EvaIconsPack} />
     <ApplicationProvider {...eva} theme={{...eva.light, ...theme}}>
-      <PKCEWrapper>
-        <Provider store={store}>
-          <PersistGate loading={<Loading />} persistor={persistor}>
-            <HomeScreen />
-          </PersistGate>
-        </Provider>
-      </PKCEWrapper>
+      <Provider store={store}>
+        <PersistGate loading={<Loading />} persistor={persistor}>
+          <HomeScreen />
+        </PersistGate>
+      </Provider>
     </ApplicationProvider>
   </>
 );
