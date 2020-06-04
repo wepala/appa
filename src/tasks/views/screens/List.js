@@ -12,10 +12,6 @@ export default (props) => {
   //setup tabs for current task list and backlog
   const Tabs = createMaterialTopTabNavigator();
 
-  // const TabNavigation = () => (
-
-  // );
-
   return (
     <>
       <TopBar navigation={navigation} />
