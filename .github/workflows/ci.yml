@@ -149,7 +149,7 @@ jobs:
       - name: Install pod dependencies
         run: |
           cd ios && pod install
-      - name: Build and archive app
+      - name: Create archive for app
         run: |
           cd ios
           xcodebuild clean archive \
@@ -160,17 +160,21 @@ jobs:
             -allowProvisioningUpdates \
             PROVISIONING_PROFILE="${{ secrets.IOS_PROVISIONING_PROFILE_ID }}" \
             CODE_SIGN_IDENTITY="${{ secrets.IOS_SIGNING_IDENTITY }}"
-
+      - name: Convert to .ipa
+        run: |
+          cd ios
           xcodebuild \
             -exportArchive \
             -archivePath build/AppaTimeTracker.xcarchive \
             -exportPath ./build \
             -exportOptionsPlist ci.plist
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: AppaTimeTracker.ipa
-          path: ios/build
+      - name: Upload ipa to Apple Store
+        run: |
+          cd ios
+          xcrun altool --upload-app --type ios \
+            --file build/AppaTimeTracker.ipa \
+            --username "${{ secrets.IOS_USERNAME }}" \
+            --password "${{ secrets.IOS_PASSWORD }}" --verbose
       - name: Send failure notification
         uses: rtCamp/action-slack-notify@v2.0.0
         if: failure()
