@@ -60,7 +60,7 @@ export default ({navigation}) => {
   };
 
   const renderHeader = () => (
-    <Layout style={styles.header}>
+    <Layout style={styles.header} level="2">
       <View style={styles.profileContainer}>
         <Avatar
           size="giant"
@@ -109,14 +109,14 @@ const themedStyles = StyleService.create({
     paddingVertical: 32,
     paddingHorizontal: 16,
     justifyContent: 'center',
-    backgroundColor: '$color-primary-500',
+    // backgroundColor: '$color-primary-500',
   },
   profileContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   profileName: {
-    color: '#fff',
+    // color: '#fff',
     marginHorizontal: 16,
   },
 });
