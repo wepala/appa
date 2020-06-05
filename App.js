@@ -8,7 +8,6 @@ import {Loading} from './src/views/components/Spinner';
 
 import HomeScreen from './src/views/HomeScreen';
 import {Provider} from 'react-redux';
-import PKCEWrapper from './src/auth/PKCEWrapper';
 import {PersistGate} from 'redux-persist/integration/react';
 
 //store
