@@ -25,5 +25,7 @@ export default class ConnectController extends Controller {
     });
   }
 
-  generateAuthroizeUrl = () => PKCE.authorizeURL();
+  authorizeURL() {
+    return PKCE.authorizeURL();
+  }
 }

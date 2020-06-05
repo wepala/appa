@@ -10,7 +10,7 @@ describe('Connect Controller', () => {
 
   it('Should provide a method that generates the PKCE authorize url', () => {
     const controller = new ConnectController();
-    expect(controller.generateAuthroizeUrl).toBeDefined();
+    expect(controller.authorizeURL).toBeDefined();
   });
 
   // it('Should provide a method to save token after successful login', () => {});
