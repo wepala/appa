@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState }from 'react';
+
 import {SafeAreaView} from 'react-native';
 import {
   Button,
@@ -6,7 +7,7 @@ import {
   Input,
   StyleService,
   useStyleSheet,
-  Text,
+  Text, Modal, Card,
 } from '@ui-kitten/components';
 import LinearGradient from 'react-native-linear-gradient';
 import TopBar from '../components/TopBar';
@@ -39,6 +40,13 @@ export default ({navigation, route, status, addFeedback}) => {
     setForm({...form, tags});
     console.log(form);
   };
+
+
+  const [visible, toggleVisible] = useState(false);
+  useEffect(() => {
+    if (status === 'success' || status === 'error') toggleVisible(true);
+  }, [status]);
+
 
   const styles = useStyleSheet(themedStyles);
   return (
@@ -112,6 +120,23 @@ export default ({navigation, route, status, addFeedback}) => {
             onPress={() => addFeedback(form)}>
             SUBMIT
           </Button>
+
+            <Modal
+  visible={visible}
+  style={styles.container}
+  backdropStyle={styles.backdrop}>
+  {status === 'error' ? (
+      <Card disabled={true}>
+      <Text category="h3">Failed to Send Feedback</Text>
+  <Button onPress={() => toggleVisible(false)}>DISMISS</Button>
+  </Card>
+) : status === 'success' ? (
+      <Card disabled={true}>
+      <Text category="h3">Feedback Sent!</Text>
+  <Button onPress={() => toggleVisible(false)}>DISMISS</Button>
+  </Card>
+) : null}
+</Modal>
         </Layout>
       </LinearGradient>
     </SafeAreaView>
