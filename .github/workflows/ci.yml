@@ -20,9 +20,12 @@ jobs:
       - name: Install npm dependencies
         run: |
           npm install
-      - name: Run tests
+      - name: Lint code
         run: |
-          npm run lint && npm test
+          npm run lint
+      - name: Test code
+        run: |
+          npm test
       - name: Install JDK for SDK to work
         uses: actions/setup-java@v1
         with:
