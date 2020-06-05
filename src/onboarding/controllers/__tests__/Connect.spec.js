@@ -13,5 +13,5 @@ describe('Connect Controller', () => {
     expect(controller.authorizeURL).toBeDefined();
   });
 
-  // it('Should provide a method to save token after successful login', () => {});
+  //TODO it('Should provide a method to save token after successful login', () => {});
 });
