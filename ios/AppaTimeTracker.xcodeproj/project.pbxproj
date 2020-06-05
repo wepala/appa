@@ -172,7 +172,7 @@
 				00E356EF1AD99517003FC87E /* WeAgendaTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				B391AA1ED0A8DA7C0A8A7C31 /* Pods */,
+				A0B492DAD2E73F52849D0EFF /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -190,7 +190,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B391AA1ED0A8DA7C0A8A7C31 /* Pods */ = {
+		A0B492DAD2E73F52849D0EFF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				BBFF98EB9BFF590EEA1D1630 /* Pods-WeAgenda.debug.xcconfig */,

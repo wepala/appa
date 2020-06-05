@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
+import {SafeAreaView, Linking} from 'react-native';
 import {
   Button,
   Text,
@@ -10,8 +10,13 @@ import {
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faUserCircle} from '@fortawesome/free-solid-svg-icons';
 
-export default ({navigation}) => {
+export default ({navigation, authorizeURL}) => {
   const styles = useStyleSheet(themedStyles);
+
+  const handleWeosConnect = () => {
+    Linking.openURL(authorizeURL());
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Layout style={styles.container} level="2">
@@ -31,7 +36,12 @@ export default ({navigation}) => {
           </Text>
         </Layout>
         <Layout level="2" style={styles.buttonContainer}>
-          <Button style={styles.buttonConnct}>WeOS Connect</Button>
+          <Button
+            style={styles.buttonConnct}
+            testID="WeOsConnectBtn"
+            onPress={handleWeosConnect}>
+            WeOS Connect
+          </Button>
           <Button
             status="basic"
             onPress={() => navigation.navigate('Complete')}>
