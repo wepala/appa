@@ -21,10 +21,13 @@ export const getIncompleteTasks = createSelector([tasksSelector], (tasks) =>
   tasks
     .filter((task) => !task.complete)
     .sort((a, b) => {
-      if (a.dueDate < b.dueDate) {
+      const d1 = new Date(a.dueDate).getTime();
+      const d2 = new Date(b.dueDate).getTime();
+
+      if (d1 < d2) {
         return 1;
       }
-      if (a.dueDate > b.dueDate) {
+      if (d1 > d2) {
         return -1;
       }
       return 0;
