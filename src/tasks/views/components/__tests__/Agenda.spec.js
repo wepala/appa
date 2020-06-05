@@ -12,6 +12,10 @@ describe('Agenda List View', () => {
     const currentItem =
       mockTasks.getById['36212c03-040b-4139-867f-bd76485f4084'];
 
+    const navigation = {
+      isFocused: jest.fn(),
+    };
+
     const {getAllByTestId, unmount} = render(
       <>
         <IconRegistry icons={EvaIconsPack} />
@@ -21,7 +25,11 @@ describe('Agenda List View', () => {
             ...eva.light,
             ...theme,
           }}>
-          <Agenda currentItem={currentItem} timeTotals={[20, 90]} />
+          <Agenda
+            navigation={navigation}
+            currentItem={currentItem}
+            timeTotals={[20, 90]}
+          />
         </ApplicationProvider>
       </>,
     );
