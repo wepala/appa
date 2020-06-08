@@ -23,14 +23,14 @@ const BacklogItem = ({
 }) => {
   const [checked, toggleCheck] = useState(item.complete);
   const styles = useStyleSheet(themedStyles);
-
+  console.log(item);
   const onAddToAgenda = () => {
     addToAgenda(item, moment().format('YYYY-MM-DD')).then(() =>
       navigation.navigate('Today'),
     );
   };
   return (
-    <Layout style={styles.item}>
+    <Layout key={item.id} style={styles.item}>
       <CheckBox
         testID={'TaskCheckBox'}
         style={styles.checkBox}
