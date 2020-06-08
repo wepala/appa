@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 jobs:
   create-env-file:
-    - name: GenerateEnv
+    - name: generateEnv
       run: |
         echo "ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
                 ROADMAP_ID: ${{ secrets.ROADMAP_ID }}"> .env
