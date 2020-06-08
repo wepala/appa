@@ -1,5 +1,6 @@
 {
   "presets": [
+    "module:react-native-dotenv",
     "@babel/preset-flow",
     "@babel/preset-typescript"
   ],

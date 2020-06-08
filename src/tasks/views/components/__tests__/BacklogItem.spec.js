@@ -7,6 +7,10 @@ import * as eva from '@eva-design/eva';
 import {default as theme} from '../../../../../theme.json';
 import BacklogItem from '../BacklogItem';
 
+jest.mock('@fortawesome/react-native-fontawesome', () => ({
+  FontAwesomeIcon: '',
+}));
+
 describe('BacklogItem', () => {
   const title = 'My Task';
   const time = '9:07 AM';

@@ -12,6 +12,7 @@ import {
   SelectItem,
   useStyleSheet,
   IndexPath,
+  Text,
 } from '@ui-kitten/components';
 import {
   AlertIcon,
@@ -106,6 +107,7 @@ export default ({navigation, route, getTask, onSave, onUpdate, onRemove}) => {
           <Layout style={styles.form}>
             <Input
               testID="TaskTitle"
+              size="large"
               style={styles.input}
               label="Task Title"
               placeholder="Enter title here"
@@ -116,13 +118,13 @@ export default ({navigation, route, getTask, onSave, onUpdate, onRemove}) => {
                 clearValid();
               }}
               status={!valid.title && 'danger'}
-              captionIcon={!valid.title && AlertIcon}
-              caption={!valid.title && 'Title cannot be blank'}
+              caption={!valid.title && 'Please enter task title'}
             />
             <Layout style={styles.row}>
               <Layout style={styles.column1}>
                 <Input
                   testID="TaskEstTime"
+                  size="large"
                   style={styles.input}
                   label="Estimated Time"
                   placeholder="30"
@@ -132,30 +134,28 @@ export default ({navigation, route, getTask, onSave, onUpdate, onRemove}) => {
                     setForm(val.trimLeft(), 'timeEstimate');
                     clearValid();
                   }}
-                  status={!valid.timeEstimate && 'danger'}
-                  captionIcon={!valid.timeEstimate && AlertIcon}
-                  caption={
-                    !valid.timeEstimate && 'Estimated time cannot be empty'
-                  }
                 />
               </Layout>
               <Layout style={styles.column2}>
                 <Select
+                  size="large"
+                  style={[styles.input, styles.unit]}
+                  status="basic"
                   accessoryRight={ClockIcon}
                   label="  "
                   value={timeUnits[form.timeUnit.row]}
-                  style={styles.input}
                   selectedIndex={form.timeUnit}
                   onSelect={(index) => {
                     setForm(index, 'timeUnit');
                   }}>
                   {timeUnits.map((unit, index) => (
-                    <SelectItem key={index + ''} title={unit} />
+                    <SelectItem size="large" key={index + ''} title={unit} />
                   ))}
                 </Select>
               </Layout>
             </Layout>
             <Input
+              size="large"
               testID="TaskDescription"
               style={styles.input}
               multiline={true}
@@ -166,6 +166,8 @@ export default ({navigation, route, getTask, onSave, onUpdate, onRemove}) => {
               onChangeText={(val) => setForm(val.trimLeft(), 'description')}
             />
             <Datepicker
+              size="large"
+              status="basic"
               testID="TaskDueDate"
               style={styles.input}
               accessoryRight={CalendarIcon}
@@ -178,23 +180,22 @@ export default ({navigation, route, getTask, onSave, onUpdate, onRemove}) => {
                 datePicker.current.blur();
               }}
             />
-            <Divider />
 
             <Layout style={styles.buttonGroup}>
               <Button
                 status="basic"
+                appearance="outline"
                 style={styles.buttonCancel}
                 size="giant"
-                Cancel
                 onPress={() => navigation.goBack()}>
-                Cancel
+                CANCEL
               </Button>
               <Button
                 testID="SubmitButton"
                 style={styles.buttonSubmit}
                 size="giant"
                 onPress={onSubmit}>
-                Submit
+                OK
               </Button>
             </Layout>
           </Layout>
@@ -209,27 +210,35 @@ export default ({navigation, route, getTask, onSave, onUpdate, onRemove}) => {
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
-    backgroundColor: '$background-basic-color-1',
+    backgroundColor: '$background-basic-color-2',
   },
   form: {
     flex: 1,
     padding: 16,
+    backgroundColor: 'transparent',
   },
   input: {
-    marginBottom: 16,
+    marginBottom: 24,
+  },
+  unit: {
+    paddingVertical: 0,
+    marginVertical: 0,
   },
   row: {
     display: 'flex',
     flexDirection: 'row',
+    backgroundColor: 'transparent',
   },
   column1: {
     flexShrink: 0,
     width: '30%',
     flexBasis: 'auto',
     marginRight: 16,
+    backgroundColor: 'transparent',
   },
   column2: {
     flexGrow: 1,
+    backgroundColor: 'transparent',
   },
 
   buttonGroup: {
@@ -237,13 +246,23 @@ const themedStyles = StyleService.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    backgroundColor: 'transparent',
   },
   buttonCancel: {
-    flexBasis: 'auto',
-    flexShrink: 0,
+    width: '40%',
     marginRight: 16,
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
   },
   buttonSubmit: {
     flexGrow: 1,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+    elevation: 5,
   },
 });
