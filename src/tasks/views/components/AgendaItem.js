@@ -35,7 +35,7 @@ const TaskItem = ({
   };
 
   return (
-    <Layout style={styles.item}>
+    <Layout key={item.id} style={styles.item}>
       <CheckBox
         testID={'TaskCheckBox'}
         style={styles.checkBox}
@@ -130,7 +130,7 @@ const themedStyles = StyleService.create({
     borderRightWidth: 0,
     borderLeftWidth: 10,
     flex: 1,
-    elevation: 7,
+    elevation: 2,
   },
 
   row: {
@@ -172,8 +172,9 @@ const themedStyles = StyleService.create({
       textDecorationLine: 'line-through',
     },
     card: {
-      backgroundColor: '$background-basic-color-2',
-      borderLeftColor: '$background-basic-color-2',
+      backgroundColor: 'transparent',
+      borderColor: 'transparent',
+      elevation: 0,
     },
   },
 });

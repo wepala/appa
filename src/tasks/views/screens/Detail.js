@@ -111,6 +111,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               <Layout style={styles.column1}>
                 <Input
                   testID="TaskEstTime"
+                  size="medium"
                   style={styles.input}
                   label="Estimated Time"
                   placeholder="30"
@@ -125,6 +126,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               <Layout style={styles.column2}>
                 <Select
                   status="basic"
+                  size="large"
                   accessoryRight={ClockIcon}
                   label="  "
                   value={timeUnits[form.timeUnit.row]}
@@ -142,7 +144,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
             </Layout>
             <Input
               testID="TaskDescription"
-              style={styles.input}
+              style={[styles.input, styles.time]}
               multiline={true}
               placeholder=""
               label="Description"
@@ -203,6 +205,9 @@ const themedStyles = StyleService.create({
   },
   input: {
     marginBottom: 24,
+  },
+  time: {
+    height: 100,
   },
   row: {
     display: 'flex',

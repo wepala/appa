@@ -172,6 +172,7 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
               </Layout>
               <Layout style={[styles.column, styles.columnThird]}>
                 <Select
+                  size="large"
                   testID="LoggedAMPM"
                   style={styles.input}
                   label=" "

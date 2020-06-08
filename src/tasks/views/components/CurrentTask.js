@@ -118,7 +118,7 @@ const themedStyles = StyleService.create({
       position: 'absolute',
       bottom: -15,
       right: 30,
-      width: 'auto',
+      width: '50%',
       borderRadius: 7,
       borderColor: 'transparent',
       borderWidth: 0,
@@ -135,6 +135,7 @@ const themedStyles = StyleService.create({
     },
     timer: {
       marginRight: 16,
+      marginBottom: 2,
     },
   },
   button: {
