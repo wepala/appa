@@ -38,12 +38,12 @@ jobs:
       - name: Build debug APK
         run: |
           npm run bundle-android
-          cd android && ROADMAP_BASEURL=${{ secrets.ROADMAP_BASEURL }} && ROADMAP_ID=${{ secrets.ROADMAP_ID }} && ./gradlew clean assembleDebug
+          cd android  && ./gradlew clean assembleDebug
         env:
-          ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
-          ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
-          API_URL: ${{ secrets.API_URL }}
-          TEMP_USER_JWT: ${{ secrets.TEMP_USER_JWT }}
+          ROADMAP_BASEURL: ${{secrets.ROADMAP_BASEURL}}
+          ROADMAP_ID: ${{secrets.ROADMAP_ID}}
+          API_URL: ${{secrets.API_URL}}
+          TEMP_USER_JWT: ${{secrets.TEMP_USER_JWT}}
       - name: Upload debug APK
         uses: actions/upload-artifact@v2
         with:

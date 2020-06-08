@@ -32,7 +32,6 @@ export default ({navigation, route, status, addFeedback}) => {
     },
     tags: [],
   });
-
   const toggleOption = (option) => {
     const index = form.tags.indexOf(option);
     let tags = form.tags;
