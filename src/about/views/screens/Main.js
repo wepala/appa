@@ -79,11 +79,10 @@ const themedStyles = StyleService.create({
     backgroundColor: 'transparent',
   },
   column: {
-    marginRight: 16,
+    width: '100%',
     backgroundColor: 'transparent',
   },
   card: {
     marginTop: 8,
-    width: 'auto',
   },
 });
