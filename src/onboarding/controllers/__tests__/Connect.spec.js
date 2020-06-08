@@ -1,5 +1,5 @@
 import ConnectController from '../Connect';
-import PKCE from '../../../auth/pkce';
+import PKCE from '../../../weos/auth/pkce';
 
 describe('Connect Controller', () => {
   it('Should initialize PKCE configurations', () => {

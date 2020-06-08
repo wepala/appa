@@ -1,5 +1,5 @@
 import {Controller} from '../../controller';
-import PKCE from '../../auth/pkce';
+import PKCE from '../../weos/auth/pkce';
 import {
   CLIENT_ID,
   AUTHORIZE_URL,
