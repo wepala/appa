@@ -3,9 +3,17 @@ on: [push, pull_request]
 
 jobs:
   create-env-file:
-    run: |
-      echo "ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
-      ROADMAP_ID: ${{ secrets.ROADMAP_ID }}"> .env
+    runs-on: ${{ matrix.os }}
+    if: "!contains(github.ref, 'release/')"
+    strategy:
+      matrix:
+        os: [ubuntu-18.04]
+        node: [13]
+    steps:
+      - name: Install npm dependencies
+        run: |
+          echo "ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
+          ROADMAP_ID: ${{ secrets.ROADMAP_ID }}"> .env
 
   install-test-and-build:
     runs-on: ${{ matrix.os }}
