@@ -40,6 +40,8 @@ jobs:
           npm run bundle-android
           cd android && ./gradlew clean assembleDebug
         env:
+          ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
+          ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
           API_URL: ${{ secrets.API_URL }}
           TEMP_USER_JWT: ${{ secrets.TEMP_USER_JWT }}
       - name: Upload debug APK
@@ -99,6 +101,8 @@ jobs:
         run: |
           cd android && ./gradlew clean bundleRelease
         env:
+          ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
+          ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
           API_URL: ${{ secrets.API_URL }}
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
