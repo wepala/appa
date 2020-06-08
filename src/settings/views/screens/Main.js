@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {SafeAreaView} from 'react-native';
 import {ThemeContext} from '../../../../theme.context';
 import {
   Button,
@@ -10,10 +11,11 @@ import {
   Text,
   Toggle,
   Icon,
+  Divider,
 } from '@ui-kitten/components';
-import {FlashIcon, InfoIcon, ClockIcon} from '../../../views/components/Icons';
 import TopBar from '../components/TopBar';
-import {SafeAreaView} from 'react-native';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faCircle} from '@fortawesome/free-solid-svg-icons';
 
 export default ({navigation, route}) => {
   const themeContext = React.useContext(ThemeContext);
@@ -26,15 +28,56 @@ export default ({navigation, route}) => {
         <Button appearance="primary" size="giant" style={styles.buttonConnect}>
           WeOS Connect
         </Button>
+        <Divider style={styles.divider} />
         <Layout style={styles.row}>
           <Layout style={styles.column1}>
             <Text category="h5">PERSONALIZATION</Text>
             <Layout style={styles.row}>
-              <Text category="s2">Choose your Colour</Text>
-              <Icon style={styles.icon} name="info-outline" />
+              <Text category="s2" style={{width: '100%'}}>
+                Choose your Colour
+              </Text>
+            </Layout>
+            <Layout style={styles.coloursRow}>
+              <FontAwesomeIcon
+                style={styles.colour}
+                size="40"
+                icon={faCircle}
+                color="#6633d4"
+              />
+              <FontAwesomeIcon
+                style={styles.colour}
+                size="40"
+                icon={faCircle}
+                color="#ba46d5"
+              />
+              <FontAwesomeIcon
+                style={styles.colour}
+                size="40"
+                icon={faCircle}
+                color="#df437a"
+              />
+              <FontAwesomeIcon
+                style={styles.colour}
+                size="40"
+                icon={faCircle}
+                color="#fa7e4c"
+              />
+              <FontAwesomeIcon
+                style={styles.colour}
+                size="40"
+                icon={faCircle}
+                color="#fec63e"
+              />
+              <FontAwesomeIcon
+                style={styles.colour}
+                size="40"
+                icon={faCircle}
+                color="#8dd76e"
+              />
             </Layout>
           </Layout>
         </Layout>
+
         <Layout style={styles.row}>
           <Layout style={styles.column1}>
             <Text category="h5">THEME</Text>
@@ -50,7 +93,8 @@ export default ({navigation, route}) => {
             </Toggle>
           </Layout>
         </Layout>
-        <Layout style={styles.row}>
+        {/* To be implemented later */}
+        {/* <Layout style={styles.row}>
           <Layout style={styles.column1}>
             <Text category="h5">TIMEOUT SETTINGS</Text>
             <Text category="s2">
@@ -62,7 +106,7 @@ export default ({navigation, route}) => {
           <SelectItem title="1 hour" />
           <SelectItem title="2 hour" />
           <SelectItem title="3 hour" />
-        </Select>
+        </Select> */}
       </Layout>
     </SafeAreaView>
   );
@@ -77,14 +121,28 @@ const themedStyles = StyleService.create({
   row: {
     display: 'flex',
     flexDirection: 'row',
-    paddingVertical: 32,
+    paddingVertical: 24,
+    paddingHorizontal: 0,
     alignItems: 'center',
     justifyContent: 'flex-start',
     backgroundColor: 'transparent',
   },
+  coloursRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: 'transparent',
+  },
+  colour: {
+    margin: 0,
+    padding: 0,
+    borderRadius: 100,
+    borderWidth: 8,
+    borderColor: '#fff',
+  },
   column1: {
     flexGrow: 1,
-    marginRight: 16,
     backgroundColor: 'transparent',
   },
   column2: {
@@ -92,6 +150,9 @@ const themedStyles = StyleService.create({
     backgroundColor: 'transparent',
   },
 
+  divider: {
+    marginVertical: 16,
+  },
   icon: {
     width: 16,
     height: 16,

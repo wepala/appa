@@ -88,7 +88,7 @@ const themedStyles = StyleService.create({
     borderColor: '$background-basic-color-1',
     borderWidth: 0,
     flex: 1,
-    elevation: 5,
+    elevation: 2,
   },
 
   row: {

@@ -91,7 +91,7 @@ const themedStyles = StyleService.create({
     borderWidth: 0,
     borderLeftWidth: 10,
     flex: 1,
-    elevation: 5,
+    elevation: 2,
   },
 
   row: {
