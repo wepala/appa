@@ -4,7 +4,13 @@ import {StyleSheet} from 'react-native';
 import BacklogItem from './BacklogItem';
 import {SectionContext} from '../../context/section-context';
 
-export default ({navigation, items, contentContainerStyle, addToAgenda}) => {
+export default ({
+  navigation,
+  items,
+  contentContainerStyle,
+  addToAgenda,
+  setTaskCompletion,
+}) => {
   const onItemPress = (index) => {
     navigation.navigate('UpdateTask', {
       id: items[index].id,
@@ -27,6 +33,7 @@ export default ({navigation, items, contentContainerStyle, addToAgenda}) => {
       onPress={onItemPress}
       addToAgenda={addToAgenda}
       navigation={navigation}
+      onComplete={setTaskCompletion}
     />
   );
 
