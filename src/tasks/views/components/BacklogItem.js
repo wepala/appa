@@ -12,8 +12,15 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components';
 
-const BacklogItem = ({navigation, item, index, onPress, addToAgenda}) => {
-  const [checked, toggleCheck] = useState(false);
+const BacklogItem = ({
+  navigation,
+  item,
+  index,
+  onPress,
+  addToAgenda,
+  onComplete,
+}) => {
+  const [checked, toggleCheck] = useState(item.complete);
   const styles = useStyleSheet(themedStyles);
 
   const onAddToAgenda = () => {
@@ -27,7 +34,9 @@ const BacklogItem = ({navigation, item, index, onPress, addToAgenda}) => {
         <Layout style={styles.column1}>
           <CheckBox
             checked={checked}
-            onChange={toggleCheck}
+            onChange={() =>
+              onComplete(item.id, !checked).then(toggleCheck(!checked))
+            }
             testID={'TaskCheckBox'}
           />
         </Layout>

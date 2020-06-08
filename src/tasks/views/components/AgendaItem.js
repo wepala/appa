@@ -21,7 +21,7 @@ const TaskItem = ({
   timeSpentToday,
   active,
 }) => {
-  const [checked, toggleCheck] = useState(false);
+  const [checked, toggleCheck] = useState(item.complete);
   const styles = useStyleSheet(themedStyles);
   let currentTimeSpent = {
     hours: parseInt(timeSpentToday / 3600, 10),
