@@ -2,6 +2,13 @@ name: Test and Build Android & iOS
 on: [push, pull_request]
 
 jobs:
+  create-env-file:
+    steps:
+      - name: GenerateEnv
+        run: |
+          echo "ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
+                ROADMAP_ID: ${{ secrets.ROADMAP_ID }}"> .env
+
   install-test-and-build:
     runs-on: ${{ matrix.os }}
     if: "!contains(github.ref, 'release/')"
