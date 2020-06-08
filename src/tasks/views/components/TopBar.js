@@ -8,7 +8,7 @@ import {
 import {MenuIcon, PlusIcon} from '../../../views/components/Icons';
 
 export default ({navigation, title}) => {
-  title = title === undefined ? 'WeAgenda' : title;
+  title = title === undefined ? 'Appa Does' : title;
 
   const showMenu = () => {
     navigation.toggleDrawer();
