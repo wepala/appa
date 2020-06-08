@@ -40,7 +40,10 @@ const BacklogItem = ({
           onComplete(item.id, !checked).then(toggleCheck(!checked))
         }
       />
-      <Card testID={'TaskItem'} style={styles.card} onPress={onPress}>
+      <Card
+        testID={'TaskItem'}
+        style={styles.card}
+        onPress={() => onPress(index)}>
         <Layout style={styles.row}>
           <Layout style={styles.column1}>
             <Text
