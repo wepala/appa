@@ -13,8 +13,15 @@ import {
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCalendarAlt} from '@fortawesome/free-solid-svg-icons';
 
-const BacklogItem = ({navigation, item, index, onPress, addToAgenda}) => {
-  const [checked, toggleCheck] = useState(false);
+const BacklogItem = ({
+  navigation,
+  item,
+  index,
+  onPress,
+  addToAgenda,
+  onComplete,
+}) => {
+  const [checked, toggleCheck] = useState(item.complete);
   const styles = useStyleSheet(themedStyles);
 
   const onAddToAgenda = () => {
@@ -29,9 +36,8 @@ const BacklogItem = ({navigation, item, index, onPress, addToAgenda}) => {
         style={styles.checkBox}
         status="primary"
         checked={checked}
-        onChange={
-          () => console.log('Backlog complete missing func')
-          // onComplete(item.id, !checked).then(toggleCheck(!checked))
+        onChange={() =>
+          onComplete(item.id, !checked).then(toggleCheck(!checked))
         }
       />
       <Card testID={'TaskItem'} style={styles.card} onPress={onPress}>
@@ -118,6 +124,11 @@ const themedStyles = StyleService.create({
   buttonStart: {
     textAlign: 'center',
     alignItems: 'center',
+  },
+  checked: {
+    title: {
+      textDecorationLine: 'line-through',
+    },
   },
 });
 

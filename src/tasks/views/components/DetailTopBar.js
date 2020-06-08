@@ -8,8 +8,9 @@ import {
 } from '@ui-kitten/components';
 import {ArrowIosBackIcon, TrashIcon} from '../../../views/components/Icons';
 import React from 'react';
+import {Alert} from 'react-native';
 
-export default ({navigation, route, title, section}) => {
+export default ({navigation, route, title, section, onRemove}) => {
   const styles = useStyleSheet(themedStyles);
   const id = route.params?.id;
   title = id === '' ? 'Add Task' : 'Update Task';
@@ -27,15 +28,33 @@ export default ({navigation, route, title, section}) => {
   );
 
   const MenuAction = () => {
-    const showCreate = () => {
-      navigation.navigate('CreateTask', {section: section});
+    const showDelete = () => {
+      Alert.alert(
+        'Delete Task',
+        'Are you sure ?',
+        [
+          {
+            text: 'Cancel',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+          {
+            text: 'Confirm',
+            onPress: () => {
+              const screen = section === 'agenda' ? 'Today' : 'Backlog';
+              return onRemove(id).then(() => navigation.navigate(screen));
+            },
+          },
+        ],
+        {cancelable: false},
+      );
     };
 
     return (
       <TopNavigationAction
         style={styles.icon}
         icon={id && TrashIcon}
-        onPress={showCreate}
+        onPress={showDelete}
       />
     );
   };

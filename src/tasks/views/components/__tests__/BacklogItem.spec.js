@@ -108,4 +108,55 @@ describe('BacklogItem', () => {
     expect(addToAgenda).toHaveBeenCalled();
     expect(addToAgenda).toHaveBeenCalledWith(itemData, today);
   });
+
+  it('Should make task as completed', async () => {
+    const itemData = {
+      title,
+      time,
+      id: '36212c03-040b-4139-867f-bd76485f4084',
+    };
+    const index = 1;
+    const onPressItem = jest.fn();
+    const navigation = jest.fn();
+    const addToAgenda = jest.fn(
+      () =>
+        new Promise(function (resolve) {
+          resolve();
+        }),
+    );
+    const onComplete = jest.fn(
+      () =>
+        new Promise(function (resolve) {
+          resolve();
+        }),
+    );
+    const {getAllByTestId} = render(
+      <>
+        <IconRegistry icons={EvaIconsPack} />
+        <ApplicationProvider
+          {...eva}
+          theme={{
+            ...eva.light,
+            ...theme,
+          }}>
+          <BacklogItem
+            index={index}
+            item={itemData}
+            onPress={onPressItem}
+            navigation={navigation}
+            addToAgenda={addToAgenda}
+            onComplete={onComplete}
+          />
+        </ApplicationProvider>
+      </>,
+    );
+
+    const item = getAllByTestId('TaskCheckBox');
+    expect(item).toHaveLength(1);
+    act(() => {
+      fireEvent.press(item[0]);
+    });
+    expect(onComplete).toHaveBeenCalled();
+    expect(onComplete).toHaveBeenCalledWith(itemData.id, true);
+  });
 });

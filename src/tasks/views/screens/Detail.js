@@ -1,4 +1,5 @@
 import React, {createRef, useContext} from 'react';
+import moment from 'moment';
 import {useForm, useValidated} from '../../../weosHelpers';
 import {
   Button,
@@ -22,12 +23,18 @@ import DetailTopBar from '../components/DetailTopBar';
 import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
 import {SectionContext} from '../../context/section-context';
 
-export default ({navigation, route, getTask, onSave, onUpdate}) => {
+export default ({navigation, route, getTask, onSave, onUpdate, onRemove}) => {
   const styles = useStyleSheet(themedStyles);
   const id = route.params?.id;
   const section = useContext(SectionContext).section;
 
-  const task = getTask(id);
+  let task = getTask(id) || {
+    title: '',
+    description: '',
+    dueDate: moment().toDate(),
+    completed: true,
+    agendas: [],
+  };
 
   const timeUnits = ['minutes', 'hours'];
   // Convert estimated time from seconds to either minutes/hours
@@ -90,7 +97,12 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.container}>
-        <DetailTopBar navigation={navigation} route={route} section={section} />
+        <DetailTopBar
+          navigation={navigation}
+          route={route}
+          section={section}
+          onRemove={onRemove}
+        />
         <ScrollView>
           <Layout style={styles.form}>
             <Input
@@ -134,7 +146,6 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
                   value={timeUnits[form.timeUnit.row]}
                   selectedIndex={form.timeUnit}
                   onSelect={(index) => {
-                    console.log(form.timeUnit.row);
                     setForm(index, 'timeUnit');
                   }}>
                   {timeUnits.map((unit, index) => (
