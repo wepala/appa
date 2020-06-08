@@ -40,37 +40,37 @@ export default ({navigation, route}) => {
             <Layout style={styles.coloursRow}>
               <FontAwesomeIcon
                 style={styles.colour}
-                size="40"
+                size={40}
                 icon={faCircle}
                 color="#6633d4"
               />
               <FontAwesomeIcon
                 style={styles.colour}
-                size="40"
+                size={40}
                 icon={faCircle}
                 color="#ba46d5"
               />
               <FontAwesomeIcon
                 style={styles.colour}
-                size="40"
+                size={40}
                 icon={faCircle}
                 color="#df437a"
               />
               <FontAwesomeIcon
                 style={styles.colour}
-                size="40"
+                size={40}
                 icon={faCircle}
                 color="#fa7e4c"
               />
               <FontAwesomeIcon
                 style={styles.colour}
-                size="40"
+                size={40}
                 icon={faCircle}
                 color="#fec63e"
               />
               <FontAwesomeIcon
                 style={styles.colour}
-                size="40"
+                size={40}
                 icon={faCircle}
                 color="#8dd76e"
               />

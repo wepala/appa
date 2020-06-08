@@ -95,6 +95,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
           <Layout style={styles.form}>
             <Input
               testID="TaskTitle"
+              size="large"
               style={styles.input}
               label="Task Title"
               placeholder="Enter title here"
@@ -111,7 +112,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               <Layout style={styles.column1}>
                 <Input
                   testID="TaskEstTime"
-                  size="medium"
+                  size="large"
                   style={styles.input}
                   label="Estimated Time"
                   placeholder="30"
@@ -125,26 +126,27 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               </Layout>
               <Layout style={styles.column2}>
                 <Select
-                  status="basic"
                   size="large"
+                  style={[styles.input, styles.unit]}
+                  status="basic"
                   accessoryRight={ClockIcon}
                   label="  "
                   value={timeUnits[form.timeUnit.row]}
-                  style={styles.input}
                   selectedIndex={form.timeUnit}
                   onSelect={(index) => {
                     console.log(form.timeUnit.row);
                     setForm(index, 'timeUnit');
                   }}>
                   {timeUnits.map((unit, index) => (
-                    <SelectItem key={index + ''} title={unit} />
+                    <SelectItem size="large" key={index + ''} title={unit} />
                   ))}
                 </Select>
               </Layout>
             </Layout>
             <Input
+              size="large"
               testID="TaskDescription"
-              style={[styles.input, styles.time]}
+              style={styles.input}
               multiline={true}
               placeholder=""
               label="Description"
@@ -153,6 +155,7 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               onChangeText={(val) => setForm(val.trimLeft(), 'description')}
             />
             <Datepicker
+              size="large"
               status="basic"
               testID="TaskDueDate"
               style={styles.input}
@@ -206,8 +209,9 @@ const themedStyles = StyleService.create({
   input: {
     marginBottom: 24,
   },
-  time: {
-    height: 100,
+  unit: {
+    paddingVertical: 0,
+    marginVertical: 0,
   },
   row: {
     display: 'flex',
