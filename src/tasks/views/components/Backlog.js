@@ -1,10 +1,9 @@
 import {List, StyleService, useStyleSheet} from '@ui-kitten/components';
 import React, {useEffect, useContext} from 'react';
-import {StyleSheet} from 'react-native';
 import BacklogItem from './BacklogItem';
 import {SectionContext} from '../../context/section-context';
 
-export default ({navigation, items, contentContainerStyle}) => {
+export default ({navigation, items, contentContainerStyle, addToAgenda}) => {
   const styles = useStyleSheet(themedStyles);
   const onItemPress = (index) => {
     navigation.navigate('UpdateTask', {
@@ -22,7 +21,13 @@ export default ({navigation, items, contentContainerStyle}) => {
 
   //method to render each item in the list
   const renderItem = ({index, item}) => (
-    <BacklogItem item={item} index={index} onPress={onItemPress} />
+    <BacklogItem
+      item={item}
+      index={index}
+      onPress={onItemPress}
+      addToAgenda={addToAgenda}
+      navigation={navigation}
+    />
   );
 
   return (

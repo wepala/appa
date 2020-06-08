@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import moment from 'moment';
+
 import {
   Text,
   Card,
@@ -11,9 +13,15 @@ import {
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCalendarAlt} from '@fortawesome/free-solid-svg-icons';
 
-const BacklogItem = ({item, index, onPress, onComplete}) => {
+const BacklogItem = ({navigation, item, index, onPress, addToAgenda}) => {
   const [checked, toggleCheck] = useState(false);
   const styles = useStyleSheet(themedStyles);
+
+  const onAddToAgenda = () => {
+    addToAgenda(item, moment().format('YYYY-MM-DD')).then(() =>
+      navigation.navigate('Today'),
+    );
+  };
   return (
     <Layout style={styles.item}>
       <CheckBox
@@ -21,14 +29,16 @@ const BacklogItem = ({item, index, onPress, onComplete}) => {
         style={styles.checkBox}
         status="primary"
         checked={checked}
-        onChange={() =>
-          onComplete(item.id, !checked).then(toggleCheck(!checked))
+        onChange={
+          () => console.log('Backlog complete missing func')
+          // onComplete(item.id, !checked).then(toggleCheck(!checked))
         }
       />
       <Card testID={'TaskItem'} style={styles.card} onPress={onPress}>
         <Layout style={styles.row}>
           <Layout style={styles.column1}>
             <Text
+              testID="TaskTitle"
               numberOfLines={1}
               category="h6"
               style={checked && styles.checked.title}>
@@ -41,16 +51,12 @@ const BacklogItem = ({item, index, onPress, onComplete}) => {
 
           <Layout style={styles.column2}>
             <Button
-              testID={'TaskButton'}
+              testID={'AddToAgenda'}
               style={styles.buttonStart}
               status="warning"
               size="tiny"
               appearance="outline"
-              onPress={() => {
-                console.log('Start Task from backlog?', item);
-                // onStart(item.id);
-                // setCurrentIndex(index);
-              }}>
+              onPress={onAddToAgenda}>
               <FontAwesomeIcon icon={faCalendarAlt} color="#Ff985f" />
             </Button>
           </Layout>
