@@ -8,6 +8,10 @@ WeAgenda is a task management application
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
+Before running the project, you will first need to set up some environment variables.
+Create a new file in the `root` of the project called `.env`
+Copy the contents of the `.env-dist` file into the `.env` and fill out the blanks
+
 ### Prerequisites
 
 1. Node
