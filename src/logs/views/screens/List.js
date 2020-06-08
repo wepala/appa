@@ -18,8 +18,6 @@ export default ({
     });
   };
 
-  console.log(items)
-
   //method to render each item in the list
   const renderItem = ({index, item}) => (
     <LogItem item={item} index={index} onPress={() => onItemPress(index)} />
