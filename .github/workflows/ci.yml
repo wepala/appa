@@ -38,7 +38,7 @@ jobs:
       - name: Build debug APK
         run: |
           npm run bundle-android
-          cd android && ./gradlew clean assembleDebug
+          cd android && ROADMAP_BASEURL=${{ secrets.ROADMAP_BASEURL }} && ROADMAP_ID=${{ secrets.ROADMAP_ID }} && ./gradlew clean assembleDebug
         env:
           ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
           ROADMAP_ID: ${{ secrets.ROADMAP_ID }}

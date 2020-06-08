@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import {ROADMAP_BASEURL, ROADMAP_ID} from 'react-native-dotenv';
+import {
+  ROADMAP_BASEURL,
+  ROADMAP_ID,
+} from 'react-native-dotenv';
 import MainScreen from '../views/screens/Main';
 const Main = (props) => {
   const [status, setStatus] = useState('init');
