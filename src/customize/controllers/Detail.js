@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {SUPPORT_URL, SENDER, DESTINATION} from 'react-native-dotenv';
+import {SUPPORT_URL, SENDER, DESTINATION,BEARER} from 'react-native-dotenv';
 
 import DetailScreen from '../views/screens/Detail';
 import {useState} from 'react';
