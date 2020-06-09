@@ -46,7 +46,9 @@ export default ({navigation, route, status, addFeedback}) => {
 
   const [visible, toggleVisible] = useState(false);
   useEffect(() => {
-    if (status === 'success' || status === 'error') toggleVisible(true);
+    if (status === 'success' || status === 'error') {
+      toggleVisible(true);
+    }
   }, [status]);
 
   const styles = useStyleSheet(themedStyles);
