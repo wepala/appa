@@ -16,7 +16,7 @@ export default ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <ImageBackground source={background} style={styles.image}>
         <Layout style={styles.headerContainer}>
-          <Text style={styles.text} category="h4">
+          <Text style={styles.text} category="h5">
             Welcome to
           </Text>
           <Text style={[styles.text, styles.appa]} category="h1">
@@ -56,9 +56,17 @@ const themedStyles = StyleService.create({
     textAlign: 'center',
   },
   appa: {
-    fontSize: 85,
+    fontSize: 70,
   },
   button: {
     width: '100%',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+    elevation: 5,
   },
 });
