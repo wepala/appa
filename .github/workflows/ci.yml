@@ -45,6 +45,7 @@ jobs:
           DESTINATION: ${{ secrets.DESTINATION }}
           ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
           ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
+          BEARER: ${{ secrets.BEARER }}
       - name: Build debug APK
         run: |
           npm run bundle-android
@@ -112,6 +113,7 @@ jobs:
           DESTINATION: ${{ secrets.DESTINATION }}
           ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
           ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
+          BEARER: ${{ secrets.BEARER }}
       - name: Build release APK
         run: |
           cd android && ./gradlew clean bundleRelease
@@ -181,6 +183,7 @@ jobs:
           DESTINATION: ${{ secrets.DESTINATION }}
           ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
           ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
+          BEARER: ${{ secrets.BEARER }}
       - name: Create archive for app
         run: |
           cd ios
