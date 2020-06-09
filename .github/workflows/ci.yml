@@ -35,13 +35,20 @@ jobs:
       - name: Install NDK # Temp fix for ongoing gradle issue
         run: |
           echo "y" | sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;20.0.5594570" --sdk_root=${ANDROID_SDK_ROOT}
+      - name: Create .env file
+        run: |
+          env > .env
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
+          SENDER: ${{ secrets.SENDER }}
+          DESTINATION: ${{ secrets.DESTINATION }}
+          ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
+          ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
       - name: Build debug APK
         run: |
           npm run bundle-android
           cd android && ./gradlew clean assembleDebug
-        env:
-          API_URL: ${{ secrets.API_URL }}
-          TEMP_USER_JWT: ${{ secrets.TEMP_USER_JWT }}
       - name: Upload debug APK
         uses: actions/upload-artifact@v2
         with:
@@ -95,11 +102,20 @@ jobs:
       - name: Generate keystore
         run: |
           echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 -d > android/app/release.keystore
+      - name: Create .env file
+        run: |
+          env > .env
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
+          SENDER: ${{ secrets.SENDER }}
+          DESTINATION: ${{ secrets.DESTINATION }}
+          ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
+          ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
       - name: Build release APK
         run: |
           cd android && ./gradlew clean bundleRelease
         env:
-          API_URL: ${{ secrets.API_URL }}
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
@@ -155,6 +171,16 @@ jobs:
       - name: Install pod dependencies
         run: |
           cd ios && pod install
+      - name: Create .env file
+        run: |
+          env > .env
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
+          SENDER: ${{ secrets.SENDER }}
+          DESTINATION: ${{ secrets.DESTINATION }}
+          ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
+          ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
       - name: Create archive for app
         run: |
           cd ios
