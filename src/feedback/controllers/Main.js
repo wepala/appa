@@ -29,7 +29,6 @@ const Main = (props) => {
       })
       .catch((error) => {
         setStatus('failure');
-
         console.log('Error', error);
       });
   };

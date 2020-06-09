@@ -51,6 +51,8 @@ export default ({navigation, route, status, addFeedback}) => {
     }
   }, [status]);
 
+  const emptyForm = {title: '', tags: []};
+
   const styles = useStyleSheet(themedStyles);
   return (
     <SafeAreaView style={styles.container}>
@@ -70,7 +72,7 @@ export default ({navigation, route, status, addFeedback}) => {
             clearButtonMode="unless-editing"
             numberOfLines={3}
             maxLength={100}
-            value={form.description}
+            value={form.title}
             onChangeText={(val) => setForm({...form, title: val})}
           />
           <Text style={styles.label} category="s2">
@@ -136,7 +138,13 @@ export default ({navigation, route, status, addFeedback}) => {
             ) : status === 'success' ? (
               <Card disabled={true}>
                 <Text category="h3">Feedback Sent!</Text>
-                <Button onPress={() => toggleVisible(false)}>DISMISS</Button>
+                <Button
+                  onPress={() => {
+                    toggleVisible(false);
+                    setForm(emptyForm);
+                  }}>
+                  DISMISS
+                </Button>
               </Card>
             ) : null}
           </Modal>
