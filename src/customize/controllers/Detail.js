@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {SUPPORT_URL, SENDER, DESTINATION, BEARER} from 'react-native-dotenv';
+import {SUPPORT_URL, SENDER, DESTINATION} from 'react-native-dotenv';
 
 import DetailScreen from '../views/screens/Detail';
 import {useState} from 'react';
@@ -8,24 +8,11 @@ import {useState} from 'react';
 const Detail = (props) => {
   const [status, setStatus] = useState('init');
   const makeRequest = (form) => {
-    console.log(
-      SUPPORT_URL,
-      '\n',
-      BEARER,
-      '\n',
-      SENDER,
-      '\n',
-      DESTINATION,
-      '\n',
-      form,
-    );
+    console.log(SUPPORT_URL, '\n', SENDER, '\n', DESTINATION, '\n', form);
     setStatus('pending');
     axios({
       method: 'post',
       url: SUPPORT_URL,
-      headers: {
-        Authorization: BEARER,
-      },
       data: {
         meta: {
           sender: SENDER,
