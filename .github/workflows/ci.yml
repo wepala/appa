@@ -39,6 +39,7 @@ jobs:
         run: |
           env > .env
         env:
+          ROADMAP_URL: ${{ secrets.ROADMAP_URL }}
           API_URL: ${{ secrets.API_URL }}
           SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
           SENDER: ${{ secrets.SENDER }}
@@ -107,6 +108,7 @@ jobs:
         run: |
           env > .env
         env:
+          ROADMAP_URL: ${{ secrets.ROADMAP_URL }}
           API_URL: ${{ secrets.API_URL }}
           SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
           SENDER: ${{ secrets.SENDER }}
@@ -177,6 +179,7 @@ jobs:
         run: |
           env > .env
         env:
+          ROADMAP_URL: ${{ secrets.ROADMAP_URL }}
           API_URL: ${{ secrets.API_URL }}
           SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
           SENDER: ${{ secrets.SENDER }}
