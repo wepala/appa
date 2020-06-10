@@ -16,6 +16,13 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* WeAgendaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* WeAgendaTests.m */; };
+		53B5AF5471FD74F7B6EA5E6F /* libPods-WeAgenda-WeAgendaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 931E881BD93E4480C7449D51 /* libPods-WeAgenda-WeAgendaTests.a */; };
+		88A0F0676EF2977962960994 /* libPods-WeAgenda-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A62CF005D8D1F8CC764081B1 /* libPods-WeAgenda-tvOS.a */; };
+		98F5D4038E32D9B7308CA644 /* libPods-WeAgenda-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6A8E7BB35BCF332909F2E9 /* libPods-WeAgenda-tvOSTests.a */; };
+		ABCE879548BAFBD0366A3D5C /* libPods-WeAgenda.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0386C63F2946CF0DB77D9F /* libPods-WeAgenda.a */; };
+		02C750B4BBE144508FDE2693 /* Geometria-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 753563E52A6A43C88601AC82 /* Geometria-Light.ttf */; };
+		B9D2DADCA5344EF6BB13B746 /* Geometria.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCEEBD3B3E8E49EB871C3C1E /* Geometria.ttf */; };
+		78F17B2AC4234C0BB60D5752 /* CeraRoundProRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7AED7DC77924420BBB484626 /* CeraRoundProRegular.otf */; };
 		6FD2B4D55238613A1C0EC90D /* libPods-AppaTimeTracker-AppaTimeTrackerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C2F64309E1694363AEEBDA /* libPods-AppaTimeTracker-AppaTimeTrackerTests.a */; };
 		B66732CE0A06E31625282573 /* libPods-AppaTimeTracker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 842ADAF75674BF10CEDB88C7 /* libPods-AppaTimeTracker.a */; };
 		C21DE3B8E25AE65786AA2E52 /* libPods-AppaTimeTracker-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79F4DB82305EDE5EBB9F2ABA /* libPods-AppaTimeTracker-tvOSTests.a */; };
@@ -74,6 +81,10 @@
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F168FEF6E705B2523DA0B99E /* Pods-AppaTimeTracker-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppaTimeTracker-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-AppaTimeTracker-tvOS/Pods-AppaTimeTracker-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		F84BEBA5F6006C0AD0040A1E /* Pods-WeAgenda-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeAgenda-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-WeAgenda-tvOSTests/Pods-WeAgenda-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FD6A8E7BB35BCF332909F2E9 /* libPods-WeAgenda-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WeAgenda-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		753563E52A6A43C88601AC82 /* Geometria-Light.ttf */ = {isa = PBXFileReference; name = "Geometria-Light.ttf"; path = "../assets/fonts/Geometria-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BCEEBD3B3E8E49EB871C3C1E /* Geometria.ttf */ = {isa = PBXFileReference; name = "Geometria.ttf"; path = "../assets/fonts/Geometria.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7AED7DC77924420BBB484626 /* CeraRoundProRegular.otf */ = {isa = PBXFileReference; name = "CeraRoundProRegular.otf"; path = "../assets/fonts/CeraRoundProRegular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		FBF8732E2841DD97E51F09A0 /* Pods-AppaTimeTracker-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppaTimeTracker-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-AppaTimeTracker-tvOSTests/Pods-AppaTimeTracker-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,7 +183,8 @@
 				00E356EF1AD99517003FC87E /* WeAgendaTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				A0B492DAD2E73F52849D0EFF /* Pods */,
+				B391AA1ED0A8DA7C0A8A7C31 /* Pods */,
+				9FC90B7AB7624735A7C362CB /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -212,6 +224,17 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		9FC90B7AB7624735A7C362CB /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				753563E52A6A43C88601AC82 /* Geometria-Light.ttf */,
+				BCEEBD3B3E8E49EB871C3C1E /* Geometria.ttf */,
+				7AED7DC77924420BBB484626 /* CeraRoundProRegular.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -309,10 +332,10 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 2PNFD8677U;
 						LastSwiftMigration = 1120;
+						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
-						ProvisioningStyle = Automatic;
 					};
 					2D02E48F1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -356,6 +379,8 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				02C750B4BBE144508FDE2693 /* Geometria-Light.ttf in Resources */,
+				B9D2DADCA5344EF6BB13B746 /* Geometria.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -645,6 +670,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2PNFD8677U;
 				ENABLE_BITCODE = NO;
@@ -662,9 +689,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.appadoes;
 				PRODUCT_NAME = "Appa: Time Tracker";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -675,6 +703,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2PNFD8677U;
 				ENABLE_BITCODE = NO;
@@ -688,8 +718,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.appadoes;
 				PRODUCT_NAME = "Appa: Time Tracker";
+				PROVISIONING_PROFILE_SPECIFIER = "Appa Does";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -732,8 +763,11 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 2PNFD8677U;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "WeAgenda-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -744,6 +778,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.appadoes;
 				PRODUCT_NAME = "Appa: Time Tracker-tvOS";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;

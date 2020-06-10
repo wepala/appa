@@ -1,8 +1,8 @@
-import {List, Layout, StyleService, useStyleSheet} from '@ui-kitten/components';
 import React, {useState, useEffect, useContext} from 'react';
+import {SectionContext} from '../../context/section-context';
+import {List, Layout, StyleService, useStyleSheet} from '@ui-kitten/components';
 import AgendaItem from '../components/AgendaItem';
 import CurrentTask from '../components/CurrentTask';
-import {SectionContext} from '../../context/section-context';
 
 export default ({
   navigation,
@@ -47,6 +47,7 @@ export default ({
       />
     );
   };
+
   return (
     <Layout style={styles.container} testID={'AgendaLayout'}>
       {currentItem && currentItem.id ? (
@@ -69,11 +70,12 @@ export default ({
 
 const themedStyles = StyleService.create({
   container: {
-    padding: 16,
+    paddingVertical: 16,
     flex: 1,
+    backgroundColor: '$background-basic-color-2',
   },
   list: {
     padding: 0,
-    backgroundColor: '$background-basic-color-1',
+    backgroundColor: 'transparent',
   },
 });

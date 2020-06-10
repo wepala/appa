@@ -17,4 +17,17 @@ export default class BacklogController extends Controller {
       items: getIncompleteTasks(state),
     };
   }
+
+  /**
+   * Task complete handler
+   * @param id
+   * @param state boolean
+   * @returns {Promise<R>}
+   */
+  setTaskCompletion(id, state = true) {
+    return new Promise((resolve) => {
+      this.dispatch(updateTask(id, {complete: state}));
+      resolve();
+    });
+  }
 }
