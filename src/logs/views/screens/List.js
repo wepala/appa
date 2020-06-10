@@ -32,7 +32,7 @@ export default ({
   return (
     <>
       <TopBar
-        canCreate={items.length}
+        canCreate={tasks.length}
         navigation={navigation}
         title="Time Log"
       />

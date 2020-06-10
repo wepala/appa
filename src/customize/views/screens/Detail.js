@@ -1,4 +1,5 @@
 import React, {useContext, useState} from 'react';
+import {ThemeContext} from '../../../../theme.context';
 import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {
@@ -19,6 +20,8 @@ import DetailTopBar from '../components/DetailTopBar';
 import {useForm} from '../../../weosHelpers';
 
 export default ({navigation, route, status, makeRequest}) => {
+  const themeContext = useContext(ThemeContext);
+
   const reasons = ['Bug', 'Feature'];
 
   const [form, setForm] = useForm({
@@ -36,7 +39,11 @@ export default ({navigation, route, status, makeRequest}) => {
           navigation={navigation}
         />
         <LinearGradient
-          colors={['#b0d9ff', '#eff9ff']}
+          colors={
+            themeContext.theme === 'dark'
+              ? ['#222B45', '#101426']
+              : ['#b0d9ff', '#eff9ff']
+          }
           style={styles.linearGradient}>
           <ScrollView>
             <Text category="h1" style={styles.title}>
