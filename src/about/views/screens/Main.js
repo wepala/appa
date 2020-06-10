@@ -1,5 +1,5 @@
 import React from 'react';
-import {ImageBackground} from 'react-native';
+import {ImageBackground, ScrollView} from 'react-native';
 import {
   Layout,
   StyleService,
@@ -17,42 +17,44 @@ export default ({navigation, route}) => {
     <SafeAreaView style={styles.container}>
       <TopBar title="About Us" navigation={navigation} route={route} />
       <ImageBackground source={background} style={styles.image}>
-        <Layout style={styles.container}>
-          <Layout style={styles.row}>
-            <Layout style={styles.column}>
-              <Text category="s1">Version</Text>
-              <Card disabled style={styles.card}>
-                <Text category="s1">WeAgenda beta 1.2</Text>
-              </Card>
+        <ScrollView style={styles.container}>
+          <Layout style={styles.container}>
+            <Layout style={styles.row}>
+              <Layout style={styles.column}>
+                <Text category="s1">Version</Text>
+                <Card disabled style={styles.card}>
+                  <Text category="s1">WeAgenda beta 1.2</Text>
+                </Card>
+              </Layout>
+            </Layout>
+            <Layout style={styles.row}>
+              <Layout style={styles.column}>
+                <Text category="s1">Pipeline</Text>
+                <Card disabled style={styles.card}>
+                  <Text category="s1">
+                    See what features are coming next update
+                  </Text>
+                </Card>
+              </Layout>
+            </Layout>
+            <Layout style={styles.row}>
+              <Layout style={styles.column}>
+                <Text category="s1">Licence</Text>
+                <Card disabled style={styles.card}>
+                  <Text category="s1">Free as in Freedom</Text>
+                </Card>
+              </Layout>
+            </Layout>
+            <Layout style={styles.row}>
+              <Layout style={styles.column}>
+                <Text category="s1">Wepala</Text>
+                <Card disabled style={styles.card}>
+                  <Text category="s1">The company behind the cApps</Text>
+                </Card>
+              </Layout>
             </Layout>
           </Layout>
-          <Layout style={styles.row}>
-            <Layout style={styles.column}>
-              <Text category="s1">Pipeline</Text>
-              <Card disabled style={styles.card}>
-                <Text category="s1">
-                  See what features are coming next update
-                </Text>
-              </Card>
-            </Layout>
-          </Layout>
-          <Layout style={styles.row}>
-            <Layout style={styles.column}>
-              <Text category="s1">Licence</Text>
-              <Card disabled style={styles.card}>
-                <Text category="s1">Free as in Freedom</Text>
-              </Card>
-            </Layout>
-          </Layout>
-          <Layout style={styles.row}>
-            <Layout style={styles.column}>
-              <Text category="s1">Wepala</Text>
-              <Card disabled style={styles.card}>
-                <Text category="s1">The company behind the cApps</Text>
-              </Card>
-            </Layout>
-          </Layout>
-        </Layout>
+        </ScrollView>
       </ImageBackground>
     </SafeAreaView>
   );

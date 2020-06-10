@@ -12,7 +12,7 @@ import {
 } from '@ui-kitten/components';
 import {MessageIcon} from '../../../views/components/Icons';
 import TopBar from '../components/TopBar';
-import {SafeAreaView} from 'react-native';
+import {SafeAreaView, ScrollView} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faGithub} from '@fortawesome/free-brands-svg-icons';
 
@@ -21,36 +21,38 @@ export default ({navigation, route}) => {
   return (
     <SafeAreaView style={styles.container}>
       <TopBar navigation={navigation} title="Customize" />
-      <Text category="h1" style={styles.title}>
-        Make Appa yours
-      </Text>
-      <Layout style={styles.row}>
-        <Layout style={styles.column}>
-          <Text category="h5" style={styles.subTitle}>
-            DEVELOPERS
-          </Text>
-          <Text category="s1" style={styles.description}>
-            If you can code then jump right in and make the changes you want!
-            Our code is free and open source!
-          </Text>
-          <FontAwesomeIcon icon={faGithub} size={100} color={'#444'} />
+      <ScrollView style={styles.container}>
+        <Text category="h1" style={styles.title}>
+          Make Appa yours
+        </Text>
+        <Layout style={styles.row}>
+          <Layout style={styles.column}>
+            <Text category="h5" style={styles.subTitle}>
+              DEVELOPERS
+            </Text>
+            <Text category="s1" style={styles.description}>
+              If you can code then jump right in and make the changes you want!
+              Our code is free and open source!
+            </Text>
+            <FontAwesomeIcon icon={faGithub} size={100} color={'#444'} />
+          </Layout>
+          <Layout style={styles.column}>
+            <Text category="h5" style={styles.subTitle}>
+              NON-DEVELOPERS
+            </Text>
+            <Text category="s1" style={styles.description}>
+              Need some help modifying Appa to work the way you want? No
+              problem, we;ll take of it for you.
+            </Text>
+            <Button
+              size="large"
+              style={styles.buttonHelp}
+              onPress={() => navigation.navigate('Help')}>
+              GET HELP
+            </Button>
+          </Layout>
         </Layout>
-        <Layout style={styles.column}>
-          <Text category="h5" style={styles.subTitle}>
-            NON-DEVELOPERS
-          </Text>
-          <Text category="s1" style={styles.description}>
-            Need some help modifying Appa to work the way you want? No problem,
-            we;ll take of it for you.
-          </Text>
-          <Button
-            size="large"
-            style={styles.buttonHelp}
-            onPress={() => navigation.navigate('Help')}>
-            GET HELP
-          </Button>
-        </Layout>
-      </Layout>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -67,6 +69,7 @@ const themedStyles = StyleService.create({
     padding: 16,
   },
   column: {
+    flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
     textAlign: 'center',
