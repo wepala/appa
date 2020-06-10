@@ -25,7 +25,7 @@ export default ({navigation, authorizeURL}) => {
             Create Account
           </Text>
           <Button
-            style={styles.buttonConnct}
+            style={styles.buttonConnect}
             testID="WeOsConnectBtn"
             onPress={handleWeosConnect}>
             WeOS Connect
