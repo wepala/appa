@@ -3,7 +3,7 @@ import {ImageBackground, Linking} from 'react-native';
 import {ROADMAP_URL} from 'react-native-dotenv';
 import packageJson from '../../../../package.json';
 
- import {
+import {
   Layout,
   StyleService,
   useStyleSheet,
@@ -29,7 +29,8 @@ export default ({navigation, status, route}) => {
               <Text category="s1">Version</Text>
               <Button
                 onPress={() => {
-                  Linking.openURL('https://github.com/wepala/weagenda').catch((err) => {
+                  Linking.openURL('https://github.com/wepala/weagenda').catch(
+                    (err) => {
                       toggleVisible(true);
                       console.warn(err);
                     },
