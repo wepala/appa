@@ -31,7 +31,11 @@ export default ({
 
   return (
     <>
-      <TopBar navigation={navigation} title="Time Log" />
+      <TopBar
+        canCreate={items.length}
+        navigation={navigation}
+        title="Time Log"
+      />
       <Layout style={styles.container}>
         <LogFilter
           tasks={tasks}
