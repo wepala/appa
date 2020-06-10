@@ -25,7 +25,7 @@ export default ({navigation}) => {
         </Layout>
         <Button
           style={styles.button}
-          onPress={() => navigation.navigate('Connect')}>
+          onPress={() => navigation.navigate('Complete')}>
           Continue
         </Button>
       </ImageBackground>

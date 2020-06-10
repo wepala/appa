@@ -16,7 +16,7 @@ export default () => (
     }}
     initialRouteName="Welcome">
     <Screen name="Welcome" component={Welcome} />
-    <Screen name="Connect" component={Connect} />
+    {/* <Screen name="Connect" component={Connect} /> */}
     <Screen
       name="Complete"
       component={Component(new CompleteController(), CompleteScreen)}
