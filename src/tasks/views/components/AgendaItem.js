@@ -55,7 +55,13 @@ const TaskItem = ({
           active
             ? [styles.card, {borderColor: themeContext.colour.hex}]
             : checked
-            ? [styles.card, styles.checked.card]
+            ? [
+                styles.card,
+                {
+                  borderColor:
+                    themeContext.theme === 'dark' ? '#222B45' : '#fff',
+                },
+              ]
             : styles.card
         }
         onPress={onPress}>
