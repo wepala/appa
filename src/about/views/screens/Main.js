@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {ImageBackground, Linking} from 'react-native';
-import {ROADMAP_URL, VERSION} from 'react-native-dotenv';
+import {ROADMAP_URL} from 'react-native-dotenv';
 import packageJson from '../../../../package.json';
 
  import {
