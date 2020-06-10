@@ -23,7 +23,6 @@ const BacklogItem = ({
 }) => {
   const [checked, toggleCheck] = useState(item.complete);
   const styles = useStyleSheet(themedStyles);
-  console.log(item);
   const onAddToAgenda = () => {
     addToAgenda(item, moment().format('YYYY-MM-DD')).then(() =>
       navigation.navigate('Today'),
