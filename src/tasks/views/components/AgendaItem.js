@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import {ThemeContext} from '../../../../theme.context';
+
 import {
   Text,
   Card,
@@ -10,6 +12,7 @@ import {
 } from '@ui-kitten/components';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faPlay} from '@fortawesome/free-solid-svg-icons';
+import {useContext} from 'react';
 
 const TaskItem = ({
   item,
@@ -21,6 +24,7 @@ const TaskItem = ({
   timeSpentToday,
   active,
 }) => {
+  const themeContext = useContext(ThemeContext);
   const [checked, toggleCheck] = useState(item.complete);
   const styles = useStyleSheet(themedStyles);
   let currentTimeSpent = {
@@ -49,7 +53,7 @@ const TaskItem = ({
         testID={'TaskItem'}
         style={
           active
-            ? [styles.card, styles.active.card]
+            ? [styles.card, {borderColor: themeContext.colour.hex}]
             : checked
             ? [styles.card, styles.checked.card]
             : styles.card
@@ -88,7 +92,7 @@ const TaskItem = ({
                 onStart(item.id);
                 setCurrentIndex(index);
               }}>
-              <FontAwesomeIcon icon={faPlay} color="#4381FF" />
+              <FontAwesomeIcon icon={faPlay} color={themeContext.colour.hex} />
             </Button>
             <Text status="primary" category="c1" style={styles.estimatedTime}>
               {estimatedTime.hours > 0 ? `${estimatedTime.hours}h ` : null}
@@ -162,11 +166,6 @@ const themedStyles = StyleService.create({
   },
 
   // States
-  active: {
-    card: {
-      borderColor: '#4381FF',
-    },
-  },
   checked: {
     title: {
       textDecorationLine: 'line-through',

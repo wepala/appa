@@ -21,6 +21,7 @@ export default () => {
   const [colour, setColour] = React.useState({
     val: colours.default,
     name: 'default',
+    hex: '#4381FF',
   });
   const toggleTheme = () => {
     const nextTheme = theme === 'light' ? 'dark' : 'light';
@@ -30,25 +31,25 @@ export default () => {
     console.log('colour change', colour);
     switch (colourName) {
       case 'violet':
-        setColour({val: colours.violet, name: colourName});
+        setColour({val: colours.violet, name: colourName, hex: '#6633D4'});
         break;
       case 'magenta':
-        setColour({val: colours.magenta, name: colourName});
+        setColour({val: colours.magenta, name: colourName, hex: '#BA46D5'});
         break;
       case 'red':
-        setColour({val: colours.red, name: colourName});
+        setColour({val: colours.red, name: colourName, hex: '#DF437A'});
         break;
       case 'orange':
-        setColour({val: colours.orange, name: colourName});
+        setColour({val: colours.orange, name: colourName, hex: '#FA7E4C'});
         break;
       case 'yellow':
-        setColour({val: colours.yellow, name: colourName});
+        setColour({val: colours.yellow, name: colourName, hex: '#FEC63E'});
         break;
       case 'green':
-        setColour({val: colours.green, name: colourName});
+        setColour({val: colours.green, name: colourName, hex: '#8DD76E'});
         break;
       default:
-        setColour({val: colours.default, name: 'default'});
+        setColour({val: colours.default, name: 'default', hex: '#4381FF'});
     }
   };
   return (
