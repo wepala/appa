@@ -1,17 +1,23 @@
-import React from 'react';
-import {ImageBackground} from 'react-native';
-import {
+import React, {useEffect, useState} from 'react';
+import {ImageBackground, Linking} from 'react-native';
+import {ROADMAP_URL, VERSION} from 'react-native-dotenv';
+import packageJson from '../../../../package.json';
+
+ import {
   Layout,
   StyleService,
   useStyleSheet,
   Text,
   Card,
+  Button,
+  Modal,
 } from '@ui-kitten/components';
 import TopBar from '../components/TopBar';
 import {SafeAreaView} from 'react-native';
 import background from '../../../../assets/images/brand/about.png';
 
-export default ({navigation, route}) => {
+export default ({navigation, status, route}) => {
+  let [visible, toggleVisible] = useState(false);
   const styles = useStyleSheet(themedStyles);
   return (
     <SafeAreaView style={styles.container}>
@@ -21,38 +27,73 @@ export default ({navigation, route}) => {
           <Layout style={styles.row}>
             <Layout style={styles.column}>
               <Text category="s1">Version</Text>
-              <Card disabled style={styles.card}>
-                <Text category="s1">WeAgenda beta 1.2</Text>
-              </Card>
+              <Button
+                onPress={() => {
+                  Linking.openURL('https://github.com/wepala/weagenda').catch((err) => {
+                      toggleVisible(true);
+                      console.warn(err);
+                    },
+                  );
+                }}
+                style={styles.button}>
+                <Text category="s1">Version: {packageJson.version}</Text>
+              </Button>
             </Layout>
           </Layout>
           <Layout style={styles.row}>
             <Layout style={styles.column}>
               <Text category="s1">Pipeline</Text>
-              <Card disabled style={styles.card}>
-                <Text category="s1">
-                  See what features are coming next update
-                </Text>
-              </Card>
+              <Button
+                onPress={() => {
+                  Linking.openURL(ROADMAP_URL).catch((err) => {
+                    toggleVisible(true);
+                    console.warn(err);
+                  });
+                }}
+                style={styles.button}>
+                <Text>See what features are coming soon</Text>
+              </Button>
             </Layout>
           </Layout>
           <Layout style={styles.row}>
             <Layout style={styles.column}>
               <Text category="s1">Licence</Text>
-              <Card disabled style={styles.card}>
-                <Text category="s1">Free as in Freedom</Text>
-              </Card>
+              <Button
+                onPress={() => {
+                  Linking.openURL(
+                    'https://www.gnu.org/licenses/agpl-3.0.en.html',
+                  ).catch((err) => {
+                    toggleVisible(true);
+                    console.warn(err);
+                  });
+                }}
+                style={styles.button}>
+                <Text>Affero General Public License</Text>
+              </Button>
             </Layout>
           </Layout>
           <Layout style={styles.row}>
             <Layout style={styles.column}>
               <Text category="s1">Wepala</Text>
-              <Card disabled style={styles.card}>
-                <Text category="s1">The company behind the cApps</Text>
-              </Card>
+              <Button
+                onPress={() => {
+                  Linking.openURL('https://wepala.com').catch((err) => {
+                    toggleVisible(true);
+                    console.warn(err);
+                  });
+                }}
+                style={styles.button}>
+                <Text>The company behind the cApps</Text>
+              </Button>
             </Layout>
           </Layout>
         </Layout>
+        <Modal visible={visible} style={styles.container}>
+          <Card disabled={true}>
+            <Text category="h3">Error</Text>
+            <Button onPress={() => toggleVisible(false)}>DISMISS</Button>
+          </Card>
+        </Modal>
       </ImageBackground>
     </SafeAreaView>
   );
@@ -84,5 +125,15 @@ const themedStyles = StyleService.create({
   },
   card: {
     marginTop: 8,
+  },
+  button: {
+    marginTop: 8,
+    backgroundColor: 'white',
+    borderColor: 'white',
+  },
+  modal: {
+    marginTop: 8,
+    backgroundColor: 'white',
+    borderColor: 'white',
   },
 });
