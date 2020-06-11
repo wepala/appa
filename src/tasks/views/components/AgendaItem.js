@@ -172,9 +172,7 @@ const themedStyles = StyleService.create({
       textDecorationLine: 'line-through',
     },
     card: {
-      backgroundColor: 'transparent',
       borderColor: 'transparent',
-      elevation: 0,
     },
   },
 });
