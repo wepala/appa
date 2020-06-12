@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {ImageBackground, Linking} from 'react-native';
-import {ROADMAP_URL} from 'react-native-dotenv';
 import packageJson from '../../../../package.json';
 
 import {
@@ -41,21 +40,6 @@ export default ({navigation, status, route}) => {
               </Button>
             </Layout>
           </Layout>
-          {/* <Layout style={styles.row}>
-            <Layout style={styles.column}>
-              <Text category="s1">Pipeline</Text>
-              <Button
-                onPress={() => {
-                  Linking.openURL(ROADMAP_URL).catch((err) => {
-                    toggleVisible(true);
-                    console.warn(err);
-                  });
-                }}
-                style={styles.button}>
-                <Text>See what features are coming soon</Text>
-              </Button>
-            </Layout>
-          </Layout> */}
           <Layout style={styles.row}>
             <Layout style={styles.column}>
               <Text category="s1">Licence</Text>
