@@ -37,7 +37,7 @@ export default ({navigation, route}) => {
               <Text category="h5">PERSONALIZATION</Text>
               <Layout style={styles.row}>
                 <Text category="s2" style={{width: '100%'}}>
-                  Choose your Colour {currentColour}
+                  Choose your Colour
                 </Text>
               </Layout>
               <Layout style={styles.coloursRow}>
@@ -171,7 +171,7 @@ const themedStyles = StyleService.create({
     marginHorizontal: 0,
     paddingHorizontal: 0,
     paddingVertical: 9,
-    paddingTop: Platform.OS === 'ios' ? 14 : 0,
+    paddingTop: Platform.OS === 'ios' ? 14 : 8,
 
     borderRadius: 200,
     // shadowColor: '#000',
