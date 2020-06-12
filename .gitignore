@@ -63,3 +63,6 @@ buck-out/
 
 # Ignore enviroment file
 .env
+
+# Ignore vscode
+.vscode
