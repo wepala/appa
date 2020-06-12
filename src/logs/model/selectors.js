@@ -88,6 +88,43 @@ export const getTaskTimeSpentByDate = createSelector(
   },
 );
 
+export const getIncompletedTaskTimeSpentByDate = createSelector(
+  [getTimesByDate, getTasksByDate, getByIdSelector],
+  (logsByTime, tasks, logs) => {
+    const values = [...logsByTime.values()];
+    const times = [...logsByTime.keys()];
+    return tasks
+      .filter((task) => !task.complete)
+      .sort((a, b) => {
+        const d1 = new Date(a.dueDate).getTime();
+        const d2 = new Date(b.dueDate).getTime();
+
+        if (d1 < d2) {
+          return 1;
+        }
+        if (d1 > d2) {
+          return -1;
+        }
+        return 0;
+      })
+      .map((task) => {
+        const filteredTimes = times.filter(
+          (time, index) => logs.get(values[index])?.taskId === task.id,
+        );
+        return filteredTimes.length > 0
+          ? filteredTimes
+              .map((time) => {
+                const endTime = times[times.indexOf(time) + 1];
+                return endTime !== undefined
+                  ? moment(endTime).diff(time, 'seconds')
+                  : 0;
+              })
+              .reduce((totalTime, time) => totalTime + time)
+          : 0;
+      });
+  },
+);
+
 export const getLogItems = (state, props = {}) => {
   let items = [...state.logs.getById.values()];
   if (props.startTime !== undefined || props.endTime !== undefined) {
@@ -119,12 +156,12 @@ const makeLogsByFilter = () =>
         let taskIndex = tasks.findIndex((task) => {
           return task.id === log.taskId;
         });
-        console.log(log, tasks[taskIndex]);
         return {
           task: tasks[taskIndex],
           ...log,
         };
-      }));
+      })
+      .filter((logs) => logs.task !== undefined));
   });
 
 export const getLogsByFilter = makeLogsByFilter();

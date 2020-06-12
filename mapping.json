@@ -8,5 +8,54 @@
     "text-heading-2-font-weight": "900",
 
     "text-heading-3-font-weight": "800"
+  },
+
+  "components": {
+    "Input": {
+      "appearances": {
+        "default": {
+          "variantGroups": {
+            "status": {
+              "basic": {
+                "borderColor": "border-basic-color-3",
+                "backgroundColor": "background-basic-color-1"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Select": {
+      "appearances": {
+        "default": {
+          "variantGroups": {
+            "status": {
+              "basic": {
+                "borderColor": "border-basic-color-3",
+                "backgroundColor": "background-basic-color-1"
+              },
+              "primary": {
+                "borderColor": "color-primary-default",
+                "backgroundColor": "background-basic-color-1"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Datepicker": {
+      "appearances": {
+        "default": {
+          "variantGroups": {
+            "status": {
+              "basic": {
+                "borderColor": "border-basic-color-3",
+                "backgroundColor": "background-basic-color-1"
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

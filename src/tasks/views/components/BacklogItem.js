@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {AssetCalendarIcon} from '../../../views/components/Icons';
+import moment from 'moment';
 
 import {
   Text,
@@ -10,72 +10,153 @@ import {
   StyleService,
   useStyleSheet,
 } from '@ui-kitten/components';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faCalendarAlt} from '@fortawesome/free-solid-svg-icons';
 
-const BacklogItem = ({item, index, onPress}) => {
-  const [checked, toggleCheck] = useState(false);
+const BacklogItem = ({
+  navigation,
+  item,
+  index,
+  onPress,
+  addToAgenda,
+  onComplete,
+  timeSpentToday,
+}) => {
+  const [checked, toggleCheck] = useState(item.complete);
   const styles = useStyleSheet(themedStyles);
+
+  const onAddToAgenda = () => {
+    addToAgenda(item, moment().format('YYYY-MM-DD')).then(() =>
+      navigation.navigate('Today'),
+    );
+  };
+
+  let currentTimeSpent = {
+    hours: parseInt(timeSpentToday / 3600, 10),
+    minutes: parseInt(timeSpentToday / 60, 10) % 60,
+    seconds: timeSpentToday % 60,
+  };
+
+  let estimatedTime = {
+    hours: parseInt(item.estimatedTime / 3600, 10),
+    minutes: parseInt(item.estimatedTime / 60, 10) % 60,
+    seconds: item.estimatedTime % 60,
+  };
   return (
-    <Card style={styles.item} onPress={() => onPress(index)}>
-      <Layout style={styles.row}>
-        <Layout style={styles.column1}>
-          <CheckBox checked={checked} onChange={toggleCheck} />
+    <Layout key={item.id} style={styles.item}>
+      <CheckBox
+        testID={'TaskCheckBox'}
+        style={styles.checkBox}
+        status="primary"
+        checked={checked}
+        onChange={() =>
+          onComplete(item.id, !checked).then(toggleCheck(!checked))
+        }
+      />
+      <Card
+        testID={'TaskItem'}
+        style={styles.card}
+        onPress={() => onPress(index)}>
+        <Layout style={styles.row}>
+          <Layout style={styles.column1}>
+            <Text
+              testID="TaskTitle"
+              numberOfLines={1}
+              category="h6"
+              style={checked && styles.checked.title}>
+              {item.title}
+            </Text>
+            <Text category="s2" appearance="hint" style={styles.timeSpent}>
+              Time Spent:{' '}
+              {currentTimeSpent.hours > 0
+                ? `${currentTimeSpent.hours}h `
+                : null}
+              {currentTimeSpent.minutes > 0
+                ? `${currentTimeSpent.minutes}m `
+                : null}
+              {`${currentTimeSpent.seconds}s`}
+              {' | '}
+              {estimatedTime.hours > 0 ? `${estimatedTime.hours}h ` : null}
+              {estimatedTime.minutes > 0 ? `${estimatedTime.minutes}m ` : null}
+            </Text>
+          </Layout>
+
+          <Layout style={styles.column2}>
+            <Button
+              testID={'AddToAgenda'}
+              style={styles.buttonStart}
+              status="warning"
+              size="tiny"
+              appearance="outline"
+              onPress={onAddToAgenda}>
+              <FontAwesomeIcon icon={faCalendarAlt} color="#Ff985f" />
+            </Button>
+          </Layout>
         </Layout>
-        <Layout style={styles.column2}>
-          <Text category="s1" style={styles.task}>
-            {item.title}
-          </Text>
-          <Text category="s2" style={styles.time}>
-            Time: 30m out of 1h
-          </Text>
-        </Layout>
-        <Layout style={styles.column1}>
-          <Button
-            size="small"
-            appearance="ghost"
-            status="basic"
-            accessoryLeft={AssetCalendarIcon}
-          />
-        </Layout>
-      </Layout>
-    </Card>
+      </Card>
+    </Layout>
   );
 };
 
 const themedStyles = StyleService.create({
   item: {
-    marginVertical: 8,
-    padding: 0,
+    marginVertical: 16,
+    paddingHorizontal: 16,
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+
+    shadowColor: '#777',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+  },
+
+  card: {
+    marginLeft: 16,
+    borderRadius: 7,
+    borderColor: '$background-basic-color-1',
+    borderWidth: 0,
+    borderLeftWidth: 10,
+    flex: 1,
+    elevation: 2,
   },
 
   row: {
-    display: 'flex',
     flexDirection: 'row',
+    backgroundColor: 'transparent',
   },
 
   column1: {
     backgroundColor: 'transparent',
-    flexBasis: 'auto',
-    flexShrink: 0,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
+    flex: 1,
+    marginRight: 8,
   },
   column2: {
     backgroundColor: 'transparent',
-    flexGrow: 1,
-    paddingVertical: 2,
-    paddingHorizontal: 16,
-    justifyContent: 'space-between',
+    width: 'auto',
+    justifyContent: 'center',
   },
-  task: {
-    marginBottom: 4,
+
+  timeSpent: {
+    paddingVertical: 4,
   },
-  time: {
-    marginBottom: 4,
+  estimatedTime: {
+    textAlign: 'center',
   },
-  icon: {
-    width: 20,
-    height: 20,
-    margin: 0,
-    padding: 0,
+  buttonStart: {
+    textAlign: 'center',
+    alignItems: 'center',
+  },
+  checked: {
+    title: {
+      textDecorationLine: 'line-through',
+    },
   },
 });
 

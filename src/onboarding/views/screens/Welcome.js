@@ -9,23 +9,21 @@ import {
 } from '@ui-kitten/components';
 import background from '../../../../assets/images/brand/welcome.png';
 
-export default ({navigation}) => {
+export default ({navigation, onComplete}) => {
   const styles = useStyleSheet(themedStyles);
 
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground source={background} style={styles.image}>
         <Layout style={styles.headerContainer}>
-          <Text style={styles.text} category="h4">
+          <Text style={styles.text} category="h5">
             Welcome to
           </Text>
           <Text style={[styles.text, styles.appa]} category="h1">
             Appa
           </Text>
         </Layout>
-        <Button
-          style={styles.button}
-          onPress={() => navigation.navigate('Connect')}>
+        <Button style={styles.button} onPress={() => onComplete()}>
           Continue
         </Button>
       </ImageBackground>
@@ -56,9 +54,17 @@ const themedStyles = StyleService.create({
     textAlign: 'center',
   },
   appa: {
-    fontSize: 85,
+    fontSize: 70,
   },
   button: {
     width: '100%',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+    elevation: 5,
   },
 });

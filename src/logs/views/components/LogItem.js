@@ -1,80 +1,120 @@
 import React from 'react';
 import moment from 'moment';
-import {PersonIcon, MoreVerticalIcon} from '../../../views/components/Icons';
 import {
   Text,
   Card,
   Layout,
   StyleService,
-  Icon,
+  Avatar,
   Button,
   useStyleSheet,
 } from '@ui-kitten/components';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faEllipsisV} from '@fortawesome/free-solid-svg-icons';
 
 export default ({item, index, onPress}) => {
   const styles = useStyleSheet(themedStyles);
   let loggedDate = moment(item.startTime).format('Do MMM, YYYY');
   let loggedTime = moment(item.startTime).format('h:mm:ss a');
   return (
-    <Card style={styles.item} onPress={onPress}>
-      <Layout style={styles.row}>
-        <Layout style={styles.column1}>
-          <Button
-            testID="UserAvatar"
-            status="basic"
-            appearance="ghost"
-            accessoryLeft={PersonIcon}
-          />
+    <Layout style={styles.item}>
+      <Card testID={'TaskItem'} style={styles.card} onPress={onPress}>
+        <Layout style={styles.row}>
+          <Layout style={styles.column1}>
+            <Avatar
+              testID="UserAvatar"
+              style={styles.avatar}
+              shape="round"
+              size="medium"
+              // source={{
+              //   uri:
+              //     {user.avatarUrl},
+              // }}
+              source={require('../../../../assets/images/avatar.png')}
+            />
+          </Layout>
+          <Layout style={styles.column2}>
+            <Text testID="LogTitle" category="h6">
+              {item.task.title}
+            </Text>
+            <Text testID="LogDate" category="s2" appearance="hint">
+              {loggedDate}
+            </Text>
+            <Text testID="LogTime" category="s2" appearance="hint">
+              {loggedTime}
+            </Text>
+          </Layout>
+
+          <Layout style={styles.column3}>
+            <Button
+              testID={'TaskButton'}
+              style={styles.buttonOptions}
+              status="basic"
+              size="tiny"
+              appearance="ghost"
+              onPress={() => {
+                console.log('The Log options?', item);
+              }}>
+              <FontAwesomeIcon icon={faEllipsisV} color="#777" />
+            </Button>
+          </Layout>
         </Layout>
-        <Layout style={styles.column2}>
-          <Text testID="LogTitle" category="s1">
-            {item.task.title}
-          </Text>
-          <Text testID="LogDate">{loggedDate}</Text>
-          <Text testID="LogTime">{loggedTime}</Text>
-        </Layout>
-        <Layout style={styles.column1}>
-          <Button
-            testID="MoreButton"
-            appearance="ghost"
-            status="basic"
-            accessoryLeft={MoreVerticalIcon}
-          />
-        </Layout>
-      </Layout>
-    </Card>
+      </Card>
+    </Layout>
   );
 };
 
 const themedStyles = StyleService.create({
   item: {
-    marginVertical: 8,
-    padding: 0,
-  },
-
-  row: {
+    marginVertical: 16,
+    paddingHorizontal: 16,
     display: 'flex',
     flexDirection: 'row',
     backgroundColor: 'transparent',
-    justifyContent: 'flex-start',
+    borderWidth: 0,
+
+    shadowColor: '#777',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+  },
+
+  card: {
+    backgroundColor: '$background-basic-color-1',
+    borderRadius: 7,
+    borderColor: '$background-basic-color-1',
+    borderWidth: 0,
+    flex: 1,
+    elevation: 2,
+  },
+
+  row: {
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
   },
 
   column1: {
+    width: 'auto',
+    justifyContent: 'center',
+    marginRight: 16,
     backgroundColor: 'transparent',
-    flexBasis: 'auto',
-    flexShrink: 0,
-    justifyContent: 'flex-start',
   },
   column2: {
     backgroundColor: 'transparent',
-    paddingHorizontal: 16,
-    justifyContent: 'space-between',
-    width: '65%',
+    justifyContent: 'space-around',
+    flex: 1,
+    marginRight: 8,
+  },
+  column3: {
+    width: 'auto',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
   },
 
-  avatar: {
-    height: 20,
-    width: 20,
-    color: '$color-basic-400',
+  buttonOptions: {
+    textAlign: 'center',
   },
 });

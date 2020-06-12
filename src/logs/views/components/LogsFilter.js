@@ -46,9 +46,10 @@ const LogsFilter = ({tasks, onSetFilters}) => {
 
   const styles = useStyleSheet(themedStyles);
   return (
-    <Layout>
+    <Layout style={styles.container}>
       <Layout style={styles.row}>
         <Select
+          size="large"
           testID={'SelectTask'}
           value={taskTitle}
           style={styles.tasksSelect}
@@ -60,6 +61,7 @@ const LogsFilter = ({tasks, onSetFilters}) => {
       </Layout>
       <Layout style={styles.row}>
         <RangeDatepicker
+          size="large"
           testID="DateRange"
           style={styles.dateRange}
           placeholder="Date Range"
@@ -73,11 +75,16 @@ const LogsFilter = ({tasks, onSetFilters}) => {
 };
 
 const themedStyles = StyleService.create({
+  container: {
+    paddingHorizontal: 16,
+    backgroundColor: 'transparent',
+  },
   row: {
     marginBottom: 16,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    backgroundColor: 'transparent',
   },
   tasksSelect: {
     width: '100%',
