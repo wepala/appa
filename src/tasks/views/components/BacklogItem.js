@@ -64,12 +64,7 @@ const BacklogItem = ({
         onPress={() => onPress(index)}>
         <Layout style={styles.row}>
           <Layout style={styles.column1}>
-            <Text
-              testID="TaskTitle"
-              numberOfLines={1}
-              category="h6"
-              // style={checked && styles.checked.title}
-            >
+            <Text testID="TaskTitle" numberOfLines={1} category="h6">
               {item.title}
             </Text>
             <Text category="s2" appearance="hint" style={styles.timeSpent}>
