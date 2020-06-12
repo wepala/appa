@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import moment from 'moment';
 
 import {
@@ -23,6 +23,11 @@ const BacklogItem = ({
   timeSpentToday,
 }) => {
   const [checked, toggleCheck] = useState(item.complete);
+
+  useEffect(() => {
+    toggleCheck(item.complete);
+  }, [item]);
+
   const styles = useStyleSheet(themedStyles);
 
   const onAddToAgenda = () => {
@@ -63,7 +68,8 @@ const BacklogItem = ({
               testID="TaskTitle"
               numberOfLines={1}
               category="h6"
-              style={checked && styles.checked.title}>
+              // style={checked && styles.checked.title}
+            >
               {item.title}
             </Text>
             <Text category="s2" appearance="hint" style={styles.timeSpent}>
@@ -152,11 +158,6 @@ const themedStyles = StyleService.create({
   buttonStart: {
     textAlign: 'center',
     alignItems: 'center',
-  },
-  checked: {
-    title: {
-      textDecorationLine: 'line-through',
-    },
   },
 });
 
