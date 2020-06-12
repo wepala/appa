@@ -8,6 +8,7 @@ import {
   SCOPE,
   CODE_CHALLENGE_METHOD,
 } from 'react-native-dotenv';
+import {setToken} from '../../weos/auth/model/commands';
 
 /**
  * @class ConnectController
@@ -27,5 +28,12 @@ export default class ConnectController extends Controller {
 
   authorizeURL() {
     return PKCE.authorizeURL();
+  }
+
+  setToken(token) {
+    return new Promise((resolve) => {
+      this.dispatch(setToken(token));
+      resolve();
+    });
   }
 }
