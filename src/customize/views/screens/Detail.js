@@ -11,6 +11,7 @@ import {
   Modal,
   Card,
 } from '@ui-kitten/components';
+import {ArrowDownIcon} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
 import {useForm} from '../../../weosHelpers';
 
@@ -20,6 +21,7 @@ export default ({navigation, route, status, makeRequest}) => {
   const [form, setForm] = useForm({
     name: '',
     email: '',
+    reason: 'temp',
     details: '',
   });
   const styles = useStyleSheet(themedStyles);
@@ -74,7 +76,6 @@ export default ({navigation, route, status, makeRequest}) => {
                 onPress={() => {
                   let data = {
                     ...form,
-                    reason: reasons[form.reason.row],
                   };
                   console.log('Sending', data);
                   makeRequest(data);
