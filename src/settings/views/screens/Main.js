@@ -1,22 +1,18 @@
 import React, {useState} from 'react';
+import {Platform} from 'react-native';
 import {SafeAreaView, ScrollView} from 'react-native';
 import {ThemeContext} from '../../../../theme.context';
 import {
   Button,
   Layout,
   StyleService,
-  Select,
-  SelectItem,
   useStyleSheet,
   Text,
   Toggle,
-  Icon,
-  Divider,
 } from '@ui-kitten/components';
 import TopBar from '../components/TopBar';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCircle} from '@fortawesome/free-solid-svg-icons';
-import {useEffect} from 'react';
 
 export default ({navigation, route}) => {
   const themeContext = React.useContext(ThemeContext);
@@ -175,6 +171,8 @@ const themedStyles = StyleService.create({
     marginHorizontal: 0,
     paddingHorizontal: 0,
     paddingVertical: 9,
+    paddingTop: Platform.OS === 'ios' ? 14 : 0,
+
     borderRadius: 200,
     // shadowColor: '#000',
     // shadowOffset: {
