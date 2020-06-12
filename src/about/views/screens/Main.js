@@ -41,7 +41,7 @@ export default ({navigation, status, route}) => {
               </Button>
             </Layout>
           </Layout>
-          <Layout style={styles.row}>
+          {/* <Layout style={styles.row}>
             <Layout style={styles.column}>
               <Text category="s1">Pipeline</Text>
               <Button
@@ -55,7 +55,7 @@ export default ({navigation, status, route}) => {
                 <Text>See what features are coming soon</Text>
               </Button>
             </Layout>
-          </Layout>
+          </Layout> */}
           <Layout style={styles.row}>
             <Layout style={styles.column}>
               <Text category="s1">Licence</Text>
@@ -129,12 +129,21 @@ const themedStyles = StyleService.create({
   },
   button: {
     marginTop: 8,
-    backgroundColor: 'white',
-    borderColor: 'white',
+    backgroundColor: '$background-basic-color-1',
+    borderColor: '$background-basic-color-1',
+    width: '100%',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+    elevation: 5,
   },
   modal: {
     marginTop: 8,
-    backgroundColor: 'white',
-    borderColor: 'white',
+    backgroundColor: '$background-basic-color-1',
+    borderColor: '$background-basic-color-1',
   },
 });
