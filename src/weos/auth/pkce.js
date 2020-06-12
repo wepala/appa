@@ -12,9 +12,17 @@ const config = {
 
 const storeVerifier = async (verifier) => {
   try {
-    await AsyncStorage.setItem('VERIFIER', verifier);
+    await AsyncStorage.setItem('verifier', verifier);
   } catch (error) {
     throw new Error('Unable to save verifier');
+  }
+};
+
+const storeState = async (state) => {
+  try {
+    await AsyncStorage.setItem('state', state);
+  } catch (error) {
+    throw new Error('Unable to save state');
   }
 };
 
@@ -46,6 +54,7 @@ const authorizeURL = () => {
   } = config.vars;
 
   storeVerifier(verifier);
+  storeState(STATE);
 
   const codeChallenge = challenge(verifier);
 

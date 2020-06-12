@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SafeAreaView, ImageBackground, Linking} from 'react-native';
-
 import {
   Button,
   Text,
@@ -8,13 +7,64 @@ import {
   StyleService,
   Layout,
 } from '@ui-kitten/components';
+import URL from 'url-parse';
 import background from '../../../../assets/images/brand/connect.png';
+import AsyncStorage from '@react-native-community/async-storage';
+import {CLIENT_ID, REDIRECT_URI} from 'react-native-dotenv';
+import {fetchToken} from '../../../weos/auth/api';
 
-export default ({navigation, authorizeURL}) => {
+export default ({navigation, authorizeURL, setToken}) => {
   const styles = useStyleSheet(themedStyles);
 
   const handleWeosConnect = () => {
     Linking.openURL(authorizeURL());
+  };
+
+  useEffect(() => {
+    Linking.addEventListener('url', handleOpenUrl);
+    Linking.getInitialURL().then((url) => {
+      if (url) {
+        this.handleOpenUrl(url);
+      }
+    });
+
+    return () => Linking.removeEventListener('url', handleOpenUrl);
+  });
+
+  const handleOpenUrl = (urlString) => {
+    const url = new URL(urlString.url, true);
+    const {code, state} = url.query;
+
+    if (!code) {
+      console.log('Code is missing');
+      return;
+    }
+
+    Promise.all([
+      AsyncStorage.getItem('verifier'),
+      AsyncStorage.getItem('state'),
+    ]).then(async ([appVerifier, appState]) => {
+      await AsyncStorage.removeItem('verifier');
+      await AsyncStorage.removeItem('state');
+
+      if (appState !== state) {
+        console.log(
+          `State mismatch, didn't carry out token request, ${appState}, ${state}`,
+        );
+        return;
+      }
+
+      const payload = {code, appVerifier, CLIENT_ID, REDIRECT_URI};
+
+      try {
+        const response = await fetchToken(payload);
+        setToken(response.token).then(() => {
+          navigation.navigate('Complete');
+        });
+      } catch (error) {
+        console.log('An error occured', error);
+      }
+    });
   };
 
   return (
