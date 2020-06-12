@@ -9,6 +9,7 @@ export default ({
   contentContainerStyle,
   addToAgenda,
   setTaskCompletion,
+  timeTotals,
 }) => {
   const styles = useStyleSheet(themedStyles);
   const onItemPress = (index) => {
@@ -34,6 +35,7 @@ export default ({
       addToAgenda={addToAgenda}
       navigation={navigation}
       onComplete={setTaskCompletion}
+      timeSpentToday={timeTotals[index]}
     />
   );
 

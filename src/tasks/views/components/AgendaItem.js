@@ -178,7 +178,6 @@ const themedStyles = StyleService.create({
     },
     card: {
       borderColor: 'transparent',
-      elevation: 0,
     },
   },
 });

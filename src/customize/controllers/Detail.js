@@ -3,9 +3,7 @@ import axios from 'axios';
 import {SUPPORT_URL, SENDER, DESTINATION} from 'react-native-dotenv';
 
 import DetailScreen from '../views/screens/Detail';
-import {RequestContext} from '../../weosHelpers';
 import {useState} from 'react';
-import {useEffect} from 'react';
 
 const value = {
   status: null,

@@ -16,10 +16,10 @@ export default ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <ImageBackground source={background} style={styles.image}>
         <Layout style={styles.headerContainer}>
-          <Text style={styles.text} category="h2">
+          {/* <Text style={styles.text} category="h2">
             Create Account
           </Text>
-          <Button style={styles.buttonConnect}>WeOS Connect</Button>
+          <Button style={styles.buttonConnect}>WeOS Connect</Button> */}
           <Text style={styles.text} category="s1">
             You can connect to WeOS our platform to make it easier to share
             information between devices. You can learn more about WeOS here.

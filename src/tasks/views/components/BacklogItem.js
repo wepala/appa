@@ -20,14 +20,27 @@ const BacklogItem = ({
   onPress,
   addToAgenda,
   onComplete,
+  timeSpentToday,
 }) => {
   const [checked, toggleCheck] = useState(item.complete);
   const styles = useStyleSheet(themedStyles);
-  console.log(item);
+
   const onAddToAgenda = () => {
     addToAgenda(item, moment().format('YYYY-MM-DD')).then(() =>
       navigation.navigate('Today'),
     );
+  };
+
+  let currentTimeSpent = {
+    hours: parseInt(timeSpentToday / 3600, 10),
+    minutes: parseInt(timeSpentToday / 60, 10) % 60,
+    seconds: timeSpentToday % 60,
+  };
+
+  let estimatedTime = {
+    hours: parseInt(item.estimatedTime / 3600, 10),
+    minutes: parseInt(item.estimatedTime / 60, 10) % 60,
+    seconds: item.estimatedTime % 60,
   };
   return (
     <Layout key={item.id} style={styles.item}>
@@ -55,6 +68,16 @@ const BacklogItem = ({
             </Text>
             <Text category="s2" appearance="hint" style={styles.timeSpent}>
               Time Spent:{' '}
+              {currentTimeSpent.hours > 0
+                ? `${currentTimeSpent.hours}h `
+                : null}
+              {currentTimeSpent.minutes > 0
+                ? `${currentTimeSpent.minutes}m `
+                : null}
+              {`${currentTimeSpent.seconds}s`}
+              {' | '}
+              {estimatedTime.hours > 0 ? `${estimatedTime.hours}h ` : null}
+              {estimatedTime.minutes > 0 ? `${estimatedTime.minutes}m ` : null}
             </Text>
           </Layout>
 
@@ -120,7 +143,9 @@ const themedStyles = StyleService.create({
     justifyContent: 'center',
   },
 
-  timeSpent: {},
+  timeSpent: {
+    paddingVertical: 4,
+  },
   estimatedTime: {
     textAlign: 'center',
   },
