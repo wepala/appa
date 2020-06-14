@@ -7,10 +7,18 @@ import {default as theme} from '../../../../../theme.json';
 import Agenda from '../Agenda';
 import {mockTasks} from '../../../__tests__/fixtures';
 
+jest.mock('@fortawesome/react-native-fontawesome', () => ({
+  FontAwesomeIcon: '',
+}));
+
 describe('Agenda List View', () => {
   it('should display the task being worked on at the top', () => {
     const currentItem =
       mockTasks.getById['36212c03-040b-4139-867f-bd76485f4084'];
+
+    const navigation = {
+      isFocused: jest.fn(),
+    };
 
     const {getAllByTestId, unmount} = render(
       <>
@@ -21,7 +29,11 @@ describe('Agenda List View', () => {
             ...eva.light,
             ...theme,
           }}>
-          <Agenda currentItem={currentItem} timeTotals={[20, 90]} />
+          <Agenda
+            navigation={navigation}
+            currentItem={currentItem}
+            timeTotals={[20, 90]}
+          />
         </ApplicationProvider>
       </>,
     );

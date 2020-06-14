@@ -1,5 +1,6 @@
+import React, {useState, useEffect, useContext} from 'react';
+import {SectionContext} from '../../context/section-context';
 import {List, Layout, StyleService, useStyleSheet} from '@ui-kitten/components';
-import React, {useState} from 'react';
 import AgendaItem from '../components/AgendaItem';
 import CurrentTask from '../components/CurrentTask';
 
@@ -19,6 +20,14 @@ export default ({
       id: items[index].id,
     });
   };
+
+  const context = useContext(SectionContext);
+
+  useEffect(() => {
+    if (navigation.isFocused()) {
+      context.setSection('agenda');
+    }
+  });
   //method to render each item in the list
   const renderItem = ({index, item}) => {
     // if there is a current item that is this item, set the totalTimes index to this item
@@ -38,6 +47,7 @@ export default ({
       />
     );
   };
+
   return (
     <Layout style={styles.container} testID={'AgendaLayout'}>
       {currentItem && currentItem.id ? (
@@ -60,11 +70,12 @@ export default ({
 
 const themedStyles = StyleService.create({
   container: {
-    padding: 16,
+    paddingVertical: 16,
     flex: 1,
+    backgroundColor: '$background-basic-color-2',
   },
   list: {
     padding: 0,
-    backgroundColor: '$background-basic-color-1',
+    backgroundColor: 'transparent',
   },
 });

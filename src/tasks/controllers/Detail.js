@@ -1,4 +1,4 @@
-import {addTask, updateTask} from '../model/commands';
+import {addTask, updateTask, removeTask} from '../model/commands';
 import {Controller} from '../../controller';
 import moment from 'moment';
 
@@ -46,16 +46,32 @@ export default class DetailController extends Controller {
     });
   }
 
-  onUpdate(navigation, task, title, description, dueDate, currentAgenda) {
+  onUpdate(
+    navigation,
+    task,
+    title,
+    description,
+    dueDate,
+    estimatedTime,
+    currentAgenda,
+  ) {
     const updatedTask = {
-      title: title,
-      description: description,
-      dueDate: dueDate,
-      currentAgenda: currentAgenda,
+      title,
+      description,
+      dueDate,
+      estimatedTime,
+      currentAgenda,
     };
     //TODO execute command to update task
     this.dispatch(updateTask(task.id, updatedTask));
     navigation.goBack();
     console.log('update task');
+  }
+
+  onRemove(taskId) {
+    return new Promise((resolve) => {
+      this.dispatch(removeTask(taskId));
+      resolve();
+    });
   }
 }

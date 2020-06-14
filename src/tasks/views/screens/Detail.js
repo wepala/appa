@@ -1,4 +1,5 @@
-import React, {createRef} from 'react';
+import React, {createRef, useContext} from 'react';
+import moment from 'moment';
 import {useForm, useValidated} from '../../../weosHelpers';
 import {
   Button,
@@ -11,6 +12,7 @@ import {
   SelectItem,
   useStyleSheet,
   IndexPath,
+  Text,
 } from '@ui-kitten/components';
 import {
   AlertIcon,
@@ -19,19 +21,37 @@ import {
 } from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
 import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
+import {SectionContext} from '../../context/section-context';
 
-export default ({navigation, route, getTask, onSave, onUpdate}) => {
+export default ({navigation, route, getTask, onSave, onUpdate, onRemove}) => {
   const styles = useStyleSheet(themedStyles);
   const id = route.params?.id;
-  const section = route.params?.section;
+  const section = useContext(SectionContext).section;
 
-  const task = getTask(id);
+  let task = getTask(id) || {
+    title: '',
+    description: '',
+    dueDate: moment().toDate(),
+    completed: true,
+    agendas: [],
+  };
 
   const timeUnits = ['minutes', 'hours'];
+  // Convert estimated time from seconds to either minutes/hours
+  let estimatedTime, timeUnit;
+  if (id) {
+    estimatedTime =
+      task.estimatedTime % 3600 === 0
+        ? parseInt(task.estimatedTime / 3600, 10)
+        : parseInt(task.estimatedTime / 60, 10);
+    timeUnit =
+      task.estimatedTime % 3600 === 0 ? new IndexPath(1) : new IndexPath(0);
+  }
+
   const [form, setForm] = useForm({
     title: task.title,
-    timeEstimate: parseInt(task.estimatedTime / 60, 10) || '',
-    timeUnit: new IndexPath(0),
+    timeEstimate: id ? estimatedTime : '',
+    timeUnit: id ? timeUnit : new IndexPath(0),
     description: task.description,
     dueDate: new Date(task.dueDate),
   });
@@ -43,23 +63,23 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
   });
 
   const onSubmit = () => {
-    const section = route.params?.section;
     setValid(form, valid);
-    console.log('Submitting', form);
     if (valid.title) {
-      console.log('UPDATING\n\n');
       if (task.id) {
+        let estimatedTime =
+          timeUnits[form.timeUnit.row] === 'minutes'
+            ? form.timeEstimate * 60
+            : form.timeEstimate * 60 * 60;
         onUpdate(
           navigation,
           task,
           form.title,
           form.description,
           form.dueDate,
-          task.agendas,
-        ).then(() => navigation.goBack());
+          estimatedTime,
+          true, // Add to backlog or agendas
+        );
       } else {
-        console.log('NEW TASK\n\n');
-
         onSave(
           form.title,
           form.description,
@@ -77,11 +97,17 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.container}>
-        <DetailTopBar navigation={navigation} route={route} section={section} />
+        <DetailTopBar
+          navigation={navigation}
+          route={route}
+          section={section}
+          onRemove={onRemove}
+        />
         <ScrollView>
           <Layout style={styles.form}>
             <Input
               testID="TaskTitle"
+              size="large"
               style={styles.input}
               label="Task Title"
               placeholder="Enter title here"
@@ -92,13 +118,13 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
                 clearValid();
               }}
               status={!valid.title && 'danger'}
-              captionIcon={!valid.title && AlertIcon}
-              caption={!valid.title && 'Title cannot be blank'}
+              caption={!valid.title && 'Please enter task title'}
             />
             <Layout style={styles.row}>
               <Layout style={styles.column1}>
                 <Input
                   testID="TaskEstTime"
+                  size="large"
                   style={styles.input}
                   label="Estimated Time"
                   placeholder="30"
@@ -108,31 +134,28 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
                     setForm(val.trimLeft(), 'timeEstimate');
                     clearValid();
                   }}
-                  status={!valid.timeEstimate && 'danger'}
-                  captionIcon={!valid.timeEstimate && AlertIcon}
-                  caption={
-                    !valid.timeEstimate && 'Estimated time cannot be empty'
-                  }
                 />
               </Layout>
               <Layout style={styles.column2}>
                 <Select
+                  size="large"
+                  style={[styles.input, styles.unit]}
+                  status="basic"
                   accessoryRight={ClockIcon}
                   label="  "
                   value={timeUnits[form.timeUnit.row]}
-                  style={styles.input}
                   selectedIndex={form.timeUnit}
                   onSelect={(index) => {
-                    console.log(form.timeUnit.row);
                     setForm(index, 'timeUnit');
                   }}>
                   {timeUnits.map((unit, index) => (
-                    <SelectItem key={index + ''} title={unit} />
+                    <SelectItem size="large" key={index + ''} title={unit} />
                   ))}
                 </Select>
               </Layout>
             </Layout>
             <Input
+              size="large"
               testID="TaskDescription"
               style={styles.input}
               multiline={true}
@@ -143,6 +166,8 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
               onChangeText={(val) => setForm(val.trimLeft(), 'description')}
             />
             <Datepicker
+              size="large"
+              status="basic"
               testID="TaskDueDate"
               style={styles.input}
               accessoryRight={CalendarIcon}
@@ -155,23 +180,22 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
                 datePicker.current.blur();
               }}
             />
-            <Divider />
 
             <Layout style={styles.buttonGroup}>
               <Button
                 status="basic"
+                appearance="outline"
                 style={styles.buttonCancel}
                 size="giant"
-                Cancel
                 onPress={() => navigation.goBack()}>
-                Cancel
+                CANCEL
               </Button>
               <Button
                 testID="SubmitButton"
                 style={styles.buttonSubmit}
                 size="giant"
                 onPress={onSubmit}>
-                Submit
+                OK
               </Button>
             </Layout>
           </Layout>
@@ -186,27 +210,35 @@ export default ({navigation, route, getTask, onSave, onUpdate}) => {
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
-    backgroundColor: '$background-basic-color-1',
+    backgroundColor: '$background-basic-color-2',
   },
   form: {
     flex: 1,
     padding: 16,
+    backgroundColor: 'transparent',
   },
   input: {
-    marginBottom: 16,
+    marginBottom: 24,
+  },
+  unit: {
+    paddingVertical: 0,
+    marginVertical: 0,
   },
   row: {
     display: 'flex',
     flexDirection: 'row',
+    backgroundColor: 'transparent',
   },
   column1: {
     flexShrink: 0,
     width: '30%',
     flexBasis: 'auto',
     marginRight: 16,
+    backgroundColor: 'transparent',
   },
   column2: {
     flexGrow: 1,
+    backgroundColor: 'transparent',
   },
 
   buttonGroup: {
@@ -214,13 +246,23 @@ const themedStyles = StyleService.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    backgroundColor: 'transparent',
   },
   buttonCancel: {
-    flexBasis: 'auto',
-    flexShrink: 0,
+    width: '40%',
     marginRight: 16,
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
   },
   buttonSubmit: {
     flexGrow: 1,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+    elevation: 5,
   },
 });
