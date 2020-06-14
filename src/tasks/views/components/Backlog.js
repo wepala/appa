@@ -1,10 +1,16 @@
-import {List} from '@ui-kitten/components';
+import {List, StyleService, useStyleSheet} from '@ui-kitten/components';
 import React, {useEffect, useContext} from 'react';
-import {StyleSheet} from 'react-native';
 import BacklogItem from './BacklogItem';
 import {SectionContext} from '../../context/section-context';
 
-export default ({navigation, items, contentContainerStyle}) => {
+export default ({
+  navigation,
+  items,
+  contentContainerStyle,
+  addToAgenda,
+  setTaskCompletion,
+}) => {
+  const styles = useStyleSheet(themedStyles);
   const onItemPress = (index) => {
     navigation.navigate('UpdateTask', {
       id: items[index].id,
@@ -21,12 +27,19 @@ export default ({navigation, items, contentContainerStyle}) => {
 
   //method to render each item in the list
   const renderItem = ({index, item}) => (
-    <BacklogItem item={item} index={index} onPress={onItemPress} />
+    <BacklogItem
+      item={item}
+      index={index}
+      onPress={onItemPress}
+      addToAgenda={addToAgenda}
+      navigation={navigation}
+      onComplete={setTaskCompletion}
+    />
   );
 
   return (
     <List
-      contentContainerStyle={[styles.container, contentContainerStyle]}
+      style={[styles.container, contentContainerStyle]}
       numColumns={1}
       data={items}
       renderItem={renderItem}
@@ -34,8 +47,15 @@ export default ({navigation, items, contentContainerStyle}) => {
   );
 };
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   container: {
-    padding: 16,
+    paddingVertical: 16,
+    backgroundColor: '$background-basic-color-2',
+    flex: 1,
+  },
+  list: {
+    flex: 1,
+    padding: 0,
+    backgroundColor: 'transparent',
   },
 });

@@ -119,12 +119,12 @@ const makeLogsByFilter = () =>
         let taskIndex = tasks.findIndex((task) => {
           return task.id === log.taskId;
         });
-        console.log(log, tasks[taskIndex]);
         return {
           task: tasks[taskIndex],
           ...log,
         };
-      }));
+      })
+      .filter((logs) => logs.task !== undefined));
   });
 
 export const getLogsByFilter = makeLogsByFilter();

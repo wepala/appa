@@ -8,6 +8,23 @@ WeAgenda is a task management application
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
+Before running the project, you will first need to set up some environment variables.
+Create a new file in the `root` of the project called `.env`
+Copy the contents of the `.env-dist` file into the `.env` and fill out the blanks
+
+- `SUPPORT_URL` is the email service endpoint
+
+```
+// Your .env should resemble this
+
+SUPPORT_URL=https://XXXXXXXXXXXXXX
+SENDER=XXXXXXXX@XXXXX
+DESTINATION=XXXXXXXX@XXXXX 
+ROADMAP_BASEURL=https://XXXXXXXXXXXXXX
+ROADMAP_ID=XXXXXXXXXXXXXX
+ 
+```
+
 ### Prerequisites
 
 1. Node
@@ -16,7 +33,9 @@ These instructions will get you a copy of the project up and running on your loc
 1. XCode (if compiling iOS app)
 
 Mac
+
 1. You can use homebrew to install Node
+
 ```
 brew install nodejs
 ```
@@ -65,17 +84,17 @@ Deployments are done through Github actions. They are automatically triggered fo
 
 For Android releases, we need the following information setup:
 
-* ANDROID_KEYSTORE \- Base64 encoded key store
-* ANDROID_KEYSTORE_PASSWORD \- Password for the key store
-* ANDROID_KEY_ALIAS \- Alias/name of the key
-* ANDROID_KEY_PASSWORD \- Password for the key
+- ANDROID_KEYSTORE \- Base64 encoded key store
+- ANDROID_KEYSTORE_PASSWORD \- Password for the key store
+- ANDROID_KEY_ALIAS \- Alias/name of the key
+- ANDROID_KEY_PASSWORD \- Password for the key
 
 For iOS, we currently need a developer team added to the project to create an IPA.
 
 ## Built With
 
-* [React Native](https://reactnative.dev/)
-* [Flow](https://flow.org/) - Dependency Management
+- [React Native](https://reactnative.dev/)
+- [Flow](https://flow.org/) - Dependency Management
 
 ## Contributing
 
@@ -87,7 +106,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Akeem Philbert** - *Initial work* - [Akeem Philbert](https://github.com/AkeemPhilbert)
+- **Akeem Philbert** - _Initial work_ - [Akeem Philbert](https://github.com/AkeemPhilbert)
 
 See also the list of [contributors](https://github.com/wepala/weagenda/contributors) who participated in this project.
 
@@ -97,6 +116,6 @@ This project is licensed under the AGPL License - see the [LICENSE.md](LICENSE.m
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+- Hat tip to anyone whose code was used
+- Inspiration
+- etc

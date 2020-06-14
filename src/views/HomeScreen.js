@@ -11,7 +11,11 @@ import Tasks from '../tasks/views/screens/Main';
 import Logs from '../logs/views/screens/Main';
 import Onboarding from '../onboarding/views/screens/Main';
 import Reports from '../reports/controllers/Main';
+import Settings from '../settings/views/screens/Main';
+import About from '../about/views/screens/Main';
 import Support from '../support/views/screens/Support';
+import Customize from '../customize/views/screens/Main';
+import Feedback from '../feedback/controllers/Main';
 
 const {Navigator, Screen} = createDrawerNavigator();
 
@@ -36,8 +40,11 @@ const HomeScreen = ({navigation, onBoarded}) => {
         <Screen name="Agenda" component={Tasks} />
         <Screen name="Logs" component={Logs} />
         <Screen name="Reports" component={Reports} />
-        <Screen name="Settings" component={Tasks} />
+        <Screen name="Settings" component={Settings} />
         <Screen name="Support" component={Support} />
+        <Screen name="About" component={About} />
+        <Screen name="Customize" component={Customize} />
+        <Screen name="Feedback" component={Feedback} />
       </Navigator>
     );
   };
