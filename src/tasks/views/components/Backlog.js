@@ -5,6 +5,7 @@ import {
   List,
   StyleService,
   useStyleSheet,
+  Button,
 } from '@ui-kitten/components';
 import BacklogItem from './BacklogItem';
 import {SectionContext} from '../../context/section-context';
@@ -31,7 +32,7 @@ export default ({
   timeTotals,
 }) => {
   const [placeholder, setPlaceholder] = useState(
-    messages[Math.floor(Math.random() * 2)],
+    messages[Math.floor(Math.random() * messages.length)],
   );
   const styles = useStyleSheet(themedStyles);
   const onItemPress = (index) => {
@@ -76,6 +77,12 @@ export default ({
       <Text style={styles.subTitle} category="h6" appearance="hint">
         {placeholder.subTitle}
       </Text>
+      <Button
+        style={styles.buttonAdd}
+        size="large"
+        onPress={() => navigation.navigate('CreateTask')}>
+        ADD TASK
+      </Button>
     </Layout>
   );
 };
@@ -106,5 +113,17 @@ const themedStyles = StyleService.create({
   },
   subTitle: {
     textAlign: 'center',
+  },
+  buttonAdd: {
+    width: '100%',
+    marginTop: 32,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+    elevation: 5,
   },
 });
