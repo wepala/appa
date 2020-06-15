@@ -169,7 +169,7 @@ const themedStyles = StyleService.create({
     width: 'auto',
     marginVertical: 0,
     marginHorizontal: 0,
-    paddingHorizontal: 0,
+    paddingHorizontal: Platform.OS === 'ios' ? 1 : 0,
     paddingVertical: 9,
     paddingTop: Platform.OS === 'ios' ? 14 : 8,
 

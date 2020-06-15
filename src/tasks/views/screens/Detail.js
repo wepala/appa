@@ -220,10 +220,7 @@ const themedStyles = StyleService.create({
   input: {
     marginBottom: 24,
   },
-  unit: {
-    paddingVertical: 0,
-    marginVertical: 0,
-  },
+  unit: {},
   row: {
     display: 'flex',
     flexDirection: 'row',

@@ -53,12 +53,14 @@ export default ({navigation, route, status, makeRequest}) => {
               <Layout style={styles.column}>
                 <Input
                   style={styles.paddingBottom}
+                  size="large"
                   placeholder="Your name"
                   onChangeText={(val) => {
                     setForm(val.trimLeft(), 'name');
                   }}
                 />
                 <Input
+                  size="large"
                   style={styles.paddingBottom}
                   placeholder="Email Address"
                   keyboardType="email-address"
@@ -68,6 +70,7 @@ export default ({navigation, route, status, makeRequest}) => {
                 />
                 <Select
                   style={[styles.select, styles.paddingBottom]}
+                  size="large"
                   placeholder="Select reason"
                   accessoryRight={ArrowDownIcon}
                   value={reasons[form.reason.row]}
@@ -82,6 +85,7 @@ export default ({navigation, route, status, makeRequest}) => {
                 </Select>
                 <Input
                   style={styles.paddingBottom}
+                  size="large"
                   placeholder="Type your message"
                   multiline={true}
                   numberOfLines={5}
