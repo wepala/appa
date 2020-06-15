@@ -30,12 +30,13 @@ const BacklogItem = ({
       navigation.navigate('Today'),
     );
   };
-
-  let currentTimeSpent = {
-    hours: parseInt(timeSpentToday / 3600, 10),
-    minutes: parseInt(timeSpentToday / 60, 10) % 60,
-    seconds: timeSpentToday % 60,
-  };
+  let currentTimeSpent = timeSpentToday
+    ? {
+        hours: parseInt(timeSpentToday / 3600, 10),
+        minutes: parseInt(timeSpentToday / 60, 10) % 60,
+        seconds: timeSpentToday % 60,
+      }
+    : {seconds: 0};
 
   let estimatedTime = {
     hours: parseInt(item.estimatedTime / 3600, 10),
