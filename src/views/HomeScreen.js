@@ -44,7 +44,7 @@ const HomeScreen = ({navigation, onBoarded}) => {
         <Screen name="About" component={About} />
         <Screen name="Customize" component={Customize} />
       </Navigator>
-    )
+    );
   };
 
   const RootStackScreen = () => {
