@@ -30,6 +30,7 @@ describe('Agenda List View', () => {
             ...theme,
           }}>
           <Agenda
+            items={[]}
             navigation={navigation}
             currentItem={currentItem}
             timeTotals={[20, 90]}
