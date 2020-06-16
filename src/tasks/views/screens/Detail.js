@@ -1,4 +1,4 @@
-import React, {createRef, useContext} from 'react';
+import React, {createRef, useContext, useState} from 'react';
 import moment from 'moment';
 import {useForm, useValidated} from '../../../weosHelpers';
 import {
@@ -27,6 +27,7 @@ export default ({navigation, route, getTask, onSave, onUpdate, onRemove}) => {
   const styles = useStyleSheet(themedStyles);
   const id = route.params?.id;
   const section = useContext(SectionContext).section;
+  const [submitStatus, setSubmitStatus] = useState(false);
 
   let task = getTask(id) || {
     title: '',
@@ -89,6 +90,8 @@ export default ({navigation, route, getTask, onSave, onUpdate, onRemove}) => {
           timeUnits[form.timeUnit.row],
         ).then(() => navigation.goBack());
       }
+
+      setSubmitStatus(true);
     }
   };
 
@@ -194,6 +197,7 @@ export default ({navigation, route, getTask, onSave, onUpdate, onRemove}) => {
                 testID="SubmitButton"
                 style={styles.buttonSubmit}
                 size="giant"
+                disabled={submitStatus}
                 onPress={onSubmit}>
                 OK
               </Button>
