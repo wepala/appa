@@ -71,6 +71,9 @@ const exchangeAuthCode = async (code, state) => {
     throw new Error("State didn't match");
   }
 
+  await AsyncStorage.removeItem('verifier');
+  await AsyncStorage.removeItem('state');
+
   const form = {
     grant_type: 'authorization_code',
     client_id: CLIENT_ID,
