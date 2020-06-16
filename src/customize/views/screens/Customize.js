@@ -19,69 +19,70 @@ export default ({navigation, route}) => {
   let [visible, toggleVisible] = useState(false);
 
   return (
-      <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <TopBar navigation={navigation} title="Customize" />
       <ScrollView>
-      <Text category="h1" style={styles.title}>
-      Make Appa yours
-  </Text>
-  <Layout style={styles.row}>
-      <Layout style={styles.column}>
-      <Text category="h5" style={styles.subTitle}>
-      DEVELOPERS
-      </Text>
+        <Text category="h1" style={styles.title}>
+          Make Appa yours
+        </Text>
+        <Layout style={styles.row}>
+          <Layout style={styles.column}>
+            <Text category="h5" style={styles.subTitle}>
+              DEVELOPERS
+            </Text>
 
-      <Text category="s1" style={styles.description}>
-      If you can code, then jump right in and make the changes you want!
-  </Text>
-  <Text category="s1" style={styles.descriptionLastLine}>
-      Check out Appa on GitHub.
-  </Text>
+            <Text category="s1" style={styles.description}>
+              If you can code, then jump right in and make the changes you want!
+            </Text>
+            <Text category="s1" style={styles.descriptionLastLine}>
+              Check out Appa on GitHub.
+            </Text>
 
-  <Button
-  size="large"
-  style={styles.buttonHelp}
-  onPress={() => {
-    Linking.openURL('https://github.com/wepala/weagenda').catch(
-        (err) => {
-          toggleVisible(true);
-          console.warn(err);
-        },
-    );
-  }}
-  accessoryRight={() => (
-  <FontAwesomeIcon style={styles.icon} icon={faGithub} />
-)}>
-  GET STARTED
-  </Button>
-  </Layout>
-  <Layout style={styles.column}>
-      <Text category="h5" style={styles.subTitle}>
-      NON-DEVELOPERS
-      </Text>
-      <Text category="s1" style={styles.description}>
-      Need some help modifying Appa to work the way you want?
-                                    </Text>
-  <Text category="s1" style={styles.descriptionLastLine}> No
-      problem, we'll take care of it for you.
-  </Text>
-                                    <Button
-    size="large"
-  style={styles.buttonHelp}
-  onPress={() => navigation.navigate('Help')}>
-  GET HELP
-  </Button>
-  </Layout>
-  </Layout>
-  <Modal visible={visible} style={styles.container}>
-      <Card disabled={true}>
-      <Text category="h3">Error</Text>
-      <Button onPress={() => toggleVisible(false)}>DISMISS</Button>
-  </Card>
-  </Modal>
-  </ScrollView>
-  </SafeAreaView>
-);
+            <Button
+              size="large"
+              style={styles.buttonHelp}
+              onPress={() => {
+                Linking.openURL('https://github.com/wepala/weagenda').catch(
+                  (err) => {
+                    toggleVisible(true);
+                    console.warn(err);
+                  },
+                );
+              }}
+              accessoryRight={() => (
+                <FontAwesomeIcon style={styles.icon} icon={faGithub} />
+              )}>
+              GET STARTED
+            </Button>
+          </Layout>
+          <Layout style={styles.column}>
+            <Text category="h5" style={styles.subTitle}>
+              NON-DEVELOPERS
+            </Text>
+            <Text category="s1" style={styles.description}>
+              Need some help modifying Appa to work the way you want?
+            </Text>
+            <Text category="s1" style={styles.descriptionLastLine}>
+              {' '}
+              No problem, we'll take care of it for you.
+            </Text>
+            <Button
+              size="large"
+              style={styles.buttonHelp}
+              onPress={() => navigation.navigate('Help')}>
+              GET HELP
+            </Button>
+          </Layout>
+        </Layout>
+        <Modal visible={visible} style={styles.container}>
+          <Card disabled={true}>
+            <Text category="h3">Error</Text>
+            <Button onPress={() => toggleVisible(false)}>DISMISS</Button>
+          </Card>
+        </Modal>
+      </ScrollView>
+    </SafeAreaView>
+  );
 };
 
 const themedStyles = StyleService.create({
