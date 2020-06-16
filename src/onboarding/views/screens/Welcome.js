@@ -9,7 +9,7 @@ import {
 } from '@ui-kitten/components';
 import background from '../../../../assets/images/brand/welcome.png';
 
-export default ({navigation}) => {
+export default ({navigation, onComplete}) => {
   const styles = useStyleSheet(themedStyles);
 
   return (
