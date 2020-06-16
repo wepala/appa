@@ -31,7 +31,11 @@ export default ({
 
   return (
     <>
-      <TopBar navigation={navigation} title="Time Log" />
+      <TopBar
+        canCreate={tasks.length}
+        navigation={navigation}
+        title="Time Log"
+      />
       <Layout style={styles.container}>
         <LogFilter
           tasks={tasks}
@@ -39,7 +43,7 @@ export default ({
           onSetFilters={onSetFilters}
         />
         <List
-          contentContainerStyle={[contentContainerStyle, styles.list]}
+          style={[styles.list, contentContainerStyle]}
           numColumns={1}
           data={logs}
           renderItem={renderItem}
@@ -51,12 +55,12 @@ export default ({
 
 const themedStyles = StyleService.create({
   container: {
-    padding: 16,
+    paddingVertical: 16,
     flex: 1,
-    backgroundColor: '$background-basic-color-1',
+    backgroundColor: '$background-basic-color-2',
   },
   list: {
     padding: 0,
-    backgroundColor: '$background-basic-color-1',
+    backgroundColor: 'transparent',
   },
 });

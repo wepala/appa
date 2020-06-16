@@ -23,7 +23,8 @@ export const memorizeLogsFilter = (state) => {
             task: tasks[taskIndex],
             ...log,
           };
-        });
+        })
+        .filter((logItems) => logItems.task !== undefined);
 
       cache[key] = result;
       return result;

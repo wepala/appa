@@ -52,65 +52,94 @@ export default ({item, index, timeSpentToday, onPress, stopTask}) => {
   let seconds = timer % 60;
 
   return (
-    <Card testID="CurrentTask" style={styles.item} onPress={onPress}>
-      <Layout style={styles.row}>
-        <Layout style={styles.column1}>
-          <Text numberOfLines={2} category="h5" style={styles.title}>
-            {item.title}
+    <Layout style={styles.item}>
+      <Card testID="CurrentTask" style={styles.card} onPress={onPress}>
+        <Text numberOfLines={1} category="h5" style={styles.title}>
+          {item.title}
+        </Text>
+        {item.project ? <Text category="s2">{item.project}</Text> : null}
+      </Card>
+      <Card disabled style={styles.subCard.item}>
+        <Layout style={styles.subCard.content}>
+          <Text testID="TotalTime" category="h6" style={styles.subCard.timer}>
+            {hours > 0 ? `${hours}h ` : null}
+            {minutes > 0 ? `${minutes}m ` : null}
+            {`${seconds}s`}
           </Text>
+          <Button
+            testID="TaskButton"
+            style={styles.button}
+            status="danger"
+            size="tiny"
+            onPress={() => stopTask('_stop')}>
+            stop
+          </Button>
         </Layout>
-        <Layout style={styles.column2}>
-          <Text testID="TotalTime" category="h6">
-            {hours > 0 ? `${hours} hrs ` : null}
-            {minutes > 0 ? `${minutes} mins ` : null}
-            {`${seconds} secs`}
-          </Text>
-        </Layout>
-      </Layout>
-      <Layout style={styles.row}>
-        <Button
-          testID="TaskButton"
-          style={styles.button}
-          status="danger"
-          size="small"
-          accessoryRight={StopOutlineIcon}
-          onPress={() => stopTask('_stop')}>
-          Stop
-        </Button>
-      </Layout>
-    </Card>
+      </Card>
+    </Layout>
   );
 };
 
 const themedStyles = StyleService.create({
   item: {
-    backgroundColor: '$background-basic-color-3',
-    padding: 0,
-    marginBottom: 16,
-  },
-
-  row: {
-    backgroundColor: 'transparent',
+    paddingHorizontal: 16,
+    marginBottom: 30,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
+    backgroundColor: 'transparent',
+    borderWidth: 0,
 
-  column1: {
-    backgroundColor: 'transparent',
-    width: '50%',
+    shadowColor: '#777',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
   },
-  column2: {
-    alignItems: 'flex-end',
-    backgroundColor: 'transparent',
-    width: '50%',
+  card: {
+    height: 'auto',
+    paddingBottom: 32,
+    backgroundColor: '$color-primary-500',
+    borderRadius: 7,
+    borderColor: 'transparent',
+    borderWidth: 0,
+    flex: 1,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    elevation: 5,
   },
-  title: {},
-  description: {
-    paddingVertical: 8,
-    fontStyle: 'italic',
+  title: {
+    color: '#fff',
+  },
+  subCard: {
+    item: {
+      height: 50,
+      position: 'absolute',
+      bottom: -15,
+      right: 30,
+      width: '50%',
+      borderRadius: 7,
+      borderColor: 'transparent',
+      borderWidth: 0,
+      alignItems: 'flex-end',
+      justifyContent: 'center',
+      elevation: 5,
+    },
+    content: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'flex-end',
+      justifyContent: 'center',
+      margin: -8,
+    },
+    timer: {
+      marginRight: 16,
+      marginBottom: 2,
+    },
   },
   button: {
-    marginTop: 4,
+    borderRadius: 10,
+    fontSize: 18,
   },
 });

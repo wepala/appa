@@ -128,7 +128,8 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
               label="Entry Title"
               value={form.title}
               placeholder="Enter text for entry here"
-              style={styles.autocomplete}
+              style={[styles.autocomplete, styles.input]}
+              size="large"
               status={!valid.taskId && 'danger'}
               captionIcon={!valid.taskId && AlertIcon}
               caption={!valid.taskId && 'Provide a valid task'}
@@ -142,6 +143,7 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
                 <Input
                   testID="LoggedHour"
                   style={styles.input}
+                  size="large"
                   label="Hour"
                   value={form.hours}
                   status={!valid.hours && 'danger'}
@@ -158,6 +160,7 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
                 <Input
                   testID="LoggedMinute"
                   style={styles.input}
+                  size="large"
                   label="Minute"
                   value={form.minutes}
                   status={!valid.minutes && 'danger'}
@@ -172,8 +175,8 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
               </Layout>
               <Layout style={[styles.column, styles.columnThird]}>
                 <Select
+                  size="large"
                   testID="LoggedAMPM"
-                  style={styles.input}
                   label=" "
                   accessoryRight={ClockIcon}
                   value={timeOfDay[form.timeOfDay.row]}
@@ -189,7 +192,6 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
                 </Select>
               </Layout>
             </Layout>
-            <Divider />
 
             <Layout style={styles.buttonGroup}>
               <Button
@@ -197,16 +199,16 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
                 status="basic"
                 style={styles.buttonCancel}
                 size="giant"
-                Cancel
+                appearance="outline"
                 onPress={() => navigation.goBack()}>
-                Cancel
+                CANCEL
               </Button>
               <Button
                 testID="SubmitButton"
                 style={styles.buttonSubmit}
                 size="giant"
                 onPress={onSubmit}>
-                Submit
+                OK
               </Button>
             </Layout>
           </Layout>
@@ -221,11 +223,12 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
-    backgroundColor: '$background-basic-color-1',
+    backgroundColor: '$background-basic-color-2',
   },
   form: {
     flex: 1,
     padding: 16,
+    backgroundColor: 'transparent',
   },
   input: {
     marginBottom: 16,
@@ -237,19 +240,24 @@ const themedStyles = StyleService.create({
   row: {
     display: 'flex',
     flexDirection: 'row',
+    backgroundColor: 'transparent',
   },
   column: {
     flex: 1,
+    backgroundColor: 'transparent',
   },
   columnFirst: {
     marginRight: 8,
+    backgroundColor: 'transparent',
   },
   columnSecond: {
     marginLeft: 8,
     marginRight: 8,
+    backgroundColor: 'transparent',
   },
   columnThird: {
     marginLeft: 8,
+    backgroundColor: 'transparent',
   },
 
   buttonGroup: {
@@ -257,13 +265,23 @@ const themedStyles = StyleService.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    backgroundColor: 'transparent',
   },
   buttonCancel: {
-    flexBasis: 'auto',
-    flexShrink: 0,
+    width: '40%',
     marginRight: 16,
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
   },
   buttonSubmit: {
     flexGrow: 1,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+    elevation: 5,
   },
 });
