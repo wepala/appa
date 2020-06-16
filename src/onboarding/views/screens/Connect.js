@@ -52,9 +52,7 @@ export default ({navigation, authorizeURL, setToken, getToken}) => {
 
     PKCE.exchangeAuthCode(code, state)
       .then((authToken) => {
-        setToken(authToken.id_token).then(() =>
-          navigation.navigate('Complete'),
-        );
+        setToken(authToken).then(() => navigation.navigate('Complete'));
       })
       .catch((error) => {
         console.log(error);
