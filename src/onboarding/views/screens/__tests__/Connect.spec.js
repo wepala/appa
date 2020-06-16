@@ -1,4 +1,4 @@
-import {render, fireEvent} from 'react-native-testing-library';
+import {render} from 'react-native-testing-library';
 import Connect from '../Connect';
 import React from 'react';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
@@ -11,18 +11,15 @@ jest.mock('@fortawesome/react-native-fontawesome', () => ({
 }));
 describe('onboarding Connect screen', () => {
   it('should have button that connects to weos', async () => {
-    const authorizeURL = jest.fn();
     const {getAllByTestId} = render(
       <>
         <IconRegistry icons={EvaIconsPack} />
         <ApplicationProvider {...eva} theme={{...eva.light, ...theme}}>
-          <Connect authorizeURL={authorizeURL} />
+          <Connect />
         </ApplicationProvider>
       </>,
     );
     const connectButton = getAllByTestId('WeOsConnectBtn');
     expect(connectButton).toHaveLength(1);
-    fireEvent.press(connectButton[0]);
-    expect(authorizeURL).toHaveBeenCalled();
   });
 });

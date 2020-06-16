@@ -1,6 +1,8 @@
 import randomString from 'random-string';
 import Hashes from 'jshashes';
 import AsyncStorage from '@react-native-community/async-storage';
+import qs from 'querystring';
+import axios from 'axios';
 
 // PKCE config vars (used in creating the authorizeURL)
 const config = {
@@ -26,11 +28,6 @@ const storeState = async (state) => {
   }
 };
 
-// Preamble for setting up authorizeURL function
-const STATE = randomString();
-
-const verifier = randomString({length: 48});
-
 const sha256base64urlencode = (str) => {
   // https://tools.ietf.org/html/rfc7636#appendix-A
   // https://tools.ietf.org/html/rfc4648#section-5
@@ -52,18 +49,51 @@ const authorizeURL = () => {
     REDIRECT_URI,
     CODE_CHALLENGE_METHOD,
   } = config.vars;
+  const STATE = randomString();
+  const verifier = randomString({length: 48});
+  const codeChallenge = challenge(verifier);
 
   storeVerifier(verifier);
   storeState(STATE);
-
-  const codeChallenge = challenge(verifier);
-
   return `${AUTHORIZE_URL}/oauth2/auth?response_type=${RESPONSE_TYPE}&client_id=${CLIENT_ID}&state=${STATE}&scope=${SCOPE}&redirect_uri=${REDIRECT_URI}&code_challenge=${codeChallenge}&code_challenge_method=${CODE_CHALLENGE_METHOD}`;
+};
+
+const exchangeAuthCode = async (code, state) => {
+  const {AUTHORIZE_URL, CLIENT_ID, REDIRECT_URI} = config.vars;
+  const verifier = await AsyncStorage.getItem('verifier');
+  const STATE = await AsyncStorage.getItem('state');
+
+  if (!code) {
+    throw new Error('Missing auth code');
+  }
+
+  if (STATE !== state) {
+    throw new Error("State didn't match");
+  }
+
+  const form = {
+    grant_type: 'authorization_code',
+    client_id: CLIENT_ID,
+    code_verifier: verifier,
+    code,
+    redirect_uri: REDIRECT_URI,
+  };
+
+  const configs = {
+    method: 'post',
+    url: `${AUTHORIZE_URL}/oauth2/token`,
+    headers: {'content-type': 'application/x-www-form-urlencoded'},
+    data: qs.stringify(form),
+  };
+  const response = await axios(configs);
+
+  return response.data;
 };
 
 const pkce = {
   config,
   authorizeURL,
+  exchangeAuthCode,
 };
 
 export default pkce;
