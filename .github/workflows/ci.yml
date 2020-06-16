@@ -39,12 +39,11 @@ jobs:
         run: |
           env > .env
         env:
+          PIPELINE_URL: ${{ secrets.PIPELINE_URL }}
           API_URL: ${{ secrets.API_URL }}
           SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
           SENDER: ${{ secrets.SENDER }}
           DESTINATION: ${{ secrets.DESTINATION }}
-          ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
-          ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
           BEARER: ${{ secrets.BEARER }}
       - name: Build debug APK
         run: |
@@ -107,12 +106,11 @@ jobs:
         run: |
           env > .env
         env:
+          PIPELINE_URL: ${{ secrets.PIPELINE_URL }}
           API_URL: ${{ secrets.API_URL }}
           SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
           SENDER: ${{ secrets.SENDER }}
           DESTINATION: ${{ secrets.DESTINATION }}
-          ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
-          ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
           BEARER: ${{ secrets.BEARER }}
       - name: Build release APK
         run: |
@@ -177,12 +175,11 @@ jobs:
         run: |
           env > .env
         env:
+          PIPELINE_URL: ${{ secrets.PIPELINE_URL }}
           API_URL: ${{ secrets.API_URL }}
           SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
           SENDER: ${{ secrets.SENDER }}
           DESTINATION: ${{ secrets.DESTINATION }}
-          ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
-          ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
           BEARER: ${{ secrets.BEARER }}
       - name: Create archive for app
         run: |

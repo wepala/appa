@@ -17,9 +17,10 @@ Copy the contents of the `.env-dist` file into the `.env` and fill out the blank
 ```
 // Your .env should resemble this
 
-SUPPORT_URL = https://XXXXXXXXXXXXXX
-SENDER = XXXXXXXX@XXXXX
-DESTINATION = XXXXXXXX@XXXXX
+SUPPORT_URL=https://XXXXXXXXXXXXXX
+SENDER=XXXXXXXX@XXXXX
+DESTINATION=XXXXXXXX@XXXXX 
+PIPELINE_URL=https://XXXXXXXXXXXXXX
 ```
 
 ### Prerequisites

@@ -4,14 +4,9 @@ import {
   Button,
   Layout,
   StyleService,
-  Select,
-  SelectItem,
   useStyleSheet,
   Text,
-  IndexPath,
-  Divider,
 } from '@ui-kitten/components';
-import {MessageIcon} from '../../../views/components/Icons';
 import TopBar from '../components/TopBar';
 import {SafeAreaView} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';

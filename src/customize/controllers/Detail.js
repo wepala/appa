@@ -1,16 +1,10 @@
-import React, {createContext} from 'react';
+import React from 'react';
 import axios from 'axios';
 import {SUPPORT_URL, SENDER, DESTINATION} from 'react-native-dotenv';
 
 import DetailScreen from '../views/screens/Detail';
 import {useState} from 'react';
 
-const value = {
-  status: null,
-  makeRequest(form) {
-    this.status = 'pending';
-  },
-};
 const Detail = (props) => {
   const [status, setStatus] = useState('init');
   const makeRequest = (form) => {
