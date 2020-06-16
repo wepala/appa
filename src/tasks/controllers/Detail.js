@@ -39,9 +39,7 @@ export default class DetailController extends Controller {
             : estimatedTime * 60 * 60,
         created: moment(),
       };
-      //TODO execute command to create task
       this.dispatch(addTask(task));
-      console.log('task created');
       resolve();
     });
   }
