@@ -20,10 +20,7 @@ Copy the contents of the `.env-dist` file into the `.env` and fill out the blank
 SUPPORT_URL=https://XXXXXXXXXXXXXX
 SENDER=XXXXXXXX@XXXXX
 DESTINATION=XXXXXXXX@XXXXX 
-ROADMAP_BASEURL=https://XXXXXXXXXXXXXX
-ROADMAP_ID=XXXXXXXXXXXXXX
-ROADMAP_URL=https://XXXXXXXXXXXXXX
- 
+PIPELINE_URL=https://XXXXXXXXXXXXXX
 ```
 
 ### Prerequisites
