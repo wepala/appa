@@ -128,7 +128,6 @@ jobs:
           packageName: com.appadoes
           releaseFile: android/app/build/outputs/bundle/release/app-release.aab
           track: beta
-          userFraction: 1.0
           whatsNewDirectory: distribution/
       - name: Send failure notification
         uses: rtCamp/action-slack-notify@v2.0.0
