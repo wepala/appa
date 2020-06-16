@@ -1,6 +1,8 @@
 import {Controller} from '../../controller';
 import {getIncompleteTasks} from '../model/selectors';
 import {updateTask} from '../model/commands';
+import {getIncompletedTaskTimeSpentByDate} from '../../logs/model/selectors';
+import moment from 'moment';
 
 export default class BacklogController extends Controller {
   addToAgenda(task, date) {
@@ -15,6 +17,10 @@ export default class BacklogController extends Controller {
   configureState(state) {
     return {
       items: getIncompleteTasks(state),
+      timeTotals: getIncompletedTaskTimeSpentByDate(
+        state,
+        moment().format('YYYY-MM-DD'),
+      ),
     };
   }
 
