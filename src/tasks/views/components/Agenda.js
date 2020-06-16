@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
+import {Image} from 'react-native';
 import {SectionContext} from '../../context/section-context';
 import {
   List,
@@ -95,12 +96,21 @@ export default ({
         />
       ) : (
         <Layout style={styles.placeholder}>
-          <Text style={styles.title} category="h3" appearance="hint">
-            {placeholder.title}
-          </Text>
-          <Text style={styles.subTitle} category="h6" appearance="hint">
-            {placeholder.subTitle}
-          </Text>
+          <Image
+            style={styles.image}
+            source={{
+              uri:
+                'https://cdn.roadmap.space/logos/5ed5164b31d74e9553c4f5eb.png',
+            }}
+          />
+          <Layout style={styles.textContainer}>
+            <Text style={styles.title} category="h3" appearance="hint">
+              {placeholder.title}
+            </Text>
+            <Text style={styles.subTitle} category="h6" appearance="hint">
+              {placeholder.subTitle}
+            </Text>
+          </Layout>
           <Button
             style={styles.buttonAdd}
             size="large"
@@ -128,8 +138,16 @@ const themedStyles = StyleService.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     padding: 16,
+    backgroundColor: 'transparent',
+  },
+  image: {
+    height: 200,
+    width: 200,
+    opacity: 0.15,
+  },
+  textContainer: {
     backgroundColor: 'transparent',
   },
   title: {
