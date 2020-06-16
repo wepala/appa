@@ -44,4 +44,29 @@ describe('Agenda List View', () => {
     expect(item).toHaveLength(1);
     unmount();
   });
+
+  it('should display ta placeholder when no items are available', () => {
+    const navigation = {
+      isFocused: jest.fn(),
+    };
+
+    const {getAllByTestId, unmount} = render(
+      <>
+        <IconRegistry icons={EvaIconsPack} />
+        <ApplicationProvider
+          {...eva}
+          theme={{
+            ...eva.light,
+            ...theme,
+          }}>
+          <Agenda items={[]} navigation={navigation} />
+        </ApplicationProvider>
+      </>,
+    );
+
+    // Task Item
+    const placeholder = getAllByTestId('Placeholder');
+    expect(placeholder).toHaveLength(1);
+    unmount();
+  });
 });
