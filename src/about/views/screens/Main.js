@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {ImageBackground, Linking} from 'react-native';
-import {ROADMAP_URL} from 'react-native-dotenv';
+import {PIPELINE_URL} from 'react-native-dotenv';
 import packageJson from '../../../../package.json';
 
 import {
@@ -46,7 +46,7 @@ export default ({navigation, status, route}) => {
               <Text category="s1">Pipeline</Text>
               <Button
                 onPress={() => {
-                  Linking.openURL(ROADMAP_URL).catch((err) => {
+                  Linking.openURL(PIPELINE_URL).catch((err) => {
                     toggleVisible(true);
                     console.warn(err);
                   });

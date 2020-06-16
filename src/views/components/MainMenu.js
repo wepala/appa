@@ -54,7 +54,7 @@ export default ({navigation}) => {
         navigation.navigate('Customize');
         return;
       }
-      case 7: {
+      case 6: {
         navigation.toggleDrawer();
         navigation.navigate('About');
         return;
