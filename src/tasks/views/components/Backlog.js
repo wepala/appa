@@ -71,7 +71,7 @@ export default ({
       renderItem={renderItem}
     />
   ) : (
-    <Layout style={styles.placeholder}>
+    <Layout testID={'Placeholder'} style={styles.placeholder}>
       <Image
         style={styles.image}
         source={{
