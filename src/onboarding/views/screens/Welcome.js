@@ -23,7 +23,9 @@ export default ({navigation, onComplete}) => {
             Appa
           </Text>
         </Layout>
-        <Button style={styles.button} onPress={() => onComplete()}>
+        <Button
+          style={styles.button}
+          onPress={() => navigation.navigate('Connect')}>
           Continue
         </Button>
       </ImageBackground>

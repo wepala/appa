@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, ImageBackground} from 'react-native';
+import {SafeAreaView, ImageBackground, Linking} from 'react-native';
 
 import {
   Button,
@@ -10,8 +10,13 @@ import {
 } from '@ui-kitten/components';
 import background from '../../../../assets/images/brand/connect.png';
 
-export default ({navigation}) => {
+export default ({navigation, authorizeURL}) => {
   const styles = useStyleSheet(themedStyles);
+
+  const handleWeosConnect = () => {
+    Linking.openURL(authorizeURL());
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground source={background} style={styles.image}>
@@ -19,7 +24,12 @@ export default ({navigation}) => {
           <Text style={styles.text} category="h2">
             Create Account
           </Text>
-          <Button style={styles.buttonConnect}>WeOS Connect</Button>
+          <Button
+            style={styles.buttonConnect}
+            testID="WeOsConnectBtn"
+            onPress={handleWeosConnect}>
+            WeOS Connect
+          </Button>
           <Text style={styles.text} category="s1">
             You can connect to WeOS our platform to make it easier to share
             information between devices. You can learn more about WeOS here.

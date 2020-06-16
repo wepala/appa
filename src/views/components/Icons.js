@@ -53,6 +53,7 @@ export const InfoIcon = (style) => <Icon {...style} name="info-outline" />;
 export const LayoutIcon = (style) => <Icon {...style} name="layout-outline" />;
 
 export const ListIcon = (style) => <Icon {...style} name="list" />;
+export const LoginIcon = (style) => <Icon {...style} name="log-in-outline" />;
 
 export const MenuIcon = (style) => <Icon {...style} name="menu" />;
 export const MessageIcon = (style) => (
