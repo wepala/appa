@@ -9,6 +9,6 @@ describe('onboarding controller', function () {
     controller.dispatch = dispatch;
     controller.state = state;
     controller.onComplete();
-    expect(dispatch).toBeCalledWith(onBoardUser());
+    expect(dispatch).toBeCalledWith(onBoardUser(true));
   });
 });
