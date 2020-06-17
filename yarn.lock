@@ -2240,6 +2240,9 @@ aws4@^1.8.0:
   integrity sha512-wMHVg2EOHaMRxbzgFJ9gtjOOCrI80OHLG14rxi28XwOW8ux6IiEbRCGGGqCtdAIg4FQCbW20k9RsT4y3gJlFug==
 
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> dev
 axios@^0.19.2:
   version "0.19.2"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
@@ -2247,7 +2250,10 @@ axios@^0.19.2:
   dependencies:
     follow-redirects "1.5.10"
 
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> dev
 >>>>>>> dev
 babel-eslint@10.1.0:
   version "10.1.0"
