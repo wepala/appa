@@ -93,9 +93,9 @@ const exchangeAuthCode = async (code, state) => {
   return response.data;
 };
 
-const createAccountURL = () => {
+const createAccountURL = (createAccount) => {
   const {AUTHORIZE_URL} = config.vars;
-  return `${AUTHORIZE_URL}/create-account?accept_login=true`;
+  return `${AUTHORIZE_URL}/create-account?accept_login=${createAccount}`;
 };
 
 const pkce = {

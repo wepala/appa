@@ -54,14 +54,11 @@ export default ({navigation, authorizeURL, setToken, getToken}) => {
       [
         {
           text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
+          onPress: () => Linking.openURL(PKCE.createAccountURL(false)),
         },
         {
           text: 'Confirm',
-          onPress: () => {
-            Linking.openURL(PKCE.createAccountURL());
-          },
+          onPress: () => Linking.openURL(PKCE.createAccountURL(true)),
         },
       ],
       {cancelable: false},
