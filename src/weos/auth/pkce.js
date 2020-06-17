@@ -93,10 +93,16 @@ const exchangeAuthCode = async (code, state) => {
   return response.data;
 };
 
+const createAccountURL = () => {
+  const {AUTHORIZE_URL} = config.vars;
+  return `${AUTHORIZE_URL}/create-account?accept_login=true`;
+};
+
 const pkce = {
   config,
   authorizeURL,
   exchangeAuthCode,
+  createAccountURL,
 };
 
 export default pkce;
