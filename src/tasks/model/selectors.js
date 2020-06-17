@@ -1,7 +1,12 @@
 import {createSelector} from 'reselect';
 import moment from 'moment';
+import CurrentTask from '../views/components/CurrentTask';
+
 export const tasksSelector = (state) => {
   return Object.values(state.tasks.getById);
+};
+export const currentTaskSelector = (state) => {
+  return state.tasks.currentTask;
 };
 /**
  * Get tasks by date
@@ -32,4 +37,15 @@ export const getIncompleteTasks = createSelector([tasksSelector], (tasks) =>
       }
       return 0;
     }),
+);
+
+export const getCurrentTask = createSelector(
+  [tasksSelector, currentTaskSelector],
+  (tasks, currentTask) => {
+    console.log('CURR TASK\n', currentTask);
+    let currentTaskIndex = tasks.findIndex((task) => {
+      return task.id === currentTask.id;
+    });
+    return tasks[currentTaskIndex];
+  },
 );
