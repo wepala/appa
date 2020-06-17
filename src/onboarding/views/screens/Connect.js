@@ -9,15 +9,30 @@ import {
 } from '@ui-kitten/components';
 import URL from 'url-parse';
 import background from '../../../../assets/images/brand/connect.png';
-import AsyncStorage from '@react-native-community/async-storage';
-import {CLIENT_ID, REDIRECT_URI} from 'react-native-dotenv';
-import {fetchToken} from '../../../weos/auth/api';
+import PKCE from '../../../weos/auth/pkce';
+import {
+  CLIENT_ID,
+  AUTHORIZE_URL,
+  REDIRECT_URI,
+  RESPONSE_TYPE,
+  SCOPE,
+  CODE_CHALLENGE_METHOD,
+} from 'react-native-dotenv';
 
-export default ({navigation, authorizeURL, setToken}) => {
+export default ({navigation, authorizeURL, setToken, getToken}) => {
   const styles = useStyleSheet(themedStyles);
 
+  PKCE.config.setVars({
+    CLIENT_ID,
+    AUTHORIZE_URL,
+    REDIRECT_URI,
+    RESPONSE_TYPE,
+    SCOPE,
+    CODE_CHALLENGE_METHOD,
+  });
+
   const handleWeosConnect = () => {
-    Linking.openURL(authorizeURL());
+    Linking.openURL(PKCE.authorizeURL());
   };
 
   useEffect(() => {
@@ -35,36 +50,13 @@ export default ({navigation, authorizeURL, setToken}) => {
     const url = new URL(urlString.url, true);
     const {code, state} = url.query;
 
-    if (!code) {
-      console.log('Code is missing');
-      return;
-    }
-
-    Promise.all([
-      AsyncStorage.getItem('verifier'),
-      AsyncStorage.getItem('state'),
-    ]).then(async ([appVerifier, appState]) => {
-      await AsyncStorage.removeItem('verifier');
-      await AsyncStorage.removeItem('state');
-
-      if (appState !== state) {
-        console.log(
-          `State mismatch, didn't carry out token request, ${appState}, ${state}`,
-        );
-        return;
-      }
-
-      const payload = {code, appVerifier, CLIENT_ID, REDIRECT_URI};
-
-      try {
-        const response = await fetchToken(payload);
-        setToken(response.token).then(() => {
-          navigation.navigate('Complete');
-        });
-      } catch (error) {
-        console.log('An error occured', error);
-      }
-    });
+    PKCE.exchangeAuthCode(code, state)
+      .then((authToken) => {
+        setToken(authToken).then(() => navigation.navigate('Complete'));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
