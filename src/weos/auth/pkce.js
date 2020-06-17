@@ -97,7 +97,7 @@ const createAccountURL = (createAccount) => {
   return `${AUTHORIZE_URL}/create-account?accept_login=${createAccount}`;
 };
 
-const logout = ({id_token}) => {
+const logoutURL = (id_token) => {
   const {AUTHORIZE_URL} = config.vars;
   return `${AUTHORIZE_URL}/oauth2/sessions/logout?id_token_hint=${id_token}`;
 };
@@ -107,7 +107,7 @@ const pkce = {
   authorizeURL,
   exchangeAuthCode,
   createAccountURL,
-  logout,
+  logoutURL,
 };
 
 export default pkce;

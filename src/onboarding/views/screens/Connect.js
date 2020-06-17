@@ -40,7 +40,7 @@ export default ({navigation, authorizeURL, setToken, getToken}) => {
     Linking.addEventListener('url', handleOpenUrl);
     Linking.getInitialURL().then((url) => {
       if (url) {
-        this.handleOpenUrl(url);
+        handleOpenUrl(url);
       }
     });
 

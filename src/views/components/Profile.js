@@ -14,7 +14,7 @@ import {ArrowDownIcon, SyncIcon, LogoutIcon} from './Icons';
 import PKCE from '../../weos/auth/pkce';
 import {AUTHORIZE_URL} from 'react-native-dotenv';
 
-export default ({navigation, account, token, logout}) => {
+export default ({account, token, logout}) => {
   const styles = useStyleSheet(themedStyles);
   const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
 
@@ -22,30 +22,19 @@ export default ({navigation, account, token, logout}) => {
     AUTHORIZE_URL,
   });
 
-  const logoutHandler = () => {
-    logout()
-      .then(() => {
-        navigation.navigate('Welcome');
-      })
-      .catch((error) => {
-        console.log('An error occured, try again');
-      });
-  };
-
   useEffect(() => {
-    Linking.addEventListener('url', logoutHandler);
+    Linking.addEventListener('url', logout);
     Linking.getInitialURL().then((url) => {
       if (url) {
-        this.logoutHandler(url);
+        logout();
       }
     });
 
-    return () => Linking.removeEventListener('url', logoutHandler);
+    return () => Linking.removeEventListener('url', logout);
   });
 
   const openLogout = () => {
-    console.log(PKCE.logout(token));
-    Linking.openURL(PKCE.logout(token));
+    Linking.openURL(PKCE.logoutURL(token.id_token));
   };
 
   return (

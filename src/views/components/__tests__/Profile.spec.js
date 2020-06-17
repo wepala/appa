@@ -9,10 +9,7 @@ import PKCE from '../../../weos/auth/pkce';
 
 describe('Profie', () => {
   it('should render the profile component correctly', () => {
-    const navigation = {
-      isFocused: jest.fn(),
-    };
-    PKCE.logout = jest.fn();
+    PKCE.logoutURL = jest.fn();
     const logout = jest.fn();
     const account = {emails: ['example@gmail.com', 'joe.doe@gmail.com']};
 
@@ -25,7 +22,11 @@ describe('Profie', () => {
             ...eva.light,
             ...theme,
           }}>
-          <Profie account={account} navigation={navigation} logout={logout} />
+          <Profie
+            account={account}
+            token={{id_token: 'token'}}
+            logout={logout}
+          />
         </ApplicationProvider>
       </>,
     );
@@ -38,6 +39,6 @@ describe('Profie', () => {
     act(() => {
       fireEvent.press(LogoutButton[0]);
     });
-    expect(PKCE.logout).toHaveBeenCalled();
+    expect(PKCE.logoutURL).toHaveBeenCalled();
   });
 });

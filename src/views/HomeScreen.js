@@ -31,11 +31,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onShowConnect: () => {},
     logout: () => {
-      return new Promise((resolve) => {
-        dispatch(setToken(null));
-        dispatch(onBoardUser(false));
-        resolve();
-      });
+      dispatch(setToken(null));
+      dispatch(onBoardUser(false));
     },
   };
 };
