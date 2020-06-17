@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import {ThemeContext} from '../../../../theme.context';
 import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -7,30 +7,25 @@ import {
   Layout,
   StyleService,
   Input,
-  Select,
-  SelectItem,
   useStyleSheet,
   Text,
   Modal,
   Card,
-  IndexPath,
 } from '@ui-kitten/components';
-import {ArrowDownIcon} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
 import {useForm} from '../../../weosHelpers';
 
 export default ({navigation, route, status, makeRequest}) => {
   const themeContext = useContext(ThemeContext);
-
-  const reasons = ['Bug', 'Feature'];
+  const styles = useStyleSheet(themedStyles);
 
   const [form, setForm] = useForm({
     name: '',
     email: '',
-    reason: new IndexPath(0),
     details: '',
+    reason: 'temp',
   });
-  const styles = useStyleSheet(themedStyles);
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.container}>
@@ -68,21 +63,6 @@ export default ({navigation, route, status, makeRequest}) => {
                     setForm(val.trimLeft(), 'email');
                   }}
                 />
-                <Select
-                  style={[styles.select, styles.paddingBottom]}
-                  size="large"
-                  placeholder="Select reason"
-                  accessoryRight={ArrowDownIcon}
-                  value={reasons[form.reason.row]}
-                  selectedIndex={form.reason}
-                  onSelect={(index) => {
-                    console.log(index);
-                    setForm(index, 'reason');
-                  }}>
-                  {reasons.map((reason, index) => (
-                    <SelectItem key={index + ''} title={reason} />
-                  ))}
-                </Select>
                 <Input
                   style={styles.paddingBottom}
                   size="large"
@@ -105,31 +85,30 @@ export default ({navigation, route, status, makeRequest}) => {
                   onPress={() => {
                     let data = {
                       ...form,
-                      reason: reasons[form.reason.row],
                     };
-                    console.log('Sending', data);
                     makeRequest(data);
                   }}>
                   {status === 'pending' ? 'SENDING...' : 'SEND REQUEST'}
                 </Button>
+                <Layout />
               </Layout>
-              <Modal
-                visible={status !== 'init'}
-                style={styles.container}
-                backdropStyle={styles.backdrop}>
-                {status === 'error' ? (
-                  <Card disabled={true}>
-                    <Text category="h3">Failed to Send</Text>
-                    <Button onPress={() => navigation.goBack()}>DISMISS</Button>
-                  </Card>
-                ) : status === 'success' ? (
-                  <Card disabled={true}>
-                    <Text category="h3">Request Sent!</Text>
-                    <Button onPress={() => navigation.goBack()}>DISMISS</Button>
-                  </Card>
-                ) : null}
-              </Modal>
             </Layout>
+            <Modal
+              visible={status !== 'init'}
+              style={styles.container}
+              backdropStyle={styles.backdrop}>
+              {status === 'error' ? (
+                <Card disabled={true}>
+                  <Text category="h3">Failed to Send</Text>
+                  <Button onPress={() => navigation.goBack()}>DISMISS</Button>
+                </Card>
+              ) : status === 'success' ? (
+                <Card disabled={true}>
+                  <Text category="h3">Request Sent!</Text>
+                  <Button onPress={() => navigation.goBack()}>DISMISS</Button>
+                </Card>
+              ) : null}
+            </Modal>
           </ScrollView>
         </LinearGradient>
       </KeyboardAvoidingView>
