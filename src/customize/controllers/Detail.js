@@ -8,7 +8,7 @@ import {useState} from 'react';
 const Detail = (props) => {
   const [status, setStatus] = useState('init');
   const makeRequest = (form) => {
-    console.log(SUPPORT_URL, '\n', SENDER, '\n', DESTINATION, '\n', form);
+    console.log(form);
     setStatus('pending');
     axios({
       method: 'post',
@@ -22,11 +22,10 @@ const Detail = (props) => {
       },
     })
       .then((res) => {
-        console.log('Success!!', res.data);
         setStatus('success');
       })
       .catch((error) => {
-        console.log('Error!!', error);
+        console.log(error);
         setStatus('error');
       });
   };
