@@ -20,7 +20,7 @@ export default class DetailController extends Controller {
     if (id) {
       const log = this.state.logs.getById.get(id);
 
-      if (log.taskId) {
+      if (log && log.taskId) {
         task = this.state.tasks.getById[log.taskId];
       }
 
@@ -28,7 +28,7 @@ export default class DetailController extends Controller {
     }
 
     return {
-      id: '',
+      id: null,
       startTime: moment().toDate(),
       task: task,
     };
