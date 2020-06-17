@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Button,
   StyleService,
@@ -8,11 +8,45 @@ import {
   IndexPath,
   Layout,
 } from '@ui-kitten/components';
-import {ArrowDownIcon, SyncIcon, LogoutIcon} from './Icons';
+import {Linking} from 'react-native';
 
-export default ({account}) => {
+import {ArrowDownIcon, SyncIcon, LogoutIcon} from './Icons';
+import PKCE from '../../weos/auth/pkce';
+import {AUTHORIZE_URL} from 'react-native-dotenv';
+
+export default ({navigation, account, token, logout}) => {
   const styles = useStyleSheet(themedStyles);
   const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
+
+  PKCE.config.setVars({
+    AUTHORIZE_URL,
+  });
+
+  const logoutHandler = () => {
+    logout()
+      .then(() => {
+        navigation.navigate('Welcome');
+      })
+      .catch((error) => {
+        console.log('An error occured, try again');
+      });
+  };
+
+  useEffect(() => {
+    Linking.addEventListener('url', logoutHandler);
+    Linking.getInitialURL().then((url) => {
+      if (url) {
+        this.logoutHandler(url);
+      }
+    });
+
+    return () => Linking.removeEventListener('url', logoutHandler);
+  });
+
+  const openLogout = () => {
+    console.log(PKCE.logout(token));
+    Linking.openURL(PKCE.logout(token));
+  };
 
   return (
     <Layout style={styles.row}>
@@ -43,6 +77,7 @@ export default ({account}) => {
           appearance="ghost"
           style={styles.button}
           accessoryLeft={LogoutIcon}
+          onPress={openLogout}
         />
       </Layout>
     </Layout>

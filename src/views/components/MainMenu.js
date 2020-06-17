@@ -23,7 +23,7 @@ import {
 } from './Icons';
 import Profile from './Profile';
 
-export default ({navigation}) => {
+export default ({navigation, token, logout}) => {
   const styles = useStyleSheet(themedStyles);
   const onItemSelect = (index) => {
     switch (index.row) {
@@ -75,13 +75,17 @@ export default ({navigation}) => {
         </Text>
       </View>
 
-      <View style={styles.profile}>
-        <Profile
-          account={{
-            emails: ['example@gmail.com', 'joe.doe@gmail.com'],
-          }}
-        />
-      </View>
+      {token && (
+        <View style={styles.profile}>
+          <Profile
+            account={{
+              emails: ['example@gmail.com', 'joe.doe@gmail.com'],
+            }}
+            token={token}
+            logout={logout}
+          />
+        </View>
+      )}
     </Layout>
   );
 
