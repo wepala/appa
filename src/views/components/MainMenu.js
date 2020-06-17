@@ -21,6 +21,7 @@ import {
   SettingsIcon,
   SupportIcon,
 } from './Icons';
+import Profile from './Profile';
 
 export default ({navigation}) => {
   const styles = useStyleSheet(themedStyles);
@@ -73,6 +74,14 @@ export default ({navigation}) => {
           Appa Does
         </Text>
       </View>
+
+      <View style={styles.profile}>
+        <Profile
+          account={{
+            emails: ['example@gmail.com', 'joe.doe@gmail.com'],
+          }}
+        />
+      </View>
     </Layout>
   );
 
@@ -106,7 +115,7 @@ const themedStyles = StyleService.create({
     flex: 1,
   },
   header: {
-    paddingVertical: 32,
+    paddingVertical: 22,
     paddingHorizontal: 16,
     justifyContent: 'center',
     // backgroundColor: '$color-primary-500',
@@ -118,5 +127,8 @@ const themedStyles = StyleService.create({
   profileName: {
     // color: '#fff',
     marginHorizontal: 16,
+  },
+  profile: {
+    marginTop: 20,
   },
 });
