@@ -66,11 +66,7 @@ export default ({navigation}) => {
   const renderHeader = () => (
     <Layout style={styles.header} level="2">
       <View style={styles.profileContainer}>
-        <Avatar
-          size="giant"
-          shape="rounded"
-          source={logo}
-        />
+        <Avatar size="giant" shape="rounded" source={logo} />
         <Text style={styles.profileName} category="h6">
           Appa Does
         </Text>

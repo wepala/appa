@@ -79,10 +79,7 @@ export default ({
     />
   ) : (
     <Layout testID={'Placeholder'} style={styles.placeholder}>
-      <Image
-        style={styles.image}
-        source={logo}
-      />
+      <Image style={styles.image} source={logo} />
       <Layout>
         <Text style={styles.title} category="h3" appearance="hint">
           {placeholder.title}
