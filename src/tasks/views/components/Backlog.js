@@ -10,6 +10,7 @@ import {
 } from '@ui-kitten/components';
 import BacklogItem from './BacklogItem';
 import {SectionContext} from '../../context/section-context';
+import logo from '../../../../assets/images/brand/logo.png';
 
 const messages = [
   {
@@ -72,12 +73,7 @@ export default ({
     />
   ) : (
     <Layout testID={'Placeholder'} style={styles.placeholder}>
-      <Image
-        style={styles.image}
-        source={{
-          uri: 'https://cdn.roadmap.space/logos/5ed5164b31d74e9553c4f5eb.png',
-        }}
-      />
+      <Image style={styles.image} source={logo} />
       <Layout>
         <Text style={styles.title} category="h3" appearance="hint">
           {placeholder.title}
