@@ -53,6 +53,8 @@ Copy the contents of the [.env-dist](.env-dist) file into the `.env` and fill ou
       DESTINATION = XXXXXXXX@XXXXX
   ```
 These .env can be set as [secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) for your github workflow 
+
+for an indepth look at each environment variable check out our [environment Guide](ENV.md)
  
 ## Running the tests
 
