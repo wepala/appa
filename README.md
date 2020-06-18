@@ -2,40 +2,37 @@
 
 ![Test and Build Android & iOS](https://github.com/wepala/weagenda/workflows/Test%20and%20Build%20Android%20&%20iOS/badge.svg)
 
-WeAgenda is a task management application
+WeAgenda is a simple customizable time tracking application that helps you manage your daily tasks in order to Increase  productivity through planning, scheduling and time tracking.
+
+# Powered By WEOS
+weos is 
+find out more at [weos](https://wepala.com)
+
+# Whats New!
+  - You can now request help from the Wepala team to customise the app for your own personal needs
+  - You can now get more info about the app/weos within the Weagenda about page
+
+# Development
 
 ## Getting Started
-
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-Before running the project, you will first need to set up some environment variables.
-Create a new file in the `root` of the project called `.env`
-Copy the contents of the `.env-dist` file into the `.env` and fill out the blanks
-
-- `SUPPORT_URL` is the email service endpoint
-
-```
-// Your .env should resemble this
-
-SUPPORT_URL = https://XXXXXXXXXXXXXX
-SENDER = XXXXXXXX@XXXXX
-DESTINATION = XXXXXXXX@XXXXX
-```
 
 ### Prerequisites
 
-1. Node
-1. NPM
-1. Android SDK (if compiling Android App)
-1. XCode (if compiling iOS app)
-
+1. [Node](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions-enterprise-linux-fedora-and-snap-packages)
+ 
 Mac
-
-1. You can use homebrew to install Node
-
+- use homebrew to install Node
 ```
 brew install nodejs
 ```
+Windows 
+- Download the [Windows Installer](https://nodejs.org/en/#home-downloadhead) directly from the [nodejs](nodejs.org) web site.
+
+2. [NPM](https://www.npmjs.com/get-npm)
+3. [Android SDK (if compiling Android App)](https://developer.android.com/studio)
+4. [XCode (if compiling iOS app)](https://developer.apple.com/xcode/)
+
 
 ### Installing
 
@@ -45,12 +42,28 @@ Clone the repository
 Give the example
 ```
 
+
 Install the dependencies
 
 ```
 npm install
 ```
 
+Before running the project, you will first need to set up some environment variables.
+Create a new file in the `root` of the project called `.env`
+Copy the contents of the `.env-dist` file into the `.env` and fill out the blanks
+
+- `SUPPORT_URL` is the email service endpoint
+```
+// Your .env should resemble this
+
+SUPPORT_URL = https://XXXXXXXXXXXXXX
+SENDER = XXXXXXXX@XXXXX
+DESTINATION = XXXXXXXX@XXXXX
+```
+ 
+ 
+ 
 ## Running the tests
 
 To run all the tests
@@ -95,7 +108,7 @@ For iOS, we currently need a developer team added to the project to create an IP
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read our [Contribution guidelines for this project](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
