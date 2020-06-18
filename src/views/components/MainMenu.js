@@ -21,6 +21,7 @@ import {
   SettingsIcon,
   SupportIcon,
 } from './Icons';
+import logo from '../../../assets/images/brand/logo.png';
 
 export default ({navigation}) => {
   const styles = useStyleSheet(themedStyles);
@@ -62,13 +63,7 @@ export default ({navigation}) => {
   const renderHeader = () => (
     <Layout style={styles.header} level="2">
       <View style={styles.profileContainer}>
-        <Avatar
-          size="giant"
-          shape="rounded"
-          source={{
-            uri: 'https://cdn.roadmap.space/logos/5ed5164b31d74e9553c4f5eb.png',
-          }}
-        />
+        <Avatar size="giant" shape="rounded" source={logo} />
         <Text style={styles.profileName} category="h6">
           Appa Does
         </Text>
