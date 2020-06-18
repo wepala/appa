@@ -86,4 +86,15 @@ describe('Auth PKCE', () => {
       "State didn't match",
     );
   });
+
+  it('should provide a method that generates a logout URL', async () => {
+    expect(PKCE.logoutURL).toBeDefined();
+    PKCE.config.setVars({
+      AUTHORIZE_URL: 'http://localhost/oauth2',
+    });
+
+    let url = PKCE.logoutURL('token');
+    expect(url).toMatch('http://localhost/oauth2');
+    expect(url).toMatch('id_token_hint=token');
+  });
 });

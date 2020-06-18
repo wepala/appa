@@ -302,3 +302,7 @@ export const AssetTopNavigationDarkIcon = (style) => (
 );
 
 export const PlusIcon = (style) => <Icon {...style} name="plus" />;
+
+export const LogoutIcon = (style) => <Icon {...style} name="power-outline" />;
+
+export const SyncIcon = (style) => <Icon {...style} name="sync-outline" />;
