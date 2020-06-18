@@ -4,14 +4,14 @@ import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
 import {default as theme} from '../../../../theme.json';
-import Profie from '../Profile';
+import Profile from '../Profile';
 import PKCE from '../../../weos/auth/pkce';
 
-describe('Profie', () => {
+describe('Profile', () => {
   it('should render the profile component correctly', () => {
     PKCE.logoutURL = jest.fn();
     const logout = jest.fn();
-    const user = {sub: {emails: 'example@gmail.com'}};
+    const user = {sub: {email: 'example@gmail.com'}};
 
     const {getAllByTestId} = render(
       <>
@@ -22,7 +22,7 @@ describe('Profie', () => {
             ...eva.light,
             ...theme,
           }}>
-          <Profie user={user} token={{id_token: 'token'}} logout={logout} />
+          <Profile user={user} token={{id_token: 'token'}} logout={logout} />
         </ApplicationProvider>
       </>,
     );
