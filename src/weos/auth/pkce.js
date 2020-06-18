@@ -102,12 +102,25 @@ const logoutURL = (id_token) => {
   return `${AUTHORIZE_URL}/oauth2/sessions/logout?id_token_hint=${id_token}`;
 };
 
+const getUserInfo = async ({access_token, token_type}) => {
+  const {AUTHORIZE_URL} = config.vars;
+  const configs = {
+    method: 'get',
+    url: `${AUTHORIZE_URL}/userinfo`,
+    headers: {AUTHORIZATION: `${token_type} ${access_token}`},
+  };
+
+  const response = await axios(configs);
+  return response.data;
+};
+
 const pkce = {
   config,
   authorizeURL,
   exchangeAuthCode,
   createAccountURL,
   logoutURL,
+  getUserInfo,
 };
 
 export default pkce;

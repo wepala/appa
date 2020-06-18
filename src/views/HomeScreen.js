@@ -15,7 +15,7 @@ import Settings from '../settings/views/screens/Main';
 import About from '../about/views/screens/Main';
 import Support from '../support/views/screens/Support';
 import Customize from '../customize/views/screens/Main';
-import {setToken} from '../weos/auth/model/commands';
+import {setToken, setUser} from '../weos/auth/model/commands';
 import {onBoardUser} from '../onboarding/model/commands';
 
 const {Navigator, Screen} = createDrawerNavigator();
@@ -24,6 +24,7 @@ const mapStateToProps = (state) => {
   return {
     onBoarded: state.onboard.onBoarded,
     token: state.token,
+    user: state.user,
   };
 };
 
@@ -32,18 +33,33 @@ const mapDispatchToProps = (dispatch) => {
     onShowConnect: () => {},
     logout: () => {
       dispatch(setToken(null));
+      dispatch(setUser(null));
       dispatch(onBoardUser(false));
     },
+    setUserInfo: (userInfo) => dispatch(setUser(userInfo)),
   };
 };
 
-const HomeScreen = ({navigation, onBoarded, token, logout}) => {
+const HomeScreen = ({
+  navigation,
+  onBoarded,
+  token,
+  logout,
+  user,
+  setUserInfo,
+}) => {
   const MainStackScreen = () => {
     return (
       <Navigator
         screenOptions={{gestureEnabled: true}}
         drawerContent={(props) => (
-          <MainMenu {...props} token={token} logout={logout} />
+          <MainMenu
+            {...props}
+            token={token}
+            logout={logout}
+            user={user}
+            setUserInfo={setUserInfo}
+          />
         )}>
         <Screen name="Agenda" component={Tasks} />
         <Screen name="Logs" component={Logs} />
