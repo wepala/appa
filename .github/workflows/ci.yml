@@ -50,11 +50,12 @@ jobs:
         run: |
           npm run bundle-android
           cd android && ./gradlew clean assembleDebug
-      - name: Upload debug APK
-        uses: actions/upload-artifact@v2
+      - name: Upload debug APK to slack step
+        uses: adrey/slack-file-upload-action@master
         with:
-          name: app-debug.apk
-          path: android/app/build/outputs/apk/debug/
+          token: ${{ secrets.SLACK_TOKEN }}
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          channel: weagenda
       - name: Send failure notification
         uses: rtCamp/action-slack-notify@v2.0.0
         if: failure()
