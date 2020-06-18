@@ -111,16 +111,21 @@ export const getIncompletedTaskTimeSpentByDate = createSelector(
         const filteredTimes = times.filter(
           (time, index) => logs.get(values[index])?.taskId === task.id,
         );
-        return filteredTimes.length > 0
-          ? filteredTimes
-              .map((time) => {
-                const endTime = times[times.indexOf(time) + 1];
-                return endTime !== undefined
-                  ? moment(endTime).diff(time, 'seconds')
-                  : 0;
-              })
-              .reduce((totalTime, time) => totalTime + time)
-          : 0;
+        let totalTimeSpent =
+          filteredTimes.length > 0
+            ? filteredTimes
+                .map((time) => {
+                  const endTime = times[times.indexOf(time) + 1];
+                  return endTime !== undefined
+                    ? moment(endTime).diff(time, 'seconds')
+                    : 0;
+                })
+                .reduce((totalTime, time) => totalTime + time)
+            : 0;
+        return {
+          taskId: task.id,
+          totalTimeSpent,
+        };
       });
   },
 );

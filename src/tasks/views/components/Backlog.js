@@ -50,7 +50,7 @@ export default ({
       context.setSection('backlog');
     }
   });
-
+  console.log('Time TOTALS', timeTotals, '\n', items);
   //method to render each item in the list
   const renderItem = ({index, item}) => (
     <BacklogItem
@@ -60,7 +60,12 @@ export default ({
       addToAgenda={addToAgenda}
       navigation={navigation}
       onComplete={setTaskCompletion}
-      timeSpentToday={timeTotals[index]}
+      timeSpentToday={
+        timeTotals.findIndex((obj) => obj.taskId === item.id) > -1
+          ? timeTotals[timeTotals.findIndex((obj) => obj.taskId === item.id)]
+              .totalTimeSpent
+          : null
+      }
     />
   );
 

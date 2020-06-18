@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Layout, List, StyleService, useStyleSheet} from '@ui-kitten/components';
 import LogItem from '../components/LogItem';
 import LogFilter from '../components/LogsFilter';
@@ -24,6 +24,10 @@ export default ({
   );
 
   let [logs, setLogs] = useState(items);
+
+  useEffect(() => {
+    setLogs(items);
+  }, [items]);
 
   const onSetFilters = (startTime, endTime, taskId) => {
     setLogs(setFilters(startTime, endTime, taskId));
