@@ -55,6 +55,8 @@ jobs:
         with:
           token: ${{ secrets.SLACK_TOKEN }}
           path: android/app/build/outputs/apk/debug/app-debug.apk
+          title: Appa Debug APK
+          initial_comment: A new build for Appa for $(echo ${GITHUB_REF#refs/heads/})
           channel: weagenda
       - name: Send failure notification
         uses: rtCamp/action-slack-notify@v2.0.0
