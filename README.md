@@ -20,14 +20,11 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 1. [Node](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions-enterprise-linux-fedora-and-snap-packages)
- 
-Mac
-- use homebrew to install Node
-```
-brew install nodejs
-```
-Windows 
-- Download the [Windows Installer](https://nodejs.org/en/#home-downloadhead) directly from the [nodejs](nodejs.org) web site.
+   - Mac
+     - use [homebrew](https://brew.sh) to install Node
+     ```brew install nodejs```
+   - Windows 
+     - Download the [Windows Installer](https://nodejs.org/en/#home-downloadhead) directly from the [nodejs](nodejs.org) web site.
 
 2. [NPM](https://www.npmjs.com/get-npm)
 3. [Android SDK (if compiling Android App)](https://developer.android.com/studio)
@@ -36,22 +33,19 @@ Windows
 
 ### Installing
 
-Clone the repository
-
+- Clone the repository to your local. 
 ```
-Give the example
+git clone https://github.com/wepala/weagenda.git
 ```
 
-
-Install the dependencies
-
+- Install the dependencies
 ```
 npm install
 ```
 
 Before running the project, you will first need to set up some environment variables.
 Create a new file in the `root` of the project called `.env`
-Copy the contents of the `.env-dist` file into the `.env` and fill out the blanks
+Copy the contents of the [.env-dist](.env-dist) file into the `.env` and fill out the blanks
 
 - `SUPPORT_URL` is the email service endpoint
 ```
