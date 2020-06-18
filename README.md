@@ -5,8 +5,7 @@
 WeAgenda is a simple customizable time tracking application that helps you manage your daily tasks in order to Increase  productivity through planning, scheduling and time tracking.
 
 # Powered By WEOS
-weos is 
-find out more at [weos](https://wepala.com)
+Find out more at [weos](https://wepala.com)
 
 # Whats New!
   - You can now request help from the Wepala team to customise the app for your own personal needs
@@ -21,7 +20,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 1. [Node](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions-enterprise-linux-fedora-and-snap-packages)
    - Mac
-     - use [homebrew](https://brew.sh) to install Node
+     - Use [Homebrew](https://brew.sh) to install Node
      ```brew install nodejs```
    - Windows 
      - Download the [Windows Installer](https://nodejs.org/en/#home-downloadhead) directly from the [nodejs](nodejs.org) web site.
@@ -34,53 +33,35 @@ These instructions will get you a copy of the project up and running on your loc
 ### Installing
 
 - Clone the repository to your local. 
-```
-git clone https://github.com/wepala/weagenda.git
-```
-
+  ```
+  git clone https://github.com/wepala/weagenda.git
+  ```
 - Install the dependencies
-```
-npm install
-```
+  ```
+  npm install
+  ```
 
 Before running the project, you will first need to set up some environment variables.
 Create a new file in the `root` of the project called `.env`
 Copy the contents of the [.env-dist](.env-dist) file into the `.env` and fill out the blanks
 
-- `SUPPORT_URL` is the email service endpoint
-```
-// Your .env should resemble this
+  - Your .env should resemble this:
 
-SUPPORT_URL = https://XXXXXXXXXXXXXX
-SENDER = XXXXXXXX@XXXXX
-DESTINATION = XXXXXXXX@XXXXX
-```
- 
- 
+  ``` 
+      SUPPORT_URL = https://XXXXXXXXXXXXXX
+      SENDER = XXXXXXXX@XXXXX
+      DESTINATION = XXXXXXXX@XXXXX
+  ```
+These .env can be set as [secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) for your github workflow 
  
 ## Running the tests
 
-To run all the tests
+- To run all the tests
+  ```
+    npm test
+  ```
 
-```
-npm test
-```
 
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
 
 ## Deployment
 
@@ -108,15 +89,27 @@ Please read our [Contribution guidelines for this project](CONTRIBUTING.md) for 
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/wepala/weagenda/tags).
 
+## Linting 
+
+We use [eslint](https://eslint.org) for parsing our ECMAScript/JavaScript code, in order to make our code more consistent and prevent bugs. 
+
+## License
+
+This project is licensed under the AGPL License - see the [LICENSE.md](LICENSE.md) file for details
+
+
+
+
+
+
+
+
+
 ## Authors
 
 - **Akeem Philbert** - _Initial work_ - [Akeem Philbert](https://github.com/AkeemPhilbert)
 
 See also the list of [contributors](https://github.com/wepala/weagenda/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the AGPL License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
