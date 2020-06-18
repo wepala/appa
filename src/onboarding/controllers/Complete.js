@@ -9,6 +9,6 @@ export default class OnboardingCompleteController extends Controller {
    * Finish the onboarding process
    */
   onComplete() {
-    this.dispatch(onBoardUser());
+    this.dispatch(onBoardUser(true));
   }
 }

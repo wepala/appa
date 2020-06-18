@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Button,
   StyleService,
@@ -8,11 +8,34 @@ import {
   IndexPath,
   Layout,
 } from '@ui-kitten/components';
-import {ArrowDownIcon, SyncIcon, LogoutIcon} from './Icons';
+import {Linking} from 'react-native';
 
-export default ({account}) => {
+import {ArrowDownIcon, SyncIcon, LogoutIcon} from './Icons';
+import PKCE from '../../weos/auth/pkce';
+import {AUTHORIZE_URL} from 'react-native-dotenv';
+
+export default ({account, token, logout}) => {
   const styles = useStyleSheet(themedStyles);
   const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
+
+  PKCE.config.setVars({
+    AUTHORIZE_URL,
+  });
+
+  useEffect(() => {
+    Linking.addEventListener('url', logout);
+    Linking.getInitialURL().then((url) => {
+      if (url) {
+        logout(url);
+      }
+    });
+
+    return () => Linking.removeEventListener('url', logout);
+  });
+
+  const openLogout = () => {
+    Linking.openURL(PKCE.logoutURL(token.id_token));
+  };
 
   return (
     <Layout style={styles.row}>
@@ -43,6 +66,7 @@ export default ({account}) => {
           appearance="ghost"
           style={styles.button}
           accessoryLeft={LogoutIcon}
+          onPress={openLogout}
         />
       </Layout>
     </Layout>

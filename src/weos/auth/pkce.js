@@ -89,7 +89,6 @@ const exchangeAuthCode = async (code, state) => {
     data: qs.stringify(form),
   };
   const response = await axios(configs);
-
   return response.data;
 };
 
@@ -98,11 +97,17 @@ const createAccountURL = (createAccount) => {
   return `${AUTHORIZE_URL}/create-account?accept_login=${createAccount}`;
 };
 
+const logoutURL = (id_token) => {
+  const {AUTHORIZE_URL} = config.vars;
+  return `${AUTHORIZE_URL}/oauth2/sessions/logout?id_token_hint=${id_token}`;
+};
+
 const pkce = {
   config,
   authorizeURL,
   exchangeAuthCode,
   createAccountURL,
+  logoutURL,
 };
 
 export default pkce;
