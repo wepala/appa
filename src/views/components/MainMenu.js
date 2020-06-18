@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../../../assets/images/brand/appaIcon.png';
 import {StyleSheet, View, SafeAreaView} from 'react-native';
 import {
   Avatar,
@@ -68,9 +69,7 @@ export default ({navigation}) => {
         <Avatar
           size="giant"
           shape="rounded"
-          source={{
-            uri: 'https://cdn.roadmap.space/logos/5ed5164b31d74e9553c4f5eb.png',
-          }}
+          source={logo}
         />
         <Text style={styles.profileName} category="h6">
           Appa Does
