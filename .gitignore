@@ -58,5 +58,11 @@ buck-out/
 # CocoaPods
 /ios/Pods/
 
-# Environment file
+# Test Coverage
+/coverage
+
+# Ignore enviroment file
 .env
+
+# vscode
+.vscode

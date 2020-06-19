@@ -1,261 +1,303 @@
 import React from 'react';
 
-import {Icon, IconElement} from '@ui-kitten/components';
+import {Icon} from '@ui-kitten/components';
 
-export const AlertIcon = style => (
+export const AlertIcon = (style) => (
   <Icon {...style} name="alert-triangle-outline" />
 );
-export const ArrowIosBackIcon = style => (
+export const ArrowDownIcon = (style) => (
+  <Icon {...style} name="arrow-ios-downward-outline" />
+);
+export const ArrowIosBackIcon = (style) => (
   <Icon {...style} name="arrow-ios-back" />
 );
 
-export const ArrowIosForwardIcon = style => (
+export const ArrowIosForwardIcon = (style) => (
   <Icon {...style} name="arrow-ios-forward" />
 );
 
-export const BookIcon = style => <Icon {...style} name="book" />;
+export const BookIcon = (style) => <Icon {...style} name="book" />;
 
-export const BookmarkIcon = style => <Icon {...style} name="bookmark" />;
+export const BookmarkIcon = (style) => <Icon {...style} name="bookmark" />;
 
-export const BookmarkOutlineIcon = style => (
+export const BookmarkOutlineIcon = (style) => (
   <Icon {...style} name="bookmark-outline" />
 );
 
-export const CalendarIcon = style => (
+export const CalendarIcon = (style) => (
   <Icon {...style} name="calendar-outline" />
 );
 
-export const ColorPaletteIcon = style => (
+export const ColorPaletteIcon = (style) => (
   <Icon {...style} name="color-palette-outline" />
 );
 
-export const ClockIcon = style => <Icon {...style} name="clock-outline" />;
+export const ClockIcon = (style) => <Icon {...style} name="clock-outline" />;
 
-export const CloseIcon = style => <Icon {...style} name="close" />;
+export const CloseIcon = (style) => <Icon {...style} name="close" />;
 
-export const EyeIcon = style => <Icon {...style} name="eye-outline" />;
+export const EditIcon = (style) => <Icon {...style} name="edit-2-outline" />;
+export const EyeIcon = (style) => <Icon {...style} name="eye-outline" />;
 
-export const EyeOffIcon = style => <Icon {...style} name="eye-off-outline" />;
+export const EyeOffIcon = (style) => <Icon {...style} name="eye-off-outline" />;
+export const FilterIcon = (style) => <Icon {...style} name="funnel-outline" />;
+export const FlashIcon = (style) => <Icon {...style} name="flash-outline" />;
 
-export const PersonIcon = style => <Icon {...style} name="person-outline" />;
+export const PersonIcon = (style) => <Icon {...style} name="person-outline" />;
 
-export const GithubIcon = style => <Icon {...style} name="github" />;
+export const GithubIcon = (style) => <Icon {...style} name="github" />;
 
-export const GridIcon = style => <Icon {...style} name="grid-outline" />;
+export const GridIcon = (style) => <Icon {...style} name="grid-outline" />;
+export const InfoIcon = (style) => <Icon {...style} name="info-outline" />;
 
-export const LayoutIcon = style => <Icon {...style} name="layout-outline" />;
+export const LayoutIcon = (style) => <Icon {...style} name="layout-outline" />;
 
-export const ListIcon = style => <Icon {...style} name="list" />;
+export const ListIcon = (style) => <Icon {...style} name="list" />;
 
-export const MenuIcon = style => <Icon {...style} name="menu" />;
+export const MenuIcon = (style) => <Icon {...style} name="menu" />;
+export const MessageIcon = (style) => (
+  <Icon {...style} name="message-circle-outline" />
+);
 
-export const MoreVerticalIcon = style => (
+export const MoreVerticalIcon = (style) => (
   <Icon {...style} name="more-vertical" />
 );
 
-export const ProjectIcon = style => <Icon {...style} name="folder-outline" />;
-export const PlayIcon = style => <Icon {...style} name="play-circle" />;
-export const ReportIcon = style => <Icon {...style} name="bar-chart-outline" />;
+export const PaperPlaneIcon = (style) => (
+  <Icon {...style} name="paper-plane-outline" />
+);
+export const ProjectIcon = (style) => <Icon {...style} name="folder-outline" />;
+export const PlayIcon = (style) => <Icon {...style} name="play-circle" />;
+export const QuestionIcon = (style) => (
+  <Icon {...style} name="question-mark-outline" />
+);
+export const ReportIcon = (style) => (
+  <Icon {...style} name="bar-chart-outline" />
+);
 
-export const SearchIcon = style => <Icon {...style} name="search" />;
+export const SearchIcon = (style) => <Icon {...style} name="search" />;
 
-export const SettingsIcon = style => (
+export const SettingsIcon = (style) => (
   <Icon {...style} name="settings-outline" />
 );
-export const SupportIcon = style => <Icon {...style} name="phone-outline" />;
+export const SupportIcon = (style) => <Icon {...style} name="phone-outline" />;
 
-export const StarIcon = style => <Icon {...style} name="star" />;
+export const StarIcon = (style) => <Icon {...style} name="star" />;
 
-export const StarOutlineIcon = style => <Icon {...style} name="star-outline" />;
+export const StarOutlineIcon = (style) => (
+  <Icon {...style} name="star-outline" />
+);
 
-export const TrashIcon = style => <Icon {...style} name="trash" />;
+export const StopOutlineIcon = (style) => (
+  <Icon {...style} name="stop-circle-outline" />
+);
 
-export const AssetAuthIcon = style => <Icon {...style} name="auth" />;
+export const TrashIcon = (style) => <Icon {...style} name="trash" />;
 
-export const AssetAuthDarkIcon = style => <Icon {...style} name="auth-dark" />;
+export const AssetAuthIcon = (style) => <Icon {...style} name="auth" />;
 
-export const AssetSocialIcon = style => <Icon {...style} name="social" />;
+export const AssetAuthDarkIcon = (style) => (
+  <Icon {...style} name="auth-dark" />
+);
 
-export const AssetSocialDarkIcon = style => (
+export const AssetSocialIcon = (style) => <Icon {...style} name="social" />;
+
+export const AssetSocialDarkIcon = (style) => (
   <Icon {...style} name="social-dark" />
 );
 
-export const AssetArticlesIcon = style => <Icon {...style} name="articles" />;
+export const AssetArticlesIcon = (style) => <Icon {...style} name="articles" />;
 
-export const AssetArticlesDarkIcon = style => (
+export const AssetArticlesDarkIcon = (style) => (
   <Icon {...style} name="articles-dark" />
 );
 
-export const AssetMessagingIcon = style => <Icon {...style} name="messaging" />;
+export const AssetMessagingIcon = (style) => (
+  <Icon {...style} name="messaging" />
+);
 
-export const AssetMessagingDarkIcon = style => (
+export const AssetMessagingDarkIcon = (style) => (
   <Icon {...style} name="messaging-dark" />
 );
 
-export const AssetDashboardsIcon = style => (
+export const AssetDashboardsIcon = (style) => (
   <Icon {...style} name="dashboards" />
 );
 
-export const AssetDashboardsDarkIcon = style => (
+export const AssetDashboardsDarkIcon = (style) => (
   <Icon {...style} name="dashboards-dark" />
 );
 
-export const AssetEcommerceIcon = style => <Icon {...style} name="ecommerce" />;
+export const AssetEcommerceIcon = (style) => (
+  <Icon {...style} name="ecommerce" />
+);
 
-export const AssetEcommerceDarkIcon = style => (
+export const AssetEcommerceDarkIcon = (style) => (
   <Icon {...style} name="ecommerce-dark" />
 );
 
-export const AssetAutocompleteIcon = style => (
+export const AssetAutocompleteIcon = (style) => (
   <Icon {...style} name="autocomplete" />
 );
 
-export const AssetAutocompleteDarkIcon = style => (
+export const AssetAutocompleteDarkIcon = (style) => (
   <Icon {...style} name="autocomplete-dark" />
 );
 
-export const AssetAvatarIcon = style => <Icon {...style} name="avatar" />;
+export const AssetAvatarIcon = (style) => <Icon {...style} name="avatar" />;
 
-export const AssetAvatarDarkIcon = style => (
+export const AssetAvatarDarkIcon = (style) => (
   <Icon {...style} name="avatar-dark" />
 );
 
-export const AssetBottomNavigationIcon = style => (
+export const AssetBottomNavigationIcon = (style) => (
   <Icon {...style} name="bottom-navigation" />
 );
 
-export const AssetBottomNavigationDarkIcon = style => (
+export const AssetBottomNavigationDarkIcon = (style) => (
   <Icon {...style} name="bottom-navigation-dark" />
 );
 
-export const AssetButtonIcon = style => <Icon {...style} name="button" />;
+export const AssetButtonIcon = (style) => <Icon {...style} name="button" />;
 
-export const AssetButtonDarkIcon = style => (
+export const AssetButtonDarkIcon = (style) => (
   <Icon {...style} name="button-dark" />
 );
 
-export const AssetButtonGroupIcon = style => (
+export const AssetButtonGroupIcon = (style) => (
   <Icon {...style} name="button-group" />
 );
 
-export const AssetButtonGroupDarkIcon = style => (
+export const AssetButtonGroupDarkIcon = (style) => (
   <Icon {...style} name="button-group-dark" />
 );
 
-export const AssetCalendarIcon = style => <Icon {...style} name="calendar" />;
+export const AssetCalendarIcon = (style) => <Icon {...style} name="calendar" />;
 
-export const AssetCalendarDarkIcon = style => (
+export const AssetCalendarDarkIcon = (style) => (
   <Icon {...style} name="calendar-dark" />
 );
 
-export const AssetCardIcon = style => <Icon {...style} name="card" />;
+export const AssetCardIcon = (style) => <Icon {...style} name="card" />;
 
-export const AssetCardDarkIcon = style => <Icon {...style} name="card-dark" />;
+export const AssetCardDarkIcon = (style) => (
+  <Icon {...style} name="card-dark" />
+);
 
-export const AssetCheckBoxIcon = style => <Icon {...style} name="check-box" />;
+export const AssetCheckBoxIcon = (style) => (
+  <Icon {...style} name="check-box" />
+);
 
-export const AssetCheckBoxDarkIcon = style => (
+export const AssetCheckBoxDarkIcon = (style) => (
   <Icon {...style} name="check-box-dark" />
 );
 
-export const AssetDatepickerIcon = style => (
+export const AssetDatepickerIcon = (style) => (
   <Icon {...style} name="datepicker" />
 );
 
-export const AssetDatepickerDarkIcon = style => (
+export const AssetDatepickerDarkIcon = (style) => (
   <Icon {...style} name="datepicker-dark" />
 );
 
-export const AssetDrawerIcon = style => <Icon {...style} name="drawer" />;
+export const AssetDrawerIcon = (style) => <Icon {...style} name="drawer" />;
 
-export const AssetDrawerDarkIcon = style => (
+export const AssetDrawerDarkIcon = (style) => (
   <Icon {...style} name="drawer-dark" />
 );
 
-export const AssetIconIcon = style => <Icon {...style} name="icon" />;
+export const AssetIconIcon = (style) => <Icon {...style} name="icon" />;
 
-export const AssetIconDarkIcon = style => <Icon {...style} name="icon-dark" />;
+export const AssetIconDarkIcon = (style) => (
+  <Icon {...style} name="icon-dark" />
+);
 
-export const AssetInputIcon = style => <Icon {...style} name="input" />;
+export const AssetInputIcon = (style) => <Icon {...style} name="input" />;
 
-export const AssetInputDarkIcon = style => (
+export const AssetInputDarkIcon = (style) => (
   <Icon {...style} name="input-dark" />
 );
 
-export const AssetListIcon = style => <Icon {...style} name="list" />;
+export const AssetListIcon = (style) => <Icon {...style} name="list" />;
 
-export const AssetListDarkIcon = style => <Icon {...style} name="list-dark" />;
+export const AssetListDarkIcon = (style) => (
+  <Icon {...style} name="list-dark" />
+);
 
-export const AssetMenuIcon = style => <Icon {...style} name="menu" />;
+export const AssetMenuIcon = (style) => <Icon {...style} name="menu" />;
 
-export const AssetMenuDarkIcon = style => <Icon {...style} name="menu-dark" />;
+export const AssetMenuDarkIcon = (style) => (
+  <Icon {...style} name="menu-dark" />
+);
 
-export const AssetModalIcon = style => <Icon {...style} name="modal" />;
+export const AssetModalIcon = (style) => <Icon {...style} name="modal" />;
 
-export const AssetModalDarkIcon = style => (
+export const AssetModalDarkIcon = (style) => (
   <Icon {...style} name="modal-dark" />
 );
 
-export const AssetOverflowMenuIcon = style => (
+export const AssetOverflowMenuIcon = (style) => (
   <Icon {...style} name="overflow-menu" />
 );
 
-export const AssetOverflowMenuDarkIcon = style => (
+export const AssetOverflowMenuDarkIcon = (style) => (
   <Icon {...style} name="overflow-menu-dark" />
 );
 
-export const AssetPopoverIcon = style => <Icon {...style} name="popover" />;
+export const AssetPopoverIcon = (style) => <Icon {...style} name="popover" />;
 
-export const AssetPopoverDarkIcon = style => (
+export const AssetPopoverDarkIcon = (style) => (
   <Icon {...style} name="popover-dark" />
 );
 
-export const AssetRadioIcon = style => <Icon {...style} name="radio" />;
+export const AssetRadioIcon = (style) => <Icon {...style} name="radio" />;
 
-export const AssetRadioDarkIcon = style => (
+export const AssetRadioDarkIcon = (style) => (
   <Icon {...style} name="radio-dark" />
 );
 
-export const AssetSelectIcon = style => <Icon {...style} name="select" />;
+export const AssetSelectIcon = (style) => <Icon {...style} name="select" />;
 
-export const AssetSelectDarkIcon = style => (
+export const AssetSelectDarkIcon = (style) => (
   <Icon {...style} name="select-dark" />
 );
 
-export const AssetSpinnerIcon = style => <Icon {...style} name="spinner" />;
+export const AssetSpinnerIcon = (style) => <Icon {...style} name="spinner" />;
 
-export const AssetSpinnerDarkIcon = style => (
+export const AssetSpinnerDarkIcon = (style) => (
   <Icon {...style} name="spinner-dark" />
 );
 
-export const AssetTabViewIcon = style => <Icon {...style} name="tab-view" />;
+export const AssetTabViewIcon = (style) => <Icon {...style} name="tab-view" />;
 
-export const AssetTabViewDarkIcon = style => (
+export const AssetTabViewDarkIcon = (style) => (
   <Icon {...style} name="tab-view-dark" />
 );
 
-export const AssetTextIcon = style => <Icon {...style} name="text" />;
+export const AssetTextIcon = (style) => <Icon {...style} name="text" />;
 
-export const AssetTextDarkIcon = style => <Icon {...style} name="text-dark" />;
+export const AssetTextDarkIcon = (style) => (
+  <Icon {...style} name="text-dark" />
+);
 
-export const AssetToggleIcon = style => <Icon {...style} name="toggle" />;
+export const AssetToggleIcon = (style) => <Icon {...style} name="toggle" />;
 
-export const AssetToggleDarkIcon = style => (
+export const AssetToggleDarkIcon = (style) => (
   <Icon {...style} name="toggle-dark" />
 );
 
-export const AssetTooltipIcon = style => <Icon {...style} name="tooltip" />;
+export const AssetTooltipIcon = (style) => <Icon {...style} name="tooltip" />;
 
-export const AssetTooltipDarkIcon = style => (
+export const AssetTooltipDarkIcon = (style) => (
   <Icon {...style} name="tooltip-dark" />
 );
 
-export const AssetTopNavigationIcon = style => (
+export const AssetTopNavigationIcon = (style) => (
   <Icon {...style} name="top-navigation" />
 );
 
-export const AssetTopNavigationDarkIcon = style => (
+export const AssetTopNavigationDarkIcon = (style) => (
   <Icon {...style} name="top-navigation-dark" />
 );
 
-export const PlusIcon = style => <Icon {...style} name="plus" />;
+export const PlusIcon = (style) => <Icon {...style} name="plus" />;

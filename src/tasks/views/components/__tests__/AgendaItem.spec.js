@@ -1,23 +1,30 @@
 import React from 'react';
 import {render, fireEvent, act} from 'react-native-testing-library';
-import {ApplicationProvider, IconRegistry, Button} from '@ui-kitten/components';
+import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
 import {default as theme} from '../../../../../theme.json';
 import AgendaItem from '../AgendaItem';
 
+jest.mock('@fortawesome/react-native-fontawesome', () => ({
+  FontAwesomeIcon: '',
+}));
+
 describe('onboarding complete screen', () => {
   const title = 'My Task';
   const time = '9:07 AM';
-  const project = 'Projecct X';
 
-  it('Should render a correctly given item prop', async () => {
+  it('Should render a correctly given item prop', () => {
     const itemData = {
       title,
       time,
-      project,
     };
     const onPressItem = jest.fn();
+
+    jest.mock('@fortawesome/react-native-fontawesome', () => ({
+      FontAwesomeIcon: '',
+    }));
+
     const {getAllByText, getAllByTestId} = render(
       <>
         <IconRegistry icons={EvaIconsPack} />
@@ -41,10 +48,7 @@ describe('onboarding complete screen', () => {
     // Task text
     const taskTitle = getAllByText(title);
     // const taskTime = getAllByText(`Time: ${time}`);
-    const taskProject = getAllByText(project);
     expect(taskTitle).toHaveLength(1);
-    // expect(taskTime).toHaveLength(1);
-    expect(taskProject).toHaveLength(1);
     // Task CheckBox
     const checkBox = getAllByTestId('TaskCheckBox');
     expect(checkBox).toHaveLength(1);
@@ -56,12 +60,12 @@ describe('onboarding complete screen', () => {
     const itemData = {
       title,
       time,
-      project,
     };
     const onPressItem = jest.fn();
+    const setCurrentIndex = jest.fn();
     const onComplete = jest.fn(
       () =>
-        new Promise(function(resolve) {
+        new Promise(function (resolve) {
           resolve();
         }),
     );
@@ -78,6 +82,7 @@ describe('onboarding complete screen', () => {
             item={itemData}
             onPress={onPressItem}
             onComplete={onComplete}
+            setCurrentIndex={setCurrentIndex}
           />
         </ApplicationProvider>
       </>,
@@ -96,18 +101,18 @@ describe('onboarding complete screen', () => {
     const itemData = {
       title,
       time,
-      project,
     };
     const onPressItem = jest.fn();
+    const setCurrentIndex = jest.fn();
     const onComplete = jest.fn(
       () =>
-        new Promise(function(resolve) {
+        new Promise(function (resolve) {
           resolve();
         }),
     );
     const onStart = jest.fn(
       () =>
-        new Promise(function(resolve) {
+        new Promise(function (resolve) {
           resolve();
         }),
     );
@@ -125,6 +130,7 @@ describe('onboarding complete screen', () => {
             onPress={onPressItem}
             onComplete={onComplete}
             onStart={onStart}
+            setCurrentIndex={setCurrentIndex}
           />
         </ApplicationProvider>
       </>,

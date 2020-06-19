@@ -1,4 +1,4 @@
-import {addTask, updateTask} from '../model/commands';
+import {addTask, updateTask, removeTask} from '../model/commands';
 import {Controller} from '../../controller';
 import moment from 'moment';
 
@@ -27,7 +27,7 @@ export default class DetailController extends Controller {
     estimatedTime = 15,
     estimatedUnit = 'minutes',
   ) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const task = {
         title: title,
         description: description,
@@ -39,23 +39,37 @@ export default class DetailController extends Controller {
             : estimatedTime * 60 * 60,
         created: moment(),
       };
-      //TODO execute command to create task
       this.dispatch(addTask(task));
-      console.log('task created');
       resolve();
     });
   }
 
-  onUpdate(navigation, task, title, description, dueDate, currentAgenda) {
+  onUpdate(
+    navigation,
+    task,
+    title,
+    description,
+    dueDate,
+    estimatedTime,
+    currentAgenda,
+  ) {
     const updatedTask = {
-      title: title,
-      description: description,
-      dueDate: dueDate,
-      currentAgenda: currentAgenda,
+      title,
+      description,
+      dueDate,
+      estimatedTime,
+      currentAgenda,
     };
     //TODO execute command to update task
     this.dispatch(updateTask(task.id, updatedTask));
     navigation.goBack();
     console.log('update task');
+  }
+
+  onRemove(taskId) {
+    return new Promise((resolve) => {
+      this.dispatch(removeTask(taskId));
+      resolve();
+    });
   }
 }

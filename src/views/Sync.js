@@ -4,13 +4,13 @@ import {fetchEvents} from '../apis/eventApi';
 import {SyncSpinner} from '../views/components/Spinners';
 import {setEventCount} from '../actions';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     eventCount: state.eventCount,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     updateEventCount: setEventCount,
     dispatch,
@@ -23,7 +23,7 @@ const Sync = ({eventCount, children, updateEventCount, dispatch}) => {
   useEffect(() => {
     if (eventCount === 0) {
       fetchEvents()
-        .then(data => {
+        .then((data) => {
           for (let event of data.events) {
             event.meta = {id: event.payload.id};
             dispatch(event);
@@ -32,7 +32,7 @@ const Sync = ({eventCount, children, updateEventCount, dispatch}) => {
           updateEventCount(data.currentCount);
           setSyncComplete(true);
         })
-        .catch(error => {
+        .catch((error) => {
           // TODO notify user of error
           console.log(error);
           setSyncComplete(true);
@@ -45,7 +45,4 @@ const Sync = ({eventCount, children, updateEventCount, dispatch}) => {
   return isSyncComplete ? children : <SyncSpinner />;
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Sync);
+export default connect(mapStateToProps, mapDispatchToProps)(Sync);

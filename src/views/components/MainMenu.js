@@ -9,18 +9,22 @@ import {
   Layout,
   MenuItemType,
   Text,
+  StyleService,
+  useStyleSheet,
 } from '@ui-kitten/components';
 import {
   AssetCalendarIcon,
   ClockIcon,
-  ProjectIcon,
+  QuestionIcon,
+  GridIcon,
   ReportIcon,
   SettingsIcon,
   SupportIcon,
 } from './Icons';
 
 export default ({navigation}) => {
-  const onItemSelect = index => {
+  const styles = useStyleSheet(themedStyles);
+  const onItemSelect = (index) => {
     switch (index.row) {
       case 0: {
         navigation.toggleDrawer();
@@ -32,25 +36,24 @@ export default ({navigation}) => {
         navigation.navigate('Logs');
         return;
       }
-      case 2: {
-        navigation.toggleDrawer();
-        navigation.navigate('Projects');
-        return;
-      }
       case 3: {
-        navigation.toggleDrawer();
-        navigation.navigate('Reports');
-        return;
-      }
-
-      case 5: {
         navigation.toggleDrawer();
         navigation.navigate('Settings');
         return;
       }
-      case 6: {
+      // case 4: {
+      //   navigation.toggleDrawer();
+      //   navigation.navigate('Support');
+      //   return;
+      // }
+      case 4: {
         navigation.toggleDrawer();
-        navigation.navigate('Support');
+        navigation.navigate('Customize');
+        return;
+      }
+      case 5: {
+        navigation.toggleDrawer();
+        navigation.navigate('About');
         return;
       }
     }
@@ -61,10 +64,13 @@ export default ({navigation}) => {
       <View style={styles.profileContainer}>
         <Avatar
           size="giant"
-          source={require('../../../assets/images/we-logo-blue.png')}
+          shape="rounded"
+          source={{
+            uri: 'https://cdn.roadmap.space/logos/5ed5164b31d74e9553c4f5eb.png',
+          }}
         />
         <Text style={styles.profileName} category="h6">
-          WeAgenda
+          Appa Does
         </Text>
       </View>
     </Layout>
@@ -85,30 +91,32 @@ export default ({navigation}) => {
         onSelect={onItemSelect}>
         <DrawerItem title={'Agenda'} accessoryLeft={AssetCalendarIcon} />
         <DrawerItem title={'Time Log'} accessoryLeft={ClockIcon} />
-        <DrawerItem title={'Projects'} accessoryLeft={ProjectIcon} />
-        <DrawerItem title={'Reports'} accessoryLeft={ReportIcon} />
+        {/* <DrawerItem title={'Reports'} accessoryLeft={ReportIcon} /> */}
         <Divider />
         <DrawerItem title={'Settings'} accessoryLeft={SettingsIcon} />
-        <DrawerItem title={'Support'} accessoryLeft={SupportIcon} />
+        <DrawerItem title={'Customize'} accessoryLeft={GridIcon} />
+        <DrawerItem title={'About'} accessoryLeft={QuestionIcon} />
       </Drawer>
     </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   safeArea: {
     flex: 1,
   },
   header: {
-    height: 128,
+    paddingVertical: 32,
     paddingHorizontal: 16,
     justifyContent: 'center',
+    // backgroundColor: '$color-primary-500',
   },
   profileContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   profileName: {
+    // color: '#fff',
     marginHorizontal: 16,
   },
 });

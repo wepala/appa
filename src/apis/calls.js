@@ -7,13 +7,13 @@ export const eventsApi = axios.create({
 });
 
 eventsApi.interceptors.request.use(
-  function(config) {
+  function (config) {
     const {token, applicationId, eventCount} = store.getState();
     config.headers.Authorization = `Bearer ${TEMP_USER_JWT}`;
     config.headers.ETag = `${applicationId}.${eventCount}`;
     return config;
   },
-  function(error) {
+  function (error) {
     return Promise.reject(error);
   },
 );

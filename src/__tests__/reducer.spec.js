@@ -1,7 +1,7 @@
 import {eventCount, token, applicationId} from '../reducers';
 import {setEventCount, setToken, setApplicationId} from '../actions';
 
-describe('EventCount reducer', function() {
+describe('EventCount reducer', function () {
   const expectedInitialState = 0;
 
   it('should return initial state', () => {
@@ -16,7 +16,7 @@ describe('EventCount reducer', function() {
   });
 });
 
-describe('Token reducer', function() {
+describe('Token reducer', function () {
   const expectedInitialState = null;
 
   it('should return initial state', () => {
@@ -31,7 +31,7 @@ describe('Token reducer', function() {
   });
 });
 
-describe('ApplicationId reducer', function() {
+describe('ApplicationId reducer', function () {
   const expectedInitialState = null;
 
   it('should return initial state', () => {

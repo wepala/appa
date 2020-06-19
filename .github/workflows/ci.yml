@@ -2,8 +2,9 @@ name: Test and Build Android & iOS
 on: [push, pull_request]
 
 jobs:
-  install-and-test:
+  install-test-and-build:
     runs-on: ${{ matrix.os }}
+    if: "!contains(github.ref, 'release/')"
     strategy:
       matrix:
         os: [ubuntu-18.04]
@@ -19,36 +20,12 @@ jobs:
       - name: Install npm dependencies
         run: |
           npm install
-      - name: Run tests
+      - name: Lint code
         run: |
-          npm run lint && npm test
-      - name: Send failure notification
-        uses: rtCamp/action-slack-notify@v2.0.0
-        if: failure()
-        env:
-          SLACK_CHANNEL: weagenda
-          SLACK_COLOR: "#FF0000"
-          SLACK_ICON: https://github.com/wepala.png?size=48
-          SLACK_MESSAGE: You entered code that was not linted or your tests failed
-          SLACK_TITLE: Lint/Test failed
-          SLACK_USERNAME: WeAgenda
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-
-  build-android-debug:
-    runs-on: ubuntu-18.04
-    needs: [install-and-test]
-    if: "!contains(github.ref, 'release/')"
-
-    steps:
-      - name: checkout
-        uses: actions/checkout@v2
-      - name: setup node @ version
-        uses: actions/setup-node@v1
-        with:
-          node-version: 13
-      - name: Install npm dependencies
+          npm run lint
+      - name: Test code
         run: |
-          npm install
+          npm test
       - name: Install JDK for SDK to work
         uses: actions/setup-java@v1
         with:
@@ -58,9 +35,21 @@ jobs:
       - name: Install NDK # Temp fix for ongoing gradle issue
         run: |
           echo "y" | sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;20.0.5594570" --sdk_root=${ANDROID_SDK_ROOT}
+      - name: Create .env file
+        run: |
+          env > .env
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
+          SENDER: ${{ secrets.SENDER }}
+          DESTINATION: ${{ secrets.DESTINATION }}
+          ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
+          ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
+          BEARER: ${{ secrets.BEARER }}
       - name: Build debug APK
         run: |
-          npm run build-android
+          npm run bundle-android
+          cd android && ./gradlew clean assembleDebug
       - name: Upload debug APK
         uses: actions/upload-artifact@v2
         with:
@@ -73,15 +62,18 @@ jobs:
           SLACK_CHANNEL: weagenda
           SLACK_COLOR: "#FF0000"
           SLACK_ICON: https://github.com/wepala.png?size=48
-          SLACK_MESSAGE: Tests passed for your code changes but we aren't able to generate and Android app
-          SLACK_TITLE: Could not build debug Android APK
+          SLACK_MESSAGE: Your recent update was not correctly linted, failed tests or could not build an app
+          SLACK_TITLE: Lint/Test failed
           SLACK_USERNAME: WeAgenda
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
   build-android:
-    runs-on: ubuntu-18.04
-    needs: [install-and-test]
+    runs-on: ${{ matrix.os }}
     if: contains(github.ref, 'release/')
+    strategy:
+      matrix:
+        os: [ubuntu-18.04]
+        node: [13]
 
     steps:
       - name: checkout
@@ -89,10 +81,16 @@ jobs:
       - name: setup node @ version
         uses: actions/setup-node@v1
         with:
-          node-version: 13
+          node-version: ${{ matrix.node }}
       - name: Install npm dependencies
         run: |
           npm install
+      - name: Lint code
+        run: |
+          npm run lint
+      - name: Test code
+        run: |
+          npm test
       - name: Install JDK for SDK to work
         uses: actions/setup-java@v1
         with:
@@ -104,19 +102,33 @@ jobs:
           echo "y" | sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;20.0.5594570" --sdk_root=${ANDROID_SDK_ROOT}
       - name: Generate keystore
         run: |
-          echo "${{ secrets.UPLOAD_KEYSTORE }}" > release.keystore.asc
-          gpg -d --passphrase "${{ secrets.UPLOAD_KEY_PASSWORD }}" --batch release.keystore.asc > app/weagenda.keystore
+          echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 -d > android/app/release.keystore
+      - name: Create .env file
+        run: |
+          env > .env
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
+          SENDER: ${{ secrets.SENDER }}
+          DESTINATION: ${{ secrets.DESTINATION }}
+          ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
+          ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
+          BEARER: ${{ secrets.BEARER }}
       - name: Build release APK
         run: |
-          cd android && ./gradlew assembleRelease
+          cd android && ./gradlew clean bundleRelease
         env:
-          UPLOAD_STORE_PASSWORD: ${{ secrets.UPLOAD_STORE_PASSWORD }}
-          UPLOAD_KEY_PASSWORD: ${{ secrets.UPLOAD_KEY_PASSWORD }}
-      - name: Upload debug APK
-        uses: actions/upload-artifact@v2
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - name: Update beta track in play store
+        uses: r0adkll/upload-google-play@v1
         with:
-          name: app-release.apk
-          path: android/app/build/outputs/apk/release/
+          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          packageName: com.appadoes
+          releaseFile: android/app/build/outputs/bundle/release/app-release.aab
+          track: beta
+          whatsNewDirectory: distribution/
       - name: Send failure notification
         uses: rtCamp/action-slack-notify@v2.0.0
         if: failure()
@@ -131,7 +143,6 @@ jobs:
 
   build-ios:
     runs-on: macos-10.15
-    needs: [install-and-test]
     if: contains(github.ref, 'release/')
 
     steps:
@@ -144,29 +155,64 @@ jobs:
       - name: Install npm dependencies
         run: |
           npm install
+      - name: Lint code
+        run: |
+          npm run lint
+      - name: Test code
+        run: |
+          npm test
+      - name: Generate and install certs
+        run: |
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles/
+          echo "${{ secrets.IOS_PROVISIONING_PROFILE }}" | base64 -d > ~/Library/MobileDevice/Provisioning\ Profiles/${{ secrets.IOS_PROVISIONING_PROFILE_ID }}.mobileprovision
+          echo "${{ secrets.IOS_CERTIFICATE }}" | base64 -d > ios/Certificates.p12
+          security create-keychain -p "" build.keychain
+          security list-keychains -d user -s build.keychain $(security list-keychains -d user | sed s/\"//g)
+          security list-keychains
+          security set-keychain-settings build.keychain
+          security unlock-keychain -p "" build.keychain
+          security import ios/Certificates.p12 -k build.keychain -P "" -T "/usr/bin/codesign"
+          security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
       - name: Install pod dependencies
         run: |
           cd ios && pod install
-      - name: Build app
+      - name: Create .env file
+        run: |
+          env > .env
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
+          SENDER: ${{ secrets.SENDER }}
+          DESTINATION: ${{ secrets.DESTINATION }}
+          ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
+          ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
+          BEARER: ${{ secrets.BEARER }}
+      - name: Create archive for app
         run: |
           cd ios
           xcodebuild clean archive \
-            -workspace WeAgenda.xcworkspace \
-            -scheme WeAgenda \
+            -workspace AppaTimeTracker.xcworkspace \
+            -scheme AppaTimeTracker \
             -configuration Release \
-            -archivePath build/WeAgenda.xcarchive \
+            -archivePath build/AppaTimeTracker.xcarchive \
             -allowProvisioningUpdates \
-            IPHONEOS_DEPLOYMENT_TARGET=9.0
+            PROVISIONING_PROFILE="${{ secrets.IOS_PROVISIONING_PROFILE_ID }}" \
+            CODE_SIGN_IDENTITY="${{ secrets.IOS_SIGNING_IDENTITY }}"
+      - name: Convert to .ipa
+        run: |
+          cd ios
           xcodebuild \
             -exportArchive \
-            -archivePath build/WeAgenda.xcarchive \
-            -exportPath . \
-            -exportOptionsPlist WeAgenda/Info.plist
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: WeAgenda.ipa
-          path: ios/
+            -archivePath build/AppaTimeTracker.xcarchive \
+            -exportPath ./build \
+            -exportOptionsPlist ci.plist
+      - name: Upload ipa to Apple Store
+        run: |
+          cd ios
+          xcrun altool --upload-app --type ios \
+            --file build/AppaTimeTracker.ipa \
+            --username "${{ secrets.IOS_USERNAME }}" \
+            --password "${{ secrets.IOS_PASSWORD }}" --verbose
       - name: Send failure notification
         uses: rtCamp/action-slack-notify@v2.0.0
         if: failure()
@@ -198,7 +244,7 @@ jobs:
   build-success-notification:
     runs-on: ubuntu-18.04
     if: "!contains(github.ref, 'release/')"
-    needs: [build-android]
+    needs: [install-test-and-build]
     steps:
       - name: Send success notification
         uses: rtCamp/action-slack-notify@v2.0.0
@@ -206,7 +252,7 @@ jobs:
           SLACK_CHANNEL: weagenda
           SLACK_COLOR: "#32BD65"
           SLACK_ICON: https://github.com/wepala.png?size=48
-          SLACK_MESSAGE: We were able to test your code without problems. Not bad
+          SLACK_MESSAGE: We were able to test and build your code without problems. Not bad
           SLACK_TITLE: Branch tests passed
           SLACK_USERNAME: WeAgenda
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

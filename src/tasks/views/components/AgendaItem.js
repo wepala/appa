@@ -1,102 +1,179 @@
 import React, {useState} from 'react';
-import {PlayIcon} from '../../../views/components/Icons';
-
 import {
   Text,
   Card,
-  Layout,
   Button,
+  Layout,
   CheckBox,
   StyleService,
   useStyleSheet,
 } from '@ui-kitten/components';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faPlay} from '@fortawesome/free-solid-svg-icons';
 
-const TaskItem = ({item, onPress, onComplete, onStart, timeSpentToday}) => {
-  const [checked, toggleCheck] = useState(false);
+const TaskItem = ({
+  item,
+  index,
+  onPress,
+  onComplete,
+  onStart,
+  setCurrentIndex,
+  timeSpentToday,
+  active,
+}) => {
+  const [checked, toggleCheck] = useState(item.complete);
   const styles = useStyleSheet(themedStyles);
+  let currentTimeSpent = {
+    hours: parseInt(timeSpentToday / 3600, 10),
+    minutes: parseInt(timeSpentToday / 60, 10) % 60,
+    seconds: timeSpentToday % 60,
+  };
+  let estimatedTime = {
+    hours: parseInt(item.estimatedTime / 3600, 10),
+    minutes: parseInt(item.estimatedTime / 60, 10) % 60,
+    seconds: item.estimatedTime % 60,
+  };
 
   return (
-    <Card
-      testID={'TaskItem'}
-      style={styles.item}
-      onPress={onPress}
-      status={checked && 'success'}>
-      <Layout style={styles.row}>
-        <Layout style={styles.column1}>
-          <CheckBox
-            testID={'TaskCheckBox'}
-            status="success"
-            checked={checked}
-            onChange={() =>
-              onComplete(item.id, !checked).then(toggleCheck(!checked))
-            }
-          />
-        </Layout>
-        <Layout style={styles.column2}>
-          <Text category="s1" style={checked && styles.checked}>
-            {item.title}
-          </Text>
-          <Text style={styles.time}>Time: {timeSpentToday} seconds</Text>
-          {item.project !== '' && (
-            <Text style={styles.project}>{item.project}</Text>
-          )}
-        </Layout>
+    <Layout key={item.id} style={styles.item}>
+      <CheckBox
+        testID={'TaskCheckBox'}
+        style={styles.checkBox}
+        status="primary"
+        checked={checked}
+        onChange={() =>
+          onComplete(item.id, !checked).then(toggleCheck(!checked))
+        }
+      />
+      <Card
+        testID={'TaskItem'}
+        style={
+          active
+            ? [styles.card, styles.active.card]
+            : checked
+            ? [styles.card, styles.checked.card]
+            : styles.card
+        }
+        onPress={onPress}>
+        <Layout style={styles.row}>
+          <Layout style={styles.column1}>
+            <Text
+              numberOfLines={1}
+              category="h6"
+              style={checked && styles.checked.title}>
+              {item.title}
+            </Text>
+            {timeSpentToday > 0 ? (
+              <Text category="s2" appearance="hint" style={styles.timeSpent}>
+                Time Spent:{' '}
+                {currentTimeSpent.hours > 0
+                  ? `${currentTimeSpent.hours}h `
+                  : null}
+                {currentTimeSpent.minutes > 0
+                  ? `${currentTimeSpent.minutes}m `
+                  : null}
+                {`${currentTimeSpent.seconds}s`}
+              </Text>
+            ) : null}
+          </Layout>
 
-        <Layout style={styles.column1}>
-          <Button
-            testID={'TaskButton'}
-            size="small"
-            status="success"
-            accessoryLeft={PlayIcon}
-            onPress={() => onStart(item.id)}
-          />
+          <Layout style={styles.column2}>
+            <Button
+              testID={'TaskButton'}
+              style={styles.buttonStart}
+              status="primary"
+              size="small"
+              appearance="ghost"
+              onPress={() => {
+                onStart(item.id);
+                setCurrentIndex(index);
+              }}>
+              <FontAwesomeIcon icon={faPlay} color="#4381FF" />
+            </Button>
+            <Text status="primary" category="c1" style={styles.estimatedTime}>
+              {estimatedTime.hours > 0 ? `${estimatedTime.hours}h ` : null}
+              {estimatedTime.minutes > 0 ? `${estimatedTime.minutes}m ` : null}
+            </Text>
+          </Layout>
         </Layout>
-      </Layout>
-    </Card>
+      </Card>
+    </Layout>
   );
 };
 
 const themedStyles = StyleService.create({
   item: {
-    marginVertical: 8,
-    padding: 0,
+    marginVertical: 16,
+    paddingHorizontal: 16,
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+
+    shadowColor: '#777',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+  },
+
+  card: {
+    marginLeft: 16,
+    borderRadius: 7,
+    backgroundColor: '$background-basic-color-1',
+
+    borderColor: '$background-basic-color-1',
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+    borderRightWidth: 0,
+    borderLeftWidth: 10,
+    flex: 1,
+    elevation: 2,
   },
 
   row: {
-    display: 'flex',
     flexDirection: 'row',
+    backgroundColor: 'transparent',
   },
 
   column1: {
     backgroundColor: 'transparent',
-    flexBasis: 'auto',
-    flexShrink: 0,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
+    flex: 1,
+    marginRight: 8,
   },
   column2: {
     backgroundColor: 'transparent',
-    flexGrow: 1,
-    paddingVertical: 2,
-    paddingHorizontal: 16,
-    justifyContent: 'space-between',
-  },
-  time: {
-    color: '$color-basic-700',
+    width: 'auto',
     justifyContent: 'center',
   },
-  project: {
-    color: '$color-basic-600',
+
+  timeSpent: {},
+  estimatedTime: {
+    textAlign: 'center',
   },
-  icon: {
-    width: 20,
-    height: 20,
-    margin: 0,
-    padding: 0,
+  buttonStart: {
+    textAlign: 'center',
+  },
+  checkBox: {
+    backgroundColor: 'transparent',
+  },
+
+  // States
+  active: {
+    card: {
+      borderColor: '#4381FF',
+    },
   },
   checked: {
-    fontStyle: 'italic',
-    textDecorationLine: 'line-through',
-    color: '$color-basic-600',
+    title: {
+      textDecorationLine: 'line-through',
+    },
+    card: {
+      borderColor: 'transparent',
+    },
   },
 });
 
