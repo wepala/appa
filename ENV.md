@@ -1,6 +1,6 @@
 # Environment Variables 
 
-## Brief recap:
+## A Brief Recap:
 An environment variable  or EnVar, is a variable whose value is set outside the main code of a program, it is made up of a name/value pair.
    - eg: ```SENDER=username@email.com ```
 During initialization or at runtime, refrences to these keys in the code are replaced with its current value
