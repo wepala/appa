@@ -62,8 +62,7 @@ for an indepth look at each environment variable check out our [environment Guid
   ```
     npm test
   ```
-
-
+for an indepth look at these tests check out our [Testing Guide](TEST.md)
 
 ## Deployment
 
@@ -117,4 +116,3 @@ See also the list of [contributors](https://github.com/wepala/weagenda/contribut
 
 - Hat tip to anyone whose code was used
 - Inspiration
-- etc
