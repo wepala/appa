@@ -46,6 +46,12 @@ jobs:
           ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
           ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
           BEARER: ${{ secrets.BEARER }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          AUTHORIZE_URL: ${{ secrets.AUTHORIZE_URL }}
+          REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
+          RESPONSE_TYPE: ${{ secrets.RESPONSE_TYPE }}
+          SCOPE: ${{ secrets.SCOPE }}
+          CODE_CHALLENGE_METHOD: ${{ secrets.CODE_CHALLENGE_METHOD }}
       - name: Build debug APK
         run: |
           npm run bundle-android
@@ -114,6 +120,12 @@ jobs:
           ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
           ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
           BEARER: ${{ secrets.BEARER }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          AUTHORIZE_URL: ${{ secrets.AUTHORIZE_URL }}
+          REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
+          RESPONSE_TYPE: ${{ secrets.RESPONSE_TYPE }}
+          SCOPE: ${{ secrets.SCOPE }}
+          CODE_CHALLENGE_METHOD: ${{ secrets.CODE_CHALLENGE_METHOD }}
       - name: Build release APK
         run: |
           cd android && ./gradlew clean bundleRelease
@@ -184,6 +196,12 @@ jobs:
           ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
           ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
           BEARER: ${{ secrets.BEARER }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          AUTHORIZE_URL: ${{ secrets.AUTHORIZE_URL }}
+          REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
+          RESPONSE_TYPE: ${{ secrets.RESPONSE_TYPE }}
+          SCOPE: ${{ secrets.SCOPE }}
+          CODE_CHALLENGE_METHOD: ${{ secrets.CODE_CHALLENGE_METHOD }}
       - name: Create archive for app
         run: |
           cd ios

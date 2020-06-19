@@ -1,34 +1,42 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Button,
   StyleService,
   useStyleSheet,
-  Select,
-  SelectItem,
-  IndexPath,
   Layout,
+  Text,
 } from '@ui-kitten/components';
 import {Linking} from 'react-native';
 
-import {ArrowDownIcon, SyncIcon, LogoutIcon} from './Icons';
+import {SyncIcon, LogoutIcon} from './Icons';
 import PKCE from '../../weos/auth/pkce';
 import {AUTHORIZE_URL} from 'react-native-dotenv';
 
-export default ({account, token, logout}) => {
+export default ({user, token, logout, setUserInfo}) => {
   const styles = useStyleSheet(themedStyles);
-  const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
-
   PKCE.config.setVars({
     AUTHORIZE_URL,
   });
+
+  const [email, setEmail] = useState(user?.sub?.email);
 
   useEffect(() => {
     Linking.addEventListener('url', logout);
     Linking.getInitialURL().then((url) => {
       if (url) {
-        logout();
+        logout(url);
       }
     });
+
+    if (!user) {
+      PKCE.getUserInfo(token)
+        .then((userInfo) => {
+          userInfo.sub = JSON.parse(userInfo.sub);
+          setUserInfo(userInfo);
+          setEmail(userInfo.email);
+        })
+        .catch((error) => console.log(error));
+    }
 
     return () => Linking.removeEventListener('url', logout);
   });
@@ -40,17 +48,7 @@ export default ({account, token, logout}) => {
   return (
     <Layout style={styles.row}>
       <Layout style={styles.column1}>
-        <Select
-          testID="Select"
-          style={styles.select}
-          value={account.emails[selectedIndex.row]}
-          selectedIndex={selectedIndex}
-          onSelect={(index) => setSelectedIndex(index)}
-          accessoryRight={ArrowDownIcon}>
-          {account.emails.map((email, index) => (
-            <SelectItem key={index} title={email} />
-          ))}
-        </Select>
+        <Text>{email}</Text>
       </Layout>
       <Layout style={styles.column2}>
         <Button

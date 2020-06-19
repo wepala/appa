@@ -64,7 +64,6 @@ describe('Auth PKCE', () => {
     });
 
     AsyncStorage.getItem = jest.fn(() => 'state');
-    axios.mockResolvedValue({data: {token: 'token'}});
     await expect(PKCE.exchangeAuthCode(undefined, 'state')).rejects.toThrow(
       'Missing auth code',
     );
@@ -81,7 +80,6 @@ describe('Auth PKCE', () => {
     });
 
     AsyncStorage.getItem = jest.fn(() => 'state');
-    axios.mockResolvedValue({data: {token: 'token'}});
     await expect(PKCE.exchangeAuthCode('code', 'statee')).rejects.toThrow(
       "State didn't match",
     );
@@ -96,5 +94,14 @@ describe('Auth PKCE', () => {
     let url = PKCE.logoutURL('token');
     expect(url).toMatch('http://localhost/oauth2');
     expect(url).toMatch('id_token_hint=token');
+  });
+
+  it('should provide a method to fetch user info', async () => {
+    PKCE.config.setVars({
+      AUTHORIZE_URL: 'http://localhost/oauth2',
+    });
+    axios.mockResolvedValue({data: {email: 'user@example.com'}});
+    const userInfo = await PKCE.getUserInfo('access_code', 'bearer');
+    expect(userInfo).toEqual({email: 'user@example.com'});
   });
 });

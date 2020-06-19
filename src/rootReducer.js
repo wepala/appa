@@ -3,7 +3,7 @@ import tasks from './tasks/model/reducer';
 import projects from './projects/model/reducer';
 import onboard from './onboarding/model/reducer';
 import logs from './logs/model/reducer';
-import {token} from './weos/auth/model/reducer';
+import {token, user} from './weos/auth/model/reducer';
 
 const rootReducer = combineReducers({
   tasks,
@@ -11,6 +11,7 @@ const rootReducer = combineReducers({
   projects,
   logs,
   token,
+  user,
 });
 
 export default rootReducer;
