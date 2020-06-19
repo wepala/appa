@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, createContext} from 'react';
 import {connect} from 'react-redux';
 
 export const Component = (controller, view) => {
@@ -18,6 +18,9 @@ export const useForm = (initValues) => {
     values,
     (val, key) => {
       setvalues({...values, [key]: val});
+    },
+    (properties) => {
+      setvalues({...values, ...properties});
     },
   ];
 };
@@ -45,3 +48,9 @@ export const useValidated = (form, validated) => {
     },
   ];
 };
+
+// Request Context
+export const RequestContext = createContext({
+  status: '',
+  makeRequest: () => {},
+});

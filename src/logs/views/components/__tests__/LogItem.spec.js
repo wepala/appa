@@ -6,11 +6,16 @@ import * as eva from '@eva-design/eva';
 import {default as theme} from '../../../../../theme.json';
 import LogItem from '../LogItem';
 
+jest.mock('@fortawesome/react-native-fontawesome', () => ({
+  FontAwesomeIcon: '',
+}));
+
 describe('LogItem', () => {
   it('Should render all fields given a log item', async () => {
     const item = {
-      title: 'My Task',
+      id: 'f4cb9236-2df7-4abd-8c06-cb836865a1c3',
       startTime: '2020-05-12T13:00:00-04:00',
+      task: {title: 'My Task'},
     };
     const {getByTestId} = render(
       <>

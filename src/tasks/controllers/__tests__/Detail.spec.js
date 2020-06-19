@@ -70,4 +70,18 @@ describe('Task Create Controller', () => {
     expect(task).toBeDefined();
     expect(task.title).toBe('Today Task');
   });
+
+  it('should delete a task', () => {
+    const dispatch = jest.fn();
+    const taskId = '36212c03-040b-4139-867f-bd76485f4084';
+    const controller = new DetailController();
+    const mockedState = {
+      tasks: mockTasks,
+    };
+    controller.configureState(mockedState);
+    controller.configureDispatch(dispatch);
+    const promise = controller.onRemove(taskId);
+    expect(dispatch).toBeCalled();
+    expect(promise).toBeDefined();
+  });
 });

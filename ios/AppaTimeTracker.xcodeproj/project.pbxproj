@@ -20,6 +20,13 @@
 		88A0F0676EF2977962960994 /* libPods-WeAgenda-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A62CF005D8D1F8CC764081B1 /* libPods-WeAgenda-tvOS.a */; };
 		98F5D4038E32D9B7308CA644 /* libPods-WeAgenda-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6A8E7BB35BCF332909F2E9 /* libPods-WeAgenda-tvOSTests.a */; };
 		ABCE879548BAFBD0366A3D5C /* libPods-WeAgenda.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0386C63F2946CF0DB77D9F /* libPods-WeAgenda.a */; };
+		02C750B4BBE144508FDE2693 /* Geometria-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 753563E52A6A43C88601AC82 /* Geometria-Light.ttf */; };
+		B9D2DADCA5344EF6BB13B746 /* Geometria.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCEEBD3B3E8E49EB871C3C1E /* Geometria.ttf */; };
+		78F17B2AC4234C0BB60D5752 /* CeraRoundProRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7AED7DC77924420BBB484626 /* CeraRoundProRegular.otf */; };
+		6FD2B4D55238613A1C0EC90D /* libPods-AppaTimeTracker-AppaTimeTrackerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C2F64309E1694363AEEBDA /* libPods-AppaTimeTracker-AppaTimeTrackerTests.a */; };
+		B66732CE0A06E31625282573 /* libPods-AppaTimeTracker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 842ADAF75674BF10CEDB88C7 /* libPods-AppaTimeTracker.a */; };
+		C21DE3B8E25AE65786AA2E52 /* libPods-AppaTimeTracker-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79F4DB82305EDE5EBB9F2ABA /* libPods-AppaTimeTracker-tvOSTests.a */; };
+		CFDD7419506B4C40BA3D39F9 /* libPods-AppaTimeTracker-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A322909871775B3005D10A53 /* libPods-AppaTimeTracker-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,10 +48,10 @@
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* WeAgendaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeAgendaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* AppaTimeTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppaTimeTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* WeAgendaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeAgendaTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* Appa Time Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Appa Time Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* Appa: Time Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Appa: Time Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = WeAgenda/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = WeAgenda/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -53,20 +60,32 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = WeAgenda/main.m; sourceTree = "<group>"; };
 		1980CD56424C2A3F661894BE /* Pods-WeAgenda-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeAgenda-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-WeAgenda-tvOSTests/Pods-WeAgenda-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		274576892B2EB9F20253292C /* Pods-WeAgenda.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeAgenda.release.xcconfig"; path = "Target Support Files/Pods-WeAgenda/Pods-WeAgenda.release.xcconfig"; sourceTree = "<group>"; };
-		2D02E47B1E0B4A5D006451C7 /* WeAgenda-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WeAgenda-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E4901E0B4A5D006451C7 /* WeAgenda-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WeAgenda-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E47B1E0B4A5D006451C7 /* Appa: Time Tracker-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Appa: Time Tracker-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* AppaTimeTracker-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AppaTimeTracker-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		456824C387FB791269761FB8 /* Pods-AppaTimeTracker-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppaTimeTracker-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-AppaTimeTracker-tvOSTests/Pods-AppaTimeTracker-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		5DDC5DACCF537B0281007CB5 /* Pods-AppaTimeTracker-AppaTimeTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppaTimeTracker-AppaTimeTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-AppaTimeTracker-AppaTimeTrackerTests/Pods-AppaTimeTracker-AppaTimeTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
+		63EA6CB35916CB2E7C8AA7FC /* Pods-AppaTimeTracker-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppaTimeTracker-tvOS.release.xcconfig"; path = "Target Support Files/Pods-AppaTimeTracker-tvOS/Pods-AppaTimeTracker-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		79F4DB82305EDE5EBB9F2ABA /* libPods-AppaTimeTracker-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AppaTimeTracker-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC2C63060238FB6C37517F1 /* Pods-WeAgenda-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeAgenda-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-WeAgenda-tvOS/Pods-WeAgenda-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		931E881BD93E4480C7449D51 /* libPods-WeAgenda-WeAgendaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WeAgenda-WeAgendaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A62CF005D8D1F8CC764081B1 /* libPods-WeAgenda-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WeAgenda-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		842ADAF75674BF10CEDB88C7 /* libPods-AppaTimeTracker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AppaTimeTracker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A322909871775B3005D10A53 /* libPods-AppaTimeTracker-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AppaTimeTracker-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBFF98EB9BFF590EEA1D1630 /* Pods-WeAgenda.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeAgenda.debug.xcconfig"; path = "Target Support Files/Pods-WeAgenda/Pods-WeAgenda.debug.xcconfig"; sourceTree = "<group>"; };
-		CA0386C63F2946CF0DB77D9F /* libPods-WeAgenda.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WeAgenda.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB928BAA01ACEF8DEC823055 /* Pods-WeAgenda-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeAgenda-tvOS.release.xcconfig"; path = "Target Support Files/Pods-WeAgenda-tvOS/Pods-WeAgenda-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		D6BBDBDA6053FA9BD6659832 /* Pods-AppaTimeTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppaTimeTracker.release.xcconfig"; path = "Target Support Files/Pods-AppaTimeTracker/Pods-AppaTimeTracker.release.xcconfig"; sourceTree = "<group>"; };
+		D9C2F64309E1694363AEEBDA /* libPods-AppaTimeTracker-AppaTimeTrackerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AppaTimeTracker-AppaTimeTrackerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBFE3166A7D616E131F2FB37 /* Pods-AppaTimeTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppaTimeTracker.debug.xcconfig"; path = "Target Support Files/Pods-AppaTimeTracker/Pods-AppaTimeTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		DC8D71B9C2AE54F0E91C2B53 /* Pods-WeAgenda-WeAgendaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeAgenda-WeAgendaTests.release.xcconfig"; path = "Target Support Files/Pods-WeAgenda-WeAgendaTests/Pods-WeAgenda-WeAgendaTests.release.xcconfig"; sourceTree = "<group>"; };
+		DDB17E72F79CC54812F5894D /* Pods-AppaTimeTracker-AppaTimeTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppaTimeTracker-AppaTimeTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-AppaTimeTracker-AppaTimeTrackerTests/Pods-AppaTimeTracker-AppaTimeTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EC086BC45ED8B59CD3BDC44D /* Pods-WeAgenda-WeAgendaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeAgenda-WeAgendaTests.debug.xcconfig"; path = "Target Support Files/Pods-WeAgenda-WeAgendaTests/Pods-WeAgenda-WeAgendaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		F168FEF6E705B2523DA0B99E /* Pods-AppaTimeTracker-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppaTimeTracker-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-AppaTimeTracker-tvOS/Pods-AppaTimeTracker-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		F84BEBA5F6006C0AD0040A1E /* Pods-WeAgenda-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeAgenda-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-WeAgenda-tvOSTests/Pods-WeAgenda-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FD6A8E7BB35BCF332909F2E9 /* libPods-WeAgenda-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WeAgenda-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		753563E52A6A43C88601AC82 /* Geometria-Light.ttf */ = {isa = PBXFileReference; name = "Geometria-Light.ttf"; path = "../assets/fonts/Geometria-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BCEEBD3B3E8E49EB871C3C1E /* Geometria.ttf */ = {isa = PBXFileReference; name = "Geometria.ttf"; path = "../assets/fonts/Geometria.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7AED7DC77924420BBB484626 /* CeraRoundProRegular.otf */ = {isa = PBXFileReference; name = "CeraRoundProRegular.otf"; path = "../assets/fonts/CeraRoundProRegular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FBF8732E2841DD97E51F09A0 /* Pods-AppaTimeTracker-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppaTimeTracker-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-AppaTimeTracker-tvOSTests/Pods-AppaTimeTracker-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53B5AF5471FD74F7B6EA5E6F /* libPods-WeAgenda-WeAgendaTests.a in Frameworks */,
+				6FD2B4D55238613A1C0EC90D /* libPods-AppaTimeTracker-AppaTimeTrackerTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABCE879548BAFBD0366A3D5C /* libPods-WeAgenda.a in Frameworks */,
+				B66732CE0A06E31625282573 /* libPods-AppaTimeTracker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88A0F0676EF2977962960994 /* libPods-WeAgenda-tvOS.a in Frameworks */,
+				CFDD7419506B4C40BA3D39F9 /* libPods-AppaTimeTracker-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98F5D4038E32D9B7308CA644 /* libPods-WeAgenda-tvOSTests.a in Frameworks */,
+				C21DE3B8E25AE65786AA2E52 /* libPods-AppaTimeTracker-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,10 +160,10 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				CA0386C63F2946CF0DB77D9F /* libPods-WeAgenda.a */,
-				931E881BD93E4480C7449D51 /* libPods-WeAgenda-WeAgendaTests.a */,
-				A62CF005D8D1F8CC764081B1 /* libPods-WeAgenda-tvOS.a */,
-				FD6A8E7BB35BCF332909F2E9 /* libPods-WeAgenda-tvOSTests.a */,
+				842ADAF75674BF10CEDB88C7 /* libPods-AppaTimeTracker.a */,
+				D9C2F64309E1694363AEEBDA /* libPods-AppaTimeTracker-AppaTimeTrackerTests.a */,
+				A322909871775B3005D10A53 /* libPods-AppaTimeTracker-tvOS.a */,
+				79F4DB82305EDE5EBB9F2ABA /* libPods-AppaTimeTracker-tvOSTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -165,6 +184,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				B391AA1ED0A8DA7C0A8A7C31 /* Pods */,
+				9FC90B7AB7624735A7C362CB /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -174,10 +194,10 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* Appa Time Tracker.app */,
-				00E356EE1AD99517003FC87E /* WeAgendaTests.xctest */,
-				2D02E47B1E0B4A5D006451C7 /* WeAgenda-tvOS.app */,
-				2D02E4901E0B4A5D006451C7 /* WeAgenda-tvOSTests.xctest */,
+				13B07F961A680F5B00A75B9A /* Appa: Time Tracker.app */,
+				00E356EE1AD99517003FC87E /* AppaTimeTrackerTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* Appa: Time Tracker-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* AppaTimeTracker-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -193,16 +213,35 @@
 				CB928BAA01ACEF8DEC823055 /* Pods-WeAgenda-tvOS.release.xcconfig */,
 				F84BEBA5F6006C0AD0040A1E /* Pods-WeAgenda-tvOSTests.debug.xcconfig */,
 				1980CD56424C2A3F661894BE /* Pods-WeAgenda-tvOSTests.release.xcconfig */,
+				DBFE3166A7D616E131F2FB37 /* Pods-AppaTimeTracker.debug.xcconfig */,
+				D6BBDBDA6053FA9BD6659832 /* Pods-AppaTimeTracker.release.xcconfig */,
+				DDB17E72F79CC54812F5894D /* Pods-AppaTimeTracker-AppaTimeTrackerTests.debug.xcconfig */,
+				5DDC5DACCF537B0281007CB5 /* Pods-AppaTimeTracker-AppaTimeTrackerTests.release.xcconfig */,
+				F168FEF6E705B2523DA0B99E /* Pods-AppaTimeTracker-tvOS.debug.xcconfig */,
+				63EA6CB35916CB2E7C8AA7FC /* Pods-AppaTimeTracker-tvOS.release.xcconfig */,
+				FBF8732E2841DD97E51F09A0 /* Pods-AppaTimeTracker-tvOSTests.debug.xcconfig */,
+				456824C387FB791269761FB8 /* Pods-AppaTimeTracker-tvOSTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		9FC90B7AB7624735A7C362CB /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				753563E52A6A43C88601AC82 /* Geometria-Light.ttf */,
+				BCEEBD3B3E8E49EB871C3C1E /* Geometria.ttf */,
+				7AED7DC77924420BBB484626 /* CeraRoundProRegular.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* WeAgendaTests */ = {
+		00E356ED1AD99517003FC87E /* AppaTimeTrackerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "WeAgendaTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "AppaTimeTrackerTests" */;
 			buildPhases = (
 				112FA7015D6F15BAB76C48BE /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -214,14 +253,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = WeAgendaTests;
+			name = AppaTimeTrackerTests;
 			productName = WeAgendaTests;
-			productReference = 00E356EE1AD99517003FC87E /* WeAgendaTests.xctest */;
+			productReference = 00E356EE1AD99517003FC87E /* AppaTimeTrackerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* WeAgenda */ = {
+		13B07F861A680F5B00A75B9A /* AppaTimeTracker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "WeAgenda" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "AppaTimeTracker" */;
 			buildPhases = (
 				A867B12CC0FA1EAD9E906056 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -234,14 +273,14 @@
 			);
 			dependencies = (
 			);
-			name = WeAgenda;
+			name = AppaTimeTracker;
 			productName = WeAgenda;
-			productReference = 13B07F961A680F5B00A75B9A /* Appa Time Tracker.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* Appa: Time Tracker.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E47A1E0B4A5D006451C7 /* WeAgenda-tvOS */ = {
+		2D02E47A1E0B4A5D006451C7 /* AppaTimeTracker-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "WeAgenda-tvOS" */;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "AppaTimeTracker-tvOS" */;
 			buildPhases = (
 				0F92E66ED674514101A6ED64 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
@@ -254,14 +293,14 @@
 			);
 			dependencies = (
 			);
-			name = "WeAgenda-tvOS";
+			name = "AppaTimeTracker-tvOS";
 			productName = "WeAgenda-tvOS";
-			productReference = 2D02E47B1E0B4A5D006451C7 /* WeAgenda-tvOS.app */;
+			productReference = 2D02E47B1E0B4A5D006451C7 /* Appa: Time Tracker-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E48F1E0B4A5D006451C7 /* WeAgenda-tvOSTests */ = {
+		2D02E48F1E0B4A5D006451C7 /* AppaTimeTracker-tvOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "WeAgenda-tvOSTests" */;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "AppaTimeTracker-tvOSTests" */;
 			buildPhases = (
 				AC3B4DCBB130402CAEAA58B7 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
@@ -273,9 +312,9 @@
 			dependencies = (
 				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
 			);
-			name = "WeAgenda-tvOSTests";
+			name = "AppaTimeTracker-tvOSTests";
 			productName = "WeAgenda-tvOSTests";
-			productReference = 2D02E4901E0B4A5D006451C7 /* WeAgenda-tvOSTests.xctest */;
+			productReference = 2D02E4901E0B4A5D006451C7 /* AppaTimeTracker-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -293,10 +332,10 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 2PNFD8677U;
 						LastSwiftMigration = 1120;
+						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
-						ProvisioningStyle = Automatic;
 					};
 					2D02E48F1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -305,7 +344,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "WeAgenda" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "AppaTimeTracker" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -318,10 +357,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* WeAgenda */,
-				00E356ED1AD99517003FC87E /* WeAgendaTests */,
-				2D02E47A1E0B4A5D006451C7 /* WeAgenda-tvOS */,
-				2D02E48F1E0B4A5D006451C7 /* WeAgenda-tvOSTests */,
+				13B07F861A680F5B00A75B9A /* AppaTimeTracker */,
+				00E356ED1AD99517003FC87E /* AppaTimeTrackerTests */,
+				2D02E47A1E0B4A5D006451C7 /* AppaTimeTracker-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* AppaTimeTracker-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -340,6 +379,8 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				02C750B4BBE144508FDE2693 /* Geometria-Light.ttf in Resources */,
+				B9D2DADCA5344EF6BB13B746 /* Geometria.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,7 +431,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WeAgenda-tvOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-AppaTimeTracker-tvOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -412,7 +453,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WeAgenda-WeAgendaTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-AppaTimeTracker-AppaTimeTrackerTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -448,7 +489,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WeAgenda-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-AppaTimeTracker-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -470,7 +511,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WeAgenda-tvOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-AppaTimeTracker-tvOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -557,12 +598,12 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* WeAgenda */;
+			target = 13B07F861A680F5B00A75B9A /* AppaTimeTracker */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2D02E47A1E0B4A5D006451C7 /* WeAgenda-tvOS */;
+			target = 2D02E47A1E0B4A5D006451C7 /* AppaTimeTracker-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -582,7 +623,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC086BC45ED8B59CD3BDC44D /* Pods-WeAgenda-WeAgendaTests.debug.xcconfig */;
+			baseConfigurationReference = DDB17E72F79CC54812F5894D /* Pods-AppaTimeTracker-AppaTimeTrackerTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -599,13 +640,13 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WeAgenda.app/WeAgenda";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppaTimeTracker.app/AppaTimeTracker";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DC8D71B9C2AE54F0E91C2B53 /* Pods-WeAgenda-WeAgendaTests.release.xcconfig */;
+			baseConfigurationReference = 5DDC5DACCF537B0281007CB5 /* Pods-AppaTimeTracker-AppaTimeTrackerTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -619,16 +660,18 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WeAgenda.app/WeAgenda";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppaTimeTracker.app/AppaTimeTracker";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BBFF98EB9BFF590EEA1D1630 /* Pods-WeAgenda.debug.xcconfig */;
+			baseConfigurationReference = DBFE3166A7D616E131F2FB37 /* Pods-AppaTimeTracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2PNFD8677U;
 				ENABLE_BITCODE = NO;
@@ -645,20 +688,23 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.appadoes;
-				PRODUCT_NAME = "Appa Time Tracker";
+				PRODUCT_NAME = "Appa: Time Tracker";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 274576892B2EB9F20253292C /* Pods-WeAgenda.release.xcconfig */;
+			baseConfigurationReference = D6BBDBDA6053FA9BD6659832 /* Pods-AppaTimeTracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2PNFD8677U;
 				ENABLE_BITCODE = NO;
@@ -671,16 +717,17 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.appadoes;
-				PRODUCT_NAME = "Appa Time Tracker";
+				PRODUCT_NAME = "Appa: Time Tracker";
+				PROVISIONING_PROFILE_SPECIFIER = "Appa Does";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7EC2C63060238FB6C37517F1 /* Pods-WeAgenda-tvOS.debug.xcconfig */;
+			baseConfigurationReference = F168FEF6E705B2523DA0B99E /* Pods-AppaTimeTracker-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -698,8 +745,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.weos.WeAgenda-tvOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.appadoes;
+				PRODUCT_NAME = "Appa: Time Tracker-tvOS";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
@@ -708,7 +755,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CB928BAA01ACEF8DEC823055 /* Pods-WeAgenda-tvOS.release.xcconfig */;
+			baseConfigurationReference = 63EA6CB35916CB2E7C8AA7FC /* Pods-AppaTimeTracker-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -716,8 +763,11 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 2PNFD8677U;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "WeAgenda-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -726,8 +776,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.weos.WeAgenda-tvOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.appadoes;
+				PRODUCT_NAME = "Appa: Time Tracker-tvOS";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
@@ -736,7 +787,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F84BEBA5F6006C0AD0040A1E /* Pods-WeAgenda-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = FBF8732E2841DD97E51F09A0 /* Pods-AppaTimeTracker-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -756,14 +807,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.WeAgenda-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WeAgenda-tvOS.app/WeAgenda-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppaTimeTracker-tvOS.app/AppaTimeTracker-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1980CD56424C2A3F661894BE /* Pods-WeAgenda-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = 456824C387FB791269761FB8 /* Pods-AppaTimeTracker-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -783,7 +834,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.WeAgenda-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WeAgenda-tvOS.app/WeAgenda-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppaTimeTracker-tvOS.app/AppaTimeTracker-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
@@ -845,6 +896,7 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "Appa: Time Tracker";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "arm64 arm64e";
 			};
@@ -899,6 +951,7 @@
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "Appa: Time Tracker";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "arm64 arm64e";
@@ -908,7 +961,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "WeAgendaTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "AppaTimeTrackerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -917,7 +970,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "WeAgenda" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "AppaTimeTracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -926,7 +979,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "WeAgenda-tvOS" */ = {
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "AppaTimeTracker-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4971E0B4A5E006451C7 /* Debug */,
@@ -935,7 +988,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "WeAgenda-tvOSTests" */ = {
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "AppaTimeTracker-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
@@ -944,7 +997,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "WeAgenda" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "AppaTimeTracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
