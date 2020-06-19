@@ -5,7 +5,7 @@ import Welcome from './Welcome';
 import Connect from './Connect';
 import CompleteController from '../../controllers/Complete';
 import CompleteScreen from '../../views/screens/Complete';
-import {Component} from '../../../weosHelpers';
+import {Component} from '../../../weos/helpers';
 
 const {Navigator, Screen} = createStackNavigator();
 

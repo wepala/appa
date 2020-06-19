@@ -5,7 +5,7 @@ import AgendaController from '../../controllers/Agenda';
 import Agenda from '../components/Agenda';
 import Backlog from '../components/Backlog';
 import TopBar from '../components/TopBar';
-import {Component} from '../../../weosHelpers';
+import {Component} from '../../../weos/helpers';
 import BacklogController from '../../controllers/Backlog';
 
 export default (props) => {

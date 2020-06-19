@@ -1,5 +1,5 @@
 import * as api from '../eventApi';
-import events from '../../tasks/__tests__/events';
+import events from './events';
 import {eventsApi} from '../calls';
 
 describe('API', () => {

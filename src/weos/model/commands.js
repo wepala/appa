@@ -1,4 +1,4 @@
-import {SET_EVENT_COUNT, SET_TOKEN, SET_APPLICATION_ID} from './actionTypes';
+import {SET_APPLICATION_ID, SET_EVENT_COUNT, SET_TOKEN} from './commandTypes';
 
 export const setEventCount = (eventCount) => {
   return {

@@ -14,7 +14,7 @@ import {
   Autocomplete,
   AutocompleteItem,
 } from '@ui-kitten/components';
-import {useForm, useValidated} from '../../../weosHelpers';
+import {useForm, useValidated} from '../../../weos/helpers';
 import {AlertIcon, ClockIcon} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
 

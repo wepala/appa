@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
-import {fetchEvents} from '../apis/eventApi';
-import {SyncSpinner} from '../views/components/Spinners';
-import {setEventCount} from '../actions';
+import {fetchEvents} from '../model/eventApi';
+import {SyncSpinner} from '../../views/components/Spinners';
+import {setEventCount} from '../model/commands';
 
 const mapStateToProps = (state) => {
   return {
@@ -40,7 +40,7 @@ const Sync = ({eventCount, children, updateEventCount, dispatch}) => {
     } else {
       setSyncComplete(true);
     }
-  }, []);
+  }, [dispatch, eventCount, updateEventCount]);
 
   return isSyncComplete ? children : <SyncSpinner />;
 };

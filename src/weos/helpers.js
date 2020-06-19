@@ -32,15 +32,11 @@ export const useValidated = (form, validated) => {
     valid,
     (data, currentValid) => {
       currentValid.title = data.title !== '';
-      if (
+      currentValid.timeEstimate = !(
         data.timeEstimate === '' ||
         data.timeEstimate === '0' ||
         data.timeEstimate === undefined
-      ) {
-        currentValid.timeEstimate = false;
-      } else {
-        currentValid.timeEstimate = true;
-      }
+      );
       setValid({...valid, ...currentValid});
     },
     () => {
