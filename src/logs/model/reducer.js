@@ -1,5 +1,5 @@
 import {v4 as uuidv4} from 'uuid';
-import {ADD_LOG, UPDATE_LOG, REMOVE_LOG} from './commandTypes';
+import {ADD_LOG, REMOVE_LOG, UPDATE_LOG} from './commandTypes';
 
 const logs = (
   state = {getByTaskId: new Map(), getById: new Map(), getByTime: new Map()},

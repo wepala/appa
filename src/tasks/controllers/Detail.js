@@ -1,4 +1,4 @@
-import {addTask, updateTask, removeTask} from '../model/commands';
+import {addTask, removeTask, updateTask} from '../model/commands';
 import {Controller} from '../../controller';
 import moment from 'moment';
 

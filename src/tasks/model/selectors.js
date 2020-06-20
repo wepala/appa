@@ -1,5 +1,6 @@
 import {createSelector} from 'reselect';
 import moment from 'moment';
+
 export const tasksSelector = (state) => {
   return Object.values(state.tasks.getById);
 };
