@@ -1,14 +1,14 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Image} from 'react-native';
 import logo from '../../../../assets/images/brand/appaIcon.png';
 
 import {
+  Button,
   Layout,
-  Text,
   List,
   StyleService,
+  Text,
   useStyleSheet,
-  Button,
 } from '@ui-kitten/components';
 import BacklogItem from './BacklogItem';
 import {SectionContext} from '../../context/section-context';

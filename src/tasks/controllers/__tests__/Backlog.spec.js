@@ -1,8 +1,7 @@
 import {mockTasks} from '../../__tests__/fixtures';
 import {mockLogs} from '../../../logs/__tests__/fixtures';
 import BacklogController from '../Backlog';
-import AgendaController from '../Agenda';
-import {startTask, updateTask} from '../../model/commands';
+import {updateTask} from '../../model/commands';
 import moment from 'moment';
 
 describe('Backlog Controller', () => {

@@ -1,18 +1,17 @@
 import React, {useState} from 'react';
 import moment from 'moment';
-import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
+import {KeyboardAvoidingView, SafeAreaView, ScrollView} from 'react-native';
 import {
-  Button,
-  Divider,
-  Input,
-  Layout,
-  StyleService,
-  useStyleSheet,
-  Select,
-  SelectItem,
-  IndexPath,
   Autocomplete,
   AutocompleteItem,
+  Button,
+  IndexPath,
+  Input,
+  Layout,
+  Select,
+  SelectItem,
+  StyleService,
+  useStyleSheet,
 } from '@ui-kitten/components';
 import {useForm, useValidated} from '../../../weosHelpers';
 import {AlertIcon, ClockIcon} from '../../../views/components/Icons';

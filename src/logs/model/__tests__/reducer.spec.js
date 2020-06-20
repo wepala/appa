@@ -1,6 +1,6 @@
 import logs from '../reducer';
 import moment from 'moment';
-import {addTimeLog, updateTimeLog, removeTimeLog} from '../commands';
+import {addTimeLog, removeTimeLog, updateTimeLog} from '../commands';
 import {mockLogs} from '../../__tests__/fixtures';
 
 describe('logs reducer', function () {

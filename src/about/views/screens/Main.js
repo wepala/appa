@@ -1,18 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import {ImageBackground, Linking} from 'react-native';
+import React, {useState} from 'react';
+import {ImageBackground, Linking, SafeAreaView} from 'react-native';
 import packageJson from '../../../../package.json';
 
 import {
-  Layout,
-  StyleService,
-  useStyleSheet,
-  Text,
-  Card,
   Button,
+  Card,
+  Layout,
   Modal,
+  StyleService,
+  Text,
+  useStyleSheet,
 } from '@ui-kitten/components';
 import TopBar from '../components/TopBar';
-import {SafeAreaView} from 'react-native';
 import background from '../../../../assets/images/brand/about.png';
 
 export default ({navigation, status, route}) => {
@@ -68,7 +67,7 @@ export default ({navigation, status, route}) => {
                   });
                 }}
                 style={styles.button}>
-                <Text>The company behind the cApps</Text>
+                <Text>The company behind Appa</Text>
               </Button>
             </Layout>
           </Layout>

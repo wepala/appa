@@ -1,15 +1,15 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Image} from 'react-native';
 import {SectionContext} from '../../context/section-context';
 import logo from '../../../../assets/images/brand/appaIcon.png';
 
 import {
-  List,
-  Text,
-  Layout,
-  StyleService,
-  useStyleSheet,
   Button,
+  Layout,
+  List,
+  StyleService,
+  Text,
+  useStyleSheet,
 } from '@ui-kitten/components';
 import AgendaItem from '../components/AgendaItem';
 import CurrentTask from '../components/CurrentTask';

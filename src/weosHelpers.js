@@ -1,4 +1,4 @@
-import {useState, createContext} from 'react';
+import {createContext, useState} from 'react';
 import {connect} from 'react-redux';
 
 export const Component = (controller, view) => {

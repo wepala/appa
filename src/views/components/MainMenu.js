@@ -1,27 +1,21 @@
 import React from 'react';
 import logo from '../../../assets/images/brand/appaIcon.png';
-import {StyleSheet, View, SafeAreaView} from 'react-native';
+import {SafeAreaView, View} from 'react-native';
 import {
   Avatar,
   Divider,
   Drawer,
-  DrawerElement,
   DrawerItem,
   Layout,
-  MenuItemType,
-  Text,
   StyleService,
+  Text,
   useStyleSheet,
 } from '@ui-kitten/components';
 import {
   AssetCalendarIcon,
   ClockIcon,
-  InfoIcon,
   EditIcon,
-  StarIcon,
-  QuestionIcon,
-  GridIcon,
-  ReportIcon,
+  InfoIcon,
   SettingsIcon,
   SupportIcon,
 } from './Icons';
