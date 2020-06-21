@@ -14,7 +14,7 @@ import Settings from '../settings/views/screens/Main';
 import About from '../about/views/screens/Main';
 import Support from '../support/views/screens/Support';
 import Customize from '../customize/views/screens/Main';
-import {setToken, setUser} from '../weos/auth/model/commands';
+import {setToken, setUser} from '../weos/model/commands';
 import {onBoardUser} from '../onboarding/model/commands';
 
 const {Navigator, Screen} = createDrawerNavigator();
@@ -22,8 +22,8 @@ const {Navigator, Screen} = createDrawerNavigator();
 const mapStateToProps = (state) => {
   return {
     onBoarded: state.onboard.onBoarded,
-    token: state.token,
-    user: state.user,
+    token: state.weos.token,
+    user: state.weos.user,
   };
 };
 

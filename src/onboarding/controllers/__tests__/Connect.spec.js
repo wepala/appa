@@ -1,5 +1,5 @@
 import ConnectController from '../Connect';
-import {setToken} from '../../../weos/auth/model/commands';
+import {setToken} from '../../../weos/model/commands';
 
 describe('Connect Controller', () => {
   it('Should provide a method to save auth token', () => {

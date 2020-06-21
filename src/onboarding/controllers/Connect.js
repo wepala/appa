@@ -1,5 +1,5 @@
 import {Controller} from '../../controller';
-import {setToken} from '../../weos/auth/model/commands';
+import {setToken} from '../../weos/model/commands';
 
 /**
  * @class ConnectController
