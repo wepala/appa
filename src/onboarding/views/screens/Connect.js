@@ -2,10 +2,10 @@ import React, {useEffect} from 'react';
 import {SafeAreaView, ImageBackground, Linking} from 'react-native';
 import {
   Button,
+  Layout,
+  StyleService,
   Text,
   useStyleSheet,
-  StyleService,
-  Layout,
 } from '@ui-kitten/components';
 import URL from 'url-parse';
 import {Alert} from 'react-native';

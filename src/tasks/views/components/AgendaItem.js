@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {
-  Text,
-  Card,
   Button,
-  Layout,
+  Card,
   CheckBox,
+  Layout,
   StyleService,
+  Text,
   useStyleSheet,
 } from '@ui-kitten/components';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';

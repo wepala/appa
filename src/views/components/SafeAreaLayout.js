@@ -1,7 +1,7 @@
 import React from 'react';
 import {FlexStyle, View, ViewProps} from 'react-native';
 import {EdgeInsets, SafeAreaConsumer} from 'react-native-safe-area-context';
-import {styled, StyledComponentProps} from '@ui-kitten/components';
+import {StyledComponentProps} from '@ui-kitten/components';
 
 interface InsetProvider {
   toStyle: (insets: EdgeInsets, styles) => FlexStyle;

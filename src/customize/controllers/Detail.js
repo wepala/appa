@@ -1,20 +1,13 @@
-import React, {createContext} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import {SUPPORT_URL, SENDER, DESTINATION} from 'react-native-dotenv';
+import {DESTINATION, SENDER, SUPPORT_URL} from 'react-native-dotenv';
 
 import DetailScreen from '../views/screens/Detail';
-import {useState} from 'react';
 
-const value = {
-  status: null,
-  makeRequest(form) {
-    this.status = 'pending';
-  },
-};
 const Detail = (props) => {
   const [status, setStatus] = useState('init');
   const makeRequest = (form) => {
-    console.log(SUPPORT_URL, '\n', SENDER, '\n', DESTINATION, '\n', form);
+    console.log(form);
     setStatus('pending');
     axios({
       method: 'post',
@@ -28,11 +21,10 @@ const Detail = (props) => {
       },
     })
       .then((res) => {
-        console.log('Success!!', res.data);
         setStatus('success');
       })
       .catch((error) => {
-        console.log('Error!!', error);
+        console.log(error);
         setStatus('error');
       });
   };

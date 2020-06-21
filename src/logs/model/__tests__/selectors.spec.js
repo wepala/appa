@@ -1,10 +1,10 @@
 import {mockLogs} from '../../__tests__/fixtures';
 import {
-  getLogsByTaskId,
-  getTimeSpentByTaskId,
-  getTimeSpentByDay,
-  getTaskTimeSpentByDate,
   getLogsByFilter,
+  getLogsByTaskId,
+  getTaskTimeSpentByDate,
+  getTimeSpentByDay,
+  getTimeSpentByTaskId,
 } from '../selectors';
 import {mockTasks} from '../../../tasks/__tests__/fixtures';
 import {addTimeLog} from '../commands';

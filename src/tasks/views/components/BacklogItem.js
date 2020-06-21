@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import moment from 'moment';
 
 import {
-  Text,
-  Card,
-  Layout,
   Button,
+  Card,
   CheckBox,
+  Layout,
   StyleService,
+  Text,
   useStyleSheet,
 } from '@ui-kitten/components';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -35,12 +35,13 @@ const BacklogItem = ({
       navigation.navigate('Today'),
     );
   };
-
-  let currentTimeSpent = {
-    hours: parseInt(timeSpentToday / 3600, 10),
-    minutes: parseInt(timeSpentToday / 60, 10) % 60,
-    seconds: timeSpentToday % 60,
-  };
+  let currentTimeSpent = timeSpentToday
+    ? {
+        hours: parseInt(timeSpentToday / 3600, 10),
+        minutes: parseInt(timeSpentToday / 60, 10) % 60,
+        seconds: timeSpentToday % 60,
+      }
+    : {seconds: 0};
 
   let estimatedTime = {
     hours: parseInt(item.estimatedTime / 3600, 10),

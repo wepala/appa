@@ -1,4 +1,5 @@
 import moment from 'moment';
+
 export const mockLogs = {
   getById: new Map([
     [

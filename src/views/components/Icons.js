@@ -83,7 +83,7 @@ export const SettingsIcon = (style) => (
 );
 export const SupportIcon = (style) => <Icon {...style} name="phone-outline" />;
 
-export const StarIcon = (style) => <Icon {...style} name="star" />;
+export const StarIcon = (style) => <Icon {...style} name="star-outline" />;
 
 export const StarOutlineIcon = (style) => (
   <Icon {...style} name="star-outline" />

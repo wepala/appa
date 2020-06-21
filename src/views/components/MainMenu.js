@@ -1,23 +1,21 @@
 import React from 'react';
-import {StyleSheet, View, SafeAreaView} from 'react-native';
+import logo from '../../../assets/images/brand/appaIcon.png';
+import {SafeAreaView, View} from 'react-native';
 import {
   Avatar,
   Divider,
   Drawer,
-  DrawerElement,
   DrawerItem,
   Layout,
-  MenuItemType,
-  Text,
   StyleService,
+  Text,
   useStyleSheet,
 } from '@ui-kitten/components';
 import {
   AssetCalendarIcon,
   ClockIcon,
-  QuestionIcon,
-  GridIcon,
-  ReportIcon,
+  EditIcon,
+  InfoIcon,
   SettingsIcon,
   SupportIcon,
 } from './Icons';
@@ -42,17 +40,17 @@ export default ({navigation, token, logout, setUserInfo, user}) => {
         navigation.navigate('Settings');
         return;
       }
-      // case 4: {
-      //   navigation.toggleDrawer();
-      //   navigation.navigate('Support');
-      //   return;
-      // }
       case 4: {
+        navigation.toggleDrawer();
+        navigation.navigate('Support');
+        return;
+      }
+      case 5: {
         navigation.toggleDrawer();
         navigation.navigate('Customize');
         return;
       }
-      case 5: {
+      case 6: {
         navigation.toggleDrawer();
         navigation.navigate('About');
         return;
@@ -63,13 +61,7 @@ export default ({navigation, token, logout, setUserInfo, user}) => {
   const renderHeader = () => (
     <Layout style={styles.header} level="2">
       <View style={styles.profileContainer}>
-        <Avatar
-          size="giant"
-          shape="rounded"
-          source={{
-            uri: 'https://cdn.roadmap.space/logos/5ed5164b31d74e9553c4f5eb.png',
-          }}
-        />
+        <Avatar size="giant" shape="rounded" source={logo} />
         <Text style={styles.profileName} category="h6">
           Appa Does
         </Text>
@@ -106,8 +98,9 @@ export default ({navigation, token, logout, setUserInfo, user}) => {
         {/* <DrawerItem title={'Reports'} accessoryLeft={ReportIcon} /> */}
         <Divider />
         <DrawerItem title={'Settings'} accessoryLeft={SettingsIcon} />
-        <DrawerItem title={'Customize'} accessoryLeft={GridIcon} />
-        <DrawerItem title={'About'} accessoryLeft={QuestionIcon} />
+        <DrawerItem title={'Support'} accessoryLeft={SupportIcon} />
+        <DrawerItem title={'Customize'} accessoryLeft={EditIcon} />
+        <DrawerItem title={'About'} accessoryLeft={InfoIcon} />
       </Drawer>
     </SafeAreaView>
   );

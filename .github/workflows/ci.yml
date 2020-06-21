@@ -117,8 +117,6 @@ jobs:
           SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
           SENDER: ${{ secrets.SENDER }}
           DESTINATION: ${{ secrets.DESTINATION }}
-          ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
-          ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
           BEARER: ${{ secrets.BEARER }}
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           AUTHORIZE_URL: ${{ secrets.AUTHORIZE_URL }}
@@ -193,8 +191,6 @@ jobs:
           SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
           SENDER: ${{ secrets.SENDER }}
           DESTINATION: ${{ secrets.DESTINATION }}
-          ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
-          ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
           BEARER: ${{ secrets.BEARER }}
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           AUTHORIZE_URL: ${{ secrets.AUTHORIZE_URL }}

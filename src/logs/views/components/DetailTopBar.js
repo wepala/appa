@@ -5,9 +5,11 @@ import {
 } from '@ui-kitten/components';
 import {ArrowIosBackIcon, TrashIcon} from '../../../views/components/Icons';
 import React from 'react';
+import {Alert} from 'react-native';
 
-export default ({navigation, title, section}) => {
+export default ({navigation, title, route, onRemove}) => {
   title = title === undefined ? 'Create Log' : title;
+  const id = route.params?.id;
 
   const goBack = () => {
     navigation.goBack();
@@ -18,11 +20,30 @@ export default ({navigation, title, section}) => {
   );
 
   const MenuAction = () => {
-    const showCreate = () => {
-      navigation.navigate('CreateLog', {section: section});
+    const showDelete = () => {
+      Alert.alert(
+        'Delete Log',
+        'Are you sure ?',
+        [
+          {
+            text: 'Cancel',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+          {
+            text: 'Confirm',
+            onPress: () => {
+              return onRemove(id)
+                .then(() => navigation.navigate('LogList'))
+                .catch((error) => console.log('An error occured', error));
+            },
+          },
+        ],
+        {cancelable: false},
+      );
     };
 
-    return <TopNavigationAction icon={TrashIcon} onPress={showCreate} />;
+    return <TopNavigationAction icon={TrashIcon} onPress={showDelete} />;
   };
 
   return (

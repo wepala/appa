@@ -1,24 +1,31 @@
 import React, {useState} from 'react';
 import moment from 'moment';
-import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
+import {KeyboardAvoidingView, SafeAreaView, ScrollView} from 'react-native';
 import {
-  Button,
-  Divider,
-  Input,
-  Layout,
-  StyleService,
-  useStyleSheet,
-  Select,
-  SelectItem,
-  IndexPath,
   Autocomplete,
   AutocompleteItem,
+  Button,
+  IndexPath,
+  Input,
+  Layout,
+  Select,
+  SelectItem,
+  StyleService,
+  useStyleSheet,
 } from '@ui-kitten/components';
 import {useForm, useValidated} from '../../../weosHelpers';
 import {AlertIcon, ClockIcon} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
 
-export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
+export default ({
+  navigation,
+  route,
+  getTasks,
+  onSave,
+  getLog,
+  onUpdate,
+  onRemove,
+}) => {
   const styles = useStyleSheet(themedStyles);
   const logId = route.params?.id;
   const log = getLog(logId);
@@ -48,6 +55,7 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
 
   const tasks = getTasks();
   const [data, setData] = useState(tasks);
+  const [submitStatus, setSubmitStatus] = useState(false);
 
   const onSubmit = () => {
     setValid(form, valid);
@@ -76,6 +84,8 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
     } else {
       onSave(form.taskId, startTime).then(() => navigation.goBack());
     }
+
+    setSubmitStatus(true);
   };
 
   const selectTask = (index) => {
@@ -120,7 +130,12 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.container}>
-        <DetailTopBar navigation={navigation} title="Time Log" />
+        <DetailTopBar
+          navigation={navigation}
+          route={route}
+          onRemove={onRemove}
+          title="Time Log"
+        />
         <ScrollView>
           <Layout style={styles.form}>
             <Autocomplete
@@ -205,6 +220,7 @@ export default ({navigation, route, getTasks, onSave, getLog, onUpdate}) => {
                 testID="SubmitButton"
                 style={styles.buttonSubmit}
                 size="giant"
+                disabled={submitStatus}
                 onPress={onSubmit}>
                 OK
               </Button>

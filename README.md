@@ -20,6 +20,7 @@ Copy the contents of the `.env-dist` file into the `.env` and fill out the blank
 SUPPORT_URL = https://XXXXXXXXXXXXXX
 SENDER = XXXXXXXX@XXXXX
 DESTINATION = XXXXXXXX@XXXXX
+PIPELINE_URL=https://XXXXXXXXXXXXXX
 CLIENT_ID=XXXXXXXX
 AUTHORIZE_URL=http://example.com
 REDIRECT_URI=com.XXXXXXXX

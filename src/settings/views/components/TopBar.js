@@ -1,10 +1,10 @@
 import {
   Divider,
+  StyleService,
+  Text,
   TopNavigation,
   TopNavigationAction,
   useStyleSheet,
-  StyleService,
-  Text,
 } from '@ui-kitten/components';
 import {ArrowIosBackIcon, CloseIcon} from '../../../views/components/Icons';
 import React from 'react';

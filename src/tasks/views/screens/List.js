@@ -1,5 +1,5 @@
 import React from 'react';
-import {TabBar, Tab, StyleService, useStyleSheet} from '@ui-kitten/components';
+import {StyleService, Tab, TabBar, useStyleSheet} from '@ui-kitten/components';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import AgendaController from '../../controllers/Agenda';
 import Agenda from '../components/Agenda';

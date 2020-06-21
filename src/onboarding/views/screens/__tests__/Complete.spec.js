@@ -1,4 +1,4 @@
-import {render, fireEvent} from 'react-native-testing-library';
+import {fireEvent, render} from 'react-native-testing-library';
 import Complete from '../Complete';
 import React from 'react';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
