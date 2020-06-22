@@ -16,7 +16,8 @@ Copy the contents of the `.env-dist` file into the `.env` and fill out the blank
 
 ```
 // Your .env should resemble this
-
+ROADMAP_BASEURL=https://XXXXXXXXXXXXXX
+ROADMAP_ID=XXXXXXXXXXXXXX
 SUPPORT_URL=https://XXXXXXXXXXXXXX
 SENDER=XXXXXXXX@XXXXX
 DESTINATION=XXXXXXXX@XXXXX 
