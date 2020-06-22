@@ -1,5 +1,5 @@
 import {mockTasks} from '../../__tests__/fixtures';
-import {getTasksByDate, getIncompleteTasks} from '../selectors';
+import {getIncompleteTasks, getTasksByDate} from '../selectors';
 import moment from 'moment';
 
 describe('Task Selectors', () => {

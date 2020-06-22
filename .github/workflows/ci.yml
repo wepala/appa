@@ -43,8 +43,6 @@ jobs:
           SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
           SENDER: ${{ secrets.SENDER }}
           DESTINATION: ${{ secrets.DESTINATION }}
-          ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
-          ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
           BEARER: ${{ secrets.BEARER }}
       - name: Build debug APK
         run: |
@@ -124,8 +122,6 @@ jobs:
           SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
           SENDER: ${{ secrets.SENDER }}
           DESTINATION: ${{ secrets.DESTINATION }}
-          ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
-          ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
           BEARER: ${{ secrets.BEARER }}
       - name: Build release APK
         run: |
@@ -134,14 +130,11 @@ jobs:
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-      - name: Update beta track in play store
-        uses: r0adkll/upload-google-play@v1
+      - name: Upload release APK
+        uses: actions/upload-artifact@v2
         with:
-          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
-          packageName: com.appadoes
-          releaseFile: android/app/build/outputs/bundle/release/app-release.aab
-          track: beta
-          whatsNewDirectory: distribution/
+          name: app-release.aab
+          path: android/app/build/outputs/bundle/release/
       - name: Send failure notification
         uses: rtCamp/action-slack-notify@v2.0.0
         if: failure()
@@ -197,8 +190,6 @@ jobs:
           SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
           SENDER: ${{ secrets.SENDER }}
           DESTINATION: ${{ secrets.DESTINATION }}
-          ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
-          ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
           BEARER: ${{ secrets.BEARER }}
       - name: Create archive for app
         run: |

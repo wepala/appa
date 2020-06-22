@@ -1,14 +1,12 @@
 import React from 'react';
-import {View, KeyboardAvoidingView} from 'react-native';
+import {View} from 'react-native';
 import {
   Button,
-  Input,
   Layout,
   StyleService,
   Text,
   useStyleSheet,
 } from '@ui-kitten/components';
-import {EyeIcon, EyeOffIcon, PersonIcon} from '../../../views/components/Icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faLifeRing} from '@fortawesome/free-solid-svg-icons';
 

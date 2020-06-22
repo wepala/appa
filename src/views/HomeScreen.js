@@ -4,7 +4,6 @@ import {StyleSheet} from 'react-native';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {connect} from 'react-redux';
-
 //import the different modules
 import MainMenu from './components/MainMenu';
 import Tasks from '../tasks/views/screens/Main';

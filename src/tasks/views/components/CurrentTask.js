@@ -1,14 +1,13 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import moment from 'moment';
 import {
-  Text,
+  Button,
   Card,
   Layout,
   StyleService,
-  Button,
+  Text,
   useStyleSheet,
 } from '@ui-kitten/components';
-import {StopOutlineIcon} from '../../../views/components/Icons';
 
 const useInterval = (callback, delay) => {
   const savedCallback = useRef();
