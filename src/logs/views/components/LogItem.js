@@ -1,12 +1,12 @@
 import React from 'react';
 import moment from 'moment';
 import {
-  Text,
+  Avatar,
+  Button,
   Card,
   Layout,
   StyleService,
-  Avatar,
-  Button,
+  Text,
   useStyleSheet,
 } from '@ui-kitten/components';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';

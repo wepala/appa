@@ -4,11 +4,12 @@ import {SafeAreaView, ScrollView} from 'react-native';
 import {ThemeContext} from '../../../../theme.context';
 import {
   Button,
+  Divider,
   Layout,
   StyleService,
-  useStyleSheet,
   Text,
   Toggle,
+  useStyleSheet,
 } from '@ui-kitten/components';
 import TopBar from '../components/TopBar';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';

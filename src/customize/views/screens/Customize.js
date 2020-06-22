@@ -1,21 +1,19 @@
-import React, {useState, useContext} from 'react';
-import {ThemeContext} from '../../../../theme.context';
-import {ScrollView, Linking, Platform, SafeAreaView} from 'react-native';
+import React, {useState, U} from 'react';
+import {Linking, Platform, SafeAreaView, ScrollView} from 'react-native';
 import {
   Button,
-  Layout,
-  StyleService,
-  useStyleSheet,
-  Text,
   Card,
+  Layout,
   Modal,
+  StyleService,
+  Text,
+  useStyleSheet,
 } from '@ui-kitten/components';
 import TopBar from '../components/TopBar';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faGithub} from '@fortawesome/free-brands-svg-icons';
 
 export default ({navigation, route}) => {
-  const themeContext = useContext(ThemeContext);
   const styles = useStyleSheet(themedStyles);
   let [visible, toggleVisible] = useState(false);
 

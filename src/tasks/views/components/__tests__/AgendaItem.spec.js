@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent, act} from 'react-native-testing-library';
+import {act, fireEvent, render} from 'react-native-testing-library';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Layout, List, StyleService, useStyleSheet} from '@ui-kitten/components';
 import LogItem from '../components/LogItem';
 import LogFilter from '../components/LogsFilter';
