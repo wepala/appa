@@ -23,6 +23,23 @@ jobs:
       - name: Lint code
         run: |
           npm run lint
+      - name: Create .env file
+        run: |
+          env > .env
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
+          SENDER: ${{ secrets.SENDER }}
+          DESTINATION: ${{ secrets.DESTINATION }}
+          ROADMAP_BASEURL: ${{ secrets.ROADMAP_BASEURL }}
+          ROADMAP_ID: ${{ secrets.ROADMAP_ID }}
+          BEARER: ${{ secrets.BEARER }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          AUTHORIZE_URL: ${{ secrets.AUTHORIZE_URL }}
+          REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
+          RESPONSE_TYPE: ${{ secrets.RESPONSE_TYPE }}
+          SCOPE: ${{ secrets.SCOPE }}
+          CODE_CHALLENGE_METHOD: ${{ secrets.CODE_CHALLENGE_METHOD }}
       - name: Test code
         run: |
           npm test
@@ -35,15 +52,6 @@ jobs:
       - name: Install NDK # Temp fix for ongoing gradle issue
         run: |
           echo "y" | sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;20.0.5594570" --sdk_root=${ANDROID_SDK_ROOT}
-      - name: Create .env file
-        run: |
-          env > .env
-        env:
-          API_URL: ${{ secrets.API_URL }}
-          SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
-          SENDER: ${{ secrets.SENDER }}
-          DESTINATION: ${{ secrets.DESTINATION }}
-          BEARER: ${{ secrets.BEARER }}
       - name: Build debug APK
         run: |
           npm run bundle-android
@@ -110,6 +118,12 @@ jobs:
           SENDER: ${{ secrets.SENDER }}
           DESTINATION: ${{ secrets.DESTINATION }}
           BEARER: ${{ secrets.BEARER }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          AUTHORIZE_URL: ${{ secrets.AUTHORIZE_URL }}
+          REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
+          RESPONSE_TYPE: ${{ secrets.RESPONSE_TYPE }}
+          SCOPE: ${{ secrets.SCOPE }}
+          CODE_CHALLENGE_METHOD: ${{ secrets.CODE_CHALLENGE_METHOD }}
       - name: Build release APK
         run: |
           cd android && ./gradlew clean bundleRelease
@@ -178,6 +192,12 @@ jobs:
           SENDER: ${{ secrets.SENDER }}
           DESTINATION: ${{ secrets.DESTINATION }}
           BEARER: ${{ secrets.BEARER }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          AUTHORIZE_URL: ${{ secrets.AUTHORIZE_URL }}
+          REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
+          RESPONSE_TYPE: ${{ secrets.RESPONSE_TYPE }}
+          SCOPE: ${{ secrets.SCOPE }}
+          CODE_CHALLENGE_METHOD: ${{ secrets.CODE_CHALLENGE_METHOD }}
       - name: Create archive for app
         run: |
           cd ios

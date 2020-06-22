@@ -9,7 +9,7 @@ import {
 } from '@ui-kitten/components';
 import background from '../../../../assets/images/brand/welcome.png';
 
-export default ({navigation, onComplete}) => {
+export default ({navigation}) => {
   const styles = useStyleSheet(themedStyles);
 
   return (
@@ -23,7 +23,9 @@ export default ({navigation, onComplete}) => {
             Appa
           </Text>
         </Layout>
-        <Button style={styles.button} onPress={() => onComplete()}>
+        <Button
+          style={styles.button}
+          onPress={() => navigation.navigate('Connect')}>
           Continue
         </Button>
       </ImageBackground>

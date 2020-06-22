@@ -20,8 +20,9 @@ import {
   SettingsIcon,
   SupportIcon,
 } from './Icons';
+import Profile from './Profile';
 
-export default ({navigation}) => {
+export default ({navigation, token, logout, setUserInfo, user}) => {
   const styles = useStyleSheet(themedStyles);
   const onItemSelect = (index) => {
     switch (index.row) {
@@ -71,6 +72,17 @@ export default ({navigation}) => {
           Appa Does
         </Text>
       </View>
+
+      {token && (
+        <View style={styles.profile}>
+          <Profile
+            user={user}
+            token={token}
+            logout={logout}
+            setUserInfo={setUserInfo}
+          />
+        </View>
+      )}
     </Layout>
   );
 
@@ -106,7 +118,7 @@ const themedStyles = StyleService.create({
     flex: 1,
   },
   header: {
-    paddingVertical: 32,
+    paddingVertical: 22,
     paddingHorizontal: 16,
     justifyContent: 'center',
     // backgroundColor: '$color-primary-500',
@@ -118,5 +130,8 @@ const themedStyles = StyleService.create({
   profileName: {
     // color: '#fff',
     marginHorizontal: 16,
+  },
+  profile: {
+    marginTop: 20,
   },
 });
