@@ -1,9 +1,9 @@
 import React from 'react';
 import {
   Divider,
+  Text,
   TopNavigation,
   TopNavigationAction,
-  Text,
 } from '@ui-kitten/components';
 import {MenuIcon, PlusIcon} from '../../../views/components/Icons';
 

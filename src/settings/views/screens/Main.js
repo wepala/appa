@@ -3,15 +3,12 @@ import {SafeAreaView} from 'react-native';
 import {ThemeContext} from '../../../../theme.context';
 import {
   Button,
+  Divider,
   Layout,
   StyleService,
-  Select,
-  SelectItem,
-  useStyleSheet,
   Text,
   Toggle,
-  Icon,
-  Divider,
+  useStyleSheet,
 } from '@ui-kitten/components';
 import TopBar from '../components/TopBar';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';

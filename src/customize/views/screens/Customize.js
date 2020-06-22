@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
-import {ScrollView, Linking, Platform} from 'react-native';
+import {Linking, Platform, SafeAreaView, ScrollView} from 'react-native';
 import {
   Button,
-  Layout,
-  StyleService,
-  useStyleSheet,
-  Text,
   Card,
+  Layout,
   Modal,
+  StyleService,
+  Text,
+  useStyleSheet,
 } from '@ui-kitten/components';
 import TopBar from '../components/TopBar';
-import {SafeAreaView} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faGithub} from '@fortawesome/free-brands-svg-icons';
 

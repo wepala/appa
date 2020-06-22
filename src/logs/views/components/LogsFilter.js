@@ -2,13 +2,13 @@ import React, {useState} from 'react';
 import moment from 'moment';
 import {
   Layout,
+  RangeDatepicker,
   Select,
   SelectItem,
-  RangeDatepicker,
-  useStyleSheet,
   StyleService,
+  useStyleSheet,
 } from '@ui-kitten/components';
-import {CalendarIcon, ArrowDownIcon} from '../../../views/components/Icons';
+import {ArrowDownIcon, CalendarIcon} from '../../../views/components/Icons';
 
 const LogsFilter = ({tasks, onSetFilters}) => {
   const [range, setRange] = useState({

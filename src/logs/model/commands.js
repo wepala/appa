@@ -1,4 +1,4 @@
-import {ADD_LOG, UPDATE_LOG, REMOVE_LOG} from './commandTypes';
+import {ADD_LOG, REMOVE_LOG, UPDATE_LOG} from './commandTypes';
 
 export const addTimeLog = (taskId, startTime) => {
   return {

@@ -1,17 +1,16 @@
-import React, {useContext, useState} from 'react';
-import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
+import React from 'react';
+import {KeyboardAvoidingView, SafeAreaView} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {
   Button,
-  Layout,
-  StyleService,
-  Input,
-  useStyleSheet,
-  Text,
-  Modal,
   Card,
+  Input,
+  Layout,
+  Modal,
+  StyleService,
+  Text,
+  useStyleSheet,
 } from '@ui-kitten/components';
-import {ArrowDownIcon} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
 import {useForm} from '../../../weosHelpers';
 
