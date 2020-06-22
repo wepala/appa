@@ -1,26 +1,21 @@
 import React from 'react';
-import {StyleSheet, View, SafeAreaView} from 'react-native';
+import logo from '../../../assets/images/brand/appaIcon.png';
+import {SafeAreaView, View} from 'react-native';
 import {
   Avatar,
   Divider,
   Drawer,
-  DrawerElement,
   DrawerItem,
   Layout,
-  MenuItemType,
-  Text,
   StyleService,
+  Text,
   useStyleSheet,
 } from '@ui-kitten/components';
 import {
   AssetCalendarIcon,
   ClockIcon,
-  InfoIcon,
   EditIcon,
-  StarIcon,
-  QuestionIcon,
-  GridIcon,
-  ReportIcon,
+  InfoIcon,
   SettingsIcon,
   SupportIcon,
 } from './Icons';
@@ -55,28 +50,24 @@ export default ({navigation}) => {
         return;
       }
       case 6: {
+
         navigation.toggleDrawer();
         navigation.navigate('Feedback');
         return;
-      }
-      case 7: {
-        navigation.toggleDrawer();
-        navigation.navigate('About');
-        return;
-      }
     }
+
+      case 7: {
+            navigation.toggleDrawer();
+            navigation.navigate('About');
+            return;
+          }
+        }
   };
 
   const renderHeader = () => (
     <Layout style={styles.header} level="2">
       <View style={styles.profileContainer}>
-        <Avatar
-          size="giant"
-          shape="rounded"
-          source={{
-            uri: 'https://cdn.roadmap.space/logos/5ed5164b31d74e9553c4f5eb.png',
-          }}
-        />
+        <Avatar size="giant" shape="rounded" source={logo} />
         <Text style={styles.profileName} category="h6">
           Appa Does
         </Text>
@@ -104,7 +95,6 @@ export default ({navigation}) => {
         <DrawerItem title={'Settings'} accessoryLeft={SettingsIcon} />
         <DrawerItem title={'Support'} accessoryLeft={SupportIcon} />
         <DrawerItem title={'Customize'} accessoryLeft={EditIcon} />
-        <DrawerItem title={'Feedback'} accessoryLeft={StarIcon} />
         <DrawerItem title={'About'} accessoryLeft={InfoIcon} />
       </Drawer>
     </SafeAreaView>

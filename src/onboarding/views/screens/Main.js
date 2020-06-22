@@ -13,9 +13,13 @@ export default () => (
   <Navigator
     screenOptions={{
       gestureEnabled: false,
+      headerShown: false,
     }}
     initialRouteName="Welcome">
-    <Screen name="Welcome" component={Welcome} />
+    <Screen
+      name="Welcome"
+      component={Component(new CompleteController(), Welcome)}
+    />
     <Screen name="Connect" component={Connect} />
     <Screen
       name="Complete"

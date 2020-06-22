@@ -1,15 +1,15 @@
 import {mockTasks} from '../../__tests__/fixtures';
+import {mockLogs} from '../../../logs/__tests__/fixtures';
 import BacklogController from '../Backlog';
-import AgendaController from '../Agenda';
-import {startTask, updateTask} from '../../model/commands';
+import {updateTask} from '../../model/commands';
 import moment from 'moment';
 
 describe('Backlog Controller', () => {
+  const mockedState = {
+    tasks: mockTasks,
+    logs: mockLogs,
+  };
   it('should have a property that only shows incomplete items', () => {
-    const mockedState = {
-      tasks: mockTasks,
-    };
-
     const controller = new BacklogController();
     const state = controller.configureState(mockedState);
     expect(state.items).toBeArrayOfSize(4);
@@ -17,9 +17,6 @@ describe('Backlog Controller', () => {
 
   it('should provide a method for adding a task to the current work agenda', () => {
     const dispatch = jest.fn();
-    const mockedState = {
-      tasks: mockTasks,
-    };
 
     const controller = new BacklogController();
     controller.configureState(mockedState);
@@ -37,9 +34,6 @@ describe('Backlog Controller', () => {
 
   it('should provide a method for marking a task as complete', () => {
     const dispatch = jest.fn();
-    const mockedState = {
-      tasks: mockTasks,
-    };
 
     const controller = new BacklogController();
     controller.configureState(mockedState);

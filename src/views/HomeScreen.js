@@ -4,7 +4,6 @@ import {StyleSheet} from 'react-native';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {connect} from 'react-redux';
-
 //import the different modules
 import MainMenu from './components/MainMenu';
 import Tasks from '../tasks/views/screens/Main';
@@ -15,7 +14,8 @@ import Settings from '../settings/views/screens/Main';
 import About from '../about/views/screens/Main';
 import Support from '../support/views/screens/Support';
 import Customize from '../customize/views/screens/Main';
-import Feedback from '../feedback/controllers/Main';
+import Feedback from '../feedback/views/screens/Main';
+
 
 const {Navigator, Screen} = createDrawerNavigator();
 
@@ -42,9 +42,9 @@ const HomeScreen = ({navigation, onBoarded}) => {
         <Screen name="Reports" component={Reports} />
         <Screen name="Settings" component={Settings} />
         <Screen name="Support" component={Support} />
-        <Screen name="About" component={About} />
+      <Screen name="Feedback" component={Feedback} />
+      <Screen name="About" component={About} />
         <Screen name="Customize" component={Customize} />
-        <Screen name="Feedback" component={Feedback} />
       </Navigator>
     );
   };

@@ -1,15 +1,15 @@
 import React from 'react';
-import {SafeAreaView, ImageBackground} from 'react-native';
+import {ImageBackground, SafeAreaView} from 'react-native';
 import {
   Button,
+  Layout,
+  StyleService,
   Text,
   useStyleSheet,
-  StyleService,
-  Layout,
 } from '@ui-kitten/components';
 import background from '../../../../assets/images/brand/welcome.png';
 
-export default ({navigation}) => {
+export default ({navigation, onComplete}) => {
   const styles = useStyleSheet(themedStyles);
 
   return (
@@ -23,9 +23,7 @@ export default ({navigation}) => {
             Appa
           </Text>
         </Layout>
-        <Button
-          style={styles.button}
-          onPress={() => navigation.navigate('Connect')}>
+        <Button style={styles.button} onPress={() => onComplete()}>
           Continue
         </Button>
       </ImageBackground>

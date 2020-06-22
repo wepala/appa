@@ -1,20 +1,16 @@
-import React, {useContext, useState} from 'react';
-import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
+import React from 'react';
+import {KeyboardAvoidingView, SafeAreaView} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {
   Button,
-  Layout,
-  StyleService,
-  Input,
-  Select,
-  SelectItem,
-  useStyleSheet,
-  Text,
-  Modal,
   Card,
-  IndexPath,
+  Input,
+  Layout,
+  Modal,
+  StyleService,
+  Text,
+  useStyleSheet,
 } from '@ui-kitten/components';
-import {ArrowDownIcon} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
 import {useForm} from '../../../weosHelpers';
 
@@ -24,7 +20,7 @@ export default ({navigation, route, status, makeRequest}) => {
   const [form, setForm] = useForm({
     name: '',
     email: '',
-    reason: new IndexPath(0),
+    reason: 'temp',
     details: '',
   });
   const styles = useStyleSheet(themedStyles);
@@ -58,20 +54,6 @@ export default ({navigation, route, status, makeRequest}) => {
                   setForm(val.trimLeft(), 'email');
                 }}
               />
-              <Select
-                style={[styles.select, styles.paddingBottom]}
-                placeholder="Select reason"
-                accessoryRight={ArrowDownIcon}
-                value={reasons[form.reason.row]}
-                selectedIndex={form.reason}
-                onSelect={(index) => {
-                  console.log(index);
-                  setForm(index, 'reason');
-                }}>
-                {reasons.map((reason, index) => (
-                  <SelectItem key={index + ''} title={reason} />
-                ))}
-              </Select>
               <Input
                 style={styles.paddingBottom}
                 placeholder="Type your message"
@@ -93,7 +75,6 @@ export default ({navigation, route, status, makeRequest}) => {
                 onPress={() => {
                   let data = {
                     ...form,
-                    reason: reasons[form.reason.row],
                   };
                   console.log('Sending', data);
                   makeRequest(data);

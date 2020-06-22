@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import moment from 'moment';
 
 import {
-  Text,
-  Card,
-  Layout,
   Button,
+  Card,
   CheckBox,
+  Layout,
   StyleService,
+  Text,
   useStyleSheet,
 } from '@ui-kitten/components';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -20,14 +20,33 @@ const BacklogItem = ({
   onPress,
   addToAgenda,
   onComplete,
+  timeSpentToday,
 }) => {
   const [checked, toggleCheck] = useState(item.complete);
+
+  useEffect(() => {
+    toggleCheck(item.complete);
+  }, [item]);
+
   const styles = useStyleSheet(themedStyles);
-  console.log(item);
+
   const onAddToAgenda = () => {
     addToAgenda(item, moment().format('YYYY-MM-DD')).then(() =>
       navigation.navigate('Today'),
     );
+  };
+  let currentTimeSpent = timeSpentToday
+    ? {
+        hours: parseInt(timeSpentToday / 3600, 10),
+        minutes: parseInt(timeSpentToday / 60, 10) % 60,
+        seconds: timeSpentToday % 60,
+      }
+    : {seconds: 0};
+
+  let estimatedTime = {
+    hours: parseInt(item.estimatedTime / 3600, 10),
+    minutes: parseInt(item.estimatedTime / 60, 10) % 60,
+    seconds: item.estimatedTime % 60,
   };
   return (
     <Layout key={item.id} style={styles.item}>
@@ -46,15 +65,21 @@ const BacklogItem = ({
         onPress={() => onPress(index)}>
         <Layout style={styles.row}>
           <Layout style={styles.column1}>
-            <Text
-              testID="TaskTitle"
-              numberOfLines={1}
-              category="h6"
-              style={checked && styles.checked.title}>
+            <Text testID="TaskTitle" numberOfLines={1} category="h6">
               {item.title}
             </Text>
             <Text category="s2" appearance="hint" style={styles.timeSpent}>
               Time Spent:{' '}
+              {currentTimeSpent.hours > 0
+                ? `${currentTimeSpent.hours}h `
+                : null}
+              {currentTimeSpent.minutes > 0
+                ? `${currentTimeSpent.minutes}m `
+                : null}
+              {`${currentTimeSpent.seconds}s`}
+              {' | '}
+              {estimatedTime.hours > 0 ? `${estimatedTime.hours}h ` : null}
+              {estimatedTime.minutes > 0 ? `${estimatedTime.minutes}m ` : null}
             </Text>
           </Layout>
 
@@ -120,18 +145,15 @@ const themedStyles = StyleService.create({
     justifyContent: 'center',
   },
 
-  timeSpent: {},
+  timeSpent: {
+    paddingVertical: 4,
+  },
   estimatedTime: {
     textAlign: 'center',
   },
   buttonStart: {
     textAlign: 'center',
     alignItems: 'center',
-  },
-  checked: {
-    title: {
-      textDecorationLine: 'line-through',
-    },
   },
 });
 
