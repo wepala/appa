@@ -16,7 +16,7 @@ import {
   ClockIcon,
   EditIcon,
   InfoIcon,
-    StarIcon,
+  StarIcon,
   SettingsIcon,
   SupportIcon,
 } from './Icons';
@@ -57,11 +57,11 @@ export default ({navigation, token, logout, setUserInfo, user}) => {
         return;
       }
       case 7: {
-            navigation.toggleDrawer();
-            navigation.navigate('About');
-            return;
-          }
-        }
+        navigation.toggleDrawer();
+        navigation.navigate('About');
+        return;
+      }
+    }
   };
 
   const renderHeader = () => (

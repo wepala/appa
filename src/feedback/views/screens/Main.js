@@ -21,7 +21,7 @@ const tags = [
   {id: '4', title: 'Analytics'},
 ];
 
-export default ({navigation, route, status, addFeedback}) => {
+export default ({navigation, token, route, status, addFeedback}) => {
   const [form, setForm] = useState({
     title: null,
     // To be used when auth is available
@@ -32,6 +32,7 @@ export default ({navigation, route, status, addFeedback}) => {
     },
     tags: [],
   });
+
   const toggleOption = (option) => {
     const index = form.tags.indexOf(option);
     let tags = form.tags;
@@ -54,8 +55,9 @@ export default ({navigation, route, status, addFeedback}) => {
   const emptyForm = {title: '', tags: []};
 
   const styles = useStyleSheet(themedStyles);
-  return (
-    <SafeAreaView style={styles.container}>
+   return (
+      {token?
+      <SafeAreaView style={styles.container}>
       <TopBar title="Request Features" navigation={navigation} route={route} />
       <LinearGradient
         colors={['#b0d9ff', '#eff9ff']}
@@ -150,7 +152,9 @@ export default ({navigation, route, status, addFeedback}) => {
           </Modal>
         </Layout>
       </LinearGradient>
-    </SafeAreaView>
+    </SafeAreaView>:
+  <Text> login <Text/>
+      }
   );
 };
 

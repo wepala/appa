@@ -2,8 +2,12 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import {ROADMAP_BASEURL, ROADMAP_ID} from 'react-native-dotenv';
 import MainScreen from '../views/screens/Main';
+import {useSelector} from "react-redux";
+
 const Main = (props) => {
   const [status, setStatus] = useState('init');
+
+  const {token} => useSelector(state => state)
 
   const addFeedback = (form) => {
     setStatus('pending');
@@ -33,7 +37,7 @@ const Main = (props) => {
       });
   };
 
-  return <MainScreen {...props} status={status} addFeedback={addFeedback} />;
+  return <MainScreen {...props} token={token} status={status} addFeedback={addFeedback} />;
 };
 
 export default Main;

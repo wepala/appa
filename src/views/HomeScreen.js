@@ -65,8 +65,8 @@ const HomeScreen = ({
         <Screen name="Reports" component={Reports} />
         <Screen name="Settings" component={Settings} />
         <Screen name="Support" component={Support} />
-      <Screen name="Feedback" component={Feedback} />
-      <Screen name="About" component={About} />
+        <Screen name="Feedback" component={Feedback} />
+        <Screen name="About" component={About} />
         <Screen name="Customize" component={Customize} />
       </Navigator>
     );
