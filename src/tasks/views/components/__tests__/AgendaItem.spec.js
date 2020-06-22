@@ -6,16 +6,25 @@ import * as eva from '@eva-design/eva';
 import {default as theme} from '../../../../../theme.json';
 import AgendaItem from '../AgendaItem';
 
+jest.mock('@fortawesome/react-native-fontawesome', () => ({
+  FontAwesomeIcon: '',
+}));
+
 describe('onboarding complete screen', () => {
   const title = 'My Task';
   const time = '9:07 AM';
 
-  it('Should render a correctly given item prop', async () => {
+  it('Should render a correctly given item prop', () => {
     const itemData = {
       title,
       time,
     };
     const onPressItem = jest.fn();
+
+    jest.mock('@fortawesome/react-native-fontawesome', () => ({
+      FontAwesomeIcon: '',
+    }));
+
     const {getAllByText, getAllByTestId} = render(
       <>
         <IconRegistry icons={EvaIconsPack} />

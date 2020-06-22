@@ -34,4 +34,22 @@ describe('Backlog Controller', () => {
       }),
     );
   });
+
+  it('should provide a method for marking a task as complete', () => {
+    const dispatch = jest.fn();
+    const mockedState = {
+      tasks: mockTasks,
+    };
+
+    const controller = new BacklogController();
+    controller.configureState(mockedState);
+    const state = controller.configureDispatch(dispatch);
+    const task = mockTasks.getById['7a5fe6af-27f5-486b-a32d-4d3d0437d0c3'];
+    controller.setTaskCompletion(task.id, true);
+    expect(dispatch).toBeCalledWith(
+      updateTask('7a5fe6af-27f5-486b-a32d-4d3d0437d0c3', {
+        complete: true,
+      }),
+    );
+  });
 });

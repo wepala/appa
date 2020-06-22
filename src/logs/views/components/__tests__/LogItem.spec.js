@@ -6,6 +6,10 @@ import * as eva from '@eva-design/eva';
 import {default as theme} from '../../../../../theme.json';
 import LogItem from '../LogItem';
 
+jest.mock('@fortawesome/react-native-fontawesome', () => ({
+  FontAwesomeIcon: '',
+}));
+
 describe('LogItem', () => {
   it('Should render all fields given a log item', async () => {
     const item = {

@@ -17,10 +17,12 @@ Copy the contents of the `.env-dist` file into the `.env` and fill out the blank
 ```
 // Your .env should resemble this
 
-SUPPORT_URL = https://XXXXXXXXXXXXXX
-SENDER = XXXXXXXX@XXXXX
-DESTINATION = XXXXXXXX@XXXXX
-BEARER = Bearer XXXXXXXXXXXXXXXXXXX
+SUPPORT_URL=https://XXXXXXXXXXXXXX
+SENDER=XXXXXXXX@XXXXX
+DESTINATION=XXXXXXXX@XXXXX 
+ROADMAP_BASEURL=https://XXXXXXXXXXXXXX
+ROADMAP_ID=XXXXXXXXXXXXXX
+ 
 ```
 
 ### Prerequisites

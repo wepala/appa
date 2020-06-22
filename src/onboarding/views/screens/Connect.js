@@ -59,6 +59,7 @@ const themedStyles = StyleService.create({
   text: {
     color: '$color-basic-700',
     textAlign: 'center',
+    marginBottom: 16,
   },
   buttonSkip: {
     width: '100%',
@@ -66,5 +67,13 @@ const themedStyles = StyleService.create({
   buttonConnect: {
     marginBottom: 16,
     width: '100%',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+    elevation: 5,
   },
 });
