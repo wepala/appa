@@ -1,6 +1,6 @@
 {
   "name": "appa-time-tracker",
-  "version": "0.2.20200616",
+  "version": "0.2.20200623",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
