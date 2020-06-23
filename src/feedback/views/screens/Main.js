@@ -17,8 +17,6 @@ import {
   Modal,
   Card,
 } from '@ui-kitten/components';
-import {Controller} from '../../../controller';
-import {setToken} from '../../../weos/model/commands';
 
 import LinearGradient from 'react-native-linear-gradient';
 import TopBar from '../components/TopBar';
@@ -49,6 +47,7 @@ const mapStateToProps = (state) => {
 const Feedback = ({
   navigation,
   authorizeURL,
+  setToken,
   token,
   route,
   status,
@@ -97,21 +96,15 @@ const Feedback = ({
   const handleOpenUrl = (urlString) => {
     const url = new URL(urlString.url, true);
     const {code, state, confirm_creation} = url.query;
+
     if (confirm_creation) {
       accountCreation();
       return;
     }
-    const addToken = (token) => {
-      return new Promise((resolve) => {
-        this.dispatch(setToken(token));
-        resolve();
-      });
-    };
 
     PKCE.exchangeAuthCode(code, state)
       .then((authToken) => {
-        console.log(authToken)
-        addToken(authToken);
+        setToken(authToken);
       })
       .catch((error) => {
         console.log(error);

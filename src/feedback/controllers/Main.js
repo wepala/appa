@@ -12,7 +12,6 @@ const Main = (props) => {
   const {weos} = useSelector((state) => state);
 
 
-
   const addFeedback = (form) => {
     setStatus('pending');
 
@@ -46,7 +45,8 @@ const Main = (props) => {
       token={weos.token}
       status={status}
       addFeedback={addFeedback}
-     />
+      setToken={setToken}
+    />
   );
 };
 
