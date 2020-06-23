@@ -17,7 +17,7 @@ export default ({item, index, onPress}) => {
   let loggedDate = moment(item.startTime).format('Do MMM, YYYY');
   let loggedTime = moment(item.startTime).format('h:mm:ss a');
   return (
-    <Layout style={styles.item}>
+    <Layout key={item.id} style={styles.item}>
       <Card testID={'TaskItem'} style={styles.card} onPress={onPress}>
         <Layout style={styles.row}>
           <Layout style={styles.column1}>

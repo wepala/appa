@@ -4,7 +4,6 @@ import React from 'react';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
-import {default as theme} from '../../../../../theme.json';
 
 jest.mock('@fortawesome/react-native-fontawesome', () => ({
   FontAwesomeIcon: '',
@@ -14,7 +13,7 @@ describe('onboarding Connect screen', () => {
     const {getAllByTestId} = render(
       <>
         <IconRegistry icons={EvaIconsPack} />
-        <ApplicationProvider {...eva} theme={{...eva.light, ...theme}}>
+        <ApplicationProvider {...eva} theme={{...eva.light}}>
           <Connect />
         </ApplicationProvider>
       </>,

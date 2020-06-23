@@ -56,11 +56,24 @@ jobs:
         run: |
           npm run bundle-android
           cd android && ./gradlew clean assembleDebug
-      - name: Upload debug APK
-        uses: actions/upload-artifact@v2
+      - name: Send success notification
+        uses: rtCamp/action-slack-notify@v2.0.0
+        env:
+          SLACK_CHANNEL: weagenda
+          SLACK_COLOR: "#32BD65"
+          SLACK_ICON: https://github.com/wepala.png?size=48
+          SLACK_MESSAGE: We were able to test and build your code without problems. Not bad
+          SLACK_TITLE: Branch tests passed
+          SLACK_USERNAME: WeAgenda
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Upload debug APK to slack step
+        uses: adrey/slack-file-upload-action@master
         with:
-          name: app-debug.apk
-          path: android/app/build/outputs/apk/debug/
+          token: ${{ secrets.SLACK_TOKEN }}
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          title: Appa Debug APK
+          initial_comment: Here's the latest debug build for Appa! Yip yip
+          channel: weagenda
       - name: Send failure notification
         uses: rtCamp/action-slack-notify@v2.0.0
         if: failure()
@@ -68,7 +81,7 @@ jobs:
           SLACK_CHANNEL: weagenda
           SLACK_COLOR: "#FF0000"
           SLACK_ICON: https://github.com/wepala.png?size=48
-          SLACK_MESSAGE: Your recent update was not correctly linted, failed tests or could not build an app
+          SLACK_MESSAGE: Complete not complete the debug build process. Please review the error in Github Actions
           SLACK_TITLE: Lint/Test failed
           SLACK_USERNAME: WeAgenda
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
@@ -249,21 +262,5 @@ jobs:
           SLACK_ICON: https://github.com/wepala.png?size=48
           SLACK_MESSAGE: We were able to test and build your code without problems. Pat yourself on the back
           SLACK_TITLE: Apps built for release
-          SLACK_USERNAME: WeAgenda
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-
-  build-success-notification:
-    runs-on: ubuntu-18.04
-    if: "!contains(github.ref, 'release/')"
-    needs: [install-test-and-build]
-    steps:
-      - name: Send success notification
-        uses: rtCamp/action-slack-notify@v2.0.0
-        env:
-          SLACK_CHANNEL: weagenda
-          SLACK_COLOR: "#32BD65"
-          SLACK_ICON: https://github.com/wepala.png?size=48
-          SLACK_MESSAGE: We were able to test and build your code without problems. Not bad
-          SLACK_TITLE: Branch tests passed
           SLACK_USERNAME: WeAgenda
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

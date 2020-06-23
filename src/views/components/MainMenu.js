@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '../../../assets/images/brand/appaIcon.png';
 import {SafeAreaView, View} from 'react-native';
 import {
   Avatar,
@@ -20,6 +19,7 @@ import {
   SupportIcon,
 } from './Icons';
 import Profile from './Profile';
+import logo from '../../../assets/images/brand/logo.png';
 
 export default ({navigation, token, logout, setUserInfo, user}) => {
   const styles = useStyleSheet(themedStyles);
@@ -114,7 +114,7 @@ const themedStyles = StyleService.create({
     paddingVertical: 22,
     paddingHorizontal: 16,
     justifyContent: 'center',
-    // backgroundColor: '$color-primary-500',
+    backgroundColor: '$background-basic-color-2',
   },
   profileContainer: {
     flexDirection: 'row',
