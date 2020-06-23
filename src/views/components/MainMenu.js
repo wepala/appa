@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '../../../assets/images/brand/appaIcon.png';
 import {SafeAreaView, View} from 'react-native';
 import {
   Avatar,

@@ -1,8 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Image} from 'react-native';
 import {SectionContext} from '../../context/section-context';
-import logo from '../../../../assets/images/brand/appaIcon.png';
-
 import {
   Button,
   Layout,
