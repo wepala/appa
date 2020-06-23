@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from 'react';
-
-import {ImageBackground, View, Linking, SafeAreaView} from 'react-native';
+import {connect} from 'react-redux';
+import {
+  ImageBackground,
+  View,
+  Linking,
+  SafeAreaView,
+  Alert,
+} from 'react-native';
 import {
   Button,
   Layout,
@@ -11,10 +17,22 @@ import {
   Modal,
   Card,
 } from '@ui-kitten/components';
+import {Controller} from '../../../controller';
+import {setToken} from '../../../weos/model/commands';
+
 import LinearGradient from 'react-native-linear-gradient';
 import TopBar from '../components/TopBar';
 import background from '../../../../assets/images/brand/welcome.png';
 import PKCE from '../../../weos/auth/pkce';
+import {
+  CLIENT_ID,
+  AUTHORIZE_URL,
+  REDIRECT_URI,
+  RESPONSE_TYPE,
+  SCOPE,
+  CODE_CHALLENGE_METHOD,
+} from 'react-native-dotenv';
+import URL from 'url-parse';
 
 const tags = [
   {id: '1', title: 'Bug'},
@@ -22,8 +40,84 @@ const tags = [
   {id: '3', title: 'Feature'},
   {id: '4', title: 'Analytics'},
 ];
+const mapStateToProps = (state) => {
+  return {
+    token: state.weos.token,
+  };
+};
 
-export default ({navigation, token, route, status, addFeedback}) => {
+const Feedback = ({
+  navigation,
+  authorizeURL,
+  token,
+  route,
+  status,
+  addFeedback,
+}) => {
+  console.log({token});
+
+  PKCE.config.setVars({
+    CLIENT_ID,
+    AUTHORIZE_URL,
+    REDIRECT_URI,
+    RESPONSE_TYPE,
+    SCOPE,
+    CODE_CHALLENGE_METHOD,
+  });
+
+  useEffect(() => {
+    Linking.addEventListener('url', handleOpenUrl);
+    Linking.getInitialURL().then((url) => {
+      if (url) {
+        handleOpenUrl(url);
+      }
+    });
+
+    return () => Linking.removeEventListener('url', handleOpenUrl);
+  });
+
+  const accountCreation = () => {
+    Alert.alert(
+      'Account Creation',
+      'Do you want to create a new account with this email address?',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => Linking.openURL(PKCE.createAccountURL(false)),
+        },
+        {
+          text: 'Confirm',
+          onPress: () => Linking.openURL(PKCE.createAccountURL(true)),
+        },
+      ],
+      {cancelable: false},
+    );
+  };
+
+  const handleOpenUrl = (urlString) => {
+    const url = new URL(urlString.url, true);
+    const {code, state, confirm_creation} = url.query;
+    if (confirm_creation) {
+      accountCreation();
+      return;
+    }
+    const addToken = (token) => {
+      return new Promise((resolve) => {
+        this.dispatch(setToken(token));
+        resolve();
+      });
+    };
+
+    PKCE.exchangeAuthCode(code, state)
+      .then((authToken) => {
+        console.log(authToken)
+        addToken(authToken);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const [form, setForm] = useState({
     title: null,
     // To be used when auth is available
@@ -35,6 +129,7 @@ export default ({navigation, token, route, status, addFeedback}) => {
     tags: [],
   });
   console.log(token);
+
   const toggleOption = (option) => {
     const index = form.tags.indexOf(option);
     let tags = form.tags;
@@ -46,7 +141,6 @@ export default ({navigation, token, route, status, addFeedback}) => {
     setForm({...form, tags});
     console.log(form);
   };
-
   const [visible, toggleVisible] = useState(false);
   useEffect(() => {
     if (status === 'success' || status === 'error') {
@@ -56,11 +150,8 @@ export default ({navigation, token, route, status, addFeedback}) => {
   const handleWeosConnect = () => {
     Linking.openURL(PKCE.authorizeURL());
   };
-
   const emptyForm = {title: '', tags: []};
-
   const styles = useStyleSheet(themedStyles);
-
   return token ? (
     <SafeAreaView style={styles.container}>
       <TopBar title="Request Features" navigation={navigation} route={route} />
@@ -164,12 +255,10 @@ export default ({navigation, token, route, status, addFeedback}) => {
           <Text style={styles.text2} category="h2">
             Hi There!{' '}
           </Text>
-          <Text style={styles.text2} category="h8">
-            {' '}
-            /{' '}
+          <Text style={styles.text2} category="h5">
+            /
           </Text>
         </View>
-
         <Layout style={styles.headerContainer}>
           <Text style={styles.text} category="h5">
             It seems you are not logged in
@@ -188,7 +277,6 @@ export default ({navigation, token, route, status, addFeedback}) => {
     </SafeAreaView>
   );
 };
-
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
@@ -209,7 +297,6 @@ const themedStyles = StyleService.create({
     backgroundColor: 'transparent',
     paddingBottom: 16,
   },
-
   item: {
     width: '50%',
     backgroundColor: 'transparent',
@@ -220,7 +307,6 @@ const themedStyles = StyleService.create({
   itemLeft: {
     paddingLeft: 4,
   },
-
   input: {
     width: '100%',
     marginBottom: 24,
@@ -255,7 +341,6 @@ const themedStyles = StyleService.create({
     shadowOpacity: 0.1,
     shadowRadius: 7,
   },
-
   buttonSubmit: {
     width: '100%',
     paddingTop: 10,
@@ -270,7 +355,6 @@ const themedStyles = StyleService.create({
     shadowRadius: 7,
     // elevation: 5,
   },
-
   HiThere: {
     justifyContent: 'space-evenly',
     alignItems: 'center',
@@ -278,7 +362,6 @@ const themedStyles = StyleService.create({
     marginTop: 123,
     width: '100%',
   },
-
   image: {
     flex: 1,
     resizeMode: 'cover',
@@ -287,7 +370,6 @@ const themedStyles = StyleService.create({
     alignItems: 'center',
     padding: 16,
   },
-
   headerContainer: {
     justifyContent: 'space-evenly',
     alignItems: 'center',
@@ -295,18 +377,15 @@ const themedStyles = StyleService.create({
     paddingBottom: 16,
     width: '100%',
   },
-
   text: {
     color: 'white',
     textAlign: 'center',
     marginBottom: 16,
   },
-
   text2: {
     color: 'black',
     textAlign: 'center',
   },
-
   buttonConnect: {
     marginBottom: 16,
     width: '100%',
@@ -319,7 +398,6 @@ const themedStyles = StyleService.create({
     shadowRadius: 7,
     elevation: 5,
   },
-
   topText: {
     position: 'absolute',
     top: 50,
@@ -327,3 +405,4 @@ const themedStyles = StyleService.create({
     alignItems: 'center',
   },
 });
+export default connect(mapStateToProps, null)(Feedback);
