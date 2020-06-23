@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, U} from 'react';
 import {Linking, Platform, SafeAreaView, ScrollView} from 'react-native';
 import {
   Button,
@@ -92,10 +92,11 @@ const themedStyles = StyleService.create({
   row: {
     display: 'flex',
     flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     padding: 16,
   },
   column: {
+    flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
     textAlign: 'center',
