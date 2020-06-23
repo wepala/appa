@@ -19,6 +19,7 @@ import {
   SettingsIcon,
   SupportIcon,
 } from './Icons';
+import logo from '../../../assets/images/brand/logo.png';
 
 export default ({navigation}) => {
   const styles = useStyleSheet(themedStyles);

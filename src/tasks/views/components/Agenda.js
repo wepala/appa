@@ -13,6 +13,7 @@ import {
 } from '@ui-kitten/components';
 import AgendaItem from '../components/AgendaItem';
 import CurrentTask from '../components/CurrentTask';
+import logo from '../../../../assets/images/brand/logo.png';
 
 const messages = [
   {title: 'What would you like to accomplish today?', subTitle: ''},

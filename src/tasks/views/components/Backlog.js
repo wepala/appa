@@ -12,6 +12,7 @@ import {
 } from '@ui-kitten/components';
 import BacklogItem from './BacklogItem';
 import {SectionContext} from '../../context/section-context';
+import logo from '../../../../assets/images/brand/logo.png';
 
 const messages = [
   {
