@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-import {SafeAreaView} from 'react-native';
+import {ImageBackground, View, Linking, SafeAreaView} from 'react-native';
 import {
   Button,
   Layout,
@@ -13,6 +13,8 @@ import {
 } from '@ui-kitten/components';
 import LinearGradient from 'react-native-linear-gradient';
 import TopBar from '../components/TopBar';
+import background from '../../../../assets/images/brand/welcome.png';
+import PKCE from '../../../weos/auth/pkce';
 
 const tags = [
   {id: '1', title: 'Bug'},
@@ -32,7 +34,7 @@ export default ({navigation, token, route, status, addFeedback}) => {
     },
     tags: [],
   });
-
+  console.log(token);
   const toggleOption = (option) => {
     const index = form.tags.indexOf(option);
     let tags = form.tags;
@@ -51,13 +53,16 @@ export default ({navigation, token, route, status, addFeedback}) => {
       toggleVisible(true);
     }
   }, [status]);
+  const handleWeosConnect = () => {
+    Linking.openURL(PKCE.authorizeURL());
+  };
 
   const emptyForm = {title: '', tags: []};
 
   const styles = useStyleSheet(themedStyles);
-   return (
-      {token?
-      <SafeAreaView style={styles.container}>
+
+  return token ? (
+    <SafeAreaView style={styles.container}>
       <TopBar title="Request Features" navigation={navigation} route={route} />
       <LinearGradient
         colors={['#b0d9ff', '#eff9ff']}
@@ -127,7 +132,6 @@ export default ({navigation, token, route, status, addFeedback}) => {
             onPress={() => addFeedback(form)}>
             SUBMIT
           </Button>
-
           <Modal
             visible={visible}
             style={styles.container}
@@ -152,9 +156,33 @@ export default ({navigation, token, route, status, addFeedback}) => {
           </Modal>
         </Layout>
       </LinearGradient>
-    </SafeAreaView>:
-  <Text> login <Text/>
-      }
+    </SafeAreaView>
+  ) : (
+    <SafeAreaView style={styles.container}>
+      <ImageBackground source={background} style={styles.image}>
+      <View style={ styles.topText}>
+<Text style={styles.text2} category="h2">Hi There! </Text>
+  <Text style={styles.text2} category="h8"> / </Text>
+
+  </View>
+
+        <Layout style={styles.headerContainer}>
+          <Text style={styles.text} category="h5">
+            It seems you are not logged in
+          </Text>
+          <Button
+            style={styles.buttonConnect}
+            testID="WeOsConnectBtn"
+            onPress={handleWeosConnect}>
+            WeOS Connect
+          </Button>
+  <Text style={styles.text} category="h6">
+      In order to leave feedback, you must first connect to WeOS
+  </Text>
+
+        </Layout>
+      </ImageBackground>
+    </SafeAreaView>
   );
 };
 
@@ -223,8 +251,8 @@ const themedStyles = StyleService.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 7,
-    // elevation: 5,
   },
+
   buttonSubmit: {
     width: '100%',
     paddingTop: 10,
@@ -239,4 +267,60 @@ const themedStyles = StyleService.create({
     shadowRadius: 7,
     // elevation: 5,
   },
+
+  HiThere: {
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    marginTop: 123,
+    width: '100%',
+  },
+
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'flex-end',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: 16,
+  },
+
+  headerContainer: {
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    paddingBottom: 16,
+    width: '100%',
+  },
+
+  text: {
+    color: 'white',
+    textAlign: 'center',
+    marginBottom: 16,
+  },
+
+  text2: {
+    color: 'black',
+    textAlign: 'center',
+  },
+
+  buttonConnect: {
+    marginBottom: 16,
+    width: '100%',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+    elevation: 5,
+  },
+
+  topText: {
+    position: 'absolute',
+    top: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 });
