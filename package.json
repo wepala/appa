@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "TZ=UTC jest",
+    "test": "jest",
     "version": "./version-ios.sh",
     "lint": "./node_modules/.bin/eslint .",
     "lint-fix": "./node_modules/.bin/eslint --fix .",
@@ -72,6 +72,7 @@
     "react-native-dotenv": "^0.2.0",
     "react-native-testing-library": "^1.13.2",
     "react-test-renderer": "^16.11.0",
+    "set-tz": "^0.2.0",
     "weak-napi": "^2.0.1"
   },
   "husky": {
@@ -81,6 +82,7 @@
   },
   "jest": {
     "preset": "react-native",
+    "globalSetup": "./jest-global-setup.js",
     "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?react-native|@ui-kitten|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)"
     ],
