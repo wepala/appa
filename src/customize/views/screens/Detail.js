@@ -1,5 +1,6 @@
-import React from 'react';
-import {KeyboardAvoidingView, SafeAreaView} from 'react-native';
+import React, {useContext} from 'react';
+import {ThemeContext} from '../../../../theme.context';
+import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {
   Button,
@@ -15,15 +16,16 @@ import DetailTopBar from '../components/DetailTopBar';
 import {useForm} from '../../../weosHelpers';
 
 export default ({navigation, route, status, makeRequest}) => {
-  const reasons = ['Bug', 'Feature'];
+  const themeContext = useContext(ThemeContext);
+  const styles = useStyleSheet(themedStyles);
 
   const [form, setForm] = useForm({
     name: '',
     email: '',
-    reason: 'temp',
     details: '',
+    reason: 'temp',
   });
-  const styles = useStyleSheet(themedStyles);
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.container}>
@@ -32,55 +34,64 @@ export default ({navigation, route, status, makeRequest}) => {
           navigation={navigation}
         />
         <LinearGradient
-          colors={['#b0d9ff', '#eff9ff']}
+          colors={
+            themeContext.theme === 'dark'
+              ? ['#222B45', '#101426']
+              : ['#b0d9ff', '#eff9ff']
+          }
           style={styles.linearGradient}>
-          <Text category="h1" style={styles.title}>
-            Appa Modification Request
-          </Text>
-          <Layout style={styles.row}>
-            <Layout style={styles.column}>
-              <Input
-                style={styles.paddingBottom}
-                placeholder="Your name"
-                onChangeText={(val) => {
-                  setForm(val.trimLeft(), 'name');
-                }}
-              />
-              <Input
-                style={styles.paddingBottom}
-                placeholder="Email Address"
-                keyboardType="email-address"
-                onChangeText={(val) => {
-                  setForm(val.trimLeft(), 'email');
-                }}
-              />
-              <Input
-                style={styles.paddingBottom}
-                placeholder="Type your message"
-                multiline={true}
-                numberOfLines={5}
-                onChangeText={(val) => {
-                  setForm(val.trimLeft(), 'details');
-                }}
-              />
-              <Button
-                disabled={
-                  form.name === '' ||
-                  form.email === '' ||
-                  form.details === '' ||
-                  status === 'success'
-                }
-                size="large"
-                style={styles.buttonSend}
-                onPress={() => {
-                  let data = {
-                    ...form,
-                  };
-                  console.log('Sending', data);
-                  makeRequest(data);
-                }}>
-                {status === 'pending' ? 'SENDING...' : 'SEND REQUEST'}
-              </Button>
+          <ScrollView>
+            <Text category="h1" style={styles.title}>
+              Appa Modification Request
+            </Text>
+            <Layout style={styles.row}>
+              <Layout style={styles.column}>
+                <Input
+                  style={styles.paddingBottom}
+                  size="large"
+                  placeholder="Your name"
+                  onChangeText={(val) => {
+                    setForm(val.trimLeft(), 'name');
+                  }}
+                />
+                <Input
+                  size="large"
+                  style={styles.paddingBottom}
+                  placeholder="Email Address"
+                  keyboardType="email-address"
+                  onChangeText={(val) => {
+                    setForm(val.trimLeft(), 'email');
+                  }}
+                />
+                <Input
+                  style={styles.paddingBottom}
+                  size="large"
+                  placeholder="Type your message"
+                  multiline={true}
+                  numberOfLines={5}
+                  onChangeText={(val) => {
+                    setForm(val.trimLeft(), 'details');
+                  }}
+                />
+                <Button
+                  disabled={
+                    form.name === '' ||
+                    form.email === '' ||
+                    form.details === '' ||
+                    status === 'success'
+                  }
+                  size="large"
+                  style={styles.buttonSend}
+                  onPress={() => {
+                    let data = {
+                      ...form,
+                    };
+                    makeRequest(data);
+                  }}>
+                  {status === 'pending' ? 'SENDING...' : 'SEND REQUEST'}
+                </Button>
+                <Layout />
+              </Layout>
             </Layout>
             <Modal
               visible={status !== 'init'}
@@ -98,7 +109,7 @@ export default ({navigation, route, status, makeRequest}) => {
                 </Card>
               ) : null}
             </Modal>
-          </Layout>
+          </ScrollView>
         </LinearGradient>
       </KeyboardAvoidingView>
     </SafeAreaView>
