@@ -160,11 +160,15 @@ export default ({navigation, token, route, status, addFeedback}) => {
   ) : (
     <SafeAreaView style={styles.container}>
       <ImageBackground source={background} style={styles.image}>
-      <View style={ styles.topText}>
-<Text style={styles.text2} category="h2">Hi There! </Text>
-  <Text style={styles.text2} category="h8"> / </Text>
-
-  </View>
+        <View style={styles.topText}>
+          <Text style={styles.text2} category="h2">
+            Hi There!{' '}
+          </Text>
+          <Text style={styles.text2} category="h8">
+            {' '}
+            /{' '}
+          </Text>
+        </View>
 
         <Layout style={styles.headerContainer}>
           <Text style={styles.text} category="h5">
@@ -174,12 +178,11 @@ export default ({navigation, token, route, status, addFeedback}) => {
             style={styles.buttonConnect}
             testID="WeOsConnectBtn"
             onPress={handleWeosConnect}>
-            WeOS Connect
+            Connect to WeOS
           </Button>
-  <Text style={styles.text} category="h6">
-      In order to leave feedback, you must first connect to WeOS
-  </Text>
-
+          <Text style={styles.text} category="h6">
+            In order to leave feedback, you must first connect to WeOS
+          </Text>
         </Layout>
       </ImageBackground>
     </SafeAreaView>
@@ -321,6 +324,6 @@ const themedStyles = StyleService.create({
     position: 'absolute',
     top: 50,
     justifyContent: 'center',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
