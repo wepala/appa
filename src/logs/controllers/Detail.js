@@ -2,8 +2,8 @@ import moment from 'moment';
 import {Controller} from '../../controller';
 import {
   addTimeLog,
-  updateTimeLog,
   removeTimeLog,
+  updateTimeLog,
 } from '../../logs/model/commands';
 import {getTasksByDate} from '../../tasks/model/selectors';
 

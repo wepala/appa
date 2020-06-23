@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleService, List, Layout, useStyleSheet} from '@ui-kitten/components';
+import {Layout, List, StyleService, useStyleSheet} from '@ui-kitten/components';
 import ProjectItem from '../components/ProjectItem';
 
 const data = new Array(8).fill({

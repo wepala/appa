@@ -4,23 +4,17 @@ import {useForm, useValidated} from '../../../weosHelpers';
 import {
   Button,
   Datepicker,
-  Divider,
+  IndexPath,
   Input,
   Layout,
-  StyleService,
   Select,
   SelectItem,
+  StyleService,
   useStyleSheet,
-  IndexPath,
-  Text,
 } from '@ui-kitten/components';
-import {
-  AlertIcon,
-  CalendarIcon,
-  ClockIcon,
-} from '../../../views/components/Icons';
+import {CalendarIcon, ClockIcon} from '../../../views/components/Icons';
 import DetailTopBar from '../components/DetailTopBar';
-import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
+import {KeyboardAvoidingView, SafeAreaView, ScrollView} from 'react-native';
 import {SectionContext} from '../../context/section-context';
 
 export default ({navigation, route, getTask, onSave, onUpdate, onRemove}) => {
@@ -224,10 +218,7 @@ const themedStyles = StyleService.create({
   input: {
     marginBottom: 24,
   },
-  unit: {
-    paddingVertical: 0,
-    marginVertical: 0,
-  },
+  unit: {},
   row: {
     display: 'flex',
     flexDirection: 'row',

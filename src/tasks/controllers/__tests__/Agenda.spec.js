@@ -1,7 +1,6 @@
 import {mockTasks} from '../../__tests__/fixtures';
 import AgendaController from '../Agenda';
 import {startTask, updateTask} from '../../model/commands';
-import {addTimeLog} from '../../../logs/model/commands';
 import {mockLogs} from '../../../logs/__tests__/fixtures';
 
 describe('Agenda Controller', () => {
