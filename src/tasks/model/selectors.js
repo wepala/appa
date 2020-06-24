@@ -39,12 +39,14 @@ export const getIncompleteTasks = createSelector([tasksSelector], (tasks) =>
 );
 
 export const getCurrentTask = createSelector(
-  [tasksSelector, currentTaskSelector],
+  [getTasksByDate, currentTaskSelector],
   (tasks, currentTask) => {
-    console.log('CURR TASK\n', currentTask);
-    let currentTaskIndex = tasks.findIndex((task) => {
-      return task.id === currentTask.id;
-    });
-    return tasks[currentTaskIndex];
+    if (currentTask) {
+      let currentTaskIndex = tasks.findIndex((task) => {
+        return task.id === currentTask.id;
+      });
+      return tasks[currentTaskIndex];
+    }
+    return null;
   },
 );
