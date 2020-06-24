@@ -9,10 +9,8 @@ import {setToken} from '../../weos/model/commands';
 const Main = (props) => {
   const [status, setStatus] = useState('init');
   const connectController = new ConnectController();
-
-
+  const settoken = connectController.setToken;
   const {weos} = useSelector((state) => state);
-
   const addFeedback = (form) => {
     setStatus('pending');
 
@@ -41,15 +39,14 @@ const Main = (props) => {
       });
   };
 
-
   return (
     <MainScreen
       {...props}
       token={weos.token}
       status={status}
       addFeedback={addFeedback}
-      setToken={connectController.setToken}
-    />
+      setToken={settoken}
+     />
   );
 };
 

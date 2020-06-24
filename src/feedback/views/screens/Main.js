@@ -32,35 +32,40 @@ import {
 } from 'react-native-dotenv';
 import URL from 'url-parse';
 
-PKCE.config.setVars({
-  CLIENT_ID,
-  AUTHORIZE_URL,
-  REDIRECT_URI,
-  RESPONSE_TYPE,
-  SCOPE,
-  CODE_CHALLENGE_METHOD,
-});
+
 const tags = [
   {id: '1', title: 'Bug'},
   {id: '2', title: 'Enhancement'},
   {id: '3', title: 'Feature'},
   {id: '4', title: 'Analytics'},
 ];
+
 const mapStateToProps = (state) => {
   return {
     token: state.weos.token,
   };
 };
 
-const Feedback = ({
-  navigation,
-  authorizeURL,
-  setToken,
-  token,
+const Feedback = ({navigation, authorizeURL, setToken, token,
   route,
   status,
   addFeedback,
 }) => {
+
+  PKCE.config.setVars({
+    CLIENT_ID,
+    AUTHORIZE_URL,
+    REDIRECT_URI,
+    RESPONSE_TYPE,
+    SCOPE,
+    CODE_CHALLENGE_METHOD,
+  });
+
+
+  const handleWeosConnect = () => {
+    Linking.openURL(PKCE.authorizeURL());
+  };
+
   useEffect(() => {
     Linking.addEventListener('url', handleOpenUrl);
     Linking.getInitialURL().then((url) => {
@@ -100,13 +105,14 @@ const Feedback = ({
     }
 
     PKCE.exchangeAuthCode(code, state)
-      .then((authToken) => {
-        setToken(authToken);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .then((authToken) => {
+          setToken(authToken).then(() => navigation.navigate('Complete'));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   };
+
 
   const [form, setForm] = useState({
     title: null,
@@ -137,9 +143,7 @@ const Feedback = ({
       toggleVisible(true);
     }
   }, [status]);
-  const handleWeosConnect = () => {
-    Linking.openURL(PKCE.authorizeURL());
-  };
+
   const emptyForm = {title: '', tags: []};
   const styles = useStyleSheet(themedStyles);
   return token ? (
