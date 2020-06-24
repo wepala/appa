@@ -32,6 +32,7 @@ import {
 } from 'react-native-dotenv';
 import URL from 'url-parse';
 import {setToken} from '../../../weos/model/commands';
+import {onBoardUser} from '../../../onboarding/model/commands';
 
 const tags = [
   {id: '1', title: 'Bug'},
@@ -114,11 +115,13 @@ const Feedback = ({
 
     PKCE.exchangeAuthCode(code, state)
       .then((authToken) => {
-        setToken(authToken).then(() => navigation.navigate('Feedback'));
+        setToken(authToken);
+        navigation.navigate('Feedback');
       })
       .catch((error) => {
         console.log(error);
       });
+
   };
 
   const [form, setForm] = useState({
@@ -267,7 +270,7 @@ const Feedback = ({
           <Button
             style={styles.buttonConnect}
             testID="WeOsConnectBtn"
-            onPress={handleWeosConnect}>
+            onPress={handleWeosConnect }>
             Connect to WeOS
           </Button>
           <Text style={styles.text} category="h6">
