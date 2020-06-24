@@ -3,14 +3,15 @@ import axios from 'axios';
 import {ROADMAP_BASEURL, ROADMAP_ID} from 'react-native-dotenv';
 import MainScreen from '../views/screens/Main';
 import {useSelector} from 'react-redux';
-import {Controller} from '../../controller';
+import ConnectController from '../../../onboarding/controllers/Connect';
 import {setToken} from '../../weos/model/commands';
 
 const Main = (props) => {
   const [status, setStatus] = useState('init');
+  const connectController = new ConnectController();
+
 
   const {weos} = useSelector((state) => state);
-
 
   const addFeedback = (form) => {
     setStatus('pending');
@@ -39,13 +40,15 @@ const Main = (props) => {
         console.log('Error', error);
       });
   };
+
+
   return (
     <MainScreen
       {...props}
       token={weos.token}
       status={status}
       addFeedback={addFeedback}
-      setToken={setToken}
+      setToken={connectController.setToken}
     />
   );
 };

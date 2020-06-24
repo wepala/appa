@@ -17,7 +17,7 @@ import {
   Modal,
   Card,
 } from '@ui-kitten/components';
-
+import ConnectController from '../../../onboarding/controllers/Connect';
 import LinearGradient from 'react-native-linear-gradient';
 import TopBar from '../components/TopBar';
 import background from '../../../../assets/images/brand/welcome.png';
@@ -32,6 +32,14 @@ import {
 } from 'react-native-dotenv';
 import URL from 'url-parse';
 
+PKCE.config.setVars({
+  CLIENT_ID,
+  AUTHORIZE_URL,
+  REDIRECT_URI,
+  RESPONSE_TYPE,
+  SCOPE,
+  CODE_CHALLENGE_METHOD,
+});
 const tags = [
   {id: '1', title: 'Bug'},
   {id: '2', title: 'Enhancement'},
@@ -53,17 +61,6 @@ const Feedback = ({
   status,
   addFeedback,
 }) => {
-  console.log({token});
-
-  PKCE.config.setVars({
-    CLIENT_ID,
-    AUTHORIZE_URL,
-    REDIRECT_URI,
-    RESPONSE_TYPE,
-    SCOPE,
-    CODE_CHALLENGE_METHOD,
-  });
-
   useEffect(() => {
     Linking.addEventListener('url', handleOpenUrl);
     Linking.getInitialURL().then((url) => {
