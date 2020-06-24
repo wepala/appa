@@ -69,30 +69,34 @@ export default ({
     />
   );
 
-  return items.length ? (
-    <List
-      style={[styles.container, contentContainerStyle]}
-      numColumns={1}
-      data={items}
-      renderItem={renderItem}
-    />
-  ) : (
-    <Layout testID={'Placeholder'} style={styles.placeholder}>
-      <Image style={styles.image} source={logo} />
-      <Layout>
-        <Text style={styles.title} category="h3" appearance="hint">
-          {placeholder.title}
-        </Text>
-        <Text style={styles.subTitle} category="h6" appearance="hint">
-          {placeholder.subTitle}
-        </Text>
-      </Layout>
-      <Button
-        style={styles.buttonAdd}
-        size="large"
-        onPress={() => navigation.navigate('CreateTask')}>
-        ADD TASK
-      </Button>
+  return (
+    <Layout style={styles.container}>
+      {items.length ? (
+        <List
+          style={[styles.list, contentContainerStyle]}
+          numColumns={1}
+          data={items}
+          renderItem={renderItem}
+        />
+      ) : (
+        <Layout testID={'Placeholder'} style={styles.placeholder}>
+          <Image style={styles.image} source={logo} />
+          <Layout style={styles.textContainer}>
+            <Text style={styles.title} category="h3" appearance="hint">
+              {placeholder.title}
+            </Text>
+            <Text style={styles.subTitle} category="h6" appearance="hint">
+              {placeholder.subTitle}
+            </Text>
+          </Layout>
+          <Button
+            style={styles.buttonAdd}
+            size="large"
+            onPress={() => navigation.navigate('CreateTask')}>
+            ADD TASK
+          </Button>
+        </Layout>
+      )}
     </Layout>
   );
 };
@@ -121,6 +125,9 @@ const themedStyles = StyleService.create({
     height: 200,
     width: 200,
     opacity: 0.15,
+  },
+  textContainer: {
+    backgroundColor: 'transparent',
   },
   title: {
     textAlign: 'center',
