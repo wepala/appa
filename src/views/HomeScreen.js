@@ -1,7 +1,9 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-
-import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
+import {
+    Text,
+ } from '@ui-kitten/components';
+ import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {connect} from 'react-redux';
 //import the different modules
@@ -26,6 +28,11 @@ const mapStateToProps = (state) => {
     user: state.weos.user,
   };
 };
+
+const linking = {
+  prefixes: ['https://com.appadoes/'],
+};
+
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -60,7 +67,8 @@ const HomeScreen = ({
             setUserInfo={setUserInfo}
           />
         )}>
-        <Screen name="Agenda" component={Tasks} />
+
+        <Screen  name="Agenda" component={Tasks} />
         <Screen name="Logs" component={Logs} />
         <Screen name="Reports" component={Reports} />
         <Screen name="Settings" component={Settings} />
@@ -68,6 +76,7 @@ const HomeScreen = ({
         <Screen name="Feedback" component={Feedback} />
         <Screen name="About" component={About} />
         <Screen name="Customize" component={Customize} />
+
       </Navigator>
     );
   };
@@ -81,7 +90,8 @@ const HomeScreen = ({
   };
 
   return (
-    <NavigationContainer theme={navigatorTheme}>
+    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}
+    theme={navigatorTheme}>
       <RootStackScreen />
     </NavigationContainer>
   );

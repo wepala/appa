@@ -89,7 +89,9 @@ const exchangeAuthCode = async (code, state) => {
     data: qs.stringify(form),
   };
   const response = await axios(configs);
+  console.log(response.data);
   return response.data;
+
 };
 
 const createAccountURL = (createAccount) => {

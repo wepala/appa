@@ -27,38 +27,42 @@ export default ({navigation, token, logout, setUserInfo, user}) => {
   const onItemSelect = (index) => {
     switch (index.row) {
       case 0: {
-        navigation.toggleDrawer();
+        navigation.closeDrawer();
         navigation.navigate('Agenda');
         return;
       }
       case 1: {
-        navigation.toggleDrawer();
+        navigation.closeDrawer();
         navigation.navigate('Logs');
         return;
       }
       case 3: {
-        navigation.toggleDrawer();
+        navigation.closeDrawer();
         navigation.navigate('Settings');
         return;
       }
       case 4: {
-        navigation.toggleDrawer();
+        navigation.closeDrawer();
         navigation.navigate('Support');
         return;
       }
       case 5: {
-        navigation.toggleDrawer();
+        navigation.closeDrawer();
         navigation.navigate('Customize');
         return;
       }
       case 6: {
-        navigation.toggleDrawer();
+        navigation.closeDrawer();
         navigation.navigate('Feedback');
         return;
       }
       case 7: {
-        navigation.toggleDrawer();
+        navigation.closeDrawer();
         navigation.navigate('About');
+        return;
+      }
+      default: {
+        navigation.closeDrawer();
         return;
       }
     }
