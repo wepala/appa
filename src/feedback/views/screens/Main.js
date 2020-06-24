@@ -48,7 +48,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-     setToken: (token) => dispatch(setToken(token)),
+    setToken: (token) => dispatch(setToken(token)),
   };
 };
 
@@ -114,7 +114,7 @@ const Feedback = ({
 
     PKCE.exchangeAuthCode(code, state)
       .then((authToken) => {
-        setToken(authToken).then(() => navigation.navigate('Request Features'));
+        setToken(authToken).then(() => navigation.navigate('Feedback'));
       })
       .catch((error) => {
         console.log(error);

@@ -21,7 +21,7 @@ import {
 } from './Icons';
 import Profile from './Profile';
 import logo from '../../../assets/images/brand/logo.png';
-
+let initialRender = true;
 export default ({navigation, token, logout, setUserInfo, user}) => {
   const styles = useStyleSheet(themedStyles);
   const onItemSelect = (index) => {
@@ -85,32 +85,35 @@ export default ({navigation, token, logout, setUserInfo, user}) => {
       )}
     </Layout>
   );
-
   const renderFooter = () => (
     <React.Fragment>
       <Divider />
       <DrawerItem disabled={true} description={'Version 0.0.1'} />
     </React.Fragment>
   );
-
-  return (
-    <SafeAreaView style={styles.safeArea} insets="top">
-      <Drawer
-        header={renderHeader}
-        footer={renderFooter}
-        onSelect={onItemSelect}>
-        <DrawerItem title={'Agenda'} accessoryLeft={AssetCalendarIcon} />
-        <DrawerItem title={'Time Log'} accessoryLeft={ClockIcon} />
-        {/* <DrawerItem title={'Reports'} accessoryLeft={ReportIcon} /> */}
-        <Divider />
-        <DrawerItem title={'Settings'} accessoryLeft={SettingsIcon} />
-        <DrawerItem title={'Support'} accessoryLeft={SupportIcon} />
-        <DrawerItem title={'Customize'} accessoryLeft={EditIcon} />
-        <DrawerItem title={'Feedback'} accessoryLeft={StarIcon} />
-        <DrawerItem title={'About'} accessoryLeft={InfoIcon} />
-      </Drawer>
-    </SafeAreaView>
-  );
+  if (initialRender) {
+    initialRender = false;
+    return null;
+  } else {
+    return (
+      <SafeAreaView style={styles.safeArea} insets="top">
+        <Drawer
+          header={renderHeader}
+          footer={renderFooter}
+          onSelect={onItemSelect}>
+          <DrawerItem title={'Agenda'} accessoryLeft={AssetCalendarIcon} />
+          <DrawerItem title={'Time Log'} accessoryLeft={ClockIcon} />
+          {/* <DrawerItem title={'Reports'} accessoryLeft={ReportIcon} /> */}
+          <Divider />
+          <DrawerItem title={'Settings'} accessoryLeft={SettingsIcon} />
+          <DrawerItem title={'Support'} accessoryLeft={SupportIcon} />
+          <DrawerItem title={'Customize'} accessoryLeft={EditIcon} />
+          <DrawerItem title={'Feedback'} accessoryLeft={StarIcon} />
+          <DrawerItem title={'About'} accessoryLeft={InfoIcon} />
+        </Drawer>
+      </SafeAreaView>
+    );
+  }
 };
 
 const themedStyles = StyleService.create({
