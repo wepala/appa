@@ -31,7 +31,7 @@ import {
   CODE_CHALLENGE_METHOD,
 } from 'react-native-dotenv';
 import URL from 'url-parse';
-
+import {setToken} from '../../../weos/model/commands';
 
 const tags = [
   {id: '1', title: 'Bug'},
@@ -46,12 +46,21 @@ const mapStateToProps = (state) => {
   };
 };
 
-const Feedback = ({navigation, authorizeURL, setToken, token,
+const mapDispatchToProps = (dispatch) => {
+  return {
+     setToken: (token) => dispatch(setToken(token)),
+  };
+};
+
+const Feedback = ({
+  navigation,
+  authorizeURL,
+  setToken,
+  token,
   route,
   status,
   addFeedback,
 }) => {
-
   PKCE.config.setVars({
     CLIENT_ID,
     AUTHORIZE_URL,
@@ -60,7 +69,6 @@ const Feedback = ({navigation, authorizeURL, setToken, token,
     SCOPE,
     CODE_CHALLENGE_METHOD,
   });
-
 
   const handleWeosConnect = () => {
     Linking.openURL(PKCE.authorizeURL());
@@ -105,14 +113,13 @@ const Feedback = ({navigation, authorizeURL, setToken, token,
     }
 
     PKCE.exchangeAuthCode(code, state)
-        .then((authToken) => {
-          setToken(authToken).then(() => navigation.navigate('Complete'));
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      .then((authToken) => {
+        setToken(authToken).then(() => navigation.navigate('Request Features'));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
-
 
   const [form, setForm] = useState({
     title: null,
@@ -399,4 +406,4 @@ const themedStyles = StyleService.create({
     alignItems: 'center',
   },
 });
-export default connect(mapStateToProps, null)(Feedback);
+export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
