@@ -37,9 +37,13 @@ describe('Agenda Controller', () => {
   });
 
   it('should return the current task being worked on', () => {
-    const mockInitialState = mockedState;
-    mockInitialState.tasks.currentTask =
-      mockInitialState.tasks.getById['36212c03-040b-4139-867f-bd76485f4084'];
+    const mockInitialState = {
+      ...mockedState,
+      tasks: {
+        ...mockedState.tasks,
+        currentTask: {id: '36212c03-040b-4139-867f-bd76485f4084'},
+      },
+    };
     const controller = new AgendaController();
     const state = controller.configureState(mockInitialState);
     expect(state.currentItem).toBe(
