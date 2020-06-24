@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
 import {
   Avatar,
@@ -20,9 +20,11 @@ import {
 } from './Icons';
 import Profile from './Profile';
 import logo from '../../../assets/images/brand/logo.png';
+import Spinner from '../components/Spinner';
 
 export default ({navigation, token, logout, setUserInfo, user}) => {
   const styles = useStyleSheet(themedStyles);
+  const [loading, setLoading] = useState(false);
   const onItemSelect = (index) => {
     switch (index.row) {
       case 0: {
@@ -74,6 +76,7 @@ export default ({navigation, token, logout, setUserInfo, user}) => {
             token={token}
             logout={logout}
             setUserInfo={setUserInfo}
+            setLoading={setLoading}
           />
         </View>
       )}
@@ -102,6 +105,7 @@ export default ({navigation, token, logout, setUserInfo, user}) => {
         <DrawerItem title={'Customize'} accessoryLeft={EditIcon} />
         <DrawerItem title={'About'} accessoryLeft={InfoIcon} />
       </Drawer>
+      {loading && <Spinner />}
     </SafeAreaView>
   );
 };

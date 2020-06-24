@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {SafeAreaView, ImageBackground, Linking} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {SafeAreaView, ImageBackground, Linking, View} from 'react-native';
 import {
   Button,
   Layout,
@@ -19,9 +19,11 @@ import {
   SCOPE,
   CODE_CHALLENGE_METHOD,
 } from 'react-native-dotenv';
+import Spinner from '../../../views/components/Spinner';
 
 export default ({navigation, authorizeURL, setToken, getToken}) => {
   const styles = useStyleSheet(themedStyles);
+  const [loading, setLoading] = useState(false);
 
   PKCE.config.setVars({
     CLIENT_ID,
@@ -33,6 +35,7 @@ export default ({navigation, authorizeURL, setToken, getToken}) => {
   });
 
   const handleWeosConnect = () => {
+    setLoading(true);
     Linking.openURL(PKCE.authorizeURL());
   };
 
@@ -44,7 +47,9 @@ export default ({navigation, authorizeURL, setToken, getToken}) => {
       }
     });
 
-    return () => Linking.removeEventListener('url', handleOpenUrl);
+    return () => {
+      Linking.removeEventListener('url', handleOpenUrl);
+    };
   });
 
   const accountCreation = () => {
@@ -77,9 +82,11 @@ export default ({navigation, authorizeURL, setToken, getToken}) => {
     PKCE.exchangeAuthCode(code, state)
       .then((authToken) => {
         setToken(authToken).then(() => navigation.navigate('Complete'));
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
   };
 
@@ -107,6 +114,7 @@ export default ({navigation, authorizeURL, setToken, getToken}) => {
           onPress={() => navigation.navigate('Complete')}>
           Skip
         </Button>
+        {loading && <Spinner />}
       </ImageBackground>
     </SafeAreaView>
   );

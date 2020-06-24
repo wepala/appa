@@ -12,7 +12,7 @@ import {SyncIcon, LogoutIcon} from './Icons';
 import PKCE from '../../weos/auth/pkce';
 import {AUTHORIZE_URL} from 'react-native-dotenv';
 
-export default ({user, token, logout, setUserInfo}) => {
+export default ({user, token, logout, setUserInfo, setLoading}) => {
   const styles = useStyleSheet(themedStyles);
   PKCE.config.setVars({
     AUTHORIZE_URL,
@@ -38,10 +38,13 @@ export default ({user, token, logout, setUserInfo}) => {
         .catch((error) => console.log(error));
     }
 
-    return () => Linking.removeEventListener('url', logout);
+    return () => {
+      Linking.removeEventListener('url', logout);
+    };
   });
 
   const openLogout = () => {
+    setLoading(true);
     Linking.openURL(PKCE.logoutURL(token.id_token));
   };
 
