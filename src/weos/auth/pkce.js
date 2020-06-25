@@ -91,7 +91,6 @@ const exchangeAuthCode = async (code, state) => {
   const response = await axios(configs);
   console.log(response.data);
   return response.data;
-
 };
 
 const createAccountURL = (createAccount) => {

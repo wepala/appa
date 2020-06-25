@@ -10,7 +10,7 @@ import {Component} from '../../../weosHelpers';
 
 const {Navigator, Screen} = createStackNavigator();
 
-export default() => (
+export default () => (
   <Navigator
     screenOptions={{
       gestureEnabled: false,

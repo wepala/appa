@@ -121,7 +121,6 @@ const Feedback = ({
       .catch((error) => {
         console.log(error);
       });
-
   };
 
   const [form, setForm] = useState({
@@ -269,7 +268,7 @@ const Feedback = ({
           <Button
             style={styles.buttonConnect}
             testID="WeOsConnectBtn"
-            onPress={handleWeosConnect }>
+            onPress={handleWeosConnect}>
             Connect to WeOS
           </Button>
           <Text style={styles.text} category="h6">
