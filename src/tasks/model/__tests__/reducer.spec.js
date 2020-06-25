@@ -76,7 +76,7 @@ describe('task reducer', function () {
       ...state.currentTask,
       startTime: state.currentTask.startTime + '',
     }).toEqual({
-      ...mockTasks.getById['36212c03-040b-4139-867f-bd76485f4084'],
+      id: '36212c03-040b-4139-867f-bd76485f4084',
       startTime: '1592006400000',
     });
     expect(state === initialState).toBe(false);
