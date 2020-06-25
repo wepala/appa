@@ -41,21 +41,21 @@ export default ({navigation, status, route}) => {
             </Layout>
           </Layout>
 
-    <Layout style={styles.row}>
-        <Layout style={styles.column}>
-        <Text category="s1">Pipeline</Text>
-        <Button
-    onPress={() => {
-        Linking.openURL(PIPELINE_URL).catch((err) => {
-            toggleVisible(true);
-            console.warn(err);
-        });
-    }}
-    style={styles.button}>
-        <Text>See what features are coming soon</Text>
-    </Button>
-    </Layout>
-    </Layout>
+          <Layout style={styles.row}>
+            <Layout style={styles.column}>
+              <Text category="s1">Pipeline</Text>
+              <Button
+                onPress={() => {
+                  Linking.openURL(PIPELINE_URL).catch((err) => {
+                    toggleVisible(true);
+                    console.warn(err);
+                  });
+                }}
+                style={styles.button}>
+                <Text>See what features are coming soon</Text>
+              </Button>
+            </Layout>
+          </Layout>
 
           <Layout style={styles.row}>
             <Layout style={styles.column}>
