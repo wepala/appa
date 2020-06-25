@@ -52,7 +52,6 @@ const mapDispatchToProps = (dispatch) => {
     setToken: (token) => dispatch(setToken(token)),
   };
 };
-
 const Feedback = ({
   navigation,
   authorizeURL,
@@ -218,7 +217,7 @@ const Feedback = ({
               : null}
           </Layout>
           <Button
-            testID="SubmitButton"
+            testID="SubmitButton2"
             disabled={!form.tags.length || form.title === ''}
             size="giant"
             style={styles.buttonSubmit}
