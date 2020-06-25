@@ -4,7 +4,7 @@ import {renderHook, act} from '@testing-library/react-hooks';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
-import {default as theme} from '../../../../../theme.json';
+import {default as theme} from '../../../../../themes/main';
 import Main from '../Main';
 import {mockStories} from '../../../__tests__/fixtures';
 
