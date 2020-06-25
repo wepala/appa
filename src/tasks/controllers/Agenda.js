@@ -1,5 +1,5 @@
 import {Controller} from '../../controller';
-import {getTasksByDate} from '../model/selectors';
+import {getTasksByDate, getCurrentTask} from '../model/selectors';
 import moment from 'moment';
 import {startTask, updateTask} from '../model/commands';
 import {addTimeLog} from '../../logs/model/commands';
@@ -43,7 +43,7 @@ export default class AgendaController extends Controller {
   configureState(state) {
     return {
       items: getTasksByDate(state, moment().format('YYYY-MM-DD')),
-      currentItem: state.tasks.currentTask,
+      currentItem: getCurrentTask(state),
       timeTotals: getTaskTimeSpentByDate(state, moment().format('YYYY-MM-DD')),
     };
   }

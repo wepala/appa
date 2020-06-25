@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Layout, List, StyleService, useStyleSheet} from '@ui-kitten/components';
 import LogItem from '../components/LogItem';
 import LogFilter from '../components/LogsFilter';
@@ -35,7 +35,11 @@ export default ({
 
   return (
     <>
-      <TopBar navigation={navigation} title="Time Log" />
+      <TopBar
+        canCreate={tasks.length}
+        navigation={navigation}
+        title="Time Log"
+      />
       <Layout style={styles.container}>
         <LogFilter
           tasks={tasks}

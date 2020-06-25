@@ -1,4 +1,4 @@
-import {Spinner, Layout} from '@ui-kitten/components';
+import {Layout, Spinner} from '@ui-kitten/components';
 import {StyleSheet} from 'react-native';
 import React from 'react';
 

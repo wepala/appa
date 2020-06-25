@@ -1,17 +1,88 @@
-import React from 'react';
-import {SafeAreaView, ImageBackground} from 'react-native';
-
+import React, {useEffect} from 'react';
+import {SafeAreaView, ImageBackground, Linking} from 'react-native';
 import {
   Button,
+  Layout,
+  StyleService,
   Text,
   useStyleSheet,
-  StyleService,
-  Layout,
 } from '@ui-kitten/components';
+import URL from 'url-parse';
+import {Alert} from 'react-native';
 import background from '../../../../assets/images/brand/connect.png';
+import PKCE from '../../../weos/auth/pkce';
+import {
+  CLIENT_ID,
+  AUTHORIZE_URL,
+  REDIRECT_URI,
+  RESPONSE_TYPE,
+  SCOPE,
+  CODE_CHALLENGE_METHOD,
+} from 'react-native-dotenv';
 
-export default ({navigation}) => {
+export default ({navigation, authorizeURL, setToken, getToken}) => {
   const styles = useStyleSheet(themedStyles);
+
+  PKCE.config.setVars({
+    CLIENT_ID,
+    AUTHORIZE_URL,
+    REDIRECT_URI,
+    RESPONSE_TYPE,
+    SCOPE,
+    CODE_CHALLENGE_METHOD,
+  });
+
+  const handleWeosConnect = () => {
+    Linking.openURL(PKCE.authorizeURL());
+  };
+
+  useEffect(() => {
+    Linking.addEventListener('url', handleOpenUrl);
+    Linking.getInitialURL().then((url) => {
+      if (url) {
+        handleOpenUrl(url);
+      }
+    });
+
+    return () => Linking.removeEventListener('url', handleOpenUrl);
+  });
+
+  const accountCreation = () => {
+    Alert.alert(
+      'Account Creation',
+      'Do you want to create a new account with this email address?',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => Linking.openURL(PKCE.createAccountURL(false)),
+        },
+        {
+          text: 'Confirm',
+          onPress: () => Linking.openURL(PKCE.createAccountURL(true)),
+        },
+      ],
+      {cancelable: false},
+    );
+  };
+
+  const handleOpenUrl = (urlString) => {
+    const url = new URL(urlString.url, true);
+    const {code, state, confirm_creation} = url.query;
+
+    if (confirm_creation) {
+      accountCreation();
+      return;
+    }
+
+    PKCE.exchangeAuthCode(code, state)
+      .then((authToken) => {
+        setToken(authToken).then(() => navigation.navigate('Complete'));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground source={background} style={styles.image}>
@@ -19,7 +90,12 @@ export default ({navigation}) => {
           <Text style={styles.text} category="h2">
             Create Account
           </Text>
-          <Button style={styles.buttonConnect}>WeOS Connect</Button>
+          <Button
+            style={styles.buttonConnect}
+            testID="WeOsConnectBtn"
+            onPress={handleWeosConnect}>
+            WeOS Connect
+          </Button>
           <Text style={styles.text} category="s1">
             You can connect to WeOS our platform to make it easier to share
             information between devices. You can learn more about WeOS here.

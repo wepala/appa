@@ -202,7 +202,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B391AA1ED0A8DA7C0A8A7C31 /* Pods */ = {
+		A0B492DAD2E73F52849D0EFF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				BBFF98EB9BFF590EEA1D1630 /* Pods-WeAgenda.debug.xcconfig */,

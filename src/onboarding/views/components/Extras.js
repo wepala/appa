@@ -1,5 +1,5 @@
 import React from 'react';
-import {Icon, IconElement} from '@ui-kitten/components';
+import {Icon} from '@ui-kitten/components';
 
 export const ArrowForwardIcon = (style) => (
   <Icon {...style} name="arrow-forward-outline" />
