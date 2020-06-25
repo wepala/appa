@@ -134,7 +134,6 @@ const Feedback = ({
     },
     tags: [],
   });
-  console.log(token);
 
   const toggleOption = (option) => {
     const index = form.tags.indexOf(option);
