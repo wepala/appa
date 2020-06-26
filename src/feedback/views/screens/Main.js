@@ -17,11 +17,11 @@ import {
   Modal,
   Card,
 } from '@ui-kitten/components';
-
+import ConnectHOC from '../../../onboarding/controllers/ConnectHOC';
 import LinearGradient from 'react-native-linear-gradient';
 import TopBar from '../components/TopBar';
 import background from '../../../../assets/images/brand/welcome.png';
-import spinner from '../../../views/components/Spinner';
+import Spinner from '../../../views/components/Spinner';
 const tags = [
   {id: '1', title: 'Bug'},
   {id: '2', title: 'Enhancement'},
@@ -45,7 +45,8 @@ const Feedback = ({
   status,
   addFeedback,
 }) => {
-  handleOpenUrl = handleOpenUrl.bind(null, 'Feedback');
+
+ handleOpenUrl = handleOpenUrl.bind(null, 'Feedback');
   useEffect(() => {
     Linking.addEventListener('url', handleOpenUrl);
     Linking.getInitialURL().then((url) => {
@@ -208,7 +209,7 @@ const Feedback = ({
             In order to leave feedback, you must first connect to WeOS
           </Text>
         </Layout>
-        {loading && <spinner />}
+        {loading && <Spinner />}
       </ImageBackground>
     </SafeAreaView>
   );

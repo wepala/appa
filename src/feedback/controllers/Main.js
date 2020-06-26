@@ -42,6 +42,7 @@ const Main = (props) => {
       token={weos.token}
       status={status}
       addFeedback={addFeedback}
+
     />
   );
 };
