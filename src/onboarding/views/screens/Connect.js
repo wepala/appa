@@ -12,9 +12,10 @@ import Spinner from '../../../views/components/Spinner';
 
 export default ({navigation, handleConnect, handleOpenUrl, loading}) => {
   const styles = useStyleSheet(themedStyles);
+  handleOpenUrl = handleOpenUrl.bind(null, 'Complete');
 
   useEffect(() => {
-    Linking.addEventListener('url', handleOpenUrl.bind(null, 'Complete'));
+    Linking.addEventListener('url', handleOpenUrl);
     Linking.getInitialURL().then((url) => {
       if (url) {
         handleOpenUrl(url, 'Complete');
@@ -22,10 +23,7 @@ export default ({navigation, handleConnect, handleOpenUrl, loading}) => {
     });
 
     return () => {
-      return Linking.removeEventListener(
-        'url',
-        handleOpenUrl.bind(null, 'Complete'),
-      );
+      return Linking.removeEventListener('url', handleOpenUrl);
     };
   });
 

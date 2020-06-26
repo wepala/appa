@@ -22,9 +22,8 @@ import Profile from './Profile';
 import logo from '../../../assets/images/brand/logo.png';
 import Spinner from '../components/Spinner';
 
-export default ({navigation, token, logout, setUserInfo, user}) => {
+export default ({navigation, logout, user, token, setLoading}) => {
   const styles = useStyleSheet(themedStyles);
-  const [loading, setLoading] = useState(false);
   const onItemSelect = (index) => {
     switch (index.row) {
       case 0: {
@@ -69,13 +68,12 @@ export default ({navigation, token, logout, setUserInfo, user}) => {
         </Text>
       </View>
 
-      {token && (
+      {user && (
         <View style={styles.profile}>
           <Profile
             user={user}
             token={token}
             logout={logout}
-            setUserInfo={setUserInfo}
             setLoading={setLoading}
           />
         </View>
@@ -105,7 +103,6 @@ export default ({navigation, token, logout, setUserInfo, user}) => {
         <DrawerItem title={'Customize'} accessoryLeft={EditIcon} />
         <DrawerItem title={'About'} accessoryLeft={InfoIcon} />
       </Drawer>
-      {loading && <Spinner />}
     </SafeAreaView>
   );
 };
