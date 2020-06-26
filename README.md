@@ -2,79 +2,70 @@
 
 ![Test and Build Android & iOS](https://github.com/wepala/weagenda/workflows/Test%20and%20Build%20Android%20&%20iOS/badge.svg)
 
-WeAgenda is a task management application
+WeAgenda is a simple customizable time tracking application that helps you manage your daily tasks in order to Increase  productivity through planning, scheduling and time tracking.
+
+# Powered By WEOS
+Find out more at [weos](https://wepala.com)
+
+# Whats New!
+  - You can now request help from the Wepala team to customise the app for your own personal needs
+  - You can now get more info about the app/weos within the Weagenda about page
+
+# Development
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-Before running the project, you will first need to set up some environment variables.
-Create a new file in the `root` of the project called `.env`
-Copy the contents of the `.env-dist` file into the `.env` and fill out the blanks
-
-- `SUPPORT_URL` is the email service endpoint
-
-```
-// Your .env should resemble this
-
-SUPPORT_URL=https://XXXXXXXXXXXXXX
-SENDER=XXXXXXXX@XXXXX
-DESTINATION=XXXXXXXX@XXXXX 
-PIPELINE_URL=https://XXXXXXXXXXXXXX
-```
-
 ### Prerequisites
 
-1. Node
-1. NPM
-1. Android SDK (if compiling Android App)
-1. XCode (if compiling iOS app)
+1. [Node](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions-enterprise-linux-fedora-and-snap-packages)
+   - Mac
+     - Use [Homebrew](https://brew.sh) to install Node
+     ```brew install nodejs```
+   - Windows 
+     - Download the [Windows Installer](https://nodejs.org/en/#home-downloadhead) directly from the [nodejs](nodejs.org) web site.
 
-Mac
+2. [NPM](https://www.npmjs.com/get-npm)
+3. [Android SDK (if compiling Android App)](https://developer.android.com/studio)
+4. [XCode (if compiling iOS app)](https://developer.apple.com/xcode/)
 
-1. You can use homebrew to install Node
-
-```
-brew install nodejs
-```
 
 ### Installing
 
-Clone the repository
+- Clone the repository to your local. 
+  ```
+  git clone https://github.com/wepala/weagenda.git
+  ```
+- Install the dependencies
+  ```
+  npm install
+  ```
 
-```
-Give the example
-```
+Before running the project, you will first need to set up some environment variables.
+Create a new file in the `root` of the project called `.env`
+Copy the contents of the [.env-dist](.env-dist) file into the `.env` and fill out the blanks
 
-Install the dependencies
+  - Your .env should resemble this:
 
-```
-npm install
-```
+  ``` 
+      SUPPORT_URL = https://XXXXXXXXXXXXXX
+      SENDER = XXXXXXXX@XXXXX
+      DESTINATION = XXXXXXXX@XXXXX
+      PIPELINE_URL=https://XXXXXXXXXXXXXX
 
+  ```
+These .env can be set as [secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) for your github workflow 
+
+for an indepth look at each environment variable check out our [environment Guide](ENV.md)
+ 
 ## Running the tests
 
-To run all the tests
-
-```
-npm test
-```
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
+- To run all the tests
+  ```
+    npm test
+  ```
+for an indepth look at these tests check out our [Testing Guide](TEST.md)
 
 ## Deployment
 
@@ -96,11 +87,19 @@ For iOS, we currently need a developer team added to the project to create an IP
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read our [Contribution guidelines for this project](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/wepala/weagenda/tags).
+
+## Linting 
+
+We use [eslint](https://eslint.org) for parsing our ECMAScript/JavaScript code, in order to make our code more consistent and prevent bugs. 
+
+## License
+
+This project is licensed under the AGPL License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Authors
 
@@ -108,12 +107,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 See also the list of [contributors](https://github.com/wepala/weagenda/contributors) who participated in this project.
 
-## License
-
-This project is licensed under the AGPL License - see the [LICENSE.md](LICENSE.md) file for details
-
 ## Acknowledgments
 
 - Hat tip to anyone whose code was used
 - Inspiration
-- etc
