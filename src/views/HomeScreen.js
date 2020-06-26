@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {Text} from '@ui-kitten/components';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
@@ -18,7 +18,7 @@ import Feedback from '../feedback/controllers/Main';
 import {setToken, setUser} from '../weos/model/commands';
 import {onBoardUser} from '../onboarding/model/commands';
 import Spinner from '../views/components/Spinner';
-
+import ConnectHOC from '../onboarding/controllers/ConnectHOC';
 const {Navigator, Screen} = createDrawerNavigator();
 
 const mapStateToProps = (state) => {
@@ -48,7 +48,7 @@ const HomeScreen = ({
   navigation,
   onBoarded,
   token,
-  logout,
+   logout,
   user,
   setUserInfo,
 }) => {
@@ -59,7 +59,9 @@ const HomeScreen = ({
     setLoading(false);
   };
 
-  const MainStackScreen = () => {
+    const WrappedFeedback = (props) => ConnectHOC(Feedback, props);
+
+    const MainStackScreen = () => {
     return (
       <Navigator
         screenOptions={{gestureEnabled: true}}
@@ -77,7 +79,7 @@ const HomeScreen = ({
         <Screen name="Reports" component={Reports} />
         <Screen name="Settings" component={Settings} />
         <Screen name="Support" component={Support} />
-        <Screen name="Feedback" component={Feedback} />
+        <Screen name="Feedback" component={WrappedFeedback} />
         <Screen name="About" component={About} />
         <Screen name="Customize" component={Customize} />
       </Navigator>

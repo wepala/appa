@@ -17,23 +17,11 @@ import {
   Modal,
   Card,
 } from '@ui-kitten/components';
-import ConnectController from '../../../onboarding/controllers/ConnectHOC';
+
 import LinearGradient from 'react-native-linear-gradient';
 import TopBar from '../components/TopBar';
 import background from '../../../../assets/images/brand/welcome.png';
-import PKCE from '../../../weos/auth/pkce';
-import {
-  CLIENT_ID,
-  AUTHORIZE_URL,
-  REDIRECT_URI,
-  RESPONSE_TYPE,
-  SCOPE,
-  CODE_CHALLENGE_METHOD,
-} from 'react-native-dotenv';
-import URL from 'url-parse';
-import {setToken} from '../../../weos/model/commands';
-import {onBoardUser} from '../../../onboarding/model/commands';
-
+import spinner from '../../../views/components/Spinner';
 const tags = [
   {id: '1', title: 'Bug'},
   {id: '2', title: 'Enhancement'},
@@ -47,33 +35,19 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setToken: (token) => dispatch(setToken(token)),
-  };
-};
+
 const Feedback = ({
   navigation,
-  authorizeURL,
-  setToken,
+  handleConnect,
+  handleOpenUrl,
+  loading,
   token,
   route,
   status,
   addFeedback,
 }) => {
-  PKCE.config.setVars({
-    CLIENT_ID,
-    AUTHORIZE_URL,
-    REDIRECT_URI,
-    RESPONSE_TYPE,
-    SCOPE,
-    CODE_CHALLENGE_METHOD,
-  });
 
-  const handleWeosConnect = () => {
-    Linking.openURL(PKCE.authorizeURL());
-  };
-
+  handleOpenUrl = handleOpenUrl.bind(null, 'Feedback');
   useEffect(() => {
     Linking.addEventListener('url', handleOpenUrl);
     Linking.getInitialURL().then((url) => {
@@ -85,42 +59,7 @@ const Feedback = ({
     return () => Linking.removeEventListener('url', handleOpenUrl);
   });
 
-  const accountCreation = () => {
-    Alert.alert(
-      'Account Creation',
-      'Do you want to create a new account with this email address?',
-      [
-        {
-          text: 'Cancel',
-          onPress: () => Linking.openURL(PKCE.createAccountURL(false)),
-        },
-        {
-          text: 'Confirm',
-          onPress: () => Linking.openURL(PKCE.createAccountURL(true)),
-        },
-      ],
-      {cancelable: false},
-    );
-  };
 
-  const handleOpenUrl = (urlString) => {
-    const url = new URL(urlString.url, true);
-    const {code, state, confirm_creation} = url.query;
-
-    if (confirm_creation) {
-      accountCreation();
-      return;
-    }
-
-    PKCE.exchangeAuthCode(code, state)
-      .then((authToken) => {
-        setToken(authToken);
-        navigation.navigate('Feedback');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   const [form, setForm] = useState({
     title: null,
@@ -154,7 +93,8 @@ const Feedback = ({
   const emptyForm = {title: '', tags: []};
   const styles = useStyleSheet(themedStyles);
   return token ? (
-    <SafeAreaView style={styles.container}>
+
+      <SafeAreaView style={styles.container}>
       <TopBar title="Request Features" navigation={navigation} route={route} />
       <LinearGradient
         colors={['#b0d9ff', '#eff9ff']}
@@ -195,6 +135,8 @@ const Feedback = ({
                         {tag.title}
                       </Button>
                     </Layout>
+
+
                   ) : (
                     <Layout
                       key={tag.id}
@@ -267,13 +209,14 @@ const Feedback = ({
           <Button
             style={styles.buttonConnect}
             testID="WeOsConnectBtn"
-            onPress={handleWeosConnect}>
+            onPress={handleConnect}>
             Connect to WeOS
           </Button>
           <Text style={styles.text} category="h6">
             In order to leave feedback, you must first connect to WeOS
           </Text>
         </Layout>
+      {loading && <Spinner />}
       </ImageBackground>
     </SafeAreaView>
   );
@@ -406,4 +349,4 @@ const themedStyles = StyleService.create({
     alignItems: 'center',
   },
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
+export default connect(mapStateToProps, null)(Feedback);
