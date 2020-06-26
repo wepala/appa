@@ -98,14 +98,6 @@ We use [eslint](https://eslint.org) for parsing our ECMAScript/JavaScript code, 
 
 This project is licensed under the AGPL License - see the [LICENSE.md](LICENSE.md) file for details
 
-
-
-
-
-
-
-
-
 ## Authors
 
 - **Akeem Philbert** - _Initial work_ - [Akeem Philbert](https://github.com/AkeemPhilbert)
