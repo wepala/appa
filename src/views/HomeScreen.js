@@ -17,6 +17,8 @@ import Customize from '../customize/views/screens/Main';
 import Feedback from '../feedback/controllers/Main';
 import {setToken, setUser} from '../weos/model/commands';
 import {onBoardUser} from '../onboarding/model/commands';
+import Spinner from '../views/components/Spinner';
+
 const {Navigator, Screen} = createDrawerNavigator();
 
 const mapStateToProps = (state) => {
@@ -39,7 +41,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(setUser(null));
       dispatch(onBoardUser(false));
     },
-    setUserInfo: (userInfo) => dispatch(setUser(userInfo)),
   };
 };
 
@@ -51,6 +52,13 @@ const HomeScreen = ({
   user,
   setUserInfo,
 }) => {
+  const [loading, setLoading] = useState(false);
+
+  const logoutHandler = () => {
+    logout();
+    setLoading(false);
+  };
+
   const MainStackScreen = () => {
     return (
       <Navigator
@@ -58,10 +66,10 @@ const HomeScreen = ({
         drawerContent={(props) => (
           <MainMenu
             {...props}
-            token={token}
-            logout={logout}
+            logout={logoutHandler}
             user={user}
-            setUserInfo={setUserInfo}
+            token={token}
+            setLoading={setLoading}
           />
         )}>
         <Screen name="Agenda" component={Tasks} />
@@ -80,7 +88,12 @@ const HomeScreen = ({
     if (!onBoarded) {
       return <Onboarding />;
     } else {
-      return <MainStackScreen />;
+      return (
+        <>
+          <MainStackScreen />
+          {loading && <Spinner />}
+        </>
+      );
     }
   };
 

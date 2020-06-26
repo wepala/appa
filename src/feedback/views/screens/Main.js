@@ -17,7 +17,7 @@ import {
   Modal,
   Card,
 } from '@ui-kitten/components';
-import ConnectController from '../../../onboarding/controllers/Connect';
+import ConnectController from '../../../onboarding/controllers/ConnectHOC';
 import LinearGradient from 'react-native-linear-gradient';
 import TopBar from '../components/TopBar';
 import background from '../../../../assets/images/brand/welcome.png';
