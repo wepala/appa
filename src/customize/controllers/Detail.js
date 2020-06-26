@@ -1,9 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import {SUPPORT_URL, SENDER, DESTINATION} from 'react-native-dotenv';
+import {DESTINATION, SENDER, SUPPORT_URL} from 'react-native-dotenv';
 
 import DetailScreen from '../views/screens/Detail';
-import {useState} from 'react';
 
 const Detail = (props) => {
   const [status, setStatus] = useState('init');

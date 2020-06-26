@@ -32,7 +32,7 @@ Appa currently uses a roadmap based pipeline to share with WEOS users upcoming f
    > the id to a spicific roadmap 
 - PIPELINE_URL= 
    > the url leading to the page where the pipeline is displayed  
-
+ 
 ### Auth 
 - CLIENT_ID= 
    > An id used for authentication by [Ory HYDRA](https://www.ory.sh/hydra/docs/) 

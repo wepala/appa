@@ -14,6 +14,7 @@ Find out more at [weos](https://wepala.com)
 # Development
 
 ## Getting Started
+
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
@@ -51,6 +52,8 @@ Copy the contents of the [.env-dist](.env-dist) file into the `.env` and fill ou
       SUPPORT_URL = https://XXXXXXXXXXXXXX
       SENDER = XXXXXXXX@XXXXX
       DESTINATION = XXXXXXXX@XXXXX
+      PIPELINE_URL=https://XXXXXXXXXXXXXX
+
   ```
 These .env can be set as [secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) for your github workflow 
 

@@ -1,9 +1,9 @@
 import React from 'react';
-import {render, fireEvent, act} from 'react-native-testing-library';
-import {ApplicationProvider, IconRegistry, Button} from '@ui-kitten/components';
+import {render} from 'react-native-testing-library';
+import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
-import {default as theme} from '../../../../../theme.json';
+import {default as theme} from '../../../../../themes/main.json';
 import LogsFilter from '../LogsFilter';
 import {mockTasks} from '../../../../tasks/__tests__/fixtures';
 
