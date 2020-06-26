@@ -45,8 +45,7 @@ const Feedback = ({
   status,
   addFeedback,
 }) => {
-
- handleOpenUrl = handleOpenUrl.bind(null, 'Feedback');
+  handleOpenUrl = handleOpenUrl.bind(null, 'Feedback');
   useEffect(() => {
     Linking.addEventListener('url', handleOpenUrl);
     Linking.getInitialURL().then((url) => {
@@ -281,7 +280,6 @@ const themedStyles = StyleService.create({
     shadowRadius: 7,
   },
   buttonSubmit: {
-
     width: '100%',
     paddingTop: 10,
     paddingBottom: 6,
