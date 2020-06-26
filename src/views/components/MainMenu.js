@@ -111,8 +111,8 @@ export default ({navigation, logout, user, token, setLoading}) => {
         <DrawerItem title={'Settings'} accessoryLeft={SettingsIcon} />
         <DrawerItem title={'Support'} accessoryLeft={SupportIcon} />
         <DrawerItem title={'Customize'} accessoryLeft={EditIcon} />
-    <DrawerItem title={'Feedback'} accessoryLeft={StarIcon} />
-    <DrawerItem title={'About'} accessoryLeft={InfoIcon} />
+        <DrawerItem title={'Feedback'} accessoryLeft={StarIcon} />
+        <DrawerItem title={'About'} accessoryLeft={InfoIcon} />
       </Drawer>
     </SafeAreaView>
   );

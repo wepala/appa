@@ -35,7 +35,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-
 const Feedback = ({
   navigation,
   handleConnect,
@@ -46,7 +45,6 @@ const Feedback = ({
   status,
   addFeedback,
 }) => {
-
   handleOpenUrl = handleOpenUrl.bind(null, 'Feedback');
   useEffect(() => {
     Linking.addEventListener('url', handleOpenUrl);
@@ -58,8 +56,6 @@ const Feedback = ({
 
     return () => Linking.removeEventListener('url', handleOpenUrl);
   });
-
-
 
   const [form, setForm] = useState({
     title: null,
@@ -93,8 +89,7 @@ const Feedback = ({
   const emptyForm = {title: '', tags: []};
   const styles = useStyleSheet(themedStyles);
   return token ? (
-
-      <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <TopBar title="Request Features" navigation={navigation} route={route} />
       <LinearGradient
         colors={['#b0d9ff', '#eff9ff']}
@@ -135,8 +130,6 @@ const Feedback = ({
                         {tag.title}
                       </Button>
                     </Layout>
-
-
                   ) : (
                     <Layout
                       key={tag.id}
@@ -216,7 +209,7 @@ const Feedback = ({
             In order to leave feedback, you must first connect to WeOS
           </Text>
         </Layout>
-      {loading && <Spinner />}
+        {loading && <Spinner />}
       </ImageBackground>
     </SafeAreaView>
   );
