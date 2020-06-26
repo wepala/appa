@@ -18,113 +18,110 @@ import Feedback from '../feedback/controllers/Main';
 import {setToken, setUser} from '../weos/model/commands';
 import {onBoardUser} from '../onboarding/model/commands';
 import Spinner from '../views/components/Spinner';
-import ConnectHOC from '../onboarding/controllers/ConnectHOC';
+
 const {Navigator, Screen} = createDrawerNavigator();
 
 const mapStateToProps = (state) => {
-  return {
-    onBoarded: state.onboard.onBoarded,
-    token: state.weos.token,
-    user: state.weos.user,
-  };
+    return {
+        onBoarded: state.onboard.onBoarded,
+        token: state.weos.token,
+        user: state.weos.user,
+    };
 };
 
 const linking = {
-  prefixes: ['https://com.appadoes/'],
+    prefixes: ['https://com.appadoes/'],
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    onShowConnect: () => {},
-    logout: () => {
-      dispatch(setToken(null));
-      dispatch(setUser(null));
-      dispatch(onBoardUser(false));
-    },
-  };
+    return {
+        onShowConnect: () => {},
+        logout: () => {
+            dispatch(setToken(null));
+            dispatch(setUser(null));
+            dispatch(onBoardUser(false));
+        },
+    };
 };
 
 const HomeScreen = ({
-  navigation,
-  onBoarded,
-  token,
-   logout,
-  user,
-  setUserInfo,
-}) => {
-  const [loading, setLoading] = useState(false);
+                        navigation,
+                        onBoarded,
+                        token,
+                        logout,
+                        user,
+                        setUserInfo,
+                    }) => {
+    const [loading, setLoading] = useState(false);
 
-  const logoutHandler = () => {
-    logout();
-    setLoading(false);
-  };
-
-    const WrappedFeedback = (props) => ConnectHOC(Feedback, props);
+    const logoutHandler = () => {
+        logout();
+        setLoading(false);
+    };
 
     const MainStackScreen = () => {
-    return (
-      <Navigator
+        return (
+            <Navigator
         screenOptions={{gestureEnabled: true}}
         drawerContent={(props) => (
-          <MainMenu
-            {...props}
-            logout={logoutHandler}
-            user={user}
-            token={token}
-            setLoading={setLoading}
-          />
-        )}>
-        <Screen name="Agenda" component={Tasks} />
+        <MainMenu
+        {...props}
+        logout={logoutHandler}
+        user={user}
+        token={token}
+        setLoading={setLoading}
+        />
+    )}>
+    <Screen name="Agenda" component={Tasks} />
         <Screen name="Logs" component={Logs} />
         <Screen name="Reports" component={Reports} />
         <Screen name="Settings" component={Settings} />
         <Screen name="Support" component={Support} />
-        <Screen name="Feedback" component={WrappedFeedback} />
         <Screen name="About" component={About} />
         <Screen name="Customize" component={Customize} />
-      </Navigator>
+        </Navigator>
     );
-  };
+    };
 
-  const RootStackScreen = () => {
-    if (!onBoarded) {
-      return <Onboarding />;
-    } else {
-      return (
-        <>
-          <MainStackScreen />
-          {loading && <Spinner />}
+    const RootStackScreen = () => {
+        if (!onBoarded) {
+            return <Onboarding />;
+        } else {
+            return (
+                <>
+                <MainStackScreen />
+                {loading && <Spinner />}
         </>
-      );
-    }
-  };
+        );
+        }
+    };
 
-  return (
-    <NavigationContainer
-      linking={linking}
-      fallback={<Text>Loading...</Text>}
-      theme={navigatorTheme}>
-      <RootStackScreen />
-    </NavigationContainer>
-  );
+    return (
+        <NavigationContainer
+    linking={linking}
+    fallback={<Text>Loading...</Text>}
+    theme={navigatorTheme}>
+        <RootStackScreen />
+        </NavigationContainer>
+);
 };
 
 /*
  * Navigation theming: https://reactnavigation.org/docs/en/next/themes.html
  */
 const navigatorTheme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    // prevent layout blinking when performing navigation
-    background: 'transparent',
-  },
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        // prevent layout blinking when performing navigation
+        background: 'transparent',
+    },
 };
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
+    safeArea: {
+        flex: 1,
+    },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
