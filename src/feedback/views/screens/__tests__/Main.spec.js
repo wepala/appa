@@ -40,7 +40,6 @@ describe('Features Screen', () => {
     );
 
     const submitButton = getByTestId('SubmitButton2');
-    // console.log('1234')
     // expect(submitButton);
 
     // Submitting empty required fields

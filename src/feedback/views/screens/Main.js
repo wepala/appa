@@ -77,7 +77,6 @@ const Feedback = ({
       tags.push(option);
     }
     setForm({...form, tags});
-    console.log(form);
   };
   const [visible, toggleVisible] = useState(false);
   useEffect(() => {
@@ -209,7 +208,7 @@ const Feedback = ({
             In order to leave feedback, you must first connect to WeOS
           </Text>
         </Layout>
-        {loading && <Spinner />}
+        {loading && <spinner />}
       </ImageBackground>
     </SafeAreaView>
   );
