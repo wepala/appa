@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {Alert, Linking} from 'react-native';
 import URL from 'url-parse';
@@ -11,10 +11,11 @@ import {
   CODE_CHALLENGE_METHOD,
 } from 'react-native-dotenv';
 import PKCE from '../../weos/auth/pkce';
-import {setToken} from '../../weos/model/commands';
+import {setToken, setUser} from '../../weos/model/commands';
 
 const ConnectHOC = (WrappedComponent, props) => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const {navigation} = props;
 
   PKCE.config.setVars({
@@ -27,6 +28,7 @@ const ConnectHOC = (WrappedComponent, props) => {
   });
 
   const handleWeosConnect = () => {
+    setLoading(true);
     Linking.openURL(PKCE.authorizeURL());
   };
 
@@ -48,23 +50,35 @@ const ConnectHOC = (WrappedComponent, props) => {
     );
   };
 
-  const handleOpenUrl = (screen, urlString) => {
+  /**
+   * Handle PKCE URL Opening
+   *
+   * @param {string} screen - Screen name to navigate to when complete
+   * @param {string} urlString - Url returned by PKCE
+   */
+  const handleOpenUrl = async (screen, urlString) => {
     const url = new URL(urlString.url, true);
     const {code, state, confirm_creation} = url.query;
 
     if (confirm_creation) {
+      setLoading(false);
       accountCreation();
+      setLoading(true);
       return;
     }
 
-    PKCE.exchangeAuthCode(code, state)
-      .then((authToken) => {
-        dispatch(setToken(authToken));
-        navigation.navigate(screen);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      let authToken = await PKCE.exchangeAuthCode(code, state);
+      let user = await PKCE.getUserInfo(authToken);
+      user.sub = JSON.parse(user.sub);
+      dispatch(setToken(authToken));
+      dispatch(setUser(user));
+      setLoading(false);
+      navigation.navigate(screen);
+    } catch (error) {
+      console.log('Error occurred ', error);
+      setLoading(false);
+    }
   };
 
   return (
@@ -72,6 +86,7 @@ const ConnectHOC = (WrappedComponent, props) => {
       {...props}
       handleConnect={handleWeosConnect}
       handleOpenUrl={handleOpenUrl}
+      loading={loading}
     />
   );
 };

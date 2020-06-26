@@ -3,7 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Welcome from './Welcome';
 import Connect from './Connect';
 import CompleteController from '../../controllers/Complete';
-import ConnectHOC from '../../controllers/Connect';
+import ConnectHOC from '../../controllers/ConnectHOC';
 import CompleteScreen from '../../views/screens/Complete';
 import {Component} from '../../../weosHelpers';
 

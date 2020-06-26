@@ -12,13 +12,11 @@ import {SyncIcon, LogoutIcon} from './Icons';
 import PKCE from '../../weos/auth/pkce';
 import {AUTHORIZE_URL} from 'react-native-dotenv';
 
-export default ({user, token, logout, setUserInfo}) => {
+export default ({user, logout, setLoading, token}) => {
   const styles = useStyleSheet(themedStyles);
   PKCE.config.setVars({
     AUTHORIZE_URL,
   });
-
-  const [email, setEmail] = useState(user?.sub?.email);
 
   useEffect(() => {
     Linking.addEventListener('url', logout);
@@ -28,27 +26,20 @@ export default ({user, token, logout, setUserInfo}) => {
       }
     });
 
-    if (!user) {
-      PKCE.getUserInfo(token)
-        .then((userInfo) => {
-          userInfo.sub = JSON.parse(userInfo.sub);
-          setUserInfo(userInfo);
-          setEmail(userInfo.email);
-        })
-        .catch((error) => console.log(error));
-    }
-
-    return () => Linking.removeEventListener('url', logout);
+    return () => {
+      Linking.removeEventListener('url', logout);
+    };
   });
 
   const openLogout = () => {
+    setLoading(true);
     Linking.openURL(PKCE.logoutURL(token.id_token));
   };
 
   return (
     <Layout style={styles.row}>
       <Layout style={styles.column1}>
-        <Text>{email}</Text>
+        <Text>{user.sub.email}</Text>
       </Layout>
       <Layout style={styles.column2}>
         <Button

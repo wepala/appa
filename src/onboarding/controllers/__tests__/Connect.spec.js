@@ -4,7 +4,7 @@ import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
 import {default as theme} from '../../../../themes/main.json';
-import ConnectHoc from '../Connect';
+import ConnectHoc from '../ConnectHOC';
 import Connect from '../../views/screens/Connect';
 import configureStore from 'redux-mock-store';
 import {Provider} from 'react-redux';

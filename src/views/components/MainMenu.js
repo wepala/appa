@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
 import {
   Avatar,
@@ -20,8 +20,9 @@ import {
 } from './Icons';
 import Profile from './Profile';
 import logo from '../../../assets/images/brand/logo.png';
+import Spinner from '../components/Spinner';
 
-export default ({navigation, token, logout, setUserInfo, user}) => {
+export default ({navigation, logout, user, token, setLoading}) => {
   const styles = useStyleSheet(themedStyles);
   const onItemSelect = (index) => {
     switch (index.row) {
@@ -67,13 +68,13 @@ export default ({navigation, token, logout, setUserInfo, user}) => {
         </Text>
       </View>
 
-      {token && (
+      {user && (
         <View style={styles.profile}>
           <Profile
             user={user}
             token={token}
             logout={logout}
-            setUserInfo={setUserInfo}
+            setLoading={setLoading}
           />
         </View>
       )}

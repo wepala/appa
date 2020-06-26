@@ -10,6 +10,7 @@ describe('Profile', () => {
   it('should render the profile component correctly', () => {
     PKCE.logoutURL = jest.fn();
     const logout = jest.fn();
+    const setLoading = jest.fn();
     const user = {sub: {email: 'example@gmail.com'}};
 
     const {getAllByTestId} = render(
@@ -20,7 +21,12 @@ describe('Profile', () => {
           theme={{
             ...eva.light,
           }}>
-          <Profile user={user} token={{id_token: 'token'}} logout={logout} />
+          <Profile
+            user={user}
+            token={{id_token: 'token'}}
+            logout={logout}
+            setLoading={setLoading}
+          />
         </ApplicationProvider>
       </>,
     );
