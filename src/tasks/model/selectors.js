@@ -4,6 +4,9 @@ import moment from 'moment';
 export const tasksSelector = (state) => {
   return Object.values(state.tasks.getById);
 };
+export const currentTaskSelector = (state) => {
+  return state.tasks.currentTask;
+};
 /**
  * Get tasks by date
  *
@@ -33,4 +36,17 @@ export const getIncompleteTasks = createSelector([tasksSelector], (tasks) =>
       }
       return 0;
     }),
+);
+
+export const getCurrentTask = createSelector(
+  [getTasksByDate, currentTaskSelector],
+  (tasks, currentTask) => {
+    if (currentTask) {
+      let currentTaskIndex = tasks.findIndex((task) => {
+        return task.id === currentTask.id;
+      });
+      return tasks[currentTaskIndex];
+    }
+    return null;
+  },
 );
