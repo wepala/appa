@@ -14,7 +14,7 @@ import Settings from '../settings/views/screens/Main';
 import About from '../about/views/screens/Main';
 import Support from '../support/views/screens/Support';
 import Customize from '../customize/views/screens/Main';
-import Feedback from '../feedback/views/screens/Main';
+import Feedback from '../feedback/controllers/Main';
 import {setToken, setUser} from '../weos/model/commands';
 import {onBoardUser} from '../onboarding/model/commands';
 const {Navigator, Screen} = createDrawerNavigator();
