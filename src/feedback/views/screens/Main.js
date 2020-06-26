@@ -264,13 +264,15 @@ const themedStyles = StyleService.create({
     marginBottom: 8,
   },
   buttonOptions: {
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    textAlign: 'center',
     width: '100%',
     borderRadius: 50,
     marginBottom: 8,
-    paddingTop: 10,
-    paddingBottom: 6,
     paddingHorizontal: 4,
     shadowColor: '#000',
+
     shadowOffset: {
       width: 0,
       height: 5,
@@ -279,6 +281,7 @@ const themedStyles = StyleService.create({
     shadowRadius: 7,
   },
   buttonSubmit: {
+
     width: '100%',
     paddingTop: 10,
     paddingBottom: 6,
