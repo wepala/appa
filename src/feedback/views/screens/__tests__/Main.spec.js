@@ -24,10 +24,8 @@ describe('Features Screen', () => {
   const addFeedback = jest.fn();
 
   it('Should have a submit button that calls onSubmit then navigates back', () => {
-
     const handleOpenUrl = jest.fn();
     const handleConnect = jest.fn();
-
 
     const {getByTestId, unmount} = render(
       <>
@@ -39,16 +37,16 @@ describe('Features Screen', () => {
             ...theme,
           }}>
           <Provider store={store}>
-            <Main addFeedback={addFeedback} navigation={navigation}
-    handleConnect={handleConnect}
-    handleOpenUrl={handleOpenUrl}
-    />
-
+            <Main
+              addFeedback={addFeedback}
+              navigation={navigation}
+              handleConnect={handleConnect}
+              handleOpenUrl={handleOpenUrl}
+            />
           </Provider>
         </ApplicationProvider>
       </>,
     );
-
 
     const submitButton = getByTestId('SubmitButton2');
     // expect(submitButton);
