@@ -9,6 +9,7 @@ import {default as theme} from '../../../../../themes/main.json';
 import Main from '../Main';
 import {mockStories} from '../../../__tests__/fixtures';
 import configureStore from 'redux-mock-store';
+import ConnectHOC from '../../../../onboarding/controllers/ConnectHOC';
 
 const mockStore = configureStore();
 
@@ -23,6 +24,11 @@ describe('Features Screen', () => {
   const addFeedback = jest.fn();
 
   it('Should have a submit button that calls onSubmit then navigates back', () => {
+
+    const handleOpenUrl = jest.fn();
+    const handleConnect = jest.fn();
+
+
     const {getByTestId, unmount} = render(
       <>
         <IconRegistry icons={EvaIconsPack} />
@@ -33,11 +39,16 @@ describe('Features Screen', () => {
             ...theme,
           }}>
           <Provider store={store}>
-            <Main addFeedback={addFeedback} navigation={navigation} />
+            <Main addFeedback={addFeedback} navigation={navigation}
+    handleConnect={handleConnect}
+    handleOpenUrl={handleOpenUrl}
+    />
+
           </Provider>
         </ApplicationProvider>
       </>,
     );
+
 
     const submitButton = getByTestId('SubmitButton2');
     // expect(submitButton);
