@@ -10,7 +10,7 @@ import configureStore from 'redux-mock-store';
 import {Provider} from 'react-redux';
 
 describe('Connect HOC', () => {
-  const WrappedConnect = (props) => ConnectHoc(Connect, props);
+  const WrappedConnect = ConnectHoc(Connect);
   const mockStore = configureStore();
   const initialState = {
     weos: {
@@ -38,7 +38,7 @@ describe('Connect HOC', () => {
 
     const ConnectLayout = getAllByTestId('ConnectLayout');
     expect(ConnectLayout).toHaveLength(1);
-
+    expect(ConnectLayout).toBeTruthy();
     const WeOsConnectBtn = getAllByTestId('WeOsConnectBtn');
     expect(WeOsConnectBtn).toHaveLength(1);
   });
