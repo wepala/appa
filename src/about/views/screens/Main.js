@@ -130,12 +130,12 @@ const themedStyles = StyleService.create({
   },
   button: {
     marginTop: 8,
-    backgroundColor: 'white',
-    borderColor: 'white',
+    backgroundColor: '$background-basic-color-1',
+    borderColor: '$background-basic-color-1',
   },
   modal: {
     marginTop: 8,
-    backgroundColor: 'white',
-    borderColor: 'white',
+    backgroundColor: '$background-basic-color-1',
+    borderColor: '$background-basic-color-1',
   },
 });
