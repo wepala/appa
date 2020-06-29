@@ -1,8 +1,8 @@
 import React from 'react';
+import packageJson from './package';
+import {VERSION} from 'react-native-dotenv';
 
-export const ThemeContext = React.createContext({
-  theme: 'light',
-  colour: {},
-  changeColour: () => {},
-  toggleTheme: () => {},
-});
+const npmVers = packageJson.version;
+export const VersionContext = React.createContext(
+  VERSION !== '' ? VERSION : npmVers,
+);

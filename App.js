@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import * as eva from '@eva-design/eva';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
@@ -8,14 +8,12 @@ import {default as mapping} from './mapping.json';
 import {default as brandTheme} from './themes/main.json';
 import {default as colours} from './themes/colours.json';
 import {ThemeContext} from './theme.context';
-
 import HomeScreen from './src/views/HomeScreen';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 
 //store
 import store, {persistor} from './src/store';
-
 export default () => {
   const [theme, setTheme] = React.useState('light');
   const [colour, setColour] = React.useState({
@@ -23,6 +21,7 @@ export default () => {
     name: 'default',
     hex: '#4381FF',
   });
+
   const toggleTheme = () => {
     const nextTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(nextTheme);

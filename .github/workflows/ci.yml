@@ -39,6 +39,7 @@ jobs:
         run: |
           env > .env
         env:
+          VERSION: ${{ secrets.VERSION }}
           API_URL: ${{ secrets.API_URL }}
           SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
           SENDER: ${{ secrets.SENDER }}
@@ -118,6 +119,7 @@ jobs:
         run: |
           env > .env
         env:
+          VERSION: ${{ secrets.VERSION }}
           API_URL: ${{ secrets.API_URL }}
           SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
           SENDER: ${{ secrets.SENDER }}
@@ -189,6 +191,7 @@ jobs:
         run: |
           env > .env
         env:
+          VERSION: ${{ secrets.VERSION }}
           API_URL: ${{ secrets.API_URL }}
           SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
           SENDER: ${{ secrets.SENDER }}

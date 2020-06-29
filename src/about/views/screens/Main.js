@@ -1,6 +1,9 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {ImageBackground, Linking, SafeAreaView} from 'react-native';
 import packageJson from '../../../../package.json';
+import App from '../../../../App';
+import {VersionContext} from '../../../../version.context';
+// Inside component
 
 import {
   Button,
@@ -17,6 +20,8 @@ import background from '../../../../assets/images/brand/about.png';
 export default ({navigation, status, route}) => {
   let [visible, toggleVisible] = useState(false);
   const styles = useStyleSheet(themedStyles);
+  const version = useContext(VersionContext);
+
   return (
     <SafeAreaView style={styles.container}>
       <TopBar title="About Us" navigation={navigation} route={route} />
@@ -35,7 +40,7 @@ export default ({navigation, status, route}) => {
                   );
                 }}
                 style={styles.button}>
-                <Text category="s1">Version: {packageJson.version}</Text>
+                <Text category="s1">Version: {version}</Text>
               </Button>
             </Layout>
           </Layout>
