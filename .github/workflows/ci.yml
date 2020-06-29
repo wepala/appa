@@ -28,9 +28,8 @@ jobs:
         run: echo "::set-env name=BRANCH::$(echo ${GITHUB_REF#refs/heads/})"
       - name: Set version variable
         run: echo "::set-env name=VERSION::$(echo ${BRANCH}-${NOW})"
-      - name: Echo current date
+      - name: Echo VERSION
         run: echo $VERSION
-
       - name: Lint code
         run: |
           npm run lint
