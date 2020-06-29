@@ -17,6 +17,7 @@ import Customize from '../customize/views/screens/Main';
 import {setToken, setUser} from '../weos/model/commands';
 import {onBoardUser} from '../onboarding/model/commands';
 import Spinner from '../views/components/Spinner';
+import ConnectHOC from '../onboarding/controllers/ConnectHOC';
 
 const {Navigator, Screen} = createDrawerNavigator();
 
@@ -48,6 +49,7 @@ const HomeScreen = ({
   setUserInfo,
 }) => {
   const [loading, setLoading] = useState(false);
+  const WrappedSettings = (props) => ConnectHOC(Settings, props);
 
   const logoutHandler = () => {
     logout();
@@ -58,6 +60,7 @@ const HomeScreen = ({
     return (
       <Navigator
         screenOptions={{gestureEnabled: true}}
+        initialParams={{user}}
         drawerContent={(props) => (
           <MainMenu
             {...props}
@@ -70,7 +73,7 @@ const HomeScreen = ({
         <Screen name="Agenda" component={Tasks} />
         <Screen name="Logs" component={Logs} />
         <Screen name="Reports" component={Reports} />
-        <Screen name="Settings" component={Settings} />
+        <Screen name="Settings" component={WrappedSettings} />
         <Screen name="Support" component={Support} />
         <Screen name="About" component={About} />
         <Screen name="Customize" component={Customize} />

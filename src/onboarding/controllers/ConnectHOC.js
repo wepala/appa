@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Alert, Linking} from 'react-native';
 import URL from 'url-parse';
 import {
@@ -15,6 +15,10 @@ import {setToken, setUser} from '../../weos/model/commands';
 
 const ConnectHOC = (WrappedComponent, props) => {
   const dispatch = useDispatch();
+  const globalState = useSelector((state) => state);
+  const componentState = {
+    user: globalState.weos.user,
+  };
   const [loading, setLoading] = useState(false);
   const {navigation} = props;
 
@@ -87,6 +91,7 @@ const ConnectHOC = (WrappedComponent, props) => {
       handleConnect={handleWeosConnect}
       handleOpenUrl={handleOpenUrl}
       loading={loading}
+      componentState={componentState}
     />
   );
 };
