@@ -35,6 +35,10 @@ jobs:
       - name: Install NDK # Temp fix for ongoing gradle issue
         run: |
           echo "y" | sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;20.0.5594570" --sdk_root=${ANDROID_SDK_ROOT}
+      - name: setVersion
+        run: |
+          echo GITHUB_REF
+          
       - name: Create .env file
         run: |
           env > .env
@@ -191,7 +195,6 @@ jobs:
         run: |
           env > .env
         env:
-          VERSION: ${{ secrets.VERSION }}
           API_URL: ${{ secrets.API_URL }}
           SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
           SENDER: ${{ secrets.SENDER }}
