@@ -32,7 +32,6 @@ const ConnectHOC = (WrappedComponent, props) => {
   });
 
   const handleWeosConnect = () => {
-    setLoading(true);
     Linking.openURL(PKCE.authorizeURL());
   };
 
@@ -65,13 +64,12 @@ const ConnectHOC = (WrappedComponent, props) => {
     const {code, state, confirm_creation} = url.query;
 
     if (confirm_creation) {
-      setLoading(false);
       accountCreation();
-      setLoading(true);
       return;
     }
 
     try {
+      setLoading(true);
       let authToken = await PKCE.exchangeAuthCode(code, state);
       let user = await PKCE.getUserInfo(authToken);
       user.sub = JSON.parse(user.sub);
@@ -80,7 +78,6 @@ const ConnectHOC = (WrappedComponent, props) => {
       setLoading(false);
       navigation.navigate(screen);
     } catch (error) {
-      console.log('Error occurred ', error);
       setLoading(false);
     }
   };
