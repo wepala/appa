@@ -79,6 +79,17 @@ const ConnectHOC = (WrappedComponent, props) => {
       navigation.navigate(screen);
     } catch (error) {
       setLoading(false);
+      Alert.alert(
+        'Login Failure',
+        'An error occured while logging in. Please try again later',
+        [
+          {
+            text: 'OK',
+            onPress: () => console.log(error),
+          },
+        ],
+        {cancelable: false},
+      );
     }
   };
 
