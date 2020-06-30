@@ -22,12 +22,8 @@ jobs:
           npm install
       - name: Set current date as env variable
         run: echo "::set-env name=NOW::$(date +'%Y%m%d%H%M%S')"
-      - name: Echo current date
-        run: echo $NOW
-      - name: Extract branch name
-        run: echo "::set-env name=BRANCH::$(echo ${GITHUB_REF#refs/heads/})"
       - name: Set version variable
-        run: echo "::set-env name=VERSION::$(echo ${BRANCH}-${NOW})"
+        run: echo "::set-env name=VERSION::$(echo ${GITHUB_REF#refs/heads/}-${NOW})"
       - name: Echo VERSION
         run: echo $VERSION
       - name: Lint code
