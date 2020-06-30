@@ -41,15 +41,10 @@ export default ({navigation}) => {
       }
       case 4: {
         navigation.toggleDrawer();
-        navigation.navigate('Support');
-        return;
-      }
-      case 5: {
-        navigation.toggleDrawer();
         navigation.navigate('Customize');
         return;
       }
-      case 6: {
+      case 5: {
         navigation.toggleDrawer();
         navigation.navigate('About');
         return;
