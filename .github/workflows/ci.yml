@@ -20,6 +20,12 @@ jobs:
       - name: Install npm dependencies
         run: |
           npm install
+      - name: Set current date as env variable
+        run: echo "::set-env name=NOW::$(date +'%Y%m%d%H%M%S')"
+      - name: Set version variable
+        run: echo "::set-env name=VERSION::$(echo ${GITHUB_REF#refs/heads/}-${NOW})"
+      - name: Echo VERSION
+        run: echo $VERSION
       - name: Lint code
         run: |
           npm run lint
@@ -39,6 +45,7 @@ jobs:
         run: |
           env > .env
         env:
+          VERSION: ${{ secrets.VERSION }}
           API_URL: ${{ secrets.API_URL }}
           SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
           SENDER: ${{ secrets.SENDER }}
@@ -118,6 +125,7 @@ jobs:
         run: |
           env > .env
         env:
+          VERSION: ${{ secrets.VERSION }}
           API_URL: ${{ secrets.API_URL }}
           SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
           SENDER: ${{ secrets.SENDER }}
