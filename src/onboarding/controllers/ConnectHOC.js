@@ -9,7 +9,6 @@ import {
   SCOPE,
   CODE_CHALLENGE_METHOD,
 } from 'react-native-dotenv';
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import PKCE from '../../weos/auth/pkce';
 import {setToken, setUser} from '../../weos/model/commands';
@@ -18,8 +17,9 @@ const mapStateToProps = (state) => ({
   user: state.weos.user,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({setToken, setUser}, dispatch);
+const mapDispatchToProps = {
+  setToken,
+  setUser,
 };
 
 const connectWeos = (WrappedComponent) => {
@@ -36,15 +36,33 @@ const connectWeos = (WrappedComponent) => {
       });
       this.state = {
         loading: false,
+        screen: null,
       };
-
       this.componentState = {user: this.props.user};
     }
 
-    handleWeosConnect = () => {
+    componentDidMount() {
+      Linking.addEventListener('url', this.handleOpenUrl);
+      Linking.getInitialURL().then((url) => {
+        if (url) {
+          this.handleOpenUrl(url, 'Complete');
+        }
+      });
+    }
+
+    componentWillUnmount() {
+      Linking.removeEventListener('url', this.handleOpenUrl);
+    }
+
+    /**
+     * Handle Connecting to WEOS
+     * @param {string} screen - Screen to go to after successful login
+     */
+    handleWeosConnect = (screen) => {
       this.setState({
         loading: true,
       });
+      this.setState({screen});
       Linking.openURL(PKCE.authorizeURL());
     };
 
@@ -72,7 +90,7 @@ const connectWeos = (WrappedComponent) => {
      * @param {string} screen - Screen name to navigate to when complete
      * @param {string} urlString - Url returned by PKCE
      */
-    handleOpenUrl = async (screen, urlString) => {
+    handleOpenUrl = async (urlString) => {
       const url = new URL(urlString.url, true);
       const {code, state, confirm_creation} = url.query;
 
@@ -96,7 +114,7 @@ const connectWeos = (WrappedComponent) => {
         this.setState({
           loading: false,
         });
-        this.props.navigation.navigate(screen);
+        this.props.navigation.navigate(this.state.screen);
       } catch (error) {
         console.log('Error occurred ', error);
         this.setState({
@@ -110,7 +128,6 @@ const connectWeos = (WrappedComponent) => {
         <WrappedComponent
           {...this.props}
           handleConnect={this.handleWeosConnect}
-          handleOpenUrl={this.handleOpenUrl}
           loading={this.state.loading}
           componentState={this.componentState}
         />
