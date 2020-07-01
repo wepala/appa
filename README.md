@@ -101,6 +101,16 @@ We use [eslint](https://eslint.org) for parsing our ECMAScript/JavaScript code, 
 
 This project is licensed under the AGPL License - see the [LICENSE.md](LICENSE.md) file for details
 
+## Copyright 
+
+APPA Does®, the APPA® logo design, WEPALA® and the WEPALA® logo design are exclusive trademarks registered in the United States by [Wepala limited](https://wepala.com).
+
+The APPA design is the exclusive property of [Wepala limited](https://wepala.com) and has been registered with the United States Copyright Office. All rights reserved.
+
+No adaptation or use of any kind of any of our registered trademarks or copyrights included in this project, is allowed without the express written permission of [Wepala limited](https://wepala.com)
+
+For more information regarding the authorized uses of these items please [contact us](https://wepala.com/contact/).
+
 ## Authors
 
 - **Akeem Philbert** - _Initial work_ - [Akeem Philbert](https://github.com/AkeemPhilbert)
