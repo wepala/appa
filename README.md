@@ -42,7 +42,7 @@ These instructions will get you a copy of the project up and running on your loc
   npm install
   ```
 
-Before running the project, you will first need to set up some environment variables.
+Before running this project, you will first need to set up some environment variables.
 Create a new file in the `root` of the project called `.env`
 Copy the contents of the [.env-dist](.env-dist) file into the `.env` and fill out the blanks
 
@@ -69,16 +69,16 @@ for an indepth look at these tests check out our [Testing Guide](TEST.md)
 
 ## Deployment
 
-Deployments are done through Github actions. They are automatically triggered for Android and iOS when a pull request is made for a **release branch**. They are also triggered when new commits are pushed to a release branch.
+Deployments for this project are done through Github actions. They are automatically triggered for Android and iOS when a pull request is made for a **release branch**. They are also triggered when new commits are pushed to a release branch.
 
-For Android releases, we need the following information setup:
+For Android releases, This project needs the following information setup:
 
 - ANDROID_KEYSTORE \- Base64 encoded key store
 - ANDROID_KEYSTORE_PASSWORD \- Password for the key store
 - ANDROID_KEY_ALIAS \- Alias/name of the key
 - ANDROID_KEY_PASSWORD \- Password for the key
 
-For iOS, we currently need a developer team added to the project to create an IPA.
+For iOS, this project currently needs a developer team added to the project to create an IPA.
 
 ## Built With
 
@@ -91,11 +91,11 @@ Please read our [Contribution guidelines for this project](CONTRIBUTING.md) for 
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/wepala/weagenda/tags).
+This project uses [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/wepala/weagenda/tags).
 
 ## Linting 
 
-We use [eslint](https://eslint.org) for parsing our ECMAScript/JavaScript code, in order to make our code more consistent and prevent bugs. 
+This project uses [eslint](https://eslint.org) for parsing our ECMAScript/JavaScript code, in order to make our code more consistent and prevent bugs. 
 
 ## License
 
