@@ -1,16 +1,249 @@
-name: Build Android and iOS
-on:
-  push:
-    branches:
-      - master
+name: Test and Build Android & iOS
+on: [push, pull_request]
+
 jobs:
-  install-and-test:
-    runs-on: ubuntu-latest
+  install-test-and-build:
+    runs-on: ${{ matrix.os }}
+    if: "!contains(github.ref, 'release/')"
+    strategy:
+      matrix:
+        os: [ubuntu-18.04]
+        node: [13]
+
     steps:
-      - uses: actions/checkout@v2
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup node @ version
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
       - name: Install npm dependencies
         run: |
           npm install
-      - name: Run tests
+      - name: Lint code
+        run: |
+          npm run lint
+      - name: Test code
         run: |
           npm test
+      - name: Install JDK for SDK to work
+        uses: actions/setup-java@v1
+        with:
+          java-version: 12 # The JDK version to make available on the path.
+          java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
+          architecture: x64 # (x64 or x86) - defaults to x64
+      - name: Install NDK # Temp fix for ongoing gradle issue
+        run: |
+          echo "y" | sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;20.0.5594570" --sdk_root=${ANDROID_SDK_ROOT}
+      - name: Create .env file
+        run: |
+          env > .env
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
+          SENDER: ${{ secrets.SENDER }}
+          DESTINATION: ${{ secrets.DESTINATION }}
+          BEARER: ${{ secrets.BEARER }}
+      - name: Build debug APK
+        run: |
+          npm run bundle-android
+          cd android && ./gradlew clean assembleDebug
+      - name: Send success notification
+        uses: rtCamp/action-slack-notify@v2.0.0
+        env:
+          SLACK_CHANNEL: weagenda
+          SLACK_COLOR: "#32BD65"
+          SLACK_ICON: https://github.com/wepala.png?size=48
+          SLACK_MESSAGE: We were able to test and build your code without problems. Not bad
+          SLACK_TITLE: Branch tests passed
+          SLACK_USERNAME: WeAgenda
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Upload debug APK to slack step
+        uses: adrey/slack-file-upload-action@master
+        with:
+          token: ${{ secrets.SLACK_TOKEN }}
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          title: Appa Debug APK
+          initial_comment: Here's the latest debug build for Appa! Yip yip
+          channel: weagenda
+      - name: Send failure notification
+        uses: rtCamp/action-slack-notify@v2.0.0
+        if: failure()
+        env:
+          SLACK_CHANNEL: weagenda
+          SLACK_COLOR: "#FF0000"
+          SLACK_ICON: https://github.com/wepala.png?size=48
+          SLACK_MESSAGE: Complete not complete the debug build process. Please review the error in Github Actions
+          SLACK_TITLE: Lint/Test failed
+          SLACK_USERNAME: WeAgenda
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+  build-android:
+    runs-on: ${{ matrix.os }}
+    if: contains(github.ref, 'release/')
+    strategy:
+      matrix:
+        os: [ubuntu-18.04]
+        node: [13]
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup node @ version
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Install npm dependencies
+        run: |
+          npm install
+      - name: Lint code
+        run: |
+          npm run lint
+      - name: Test code
+        run: |
+          npm test
+      - name: Install JDK for SDK to work
+        uses: actions/setup-java@v1
+        with:
+          java-version: 12 # The JDK version to make available on the path.
+          java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
+          architecture: x64 # (x64 or x86) - defaults to x64
+      - name: Install NDK # Temp fix for ongoing gradle issue
+        run: |
+          echo "y" | sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;20.0.5594570" --sdk_root=${ANDROID_SDK_ROOT}
+      - name: Generate keystore
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 -d > android/app/release.keystore
+      - name: Create .env file
+        run: |
+          env > .env
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
+          SENDER: ${{ secrets.SENDER }}
+          DESTINATION: ${{ secrets.DESTINATION }}
+          BEARER: ${{ secrets.BEARER }}
+      - name: Build release APK
+        run: |
+          cd android && ./gradlew clean bundleRelease
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - name: Update beta track in play store
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          packageName: com.appadoes
+          releaseFile: android/app/build/outputs/bundle/release/app-release.aab
+          track: beta
+          whatsNewDirectory: distribution/
+      - name: Send failure notification
+        uses: rtCamp/action-slack-notify@v2.0.0
+        if: failure()
+        env:
+          SLACK_CHANNEL: weagenda
+          SLACK_COLOR: "#FF0000"
+          SLACK_ICON: https://github.com/wepala.png?size=48
+          SLACK_MESSAGE: Tests passed for your code changes but we aren't able to generate and Android app
+          SLACK_TITLE: Could not build Android APK
+          SLACK_USERNAME: WeAgenda
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+  build-ios:
+    runs-on: macos-10.15
+    if: contains(github.ref, 'release/')
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup node @ version
+        uses: actions/setup-node@v1
+        with:
+          node-version: 13
+      - name: Install npm dependencies
+        run: |
+          npm install
+      - name: Lint code
+        run: |
+          npm run lint
+      - name: Test code
+        run: |
+          npm test
+      - name: Generate and install certs
+        run: |
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles/
+          echo "${{ secrets.IOS_PROVISIONING_PROFILE }}" | base64 -d > ~/Library/MobileDevice/Provisioning\ Profiles/${{ secrets.IOS_PROVISIONING_PROFILE_ID }}.mobileprovision
+          echo "${{ secrets.IOS_CERTIFICATE }}" | base64 -d > ios/Certificates.p12
+          security create-keychain -p "" build.keychain
+          security list-keychains -d user -s build.keychain $(security list-keychains -d user | sed s/\"//g)
+          security list-keychains
+          security set-keychain-settings build.keychain
+          security unlock-keychain -p "" build.keychain
+          security import ios/Certificates.p12 -k build.keychain -P "" -T "/usr/bin/codesign"
+          security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
+      - name: Install pod dependencies
+        run: |
+          cd ios && pod install
+      - name: Create .env file
+        run: |
+          env > .env
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
+          SENDER: ${{ secrets.SENDER }}
+          DESTINATION: ${{ secrets.DESTINATION }}
+          BEARER: ${{ secrets.BEARER }}
+      - name: Create archive for app
+        run: |
+          cd ios
+          xcodebuild clean archive \
+            -workspace AppaTimeTracker.xcworkspace \
+            -scheme AppaTimeTracker \
+            -configuration Release \
+            -archivePath build/AppaTimeTracker.xcarchive \
+            -allowProvisioningUpdates \
+            PROVISIONING_PROFILE="${{ secrets.IOS_PROVISIONING_PROFILE_ID }}" \
+            CODE_SIGN_IDENTITY="${{ secrets.IOS_SIGNING_IDENTITY }}"
+      - name: Convert to .ipa
+        run: |
+          cd ios
+          xcodebuild \
+            -exportArchive \
+            -archivePath build/AppaTimeTracker.xcarchive \
+            -exportPath ./build \
+            -exportOptionsPlist ci.plist
+      - name: Upload ipa to Apple Store
+        run: |
+          cd ios
+          xcrun altool --upload-app --type ios \
+            --file build/AppaTimeTracker.ipa \
+            --username "${{ secrets.IOS_USERNAME }}" \
+            --password "${{ secrets.IOS_PASSWORD }}" --verbose
+      - name: Send failure notification
+        uses: rtCamp/action-slack-notify@v2.0.0
+        if: failure()
+        env:
+          SLACK_CHANNEL: weagenda
+          SLACK_COLOR: "#FF0000"
+          SLACK_ICON: https://github.com/wepala.png?size=48
+          SLACK_MESSAGE: Tests passed for your code changes but we aren't able to generate and iOS app
+          SLACK_TITLE: Could not build iOS app
+          SLACK_USERNAME: WeAgenda
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+  build-success-notification-release:
+    runs-on: ubuntu-18.04
+    if: contains(github.ref, 'release/')
+    needs: [build-android, build-ios]
+    steps:
+      - name: Send success notification
+        uses: rtCamp/action-slack-notify@v2.0.0
+        env:
+          SLACK_CHANNEL: weagenda
+          SLACK_COLOR: "#32BD65"
+          SLACK_ICON: https://github.com/wepala.png?size=48
+          SLACK_MESSAGE: We were able to test and build your code without problems. Pat yourself on the back
+          SLACK_TITLE: Apps built for release
+          SLACK_USERNAME: WeAgenda
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

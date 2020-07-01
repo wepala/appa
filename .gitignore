@@ -29,7 +29,7 @@ build/
 local.properties
 *.iml
 
-# node.js
+# node.src
 #
 node_modules/
 npm-debug.log
@@ -57,3 +57,12 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+
+# Test Coverage
+/coverage
+
+# Ignore enviroment file
+.env
+
+# vscode
+.vscode
