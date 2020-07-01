@@ -12,14 +12,17 @@ import {
 import {connect} from 'react-redux';
 import PKCE from '../../weos/auth/pkce';
 import {setToken, setUser} from '../../weos/model/commands';
+import {onBoardUser} from '../../onboarding/model/commands';
 
 const mapStateToProps = (state) => ({
   user: state.weos.user,
+  token: state.weos.token,
 });
 
 const mapDispatchToProps = {
   setToken,
   setUser,
+  onBoardUser,
 };
 
 const connectWeos = (WrappedComponent) => {
@@ -39,19 +42,22 @@ const connectWeos = (WrappedComponent) => {
         screen: null,
       };
       this.componentState = {user: this.props.user};
+      this.handler = this.props.user
+        ? this.handleLogoutUrl
+        : this.handleOpenUrl;
     }
 
     componentDidMount() {
-      Linking.addEventListener('url', this.handleOpenUrl);
+      Linking.addEventListener('url', this.handler);
       Linking.getInitialURL().then((url) => {
         if (url) {
-          this.handleOpenUrl(url, 'Complete');
+          this.handler();
         }
       });
     }
 
     componentWillUnmount() {
-      Linking.removeEventListener('url', this.handleOpenUrl);
+      Linking.removeEventListener('url', this.handler);
     }
 
     /**
@@ -61,6 +67,10 @@ const connectWeos = (WrappedComponent) => {
     handleWeosConnect = (screen) => {
       this.setState({screen});
       Linking.openURL(PKCE.authorizeURL());
+    };
+
+    handleWeosLogout = () => {
+      Linking.openURL(PKCE.logoutURL(this.props.token.id_token));
     };
 
     accountCreation = () => {
@@ -103,16 +113,22 @@ const connectWeos = (WrappedComponent) => {
         user.sub = JSON.parse(user.sub);
         this.props.setToken(authToken);
         this.props.setUser(user);
-        this.setState({
-          loading: false,
-        });
+        this.setState({loading: false});
         this.props.navigation.navigate(this.state.screen);
       } catch (error) {
-        console.log('Error occurred ', error);
+        console.error('Error occurred ', error);
         this.setState({
           loading: false,
         });
       }
+    };
+
+    handleLogoutUrl = () => {
+      this.setState({loading: true});
+      this.props.setToken(null);
+      this.props.setUser(null);
+      this.props.onBoardUser(false);
+      this.setState({loading: false});
     };
 
     render() {
@@ -120,6 +136,7 @@ const connectWeos = (WrappedComponent) => {
         <WrappedComponent
           {...this.props}
           handleConnect={this.handleWeosConnect}
+          handleLogout={this.handleWeosLogout}
           loading={this.state.loading}
           componentState={this.componentState}
         />

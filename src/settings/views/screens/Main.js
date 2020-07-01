@@ -20,6 +20,7 @@ export default ({
   navigation,
   route,
   handleConnect,
+  handleLogout,
   loading,
   componentState,
 }) => {
@@ -30,7 +31,7 @@ export default ({
   const {user} = componentState;
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1}} testID="ConnectSafeAreaView">
       <TopBar title="Settings" navigation={navigation} route={route} />
       <Layout style={styles.container}>
         <ScrollView>
@@ -52,6 +53,15 @@ export default ({
             <Layout style={styles.column1}>
               {user && (
                 <>
+                  <Button
+                    testID="LogoutBtn"
+                    appearance="primary"
+                    size="giant"
+                    style={styles.buttonLogout}
+                    onPress={handleLogout}>
+                    Logout
+                  </Button>
+                  <Divider style={styles.divider} />
                   <Text category="h5">ACCOUNT</Text>
                   <Layout style={styles.row}>
                     <Text
@@ -239,6 +249,16 @@ const themedStyles = StyleService.create({
   },
   buttonConnect: {
     marginTop: 32,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+    elevation: 5,
+  },
+  buttonLogout: {
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

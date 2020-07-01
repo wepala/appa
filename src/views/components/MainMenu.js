@@ -20,7 +20,6 @@ import {
 } from './Icons';
 import Profile from './Profile';
 import logo from '../../../assets/images/brand/logo.png';
-import Spinner from '../components/Spinner';
 
 export default ({navigation, logout, user, token, setLoading}) => {
   const styles = useStyleSheet(themedStyles);

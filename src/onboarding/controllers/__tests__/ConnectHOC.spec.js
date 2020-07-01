@@ -9,6 +9,12 @@ import {Provider} from 'react-redux';
 import {Linking} from 'react-native';
 import ConnectHoc from '../ConnectHOC';
 import Connect from '../../views/screens/Connect';
+import PKCE from '../../../weos/auth/pkce';
+import Main from '../../../settings/views/screens/Main';
+
+jest.mock('@fortawesome/react-native-fontawesome', () => ({
+  FontAwesomeIcon: '',
+}));
 
 describe('Connect HOC', () => {
   const mockStore = configureStore();
@@ -22,10 +28,10 @@ describe('Connect HOC', () => {
       },
     },
   };
-  const store = mockStore(initialState);
   const navigation = jest.fn();
 
   it('Should render wrapped component with props', () => {
+    const store = mockStore(initialState);
     const WrappedConnect = ConnectHoc(Connect);
     const {getByTestId, unmount} = render(
       <>
@@ -66,8 +72,9 @@ describe('Connect HOC', () => {
   });
 
   it('should provide a method for handling connecting to weos', () => {
+    const store = mockStore(initialState);
     const WrappedConnect = ConnectHoc(Connect);
-    Linking.openUrl = jest.fn();
+    PKCE.authorizeURL = jest.fn();
     const {getByTestId, unmount} = render(
       <>
         <IconRegistry icons={EvaIconsPack} />
@@ -86,6 +93,39 @@ describe('Connect HOC', () => {
 
     const ConnectSafeAreaView = getByTestId('ConnectSafeAreaView');
     expect(ConnectSafeAreaView.parent.props.handleConnect).toBeTruthy();
+
+    const WeOsConnectBtn = getByTestId('WeOsConnectBtn');
+    fireEvent.press(WeOsConnectBtn);
+    expect(PKCE.authorizeURL).toHaveBeenCalled();
+    unmount();
+  });
+
+  it('should provide a method for logging out of weos', () => {
+    const store = mockStore(initialState);
+    const WrappedConnect = ConnectHoc(Main);
+    Linking.openUrl = jest.fn();
+    PKCE.logoutURL = jest.fn();
+    const {getByTestId, unmount} = render(
+      <>
+        <IconRegistry icons={EvaIconsPack} />
+        <Provider store={store}>
+          <ApplicationProvider
+            {...eva}
+            theme={{
+              ...eva.light,
+              ...theme,
+            }}>
+            <WrappedConnect navigation={navigation} />
+          </ApplicationProvider>
+        </Provider>
+      </>,
+    );
+
+    const ConnectSafeAreaView = getByTestId('ConnectSafeAreaView');
+    expect(ConnectSafeAreaView.parent.props.handleLogout).toBeTruthy();
+    const LogoutBtn = getByTestId('LogoutBtn');
+    fireEvent.press(LogoutBtn);
+    expect(PKCE.logoutURL).toHaveBeenCalled();
     unmount();
   });
 });
