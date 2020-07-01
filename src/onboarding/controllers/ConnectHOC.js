@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import React, {Component} from 'react';
 import {Alert, Linking} from 'react-native';
 import URL from 'url-parse';
 import {
@@ -10,98 +9,125 @@ import {
   SCOPE,
   CODE_CHALLENGE_METHOD,
 } from 'react-native-dotenv';
+import {connect} from 'react-redux';
 import PKCE from '../../weos/auth/pkce';
 import {setToken, setUser} from '../../weos/model/commands';
 
-const ConnectHOC = (WrappedComponent, props) => {
-  const dispatch = useDispatch();
-  const globalState = useSelector((state) => state);
-  const componentState = {
-    user: globalState.weos.user,
-  };
-  const [loading, setLoading] = useState(false);
-  const {navigation} = props;
+const mapStateToProps = (state) => ({
+  user: state.weos.user,
+});
 
-  PKCE.config.setVars({
-    CLIENT_ID,
-    AUTHORIZE_URL,
-    REDIRECT_URI,
-    RESPONSE_TYPE,
-    SCOPE,
-    CODE_CHALLENGE_METHOD,
-  });
+const mapDispatchToProps = {
+  setToken,
+  setUser,
+};
 
-  const handleWeosConnect = () => {
-    Linking.openURL(PKCE.authorizeURL());
-  };
-
-  const accountCreation = () => {
-    Alert.alert(
-      'Account Creation',
-      'Do you want to create a new account with this email address?',
-      [
-        {
-          text: 'Cancel',
-          onPress: () => Linking.openURL(PKCE.createAccountURL(false)),
-        },
-        {
-          text: 'Confirm',
-          onPress: () => Linking.openURL(PKCE.createAccountURL(true)),
-        },
-      ],
-      {cancelable: false},
-    );
-  };
-
-  /**
-   * Handle PKCE URL Opening
-   *
-   * @param {string} screen - Screen name to navigate to when complete
-   * @param {string} urlString - Url returned by PKCE
-   */
-  const handleOpenUrl = async (screen, urlString) => {
-    const url = new URL(urlString.url, true);
-    const {code, state, confirm_creation} = url.query;
-
-    if (confirm_creation) {
-      accountCreation();
-      return;
+const connectWeos = (WrappedComponent) => {
+  const ConnectHOC = class extends Component {
+    constructor(props) {
+      super(props);
+      PKCE.config.setVars({
+        CLIENT_ID,
+        AUTHORIZE_URL,
+        REDIRECT_URI,
+        RESPONSE_TYPE,
+        SCOPE,
+        CODE_CHALLENGE_METHOD,
+      });
+      this.state = {
+        loading: false,
+        screen: null,
+      };
+      this.componentState = {user: this.props.user};
     }
 
-    try {
-      setLoading(true);
-      let authToken = await PKCE.exchangeAuthCode(code, state);
-      let user = await PKCE.getUserInfo(authToken);
-      user.sub = JSON.parse(user.sub);
-      dispatch(setToken(authToken));
-      dispatch(setUser(user));
-      setLoading(false);
-      navigation.navigate(screen);
-    } catch (error) {
-      setLoading(false);
+    componentDidMount() {
+      Linking.addEventListener('url', this.handleOpenUrl);
+      Linking.getInitialURL().then((url) => {
+        if (url) {
+          this.handleOpenUrl(url, 'Complete');
+        }
+      });
+    }
+
+    componentWillUnmount() {
+      Linking.removeEventListener('url', this.handleOpenUrl);
+    }
+
+    /**
+     * Handle Connecting to WEOS
+     * @param {string} screen - Screen to go to after successful login
+     */
+    handleWeosConnect = (screen) => {
+      this.setState({screen});
+      Linking.openURL(PKCE.authorizeURL());
+    };
+
+    accountCreation = () => {
       Alert.alert(
-        'Login Failure',
-        'An error occured while logging in. Please try again later',
+        'Account Creation',
+        'Do you want to create a new account with this email address?',
         [
           {
-            text: 'OK',
-            onPress: () => console.log(error),
+            text: 'Cancel',
+            onPress: () => Linking.openURL(PKCE.createAccountURL(false)),
+          },
+          {
+            text: 'Confirm',
+            onPress: () => Linking.openURL(PKCE.createAccountURL(true)),
           },
         ],
         {cancelable: false},
       );
+    };
+
+    /**
+     * Handle PKCE URL Opening
+     *
+     * @param {string} screen - Screen name to navigate to when complete
+     * @param {string} urlString - Url returned by PKCE
+     */
+    handleOpenUrl = async (urlString) => {
+      const url = new URL(urlString.url, true);
+      const {code, state, confirm_creation} = url.query;
+
+      if (confirm_creation) {
+        this.accountCreation();
+        return;
+      }
+
+      try {
+        this.setState({loading: true});
+        let authToken = await PKCE.exchangeAuthCode(code, state);
+        let user = await PKCE.getUserInfo(authToken);
+        user.sub = JSON.parse(user.sub);
+        this.props.setToken(authToken);
+        this.props.setUser(user);
+        this.setState({
+          loading: false,
+        });
+        this.props.navigation.navigate(this.state.screen);
+      } catch (error) {
+        console.log('Error occurred ', error);
+        this.setState({
+          loading: false,
+        });
+      }
+    };
+
+    render() {
+      return (
+        <WrappedComponent
+          {...this.props}
+          handleConnect={this.handleWeosConnect}
+          loading={this.state.loading}
+          componentState={this.componentState}
+        />
+      );
     }
   };
 
-  return (
-    <WrappedComponent
-      {...props}
-      handleConnect={handleWeosConnect}
-      handleOpenUrl={handleOpenUrl}
-      loading={loading}
-      componentState={componentState}
-    />
-  );
+  return connect(mapStateToProps, mapDispatchToProps)(ConnectHOC);
 };
 
-export default ConnectHOC;
+export default connectWeos;

@@ -20,7 +20,6 @@ export default ({
   navigation,
   route,
   handleConnect,
-  handleOpenUrl,
   loading,
   componentState,
 }) => {
@@ -29,20 +28,6 @@ export default ({
   const [currentColour, setCurrentColour] = useState(themeContext.colour.name);
   const styles = useStyleSheet(themedStyles);
   const {user} = componentState;
-  handleOpenUrl = handleOpenUrl.bind(null, 'Settings');
-
-  useEffect(() => {
-    Linking.addEventListener('url', handleOpenUrl);
-    Linking.getInitialURL().then((url) => {
-      if (url) {
-        handleOpenUrl(url, 'Settings');
-      }
-    });
-
-    return () => {
-      return Linking.removeEventListener('url', handleOpenUrl);
-    };
-  });
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -56,7 +41,7 @@ export default ({
                 appearance="primary"
                 size="giant"
                 style={styles.buttonConnect}
-                onPress={handleConnect}>
+                onPress={() => handleConnect('Settings')}>
                 WeOS Connect
               </Button>
               <Divider style={styles.divider} />
