@@ -20,7 +20,13 @@ const initialState = {
   },
   weos: {
     token: null,
+    applicationId: null,
+    eventCount: 0,
+    connected: false,
+    online: true,
+    syncing: false,
     user: null,
+    eventsQueue: [],
   },
 };
 const middlewares = [thunk];

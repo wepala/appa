@@ -3,6 +3,8 @@ import {
   SET_APPLICATION_ID,
   SET_EVENT_COUNT,
   SET_USER,
+  SET_SYNC,
+  EMPTY_QUEUE,
 } from './commandTypes';
 
 const weos = (
@@ -14,6 +16,7 @@ const weos = (
     online: true,
     syncing: false,
     user: null,
+    eventsQueue: [],
   },
   action,
 ) => {
@@ -26,6 +29,10 @@ const weos = (
       return {...state, token: action.payload.token};
     case SET_USER:
       return {...state, user: action.payload.user};
+    case SET_SYNC:
+      return {...state, syncing: action.payload.syncing};
+    case EMPTY_QUEUE:
+      return {...state, eventsQueue: []};
     default:
       return state;
   }

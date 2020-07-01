@@ -3,6 +3,8 @@ import {
   SET_USER,
   SET_APPLICATION_ID,
   SET_EVENT_COUNT,
+  SET_SYNC,
+  EMPTY_QUEUE,
 } from './commandTypes';
 
 export const setToken = (token) => {
@@ -30,5 +32,18 @@ export const setApplicationId = (applicationId) => {
   return {
     type: SET_APPLICATION_ID,
     payload: {applicationId},
+  };
+};
+
+export const setSync = (syncing) => {
+  return {
+    type: SET_SYNC,
+    payload: {syncing},
+  };
+};
+
+export const emptyQueue = () => {
+  return {
+    type: EMPTY_QUEUE,
   };
 };

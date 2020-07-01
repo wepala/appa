@@ -1,5 +1,13 @@
 import weos from '../reducer';
-import {setEventCount, setApplicationId, setToken, setUser} from '../commands';
+import {
+  setEventCount,
+  setApplicationId,
+  setToken,
+  setUser,
+  setSync,
+  emptyQueue,
+} from '../commands';
+import events from './events';
 
 describe('WeOS reducer', function () {
   const expectedInitialState = {
@@ -10,6 +18,7 @@ describe('WeOS reducer', function () {
     online: true,
     syncing: false,
     user: null,
+    eventsQueue: [],
   };
 
   it('should return initial state', () => {
@@ -59,5 +68,16 @@ describe('WeOS reducer', function () {
         accountId: 'acf3233',
       },
     });
+  });
+
+  it('should set sync state', () => {
+    let state = weos(expectedInitialState, setSync(true));
+    expect(state.syncing).toBe(true);
+  });
+
+  it('should empty the events queue', () => {
+    let initialState = {...expectedInitialState, eventsQueue: events.events};
+    let state = weos(initialState, emptyQueue());
+    expect(state.eventsQueue.length).toBe(0);
   });
 });
