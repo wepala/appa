@@ -1,48 +1,33 @@
-import React, {useEffect, useState} from 'react';
-import {connect} from 'react-redux';
-import {fetchEvents} from '../model/eventApi';
+import React, {useEffect} from 'react';
 import {SyncSpinner} from '../../views/components/Spinners';
-import {setEventCount} from '../model/commands';
 
-const mapStateToProps = (state) => {
-  return {
-    eventCount: state.eventCount,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateEventCount: setEventCount,
-    dispatch,
-  };
-};
-
-const Sync = ({eventCount, children, updateEventCount, dispatch}) => {
-  const [isSyncComplete, setSyncComplete] = useState(false);
-
+const Sync = ({
+  children,
+  dispatch,
+  getEvents,
+  pushEvents,
+  setSync,
+  syncing,
+}) => {
   useEffect(() => {
-    if (eventCount === 0) {
-      fetchEvents()
-        .then((data) => {
-          for (let event of data.events) {
-            event.meta = {id: event.payload.id};
-            dispatch(event);
-          }
+    setSync(true);
 
-          updateEventCount(data.currentCount);
-          setSyncComplete(true);
-        })
-        .catch((error) => {
-          // TODO notify user of error
-          console.log(error);
-          setSyncComplete(true);
-        });
-    } else {
-      setSyncComplete(true);
-    }
-  }, [dispatch, eventCount, updateEventCount]);
+    const replayEvents = async () => {
+      let {events} = await getEvents();
+      for (let event of events) {
+        event.meta = {id: event.payload.id};
+        dispatch(event);
+      }
 
-  return isSyncComplete ? children : <SyncSpinner />;
+      await pushEvents();
+      setSync(false);
+    };
+
+    replayEvents();
+    setSync(false);
+  }, []);
+
+  return syncing ? <SyncSpinner /> : children;
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sync);
+export default Sync;
