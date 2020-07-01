@@ -43,7 +43,7 @@ export default ({navigation, logout, user, token, setLoading}) => {
         return;
       }
       case 4: {
-          navigation.closeDrawer();
+        navigation.closeDrawer();
         navigation.navigate('Customize');
         return;
       }
