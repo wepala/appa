@@ -43,21 +43,16 @@ export default ({navigation, logout, user, token, setLoading}) => {
         return;
       }
       case 4: {
-        navigation.closeDrawer();
-        navigation.navigate('Support');
+          navigation.closeDrawer();
+        navigation.navigate('Customize');
         return;
       }
       case 5: {
         navigation.closeDrawer();
-        navigation.navigate('Customize');
-        return;
-      }
-      case 6: {
-        navigation.closeDrawer();
         navigation.navigate('Feedback');
         return;
       }
-      case 7: {
+      case 6: {
         navigation.closeDrawer();
         navigation.navigate('About');
         return;
@@ -109,7 +104,6 @@ export default ({navigation, logout, user, token, setLoading}) => {
         {/* <DrawerItem title={'Reports'} accessoryLeft={ReportIcon} /> */}
         <Divider />
         <DrawerItem title={'Settings'} accessoryLeft={SettingsIcon} />
-        <DrawerItem title={'Support'} accessoryLeft={SupportIcon} />
         <DrawerItem title={'Customize'} accessoryLeft={EditIcon} />
         <DrawerItem title={'Feedback'} accessoryLeft={StarIcon} />
         <DrawerItem title={'About'} accessoryLeft={InfoIcon} />
@@ -123,7 +117,7 @@ const themedStyles = StyleService.create({
     flex: 1,
   },
   header: {
-    paddingVertical: 22,
+    paddingVertical: 32,
     paddingHorizontal: 16,
     justifyContent: 'center',
     backgroundColor: '$background-basic-color-2',
