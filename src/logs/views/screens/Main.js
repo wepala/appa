@@ -2,7 +2,7 @@ import React from 'react';
 import List from './List';
 import {SafeAreaView} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Component} from '../../../weosHelpers';
+import {Component} from '../../../weos/helpers';
 import LogsController from '../../controllers/Logs';
 import Detail from './Detail';
 import DetailController from '../../controllers/Detail';

@@ -13,7 +13,7 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components';
 import DetailTopBar from '../components/DetailTopBar';
-import {useForm} from '../../../weosHelpers';
+import {useForm} from '../../../weos/helpers';
 
 export default ({navigation, route, status, makeRequest}) => {
   const themeContext = useContext(ThemeContext);
