@@ -65,7 +65,6 @@ for an indepth look at each environment variable check out our [environment Guid
   ```
     npm test
   ```
-for an indepth look at these tests check out our [Testing Guide](TEST.md)
 
 ## Deployment
 
