@@ -9,8 +9,8 @@ jest.mock('@fortawesome/react-native-fontawesome', () => ({
   FontAwesomeIcon: '',
 }));
 describe('Settings screen', () => {
-  const handleOpenUrl = jest.fn();
   const handleConnect = jest.fn();
+  const handleLogout = jest.fn();
   const loading = false;
 
   it('should have button that connects to weos', async () => {
@@ -23,7 +23,7 @@ describe('Settings screen', () => {
         <ApplicationProvider {...eva} theme={{...eva.light}}>
           <Main
             handleConnect={handleConnect}
-            handleOpenUrl={handleOpenUrl}
+            handleLogOut={handleLogout}
             loading={loading}
             componentState={initialState}
           />
@@ -45,7 +45,7 @@ describe('Settings screen', () => {
         <ApplicationProvider {...eva} theme={{...eva.light}}>
           <Main
             handleConnect={handleConnect}
-            handleOpenUrl={handleOpenUrl}
+            handleLogout={handleLogout}
             loading={loading}
             componentState={initialState}
           />
@@ -59,7 +59,7 @@ describe('Settings screen', () => {
     unmount();
   });
 
-  it('should show logged-in account email', () => {
+  it('should show logged-in account email and logout button when logged-in', () => {
     const initialState = {
       user: {
         sub: {
@@ -73,7 +73,7 @@ describe('Settings screen', () => {
         <ApplicationProvider {...eva} theme={{...eva.light}}>
           <Main
             handleConnect={handleConnect}
-            handleOpenUrl={handleOpenUrl}
+            handleLogout={handleLogout}
             loading={loading}
             componentState={initialState}
           />
@@ -83,6 +83,10 @@ describe('Settings screen', () => {
 
     const AccountEmail = getAllByTestId('AccountEmail');
     expect(AccountEmail).toHaveLength(1);
+    const LogoutBtn = getAllByTestId('LogoutBtn');
+    expect(LogoutBtn).toHaveLength(1);
+    fireEvent.press(LogoutBtn[0]);
+    expect(handleLogout).toHaveBeenCalled();
     unmount();
   });
 });
