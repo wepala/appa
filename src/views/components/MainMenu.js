@@ -42,15 +42,10 @@ export default ({navigation, logout, user, token, setLoading}) => {
       }
       case 4: {
         navigation.toggleDrawer();
-        navigation.navigate('Support');
-        return;
-      }
-      case 5: {
-        navigation.toggleDrawer();
         navigation.navigate('Customize');
         return;
       }
-      case 6: {
+      case 5: {
         navigation.toggleDrawer();
         navigation.navigate('About');
         return;
@@ -98,7 +93,6 @@ export default ({navigation, logout, user, token, setLoading}) => {
         {/* <DrawerItem title={'Reports'} accessoryLeft={ReportIcon} /> */}
         <Divider />
         <DrawerItem title={'Settings'} accessoryLeft={SettingsIcon} />
-        <DrawerItem title={'Support'} accessoryLeft={SupportIcon} />
         <DrawerItem title={'Customize'} accessoryLeft={EditIcon} />
         <DrawerItem title={'About'} accessoryLeft={InfoIcon} />
       </Drawer>
