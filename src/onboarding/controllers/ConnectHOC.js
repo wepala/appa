@@ -59,9 +59,6 @@ const connectWeos = (WrappedComponent) => {
      * @param {string} screen - Screen to go to after successful login
      */
     handleWeosConnect = (screen) => {
-      this.setState({
-        loading: true,
-      });
       this.setState({screen});
       Linking.openURL(PKCE.authorizeURL());
     };
@@ -95,17 +92,12 @@ const connectWeos = (WrappedComponent) => {
       const {code, state, confirm_creation} = url.query;
 
       if (confirm_creation) {
-        this.setState({
-          loading: false,
-        });
         this.accountCreation();
-        this.setState({
-          loading: false,
-        });
         return;
       }
 
       try {
+        this.setState({loading: true});
         let authToken = await PKCE.exchangeAuthCode(code, state);
         let user = await PKCE.getUserInfo(authToken);
         user.sub = JSON.parse(user.sub);

@@ -86,9 +86,6 @@ describe('Connect HOC', () => {
 
     const ConnectSafeAreaView = getByTestId('ConnectSafeAreaView');
     expect(ConnectSafeAreaView.parent.props.handleConnect).toBeTruthy();
-    const WeOsConnectBtn = getByTestId('WeOsConnectBtn');
-    fireEvent.press(WeOsConnectBtn);
-    expect(ConnectSafeAreaView.parent.props.loading).toBeTruthy();
     unmount();
   });
 });
