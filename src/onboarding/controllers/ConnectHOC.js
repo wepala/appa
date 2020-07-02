@@ -116,7 +116,7 @@ const connectWeos = (WrappedComponent) => {
         this.setState({loading: false});
         this.props.navigation.navigate(this.state.screen);
       } catch (error) {
-        console.error('Error occurred ', error);
+        console.log('Error occurred ', error);
         this.setState({
           loading: false,
         });
