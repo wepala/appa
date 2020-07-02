@@ -45,7 +45,7 @@ export const getCurrentTask = createSelector(
       let currentTaskIndex = tasks.findIndex((task) => {
         return task.id === currentTask.id;
       });
-      return tasks[currentTaskIndex];
+      return {...tasks[currentTaskIndex], startTime: currentTask.startTime};
     }
     return null;
   },

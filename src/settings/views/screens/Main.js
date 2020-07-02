@@ -162,6 +162,7 @@ const themedStyles = StyleService.create({
   coloursRow: {
     display: 'flex',
     flexDirection: 'row',
+    flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: 'transparent',
@@ -175,13 +176,6 @@ const themedStyles = StyleService.create({
     paddingTop: Platform.OS === 'ios' ? 14 : 8,
 
     borderRadius: 200,
-    // shadowColor: '#000',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 5,
-    // },
-    // shadowOpacity: 0.1,
-    // shadowRadius: 7,
   },
   column1: {
     flexGrow: 1,
