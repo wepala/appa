@@ -116,10 +116,20 @@ const connectWeos = (WrappedComponent) => {
         this.setState({loading: false});
         this.props.navigation.navigate(this.state.screen);
       } catch (error) {
-        console.log('Error occurred ', error);
-        this.setState({
-          loading: false,
-        });
+        console.log(error);
+        this.setState({loading: false});
+
+        Alert.alert(
+          'WeOs Connect',
+          'An Error occurred during login, please try again later',
+          [
+            {
+              text: 'Ok',
+              onPress: () => console.log('Please try again later'),
+            },
+          ],
+          {cancelable: false},
+        );
       }
     };
 
