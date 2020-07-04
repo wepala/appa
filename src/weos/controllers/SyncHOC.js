@@ -22,11 +22,11 @@ const syncWeos = (WrappedComponent) => {
     getEvents = async () => {
       const {applicationId, eventCount, token} = this.props.weos;
 
-      if (!token) {
-        throw new Error('Missing token, Please login to Sync');
-      }
-
       try {
+        if (!token) {
+          throw new Error('Missing token, Please login to Sync');
+        }
+
         let response = await axios.get(`${AUTHORIZE_URL}/events/get`, {
           headers: {
             Authorization: `${token.token_type} ${token.access_token}`,
@@ -34,14 +34,9 @@ const syncWeos = (WrappedComponent) => {
           },
         });
 
-        if (response.status >= 400) {
-          throw new Error(response.data.error);
-        }
-
-        this.props.setEventCount(response.data.currentCount);
         return response.data;
       } catch (error) {
-        console.error('An error occured while fetching events', error);
+        console.log('An error occured while fetching events', error);
       }
     };
 
@@ -49,20 +44,20 @@ const syncWeos = (WrappedComponent) => {
      * Push events to weos
      */
     pushEvents = async () => {
-      const {eventQueue, token} = this.props.weosState;
+      const {eventsQueue, token} = this.props.weos;
 
-      if (eventQueue.length === 0) {
+      if (eventsQueue.length === 0) {
         return;
       }
 
-      if (!token) {
-        throw new Error('Missing token, Please login to Sync');
-      }
-
       try {
+        if (!token) {
+          throw new Error('Missing token, Please login to Sync');
+        }
+
         let response = await axios.post(
           `${AUTHORIZE_URL}/events/add`,
-          eventQueue,
+          eventsQueue,
           {
             headers: {
               Authorization: `${token.token_type} ${token.access_token}`,
@@ -70,15 +65,26 @@ const syncWeos = (WrappedComponent) => {
           },
         );
 
-        if (response.status >= 400) {
-          throw new Error(response.data.error);
-        }
-
         this.props.emptyQueue();
         return response.data;
       } catch (error) {
-        console.error('An error occured while pushing events', error);
+        console.log('An error occured while pushing events', error);
       }
+    };
+
+    sync = async () => {
+      this.props.setSync(true);
+      await axios.get(`${AUTHORIZE_URL}/health`);
+      let {events, currentCount} = await this.getEvents();
+
+      for (let event of events) {
+        event.meta = {id: event.payload.id};
+        this.props.dispatch(event);
+      }
+
+      this.props.setEventCount(currentCount);
+      await this.pushEvents();
+      this.props.setSync(false);
     };
 
     render() {
@@ -87,9 +93,9 @@ const syncWeos = (WrappedComponent) => {
           {...this.props}
           getEvents={this.getEvents}
           pushEvents={this.pushEvents}
-          dispatch={this.dispatch}
           syncing={this.props.weos.syncing}
           setSync={this.props.setSync}
+          sync={this.sync}
         />
       );
     }

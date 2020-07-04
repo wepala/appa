@@ -76,8 +76,7 @@ describe('WeOS reducer', function () {
   });
 
   it('should empty the events queue', () => {
-    let initialState = {...expectedInitialState, eventsQueue: events.events};
-    let state = weos(initialState, emptyQueue());
+    let state = weos(expectedInitialState, emptyQueue());
     expect(state.eventsQueue.length).toBe(0);
   });
 });

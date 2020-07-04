@@ -16,7 +16,7 @@ import Customize from '../customize/views/screens/Main';
 import Sync from '../weos/views/Sync';
 import {setToken, setUser} from '../weos/model/commands';
 import {onBoardUser} from '../onboarding/model/commands';
-import SyncHOC from '../weos/controllers/Sync';
+import SyncHOC from '../weos/controllers/SyncHOC';
 
 const {Navigator, Screen} = createDrawerNavigator();
 
