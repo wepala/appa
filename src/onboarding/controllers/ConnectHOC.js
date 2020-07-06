@@ -12,7 +12,6 @@ import {
 import {connect} from 'react-redux';
 import PKCE from '../../weos/auth/pkce';
 import {setToken, setUser} from '../../weos/model/commands';
-import {onBoardUser} from '../../onboarding/model/commands';
 
 const mapStateToProps = (state) => ({
   user: state.weos.user,
@@ -22,7 +21,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   setToken,
   setUser,
-  onBoardUser,
 };
 
 const connectWeos = (WrappedComponent) => {
@@ -137,7 +135,6 @@ const connectWeos = (WrappedComponent) => {
       this.setState({loading: true});
       this.props.setToken(null);
       this.props.setUser(null);
-      this.props.onBoardUser(false);
       this.setState({loading: false});
     };
 

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   Button,
   StyleService,
@@ -6,40 +6,15 @@ import {
   Layout,
   Text,
 } from '@ui-kitten/components';
-import {Linking} from 'react-native';
-
 import {SyncIcon, LogoutIcon} from './Icons';
-import PKCE from '../../weos/auth/pkce';
-import {AUTHORIZE_URL} from 'react-native-dotenv';
 
-export default ({user, logout, setLoading, token}) => {
+export default ({user, handleLogout}) => {
   const styles = useStyleSheet(themedStyles);
-  PKCE.config.setVars({
-    AUTHORIZE_URL,
-  });
-
-  useEffect(() => {
-    Linking.addEventListener('url', logout);
-    Linking.getInitialURL().then((url) => {
-      if (url) {
-        logout(url);
-      }
-    });
-
-    return () => {
-      Linking.removeEventListener('url', logout);
-    };
-  });
-
-  const openLogout = () => {
-    setLoading(true);
-    Linking.openURL(PKCE.logoutURL(token.id_token));
-  };
 
   return (
     <Layout style={styles.row}>
       <Layout style={styles.column1}>
-        <Text>{user.sub.email}</Text>
+        <Text testID="UserEmail">{user.sub.email}</Text>
       </Layout>
       <Layout style={styles.column2}>
         <Button
@@ -55,7 +30,7 @@ export default ({user, logout, setLoading, token}) => {
           appearance="ghost"
           style={styles.button}
           accessoryLeft={LogoutIcon}
-          onPress={openLogout}
+          onPress={handleLogout}
         />
       </Layout>
     </Layout>
