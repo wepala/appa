@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
-
+import {Text} from '@ui-kitten/components';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {connect} from 'react-redux';
@@ -13,6 +13,7 @@ import Reports from '../reports/controllers/Main';
 import Settings from '../settings/views/screens/Main';
 import About from '../about/views/screens/Main';
 import Customize from '../customize/views/screens/Main';
+import Feedback from '../feedback/controllers/Main';
 import {setToken, setUser} from '../weos/model/commands';
 import Spinner from '../views/components/Spinner';
 import ConnectHOC from '../onboarding/controllers/ConnectHOC';
@@ -25,6 +26,10 @@ const mapStateToProps = (state) => {
     token: state.weos.token,
     user: state.weos.user,
   };
+};
+
+const linking = {
+  prefixes: ['https://com.appadoes/'],
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -40,6 +45,7 @@ const mapDispatchToProps = (dispatch) => {
 const HomeScreen = ({navigation, onBoarded, user}) => {
   const [loading, setLoading] = useState(false);
   const WrappedSettings = ConnectHOC(Settings);
+  const WrappedConnect = (props) => ConnectHOC(Feedback, props);
 
   const MainStackScreen = () => {
     return (
@@ -53,6 +59,7 @@ const HomeScreen = ({navigation, onBoarded, user}) => {
         <Screen name="Reports" component={Reports} />
         <Screen name="Settings" component={WrappedSettings} />
         <Screen name="About" component={About} />
+        <Screen name="Feedback" component={WrappedConnect} />
         <Screen name="Customize" component={Customize} />
       </Navigator>
     );
@@ -72,7 +79,10 @@ const HomeScreen = ({navigation, onBoarded, user}) => {
   };
 
   return (
-    <NavigationContainer theme={navigatorTheme}>
+    <NavigationContainer
+      linking={linking}
+      fallback={<Text>Loading...</Text>}
+      theme={navigatorTheme}>
       <RootStackScreen />
     </NavigationContainer>
   );

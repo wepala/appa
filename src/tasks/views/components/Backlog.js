@@ -50,7 +50,6 @@ export default ({
       context.setSection('backlog');
     }
   });
-  console.log('Time TOTALS', timeTotals, '\n', items);
   //method to render each item in the list
   const renderItem = ({index, item}) => (
     <BacklogItem

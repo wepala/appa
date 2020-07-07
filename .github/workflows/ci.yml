@@ -27,6 +27,7 @@ jobs:
         run: |
           env > .env
         env:
+          PIPELINE_URL: ${{ secrets.PIPELINE_URL }}
           API_URL: ${{ secrets.API_URL }}
           SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
           SENDER: ${{ secrets.SENDER }}
@@ -126,6 +127,7 @@ jobs:
         run: |
           env > .env
         env:
+          PIPELINE_URL: ${{ secrets.PIPELINE_URL }}
           API_URL: ${{ secrets.API_URL }}
           SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
           SENDER: ${{ secrets.SENDER }}
@@ -203,6 +205,7 @@ jobs:
         run: |
           env > .env
         env:
+          PIPELINE_URL: ${{ secrets.PIPELINE_URL }}
           API_URL: ${{ secrets.API_URL }}
           SUPPORT_URL: ${{ secrets.SUPPORT_URL }}
           SENDER: ${{ secrets.SENDER }}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {SafeAreaView, View} from 'react-native';
 import {
   Avatar,
@@ -15,6 +15,7 @@ import {
   ClockIcon,
   EditIcon,
   InfoIcon,
+  StarIcon,
   SettingsIcon,
   SupportIcon,
 } from './Icons';
@@ -28,28 +29,37 @@ export default ({navigation, user, setLoading}) => {
   const onItemSelect = (index) => {
     switch (index.row) {
       case 0: {
-        navigation.toggleDrawer();
+        navigation.closeDrawer();
         navigation.navigate('Agenda');
         return;
       }
       case 1: {
-        navigation.toggleDrawer();
+        navigation.closeDrawer();
         navigation.navigate('Logs');
         return;
       }
       case 3: {
-        navigation.toggleDrawer();
+        navigation.closeDrawer();
         navigation.navigate('Settings');
         return;
       }
       case 4: {
-        navigation.toggleDrawer();
+        navigation.closeDrawer();
         navigation.navigate('Customize');
         return;
       }
       case 5: {
-        navigation.toggleDrawer();
+        navigation.closeDrawer();
+        navigation.navigate('Feedback');
+        return;
+      }
+      case 6: {
+        navigation.closeDrawer();
         navigation.navigate('About');
+        return;
+      }
+      default: {
+        navigation.closeDrawer();
         return;
       }
     }
@@ -91,6 +101,7 @@ export default ({navigation, user, setLoading}) => {
         <Divider />
         <DrawerItem title={'Settings'} accessoryLeft={SettingsIcon} />
         <DrawerItem title={'Customize'} accessoryLeft={EditIcon} />
+        <DrawerItem title={'Feedback'} accessoryLeft={StarIcon} />
         <DrawerItem title={'About'} accessoryLeft={InfoIcon} />
       </Drawer>
     </SafeAreaView>
@@ -102,7 +113,7 @@ const themedStyles = StyleService.create({
     flex: 1,
   },
   header: {
-    paddingVertical: 22,
+    paddingVertical: 32,
     paddingHorizontal: 16,
     justifyContent: 'center',
     backgroundColor: '$background-basic-color-2',

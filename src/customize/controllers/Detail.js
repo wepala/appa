@@ -7,7 +7,6 @@ import DetailScreen from '../views/screens/Detail';
 const Detail = (props) => {
   const [status, setStatus] = useState('init');
   const makeRequest = (form) => {
-    console.log(form);
     setStatus('pending');
     axios({
       method: 'post',

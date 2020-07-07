@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {ImageBackground, Linking, SafeAreaView} from 'react-native';
 import packageJson from '../../../../package.json';
+import {PIPELINE_URL} from 'react-native-dotenv';
 
 import {
   Button,
@@ -39,6 +40,23 @@ export default ({navigation, status, route}) => {
               </Button>
             </Layout>
           </Layout>
+
+          <Layout style={styles.row}>
+            <Layout style={styles.column}>
+              <Text category="s1">Pipeline</Text>
+              <Button
+                onPress={() => {
+                  Linking.openURL(PIPELINE_URL).catch((err) => {
+                    toggleVisible(true);
+                    console.warn(err);
+                  });
+                }}
+                style={styles.button}>
+                <Text>See what features are coming soon</Text>
+              </Button>
+            </Layout>
+          </Layout>
+
           <Layout style={styles.row}>
             <Layout style={styles.column}>
               <Text category="s1">Licence</Text>
@@ -112,12 +130,12 @@ const themedStyles = StyleService.create({
   },
   button: {
     marginTop: 8,
-    backgroundColor: 'white',
-    borderColor: 'white',
+    backgroundColor: '$background-basic-color-1',
+    borderColor: '$background-basic-color-1',
   },
   modal: {
     marginTop: 8,
-    backgroundColor: 'white',
-    borderColor: 'white',
+    backgroundColor: '$background-basic-color-1',
+    borderColor: '$background-basic-color-1',
   },
 });
