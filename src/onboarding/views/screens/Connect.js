@@ -1,6 +1,5 @@
-import React from 'react';
-import {ImageBackground, SafeAreaView} from 'react-native';
-
+import React, {useEffect} from 'react';
+import {SafeAreaView, ImageBackground, Linking} from 'react-native';
 import {
   Button,
   Layout,
@@ -9,17 +8,24 @@ import {
   useStyleSheet,
 } from '@ui-kitten/components';
 import background from '../../../../assets/images/brand/connect.png';
+import Spinner from '../../../views/components/Spinner';
 
-export default ({navigation}) => {
+export default ({navigation, handleConnect, loading}) => {
   const styles = useStyleSheet(themedStyles);
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} testID="ConnectSafeAreaView">
       <ImageBackground source={background} style={styles.image}>
-        <Layout style={styles.headerContainer}>
-          {/* <Text style={styles.text} category="h2">
+        <Layout style={styles.headerContainer} testID="ConnectLayout">
+          <Text style={styles.text} category="h2">
             Create Account
           </Text>
-          <Button style={styles.buttonConnect}>WeOS Connect</Button> */}
+          <Button
+            style={styles.buttonConnect}
+            testID="WeOsConnectBtn"
+            onPress={() => handleConnect('Complete')}>
+            WeOS Connect
+          </Button>
           <Text style={styles.text} category="s1">
             You can connect to WeOS our platform to make it easier to share
             information between devices. You can learn more about WeOS here.
@@ -31,6 +37,7 @@ export default ({navigation}) => {
           onPress={() => navigation.navigate('Complete')}>
           Skip
         </Button>
+        {loading && <Spinner />}
       </ImageBackground>
     </SafeAreaView>
   );

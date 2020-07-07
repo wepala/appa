@@ -300,7 +300,7 @@ PODS:
     - ReactCommon/callinvoker (= 0.62.2)
   - RNCAsyncStorage (1.11.0):
     - React
-  - RNCMaskedView (0.1.10):
+  - RNCMaskedView (0.1.9):
     - React
   - RNGestureHandler (1.6.1):
     - React

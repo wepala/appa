@@ -18,6 +18,10 @@ const initialState = {
     getById: new Map(),
     getByTime: new Map(),
   },
+  weos: {
+    token: null,
+    user: null,
+  },
 };
 const middlewares = [thunk];
 

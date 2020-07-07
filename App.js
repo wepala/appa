@@ -3,7 +3,7 @@ import React from 'react';
 import * as eva from '@eva-design/eva';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
-import {Loading} from './src/views/components/Spinner';
+import Spinner from './src/views/components/Spinner';
 import {default as mapping} from './mapping.json';
 import {default as brandTheme} from './themes/main.json';
 import {default as colours} from './themes/colours.json';
@@ -61,7 +61,7 @@ export default () => {
           theme={{...eva[theme], ...brandTheme, ...colour.val}}
           customMapping={mapping}>
           <Provider store={store}>
-            <PersistGate loading={<Loading />} persistor={persistor}>
+            <PersistGate loading={<Spinner />} persistor={persistor}>
               <HomeScreen />
             </PersistGate>
           </Provider>
