@@ -15,7 +15,6 @@ import About from '../about/views/screens/Main';
 import Customize from '../customize/views/screens/Main';
 import Feedback from '../feedback/controllers/Main';
 import {setToken, setUser} from '../weos/model/commands';
-import {onBoardUser} from '../onboarding/model/commands';
 import Spinner from '../views/components/Spinner';
 import ConnectHOC from '../onboarding/controllers/ConnectHOC';
 
@@ -39,25 +38,13 @@ const mapDispatchToProps = (dispatch) => {
     logout: () => {
       dispatch(setToken(null));
       dispatch(setUser(null));
-      dispatch(onBoardUser(false));
     },
   };
 };
 
-const HomeScreen = ({
-  navigation,
-  onBoarded,
-  token,
-  logout,
-  user,
-  setUserInfo,
-}) => {
+const HomeScreen = ({navigation, onBoarded, user}) => {
   const [loading, setLoading] = useState(false);
-
-  const logoutHandler = () => {
-    logout();
-    setLoading(false);
-  };
+  const WrappedSettings = ConnectHOC(Settings);
   const WrappedConnect = (props) => ConnectHOC(Feedback, props);
 
   const MainStackScreen = () => {
@@ -65,18 +52,12 @@ const HomeScreen = ({
       <Navigator
         screenOptions={{gestureEnabled: true}}
         drawerContent={(props) => (
-          <MainMenu
-            {...props}
-            logout={logoutHandler}
-            user={user}
-            token={token}
-            setLoading={setLoading}
-          />
+          <MainMenu {...props} user={user} setLoading={setLoading} />
         )}>
         <Screen name="Agenda" component={Tasks} />
         <Screen name="Logs" component={Logs} />
         <Screen name="Reports" component={Reports} />
-        <Screen name="Settings" component={Settings} />
+        <Screen name="Settings" component={WrappedSettings} />
         <Screen name="About" component={About} />
         <Screen name="Feedback" component={WrappedConnect} />
         <Screen name="Customize" component={Customize} />

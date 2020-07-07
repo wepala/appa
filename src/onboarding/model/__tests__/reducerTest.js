@@ -9,7 +9,7 @@ describe('onboarding reducer', function () {
   });
 
   it('should onboard user', () => {
-    let state = onboard(expectedInitialState, onBoardUser(true));
+    let state = onboard(expectedInitialState, onBoardUser());
     expect(state.onBoarded).toBe(true);
   });
 });

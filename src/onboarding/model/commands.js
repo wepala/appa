@@ -1,8 +1,7 @@
 import {ONBOARD} from './commandTypes';
 
-export const onBoardUser = (onBoard) => {
+export const onBoardUser = () => {
   return {
     type: ONBOARD,
-    payload: onBoard,
   };
 };

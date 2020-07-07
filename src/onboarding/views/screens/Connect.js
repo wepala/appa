@@ -10,25 +10,11 @@ import {
 import background from '../../../../assets/images/brand/connect.png';
 import Spinner from '../../../views/components/Spinner';
 
-export default ({navigation, handleConnect, handleOpenUrl, loading}) => {
+export default ({navigation, handleConnect, loading}) => {
   const styles = useStyleSheet(themedStyles);
-  handleOpenUrl = handleOpenUrl.bind(null, 'Complete');
-
-  useEffect(() => {
-    Linking.addEventListener('url', handleOpenUrl);
-    Linking.getInitialURL().then((url) => {
-      if (url) {
-        handleOpenUrl(url, 'Complete');
-      }
-    });
-
-    return () => {
-      return Linking.removeEventListener('url', handleOpenUrl);
-    };
-  });
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} testID="ConnectSafeAreaView">
       <ImageBackground source={background} style={styles.image}>
         <Layout style={styles.headerContainer} testID="ConnectLayout">
           <Text style={styles.text} category="h2">
@@ -37,7 +23,7 @@ export default ({navigation, handleConnect, handleOpenUrl, loading}) => {
           <Button
             style={styles.buttonConnect}
             testID="WeOsConnectBtn"
-            onPress={handleConnect}>
+            onPress={() => handleConnect('Complete')}>
             WeOS Connect
           </Button>
           <Text style={styles.text} category="s1">

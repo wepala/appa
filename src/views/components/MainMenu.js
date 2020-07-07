@@ -20,11 +20,12 @@ import {
   SupportIcon,
 } from './Icons';
 import Profile from './Profile';
+import ConnectHOC from '../../onboarding/controllers/ConnectHOC';
 import logo from '../../../assets/images/brand/logo.png';
-import Spinner from '../components/Spinner';
 
-export default ({navigation, logout, user, token, setLoading}) => {
+export default ({navigation, user, setLoading}) => {
   const styles = useStyleSheet(themedStyles);
+  const WrappedProfile = ConnectHOC(Profile);
   const onItemSelect = (index) => {
     switch (index.row) {
       case 0: {
@@ -75,12 +76,7 @@ export default ({navigation, logout, user, token, setLoading}) => {
 
       {user && (
         <View style={styles.profile}>
-          <Profile
-            user={user}
-            token={token}
-            logout={logout}
-            setLoading={setLoading}
-          />
+          <WrappedProfile setLoading={setLoading} />
         </View>
       )}
     </Layout>

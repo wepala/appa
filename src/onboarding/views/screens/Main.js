@@ -10,7 +10,7 @@ import {Component} from '../../../weosHelpers';
 const {Navigator, Screen} = createStackNavigator();
 
 export default (props) => {
-  const WrappedConnect = (props) => ConnectHOC(Connect, props);
+  const WrappedConnect = ConnectHOC(Connect, props);
 
   return (
     <Navigator

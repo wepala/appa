@@ -4,16 +4,13 @@ import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
 import Profile from '../Profile';
-import PKCE from '../../../weos/auth/pkce';
 
 describe('Profile', () => {
   it('should render the profile component correctly', () => {
-    PKCE.logoutURL = jest.fn();
-    const logout = jest.fn();
-    const setLoading = jest.fn();
     const user = {sub: {email: 'example@gmail.com'}};
+    const handleLogout = jest.fn();
 
-    const {getAllByTestId} = render(
+    const {getAllByTestId, getByTestId} = render(
       <>
         <IconRegistry icons={EvaIconsPack} />
         <ApplicationProvider
@@ -21,12 +18,7 @@ describe('Profile', () => {
           theme={{
             ...eva.light,
           }}>
-          <Profile
-            user={user}
-            token={{id_token: 'token'}}
-            logout={logout}
-            setLoading={setLoading}
-          />
+          <Profile user={user} handleLogout={handleLogout} />
         </ApplicationProvider>
       </>,
     );
@@ -36,9 +28,8 @@ describe('Profile', () => {
 
     const LogoutButton = getAllByTestId('LogoutButton');
     expect(LogoutButton).toHaveLength(1);
-    act(() => {
-      fireEvent.press(LogoutButton[0]);
-    });
-    expect(PKCE.logoutURL).toHaveBeenCalled();
+
+    const UserEmail = getByTestId('UserEmail');
+    expect(UserEmail.props.children).toBe('example@gmail.com');
   });
 });

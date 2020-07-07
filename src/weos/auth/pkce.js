@@ -92,7 +92,7 @@ const exchangeAuthCode = async (code, state) => {
   return response.data;
 };
 
-const createAccountURL = (createAccount) => {
+const accountURL = (createAccount) => {
   const {AUTHORIZE_URL} = config.vars;
   return `${AUTHORIZE_URL}/create-account?accept_login=${createAccount}`;
 };
@@ -118,7 +118,7 @@ const pkce = {
   config,
   authorizeURL,
   exchangeAuthCode,
-  createAccountURL,
+  accountURL,
   logoutURL,
   getUserInfo,
 };
