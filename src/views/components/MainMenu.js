@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
 import {
   Avatar,
@@ -18,10 +18,13 @@ import {
   SettingsIcon,
   SupportIcon,
 } from './Icons';
+import Profile from './Profile';
+import ConnectHOC from '../../onboarding/controllers/ConnectHOC';
 import logo from '../../../assets/images/brand/logo.png';
 
-export default ({navigation}) => {
+export default ({navigation, user, setLoading}) => {
   const styles = useStyleSheet(themedStyles);
+  const WrappedProfile = ConnectHOC(Profile);
   const onItemSelect = (index) => {
     switch (index.row) {
       case 0: {
@@ -60,6 +63,12 @@ export default ({navigation}) => {
           Appa Does
         </Text>
       </View>
+
+      {user && (
+        <View style={styles.profile}>
+          <WrappedProfile setLoading={setLoading} />
+        </View>
+      )}
     </Layout>
   );
 
@@ -93,7 +102,7 @@ const themedStyles = StyleService.create({
     flex: 1,
   },
   header: {
-    paddingVertical: 32,
+    paddingVertical: 22,
     paddingHorizontal: 16,
     justifyContent: 'center',
     backgroundColor: '$background-basic-color-2',
@@ -105,5 +114,8 @@ const themedStyles = StyleService.create({
   profileName: {
     // color: '#fff',
     marginHorizontal: 16,
+  },
+  profile: {
+    marginTop: 20,
   },
 });

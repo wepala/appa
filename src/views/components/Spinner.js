@@ -1,17 +1,27 @@
-import {Layout, Spinner} from '@ui-kitten/components';
-import {StyleSheet} from 'react-native';
 import React from 'react';
+import {View, ActivityIndicator, StyleSheet} from 'react-native';
 
-export const Loading = () => (
-  <Layout style={styles.container} level="1">
-    <Spinner size="large" />
-  </Layout>
-);
+const Spinner = ({theme = 'white', size = 'large'}) => {
+  const color = theme === 'white' ? '#00bdcd' : '#fff';
+  return (
+    <View style={styles.container}>
+      <ActivityIndicator size={size} color={color} />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    opacity: 0.5,
+    backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
   },
 });
+
+export default Spinner;

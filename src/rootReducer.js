@@ -4,6 +4,7 @@ import projects from './projects/model/reducer';
 import onboard from './onboarding/model/reducer';
 import {applicationId, token, eventCount} from './reducers';
 import logs from './logs/model/reducer';
+import weos from './weos/model/reducer';
 
 const rootReducer = combineReducers({
   tasks,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   token,
   eventCount,
   logs,
+  weos,
 });
 
 export default rootReducer;

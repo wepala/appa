@@ -17,10 +17,16 @@ Copy the contents of the `.env-dist` file into the `.env` and fill out the blank
 ```
 // Your .env should resemble this
 
-SUPPORT_URL=https://XXXXXXXXXXXXXX
-SENDER=XXXXXXXX@XXXXX
-DESTINATION=XXXXXXXX@XXXXX 
+SUPPORT_URL = https://XXXXXXXXXXXXXX
+SENDER = XXXXXXXX@XXXXX
+DESTINATION = XXXXXXXX@XXXXX
 PIPELINE_URL=https://XXXXXXXXXXXXXX
+CLIENT_ID=XXXXXXXX
+AUTHORIZE_URL=http://example.com
+REDIRECT_URI=com.XXXXXXXX
+RESPONSE_TYPE=code
+SCOPE=openid
+CODE_CHALLENGE_METHOD=S256
 ```
 
 ### Prerequisites
