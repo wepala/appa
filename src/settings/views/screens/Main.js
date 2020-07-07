@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Platform} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Platform, Linking} from 'react-native';
 import {SafeAreaView, ScrollView} from 'react-native';
 import {ThemeContext} from '../../../../theme.context';
 import {
@@ -14,27 +14,65 @@ import {
 import TopBar from '../components/TopBar';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCircle} from '@fortawesome/free-solid-svg-icons';
+import Spinner from '../../../views/components/Spinner';
 
-export default ({navigation, route}) => {
+export default ({
+  navigation,
+  route,
+  handleConnect,
+  handleLogout,
+  loading,
+  componentState,
+}) => {
   const themeContext = React.useContext(ThemeContext);
   const [checked, toggleCheck] = useState(themeContext.theme === 'dark');
   const [currentColour, setCurrentColour] = useState(themeContext.colour.name);
-
   const styles = useStyleSheet(themedStyles);
+  const {user} = componentState;
+
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1}} testID="ConnectSafeAreaView">
       <TopBar title="Settings" navigation={navigation} route={route} />
       <Layout style={styles.container}>
         <ScrollView>
-          {/* <Button
-            appearance="primary"
-            size="giant"
-            style={styles.buttonConnect}>
-            WeOS Connect
-          </Button> */}
-          {/* <Divider style={styles.divider} /> */}
+          {!user && (
+            <>
+              <Button
+                testID="WeOsConnectBtn"
+                appearance="primary"
+                size="giant"
+                style={styles.buttonConnect}
+                onPress={() => handleConnect('Settings')}>
+                WeOS Connect
+              </Button>
+              <Divider style={styles.divider} />
+            </>
+          )}
+
           <Layout style={styles.row}>
             <Layout style={styles.column1}>
+              {user && (
+                <>
+                  <Button
+                    testID="LogoutBtn"
+                    appearance="primary"
+                    size="giant"
+                    style={styles.buttonLogout}
+                    onPress={handleLogout}>
+                    Logout
+                  </Button>
+                  <Divider style={styles.divider} />
+                  <Text category="h5">ACCOUNT</Text>
+                  <Layout style={styles.row}>
+                    <Text
+                      category="s2"
+                      style={{width: '100%'}}
+                      testID="AccountEmail">
+                      {user.sub.email}
+                    </Text>
+                  </Layout>
+                </>
+              )}
               <Text category="h5">PERSONALIZATION</Text>
               <Layout style={styles.row}>
                 <Text category="s2" style={{width: '100%'}}>
@@ -139,6 +177,7 @@ export default ({navigation, route}) => {
           <SelectItem title="3 hour" />
         </Select> */}
         </ScrollView>
+        {loading && <Spinner />}
       </Layout>
     </SafeAreaView>
   );
@@ -204,6 +243,16 @@ const themedStyles = StyleService.create({
   },
   buttonConnect: {
     marginTop: 32,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 7,
+    elevation: 5,
+  },
+  buttonLogout: {
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

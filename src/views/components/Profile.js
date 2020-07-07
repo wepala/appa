@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   Button,
   StyleService,
@@ -6,49 +6,15 @@ import {
   Layout,
   Text,
 } from '@ui-kitten/components';
-import {Linking} from 'react-native';
-
 import {SyncIcon, LogoutIcon} from './Icons';
-import PKCE from '../../weos/auth/pkce';
-import {AUTHORIZE_URL} from 'react-native-dotenv';
 
-export default ({user, token, logout, setUserInfo}) => {
+export default ({user, handleLogout}) => {
   const styles = useStyleSheet(themedStyles);
-  PKCE.config.setVars({
-    AUTHORIZE_URL,
-  });
-
-  const [email, setEmail] = useState(user?.sub?.email);
-
-  useEffect(() => {
-    Linking.addEventListener('url', logout);
-    Linking.getInitialURL().then((url) => {
-      if (url) {
-        logout(url);
-      }
-    });
-
-    if (!user) {
-      PKCE.getUserInfo(token)
-        .then((userInfo) => {
-          userInfo.sub = JSON.parse(userInfo.sub);
-          setUserInfo(userInfo);
-          setEmail(userInfo.email);
-        })
-        .catch((error) => console.log(error));
-    }
-
-    return () => Linking.removeEventListener('url', logout);
-  });
-
-  const openLogout = () => {
-    Linking.openURL(PKCE.logoutURL(token.id_token));
-  };
 
   return (
     <Layout style={styles.row}>
       <Layout style={styles.column1}>
-        <Text>{email}</Text>
+        <Text testID="UserEmail">{user.sub.email}</Text>
       </Layout>
       <Layout style={styles.column2}>
         <Button
@@ -64,7 +30,7 @@ export default ({user, token, logout, setUserInfo}) => {
           appearance="ghost"
           style={styles.button}
           accessoryLeft={LogoutIcon}
-          onPress={openLogout}
+          onPress={handleLogout}
         />
       </Layout>
     </Layout>

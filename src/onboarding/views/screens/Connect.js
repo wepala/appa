@@ -7,93 +7,23 @@ import {
   Text,
   useStyleSheet,
 } from '@ui-kitten/components';
-import URL from 'url-parse';
-import {Alert} from 'react-native';
 import background from '../../../../assets/images/brand/connect.png';
-import PKCE from '../../../weos/auth/pkce';
-import {
-  CLIENT_ID,
-  AUTHORIZE_URL,
-  REDIRECT_URI,
-  RESPONSE_TYPE,
-  SCOPE,
-  CODE_CHALLENGE_METHOD,
-} from 'react-native-dotenv';
+import Spinner from '../../../views/components/Spinner';
 
-export default ({navigation, authorizeURL, setToken, getToken}) => {
+export default ({navigation, handleConnect, loading}) => {
   const styles = useStyleSheet(themedStyles);
 
-  PKCE.config.setVars({
-    CLIENT_ID,
-    AUTHORIZE_URL,
-    REDIRECT_URI,
-    RESPONSE_TYPE,
-    SCOPE,
-    CODE_CHALLENGE_METHOD,
-  });
-
-  const handleWeosConnect = () => {
-    Linking.openURL(PKCE.authorizeURL());
-  };
-
-  useEffect(() => {
-    Linking.addEventListener('url', handleOpenUrl);
-    Linking.getInitialURL().then((url) => {
-      if (url) {
-        handleOpenUrl(url);
-      }
-    });
-
-    return () => Linking.removeEventListener('url', handleOpenUrl);
-  });
-
-  const accountCreation = () => {
-    Alert.alert(
-      'Account Creation',
-      'Do you want to create a new account with this email address?',
-      [
-        {
-          text: 'Cancel',
-          onPress: () => Linking.openURL(PKCE.createAccountURL(false)),
-        },
-        {
-          text: 'Confirm',
-          onPress: () => Linking.openURL(PKCE.createAccountURL(true)),
-        },
-      ],
-      {cancelable: false},
-    );
-  };
-
-  const handleOpenUrl = (urlString) => {
-    const url = new URL(urlString.url, true);
-    const {code, state, confirm_creation} = url.query;
-
-    if (confirm_creation) {
-      accountCreation();
-      return;
-    }
-
-    PKCE.exchangeAuthCode(code, state)
-      .then((authToken) => {
-        setToken(authToken).then(() => navigation.navigate('Complete'));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} testID="ConnectSafeAreaView">
       <ImageBackground source={background} style={styles.image}>
-        <Layout style={styles.headerContainer}>
+        <Layout style={styles.headerContainer} testID="ConnectLayout">
           <Text style={styles.text} category="h2">
             Create Account
           </Text>
           <Button
             style={styles.buttonConnect}
             testID="WeOsConnectBtn"
-            onPress={handleWeosConnect}>
+            onPress={() => handleConnect('Complete')}>
             WeOS Connect
           </Button>
           <Text style={styles.text} category="s1">
@@ -107,6 +37,7 @@ export default ({navigation, authorizeURL, setToken, getToken}) => {
           onPress={() => navigation.navigate('Complete')}>
           Skip
         </Button>
+        {loading && <Spinner />}
       </ImageBackground>
     </SafeAreaView>
   );

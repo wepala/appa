@@ -10,11 +10,17 @@ jest.mock('@fortawesome/react-native-fontawesome', () => ({
 }));
 describe('onboarding Connect screen', () => {
   it('should have button that connects to weos', async () => {
+    const handleOpenUrl = jest.fn();
+    const handleConnect = jest.fn();
+
     const {getAllByTestId} = render(
       <>
         <IconRegistry icons={EvaIconsPack} />
         <ApplicationProvider {...eva} theme={{...eva.light}}>
-          <Connect />
+          <Connect
+            handleConnect={handleConnect}
+            handleOpenUrl={handleOpenUrl}
+          />
         </ApplicationProvider>
       </>,
     );

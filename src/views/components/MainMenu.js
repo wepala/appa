@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
 import {
   Avatar,
@@ -19,10 +19,12 @@ import {
   SupportIcon,
 } from './Icons';
 import Profile from './Profile';
+import ConnectHOC from '../../onboarding/controllers/ConnectHOC';
 import logo from '../../../assets/images/brand/logo.png';
 
-export default ({navigation, token, logout, setUserInfo, user}) => {
+export default ({navigation, user, setLoading}) => {
   const styles = useStyleSheet(themedStyles);
+  const WrappedProfile = ConnectHOC(Profile);
   const onItemSelect = (index) => {
     switch (index.row) {
       case 0: {
@@ -62,14 +64,9 @@ export default ({navigation, token, logout, setUserInfo, user}) => {
         </Text>
       </View>
 
-      {token && (
+      {user && (
         <View style={styles.profile}>
-          <Profile
-            user={user}
-            token={token}
-            logout={logout}
-            setUserInfo={setUserInfo}
-          />
+          <WrappedProfile setLoading={setLoading} />
         </View>
       )}
     </Layout>
