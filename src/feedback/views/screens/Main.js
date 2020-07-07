@@ -22,6 +22,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import TopBar from '../components/TopBar';
 import background from '../../../../assets/images/brand/welcome.png';
 import Spinner from '../../../views/components/Spinner';
+import Profile from '../../../views/components/Profile';
+
 const tags = [
   {id: '1', title: 'Bug'},
   {id: '2', title: 'Enhancement'},
@@ -45,17 +47,10 @@ const Feedback = ({
   status,
   addFeedback,
 }) => {
-  handleOpenUrl = handleOpenUrl.bind(null, 'Feedback');
-  useEffect(() => {
-    Linking.addEventListener('url', handleOpenUrl);
-    Linking.getInitialURL().then((url) => {
-      if (url) {
-        handleOpenUrl(url);
-      }
-    });
-
-    return () => Linking.removeEventListener('url', handleOpenUrl);
-  });
+  console.log('Profile');
+  console.log(Profile);
+  const WrappedProfile = ConnectHOC(Profile);
+  console.log(WrappedProfile);
 
   const [form, setForm] = useState({
     title: null,
