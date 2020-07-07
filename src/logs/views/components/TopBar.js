@@ -6,7 +6,7 @@ import {
 import {MenuIcon, PlusIcon} from '../../../views/components/Icons';
 import React from 'react';
 
-export default ({navigation, title}) => {
+export default ({navigation, title, canCreate}) => {
   title = title === undefined ? 'Logs' : title;
 
   const showMenu = () => {
@@ -22,7 +22,9 @@ export default ({navigation, title}) => {
       navigation.navigate('CreateLog');
     };
 
-    return <TopNavigationAction icon={PlusIcon} onPress={showCreate} />;
+    return canCreate ? (
+      <TopNavigationAction icon={PlusIcon} onPress={showCreate} />
+    ) : null;
   };
 
   return (

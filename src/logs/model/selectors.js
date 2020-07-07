@@ -1,7 +1,7 @@
 import {createSelector} from 'reselect';
 import moment from 'moment';
-import {getTasksByDate} from '../../tasks/model/selectors';
-import {tasksSelector} from '../../tasks/model/selectors';
+import {getTasksByDate, tasksSelector} from '../../tasks/model/selectors';
+
 export const getByTaskSelector = (state, taskId) =>
   state.logs.getByTaskId.get(taskId);
 export const getByIdSelector = (state) => state.logs.getById;

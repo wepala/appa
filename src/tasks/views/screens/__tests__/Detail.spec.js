@@ -1,14 +1,12 @@
 import React from 'react';
 import {fireEvent, render} from 'react-native-testing-library';
-import {renderHook, act} from '@testing-library/react-hooks';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
-import {default as theme} from '../../../../../theme.json';
+import {default as theme} from '../../../../../themes/main.json';
 import Detail from '../Detail';
 import {mockTasks} from '../../../__tests__/fixtures';
 import moment from 'moment';
-import {useForm, useValidated} from '../../../../weosHelpers';
 
 describe('Task Detail Screen', () => {
   it('should have a submit button that calls onSubmit then navigates back', () => {
