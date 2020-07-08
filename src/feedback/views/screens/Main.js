@@ -42,10 +42,10 @@ const Feedback = ({
   status,
   addFeedback,
 }) => {
-  let Email = 'user email';
+  let email = 'user email';
   if (!token || !user) {
   } else {
-    Email = user.sub.email;
+    email = user.sub.email;
   }
 
   const [form, setForm] = useState({
@@ -54,7 +54,7 @@ const Feedback = ({
     user: {
       first: 'userFirstName',
       last: 'UserLastName',
-      email: Email,
+      email: email,
     },
     tags: [],
   });

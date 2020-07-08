@@ -71,12 +71,9 @@ const connectWeos = (WrappedComponent) => {
     };
 
     handleWeosLogout = () => {
-      console.log('Logging Out');
-      console.log(PKCE.logoutURL(this.props.token.id_token));
       axios
         .get(PKCE.logoutURL(this.props.token.id_token))
         .then((res) => {
-          console.log('Success', res);
           this.props.setToken(null);
           this.props.setUser(null);
           this.props.navigation.goBack();
