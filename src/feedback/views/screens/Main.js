@@ -22,7 +22,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import TopBar from '../components/TopBar';
 import background from '../../../../assets/images/brand/welcome.png';
 import Spinner from '../../../views/components/Spinner';
-import Profile from '../../../views/components/Profile';
 
 const tags = [
   {id: '1', title: 'Bug'},
