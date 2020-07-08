@@ -31,11 +31,7 @@ const tags = [
   {id: '4', title: 'Analytics'},
 ];
 
-const mapStateToProps = (state) => {
-  return {
-    token: state.weos.token,
-  };
-};
+
 
 const Feedback = ({
   navigation,
@@ -44,21 +40,22 @@ const Feedback = ({
   loading,
   token,
   route,
+  user,
   status,
   addFeedback,
 }) => {
-  console.log('Profile');
-  console.log(Profile);
-  const WrappedProfile = ConnectHOC(Profile);
-  console.log(WrappedProfile);
+  let Email = 'user email';
+  if (token != null && user !== null) {
+    Email = user.sub.email;
+  }
 
-  const [form, setForm] = useState({
+   const [form, setForm] = useState({
     title: null,
     // To be used when auth is available
     user: {
       first: 'userFirstName',
       last: 'UserLastName',
-      email: 'userEmail@mail.com',
+      email: Email,
     },
     tags: [],
   });
@@ -196,7 +193,7 @@ const Feedback = ({
           <Button
             style={styles.buttonConnect}
             testID="WeOsConnectBtn"
-            onPress={handleConnect}>
+  onPress={() => handleConnect('Feedback')}>
             Connect to WeOS
           </Button>
           <Text style={styles.text} category="h6">
@@ -338,4 +335,4 @@ const themedStyles = StyleService.create({
     alignItems: 'center',
   },
 });
-export default connect(mapStateToProps, null)(Feedback);
+export default Feedback;

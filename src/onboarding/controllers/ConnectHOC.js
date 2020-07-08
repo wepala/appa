@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import {Alert, Linking} from 'react-native';
 import URL from 'url-parse';
 
@@ -8,11 +8,12 @@ import {
   REDIRECT_URI,
   RESPONSE_TYPE,
   SCOPE,
-  CODE_CHALLENGE_METHOD,
+  CODE_CHALLENGE_METHOD, ROADMAP_BASEURL,
 } from 'react-native-dotenv';
 import {connect} from 'react-redux';
 import PKCE from '../../weos/auth/pkce';
 import {setToken, setUser} from '../../weos/model/commands';
+import axios from "axios";
 
 const mapStateToProps = (state) => ({
   user: state.weos.user,
@@ -68,8 +69,19 @@ const connectWeos = (WrappedComponent) => {
       Linking.openURL(PKCE.authorizeURL());
     };
 
+
     handleWeosLogout = () => {
-      Linking.openURL(PKCE.logoutURL(this.props.token.id_token));
+      console.log('Logging Out');
+      console.log(PKCE.logoutURL(this.props.token.id_token))
+      axios
+        .post(PKCE.logoutURL(this.props.token.id_token), null)
+          .then((res) => {
+             console.log('Success', res);
+            props.navigation.goBack();
+          })
+          .catch((error) => {
+             console.log('Error', error);
+        });
     };
 
     accountCreation = () => {
