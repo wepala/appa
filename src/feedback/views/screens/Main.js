@@ -31,8 +31,6 @@ const tags = [
   {id: '4', title: 'Analytics'},
 ];
 
-
-
 const Feedback = ({
   navigation,
   handleConnect,
@@ -49,7 +47,7 @@ const Feedback = ({
     Email = user.sub.email;
   }
 
-   const [form, setForm] = useState({
+  const [form, setForm] = useState({
     title: null,
     // To be used when auth is available
     user: {
@@ -193,7 +191,7 @@ const Feedback = ({
           <Button
             style={styles.buttonConnect}
             testID="WeOsConnectBtn"
-  onPress={() => handleConnect('Feedback')}>
+            onPress={() => handleConnect('Feedback')}>
             Connect to WeOS
           </Button>
           <Text style={styles.text} category="h6">

@@ -8,12 +8,13 @@ import {
   REDIRECT_URI,
   RESPONSE_TYPE,
   SCOPE,
-  CODE_CHALLENGE_METHOD, ROADMAP_BASEURL,
+  CODE_CHALLENGE_METHOD,
+  ROADMAP_BASEURL,
 } from 'react-native-dotenv';
 import {connect} from 'react-redux';
 import PKCE from '../../weos/auth/pkce';
 import {setToken, setUser} from '../../weos/model/commands';
-import axios from "axios";
+import axios from 'axios';
 
 const mapStateToProps = (state) => ({
   user: state.weos.user,
@@ -69,20 +70,19 @@ const connectWeos = (WrappedComponent) => {
       Linking.openURL(PKCE.authorizeURL());
     };
 
-
     handleWeosLogout = () => {
       console.log('Logging Out');
-      console.log(PKCE.logoutURL(this.props.token.id_token))
+      console.log(PKCE.logoutURL(this.props.token.id_token));
       axios
-        .get(PKCE.logoutURL(this.props.token.id_token), )
-          .then((res) => {
-             console.log('Success', res);
-            this.props.setToken(null);
-            this.props.setUser(null);
-            this.props.navigation.goBack();
-          })
-          .catch((error) => {
-             console.log('Error', error);
+        .get(PKCE.logoutURL(this.props.token.id_token))
+        .then((res) => {
+          console.log('Success', res);
+          this.props.setToken(null);
+          this.props.setUser(null);
+          this.props.navigation.goBack();
+        })
+        .catch((error) => {
+          console.log('Error', error);
         });
     };
 
