@@ -14,7 +14,9 @@ import ConnectHOC from '../../../../onboarding/controllers/ConnectHOC';
 const mockStore = configureStore();
 
 describe('Features Screen', () => {
-  const store = mockStore({weos: {token: '123'}});
+  const store = mockStore({
+    weos: {token: '123', user: {sub: {email: 'qweqwe'}}},
+  });
   beforeEach(() => {
     store.clearActions();
   });
@@ -38,6 +40,7 @@ describe('Features Screen', () => {
           }}>
           <Provider store={store}>
             <Main
+              token="token"
               addFeedback={addFeedback}
               navigation={navigation}
               handleConnect={handleConnect}

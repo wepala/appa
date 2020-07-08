@@ -43,7 +43,8 @@ const Feedback = ({
   addFeedback,
 }) => {
   let Email = 'user email';
-  if (token != null && user !== null) {
+  if (!token || !user) {
+  } else {
     Email = user.sub.email;
   }
 
