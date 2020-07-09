@@ -1,12 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
-import {
-  ImageBackground,
-  View,
-  Linking,
-  SafeAreaView,
-  Alert,
-} from 'react-native';
+import {ImageBackground, View, SafeAreaView} from 'react-native';
 import {
   Button,
   Layout,
@@ -17,7 +11,6 @@ import {
   Modal,
   Card,
 } from '@ui-kitten/components';
-import ConnectHOC from '../../../onboarding/controllers/ConnectHOC';
 import LinearGradient from 'react-native-linear-gradient';
 import TopBar from '../components/TopBar';
 import background from '../../../../assets/images/brand/welcome.png';

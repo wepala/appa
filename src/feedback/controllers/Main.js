@@ -3,7 +3,6 @@ import axios from 'axios';
 import {ROADMAP_BASEURL, ROADMAP_ID} from 'react-native-dotenv';
 import MainScreen from '../views/screens/Main';
 import {useSelector} from 'react-redux';
-import {setToken} from '../../weos/model/commands';
 
 const Main = (props) => {
   const [status, setStatus] = useState('init');

@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Provider} from 'react-redux';
-import {fireEvent, render} from 'react-native-testing-library';
+import {render} from 'react-native-testing-library';
 import {renderHook, act} from '@testing-library/react-hooks';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
