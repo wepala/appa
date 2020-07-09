@@ -26,8 +26,6 @@ const Main = (props) => {
       .post(`${ROADMAP_BASEURL}/roadmaps/feedback`, feedback)
       .then((res) => {
         setStatus('success');
-
-        console.log('Success', res);
         props.navigation.goBack();
       })
       .catch((error) => {

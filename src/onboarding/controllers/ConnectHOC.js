@@ -71,16 +71,29 @@ const connectWeos = (WrappedComponent) => {
     };
 
     handleWeosLogout = () => {
-      axios
-        .get(PKCE.logoutURL(this.props.token.id_token))
-        .then((res) => {
+      try {
+        this.setState({loading: true});
+        axios.get(PKCE.logoutURL(this.props.token.id_token)).then((res) => {
           this.props.setToken(null);
           this.props.setUser(null);
+          this.setState({loading: false});
           this.props.navigation.goBack();
-        })
-        .catch((error) => {
-          console.log('Error', error);
         });
+      } catch (error) {
+        console.log(error);
+        this.setState({loading: false});
+        Alert.alert(
+          'WeOs Connect',
+          'An Error occurred during logout, please try again later',
+          [
+            {
+              text: 'Ok',
+              onPress: () => console.log('Please try again later'),
+            },
+          ],
+          {cancelable: false},
+        );
+      }
     };
 
     accountCreation = () => {
