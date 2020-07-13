@@ -70,15 +70,14 @@ const connectWeos = (WrappedComponent) => {
       Linking.openURL(PKCE.authorizeURL());
     };
 
-    handleWeosLogout = () => {
+    handleWeosLogout = async () => {
       try {
         this.setState({loading: true});
-        axios.get(PKCE.logoutURL(this.props.token.id_token)).then((res) => {
-          this.props.setToken(null);
-          this.props.setUser(null);
-          this.setState({loading: false});
-          this.props.navigation.goBack();
-        });
+        await axios.get(PKCE.logoutURL(this.props.token.id_token));
+        this.props.setToken(null);
+        this.props.setUser(null);
+        this.setState({loading: false});
+        this.props.navigation.goBack();
       } catch (error) {
         console.log(error);
         this.setState({loading: false});
