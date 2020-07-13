@@ -26,6 +26,7 @@ import logo from '../../../assets/images/brand/logo.png';
 export default ({navigation, user, setLoading}) => {
   const styles = useStyleSheet(themedStyles);
   const WrappedProfile = ConnectHOC(Profile);
+
   const onItemSelect = (index) => {
     switch (index.row) {
       case 0: {

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import {Alert, Linking} from 'react-native';
 import URL from 'url-parse';
 
@@ -9,10 +9,12 @@ import {
   RESPONSE_TYPE,
   SCOPE,
   CODE_CHALLENGE_METHOD,
+  ROADMAP_BASEURL,
 } from 'react-native-dotenv';
 import {connect} from 'react-redux';
 import PKCE from '../../weos/auth/pkce';
 import {setToken, setUser} from '../../weos/model/commands';
+import axios from 'axios';
 
 const mapStateToProps = (state) => ({
   user: state.weos.user,
@@ -68,8 +70,29 @@ const connectWeos = (WrappedComponent) => {
       Linking.openURL(PKCE.authorizeURL());
     };
 
-    handleWeosLogout = () => {
-      Linking.openURL(PKCE.logoutURL(this.props.token.id_token));
+    handleWeosLogout = async () => {
+      try {
+        this.setState({loading: true});
+        await axios.get(PKCE.logoutURL(this.props.token.id_token));
+        this.props.setToken(null);
+        this.props.setUser(null);
+        this.setState({loading: false});
+        this.props.navigation.goBack();
+      } catch (error) {
+        console.log(error);
+        this.setState({loading: false});
+        Alert.alert(
+          'WeOs Connect',
+          'An Error occurred during logout, please try again later',
+          [
+            {
+              text: 'Ok',
+              onPress: () => console.log('Please try again later'),
+            },
+          ],
+          {cancelable: false},
+        );
+      }
     };
 
     accountCreation = () => {

@@ -45,8 +45,7 @@ const mapDispatchToProps = (dispatch) => {
 const HomeScreen = ({navigation, onBoarded, user}) => {
   const [loading, setLoading] = useState(false);
   const WrappedSettings = ConnectHOC(Settings);
-  const WrappedConnect = (props) => ConnectHOC(Feedback, props);
-
+  const WrappedFeedback = ConnectHOC(Feedback);
   const MainStackScreen = () => {
     return (
       <Navigator
@@ -59,7 +58,7 @@ const HomeScreen = ({navigation, onBoarded, user}) => {
         <Screen name="Reports" component={Reports} />
         <Screen name="Settings" component={WrappedSettings} />
         <Screen name="About" component={About} />
-        <Screen name="Feedback" component={WrappedConnect} />
+        <Screen name="Feedback" component={WrappedFeedback} />
         <Screen name="Customize" component={Customize} />
       </Navigator>
     );

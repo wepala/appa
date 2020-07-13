@@ -1,12 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
-import {
-  ImageBackground,
-  View,
-  Linking,
-  SafeAreaView,
-  Alert,
-} from 'react-native';
+import {ImageBackground, View, SafeAreaView} from 'react-native';
 import {
   Button,
   Layout,
@@ -17,23 +11,17 @@ import {
   Modal,
   Card,
 } from '@ui-kitten/components';
-import ConnectHOC from '../../../onboarding/controllers/ConnectHOC';
 import LinearGradient from 'react-native-linear-gradient';
 import TopBar from '../components/TopBar';
 import background from '../../../../assets/images/brand/welcome.png';
 import Spinner from '../../../views/components/Spinner';
+
 const tags = [
   {id: '1', title: 'Bug'},
   {id: '2', title: 'Enhancement'},
   {id: '3', title: 'Feature'},
   {id: '4', title: 'Analytics'},
 ];
-
-const mapStateToProps = (state) => {
-  return {
-    token: state.weos.token,
-  };
-};
 
 const Feedback = ({
   navigation,
@@ -42,20 +30,15 @@ const Feedback = ({
   loading,
   token,
   route,
+  user,
   status,
   addFeedback,
 }) => {
-  handleOpenUrl = handleOpenUrl.bind(null, 'Feedback');
-  useEffect(() => {
-    Linking.addEventListener('url', handleOpenUrl);
-    Linking.getInitialURL().then((url) => {
-      if (url) {
-        handleOpenUrl(url);
-      }
-    });
-
-    return () => Linking.removeEventListener('url', handleOpenUrl);
-  });
+  let email = 'user email';
+  if (!token || !user) {
+  } else {
+    email = user.sub.email;
+  }
 
   const [form, setForm] = useState({
     title: null,
@@ -63,7 +46,7 @@ const Feedback = ({
     user: {
       first: 'userFirstName',
       last: 'UserLastName',
-      email: 'userEmail@mail.com',
+      email: email,
     },
     tags: [],
   });
@@ -201,7 +184,7 @@ const Feedback = ({
           <Button
             style={styles.buttonConnect}
             testID="WeOsConnectBtn"
-            onPress={handleConnect}>
+            onPress={() => handleConnect('Feedback')}>
             Connect to WeOS
           </Button>
           <Text style={styles.text} category="h6">
@@ -343,4 +326,4 @@ const themedStyles = StyleService.create({
     alignItems: 'center',
   },
 });
-export default connect(mapStateToProps, null)(Feedback);
+export default Feedback;

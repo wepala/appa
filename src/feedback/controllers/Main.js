@@ -3,7 +3,6 @@ import axios from 'axios';
 import {ROADMAP_BASEURL, ROADMAP_ID} from 'react-native-dotenv';
 import MainScreen from '../views/screens/Main';
 import {useSelector} from 'react-redux';
-import {setToken} from '../../weos/model/commands';
 
 const Main = (props) => {
   const [status, setStatus] = useState('init');
@@ -26,8 +25,6 @@ const Main = (props) => {
       .post(`${ROADMAP_BASEURL}/roadmaps/feedback`, feedback)
       .then((res) => {
         setStatus('success');
-
-        console.log('Success', res);
         props.navigation.goBack();
       })
       .catch((error) => {
